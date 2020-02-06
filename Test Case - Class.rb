@@ -37,39 +37,10 @@ describe "Class Testing" do
 		# Click on Settings > Job Lines and search columns
 		settings = SettingsResource.new(@driver)
 		settings.open_settings()
-		settings.open_joblines()
-		joblines = JobLinesResource.new(@driver)
-		joblines.search_id(searchjoblineid)
-		print "Job Lines Search (ID): \n"
-		print "%s \n" % joblines.top_refnumber.text
-		print "\n"
-		expect(joblines.top_refnumber.text).to include(searchjoblineid)
 
-		joblines.search_reset()
-		sleep(2)
-		joblines.search_jobname(searchjoblinejobname)
-		print "Job Lines Search (NAME): \n"
-		print "%s \n" % joblines.top_jobname.text
-		print "\n"
-		expect(joblines.top_jobname.text).to include(searchjoblinejobname)
+		#Test change for Git (before staging)
 
-		# Click on Settings > Invoice Lines and search columns
-		settings.open_settings()
-		settings.open_invoicelines()
-		invoicelines = InvoiceLinesResource.new(@driver)
-		invoicelines.search_id(searchinvoicelineid)
-		print "Invoice Lines Search (ID): \n"
-		print "%s \n" % invoicelines.top_refnumber.text
-		print "\n"
-		expect(invoicelines.top_refnumber.text).to include(searchinvoicelineid)
-
-		invoicelines.search_reset()
-		sleep(2)
-		invoicelines.search_invoiceid(searchinvoicelineinvoiceid)
-		print "Invoice Lines Search (NAME): \n"
-		print "%s \n" % invoicelines.top_invoiceid.text
-		print "\n"
-		expect(invoicelines.top_invoiceid.text).to include(searchinvoicelineinvoiceid)
+		#Test after staging
 
 	end
 end
