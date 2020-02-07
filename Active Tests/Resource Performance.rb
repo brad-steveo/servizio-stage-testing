@@ -1,16 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
-require_relative "Class - Login Page.rb"
-require_relative "Class - Activities Resource.rb"
-require_relative "Class - Patrols Resource.rb"
-require_relative "Class - Jobs Resource.rb"
-require_relative "Class - Estimates Resource.rb"
-require_relative "Class - Invoices Resource.rb"
-require_relative "Class - Customers Resource.rb"
-require_relative "Class - Settings Page.rb"
-require_relative "Class - Invoice Lines Resource.rb"
-require_relative "Class - Job Lines Resource.rb"
-require_relative "Class - Documents Resource.rb"
+require "require_all"
+require_all "Classes"
 
 describe "Cycles through each main resource" do
 	it "Posts load metrics to command line" do

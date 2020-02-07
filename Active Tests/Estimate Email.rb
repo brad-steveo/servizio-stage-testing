@@ -1,11 +1,10 @@
 require "selenium-webdriver"
 require "rspec"
-require_relative "Class - Login Page.rb"
-require_relative "Class - Patrols Resource.rb"
-require_relative "Class - PrintEmail Page.rb"
+require "require_all"
+require_all "Classes"
 
-describe "Patrol Email Test" do
-	it "Opens most recent patrol and sends an email" do
+describe "Estimates Email Test" do
+	it "Opens most recent estimate and sends an email" do
 
 		@driver = Selenium::WebDriver.for :chrome
 
@@ -14,7 +13,8 @@ describe "Patrol Email Test" do
 		loginname = "masterchief@yesco.com"
 		password = "yesco123"
 		emailaddress = ', bstevenson@yesco.com'
-		emailsubject = "Patrol Email (Selenium) #{timestamp}"
+		emailsubject = "Estimate Email (Selenium) #{timestamp}"
+		emailmessage = 'Selenium Test Email Message'
 
 		#Go to page
 		@driver.navigate.to "https://stage.yesco.com/servizio/"
@@ -25,21 +25,23 @@ describe "Patrol Email Test" do
 		login.enter_password(password)
 		login.sign_in()
 
-		#Open job and send email
-		patrols = PatrolsResource.new(@driver)
+		#Open estimate and send email
+		estimates = EstimatesResource.new(@driver)
 		printemail = PrintEmailPage.new(@driver)
-		patrols.open_patrols()
-		patrols.top_open()
-		patrols.actions()
-		patrols.actions_printemail()
+		estimates.open_estimates()
+		estimates.top_open()
+		estimates.actions()
+		estimates.actions_printemail()
+		printemail.additional_notes()
 		printemail.ok()
 		printemail.email_address(emailaddress)
 		printemail.email_subject(emailsubject)
+		printemail.email_message(emailmessage)
 		printemail.email_close()
 
 		sleep(2)
 
-		patrols.save_close()
+		estimates.save_close()
 
 	end
 end

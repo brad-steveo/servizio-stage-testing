@@ -1,8 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
-require_relative "Class - Login Page.rb"
-require_relative "Class - Jobs Resource.rb"
-require_relative "Class - Activities Resource.rb"
+require "require_all"
+require_all "Classes"
 
 describe "Opens top Job" do
 	it "Creates and verifies Activity creation was successful" do

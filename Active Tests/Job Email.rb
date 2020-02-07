@@ -1,11 +1,10 @@
 require "selenium-webdriver"
 require "rspec"
-require_relative "Class - Login Page.rb"
-require_relative "Class - Estimates Resource.rb"
-require_relative "Class - PrintEmail Page.rb"
+require "require_all"
+require_all "Classes"
 
-describe "Estimates Email Test" do
-	it "Opens most recent estimate and sends an email" do
+describe "Job Email Test" do
+	it "Opens most recent job and sends an email" do
 
 		@driver = Selenium::WebDriver.for :chrome
 
@@ -14,7 +13,7 @@ describe "Estimates Email Test" do
 		loginname = "masterchief@yesco.com"
 		password = "yesco123"
 		emailaddress = ', bstevenson@yesco.com'
-		emailsubject = "Estimate Email (Selenium) #{timestamp}"
+		emailsubject = "Job Email (Selenium) #{timestamp}"
 		emailmessage = 'Selenium Test Email Message'
 
 		#Go to page
@@ -26,13 +25,13 @@ describe "Estimates Email Test" do
 		login.enter_password(password)
 		login.sign_in()
 
-		#Open estimate and send email
-		estimates = EstimatesResource.new(@driver)
+		#Open job and send email
+		jobs = JobsResource.new(@driver)
 		printemail = PrintEmailPage.new(@driver)
-		estimates.open_estimates()
-		estimates.top_open()
-		estimates.actions()
-		estimates.actions_printemail()
+		jobs.open_jobs()
+		jobs.top_open()
+		jobs.actions()
+		jobs.actions_printemail()
 		printemail.additional_notes()
 		printemail.ok()
 		printemail.email_address(emailaddress)
@@ -42,7 +41,7 @@ describe "Estimates Email Test" do
 
 		sleep(2)
 
-		estimates.save_close()
+		jobs.save_close()
 
 	end
 end

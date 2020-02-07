@@ -1,7 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
-require_relative "Class - Login Page.rb"
-require_relative "Class - Activities Resource.rb"
+require "require_all"
+require_all "Classes"
 
 describe "Creates new basic activity" do
 	it "Verifies if activity creation is successful" do
@@ -9,6 +9,7 @@ describe "Creates new basic activity" do
 		@driver = Selenium::WebDriver.for :chrome
 
 		#Test Variables
+		timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
 		date = Time.now.strftime("%m/%d/%Y")
 		loginname = "masterchief@yesco.com"
 		password = "yesco123"
@@ -28,30 +29,30 @@ describe "Creates new basic activity" do
 		activities = ActivitiesResource.new(@driver)
 		activities.open_activities()
 
-		loop do
-			timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
-			i += 1
-			activities.create_activity()
-			activities.description(timestamp)
-			activities.save_close_grid()
+		activitycount = activities.activity_count.text
 
-			print activities.top_refnumber.text
-			print "\n"
-			print activities.top_description.text
-			expect(activities.top_description.text).to eql(timestamp)
-			print "\n"
-			print activities.top_assigned.text
-			print "\n"
-			print activities.top_due.text
-			expect(activities.top_due.text).to eql(date)
-			print "\n"
-			print "Loop: %s" % i
-			print "\n\n"
+		loop do
+			i += 1
+			activities.top_open()
+			activities.complete_activity()
+
+			if activities.date_due_contents.nil? == true
+				activities.date_due(date)
+				activities.save_close_grid()
+			else
+				activities.save_close_grid()
+			end
 
 			if i == loopcount
 				break
 			end
 		end
+
+		print activitycount
+		print "\n"
+		print activities.activity_count.text
+
+		expect(activities.activity_count.text.to_i).to eql(activitycount.to_i - loopcount)
 
 	end
 end

@@ -1,21 +1,19 @@
 require "selenium-webdriver"
 require "rspec"
-require_relative "Class - Login Page.rb"
-require_relative "Class - Invoices Resource.rb"
-require_relative "Class - PrintEmail Page.rb"
+require "require_all"
+require_all "Classes"
 
-describe "Invoice Email Test" do
-	it "Opens most recent invoice and sends an email" do
+describe "Patrol Email Test" do
+	it "Opens most recent patrol and sends an email" do
 
 		@driver = Selenium::WebDriver.for :chrome
 
 		#Test Variables
 		timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
-		loginname = "seleniumuser@yesco.com"
-		password = "SUyesco123"
+		loginname = "masterchief@yesco.com"
+		password = "yesco123"
 		emailaddress = ', bstevenson@yesco.com'
-		emailsubject = "Invoice Email (Selenium) #{timestamp}"
-		emailmessage = 'Selenium Test Email Message'
+		emailsubject = "Patrol Email (Selenium) #{timestamp}"
 
 		#Go to page
 		@driver.navigate.to "https://stage.yesco.com/servizio/"
@@ -27,22 +25,20 @@ describe "Invoice Email Test" do
 		login.sign_in()
 
 		#Open job and send email
-		invoices = InvoicesResource.new(@driver)
+		patrols = PatrolsResource.new(@driver)
 		printemail = PrintEmailPage.new(@driver)
-		invoices.open_invoices()
-		invoices.top_open()
-		invoices.actions()
-		invoices.actions_printemail()
-		printemail.additional_notes()
+		patrols.open_patrols()
+		patrols.top_open()
+		patrols.actions()
+		patrols.actions_printemail()
 		printemail.ok()
 		printemail.email_address(emailaddress)
 		printemail.email_subject(emailsubject)
-		printemail.email_message(emailmessage)
 		printemail.email_close()
 
 		sleep(2)
 
-		invoices.cancel()
+		patrols.save_close()
 
 	end
 end

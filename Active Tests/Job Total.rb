@@ -1,7 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
-require_relative "Class - Login Page.rb"
-require_relative "Class - Jobs Resource.rb"
+require "require_all"
+require_all "Classes"
 
 describe "Opens Jobs resource and adds several line items" do
 	it "Checks subtotal to make sure line items are being added and totalled correctly" do

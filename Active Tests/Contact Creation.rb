@@ -1,8 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
-require_relative "Class - Login Page.rb"
-require_relative "Class - Settings Page.rb"
-require_relative "Class - Contacts Resource.rb"
+require "require_all"
+require_all "Classes"
 
 describe "Creates a Contact" do
 	it "Verifies that Contact Creation was successful" do

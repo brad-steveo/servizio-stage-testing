@@ -1,7 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
-require_relative "Class - Login Page.rb"
-require_relative "Class - Jobs Resource.rb"
+require "require_all"
+require_all "Classes"
 
 describe "Creates a Job" do
 	it "Verifies that Job Creation was successful" do

@@ -2,8 +2,8 @@ require "selenium-webdriver"
 require "rspec"
 require "active_support"
 require "Date"
-require_relative "Class - Login Page.rb"
-require_relative "Class - Estimates Resource.rb"
+require "require_all"
+require_all "Classes"
 
 describe "Creates an Estimate" do
 	it "Verifies that Estimate Creation was successful" do

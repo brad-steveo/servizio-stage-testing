@@ -1,7 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
-require_relative "Class - Login Page.rb"
-require_relative "Class - Customers Resource.rb"
+require "require_all"
+require_all "Classes"
 
 describe "Creates an Customer" do
 	it "Verifies that Customer Creation was successful" do

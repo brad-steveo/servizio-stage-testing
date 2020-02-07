@@ -1,9 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
-require_relative "Class - Login Page.rb"
-require_relative "Class - Settings Page.rb"
-require_relative "Class - Invoice Lines Resource.rb"
-require_relative "Class - Invoices Resource.rb"
+require "require_all"
+require_all "Classes"
 
 describe "Opens Invoices resource and adds a line item" do
 	it "Checks Invoice Lines resource and verifies top invoice line" do

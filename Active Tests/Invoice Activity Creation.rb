@@ -1,8 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
-require_relative "Class - Login Page.rb"
-require_relative "Class - Invoices Resource.rb"
-require_relative "Class - Activities Resource.rb"
+require "require_all"
+require_all "Classes"
 
 describe "Creates an Invoice" do
 	it "Verifies that Invoice creation and subsequent activity creation was successful" do

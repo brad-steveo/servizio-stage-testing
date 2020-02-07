@@ -1,7 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
-require_relative "Class - Login Page.rb"
-require_relative "Class - Patrols Resource.rb"
+require "require_all"
+require_all "Classes"
 
 describe "Creates a Patrol" do
 	it "Verifies that Patrol Creation was successful" do
