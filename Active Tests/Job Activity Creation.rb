@@ -1,7 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
 require "require_all"
-require_all "Classes"
+require_all "#Classes"
 
 describe "Opens top Job" do
 	it "Creates and verifies Activity creation was successful" do

@@ -1,7 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
 require "require_all"
-require_all "Classes"
+require_all "#Classes"
 
 describe "Creates new basic activity" do
 	it "Verifies if activity creation is successful" do

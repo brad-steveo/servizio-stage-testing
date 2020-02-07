@@ -1,7 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
 require "require_all"
-require_all "Classes"
+require_all "#Classes"
 
 describe "Job Email Test" do
 	it "Opens most recent job and sends an email" do

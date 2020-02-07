@@ -1,7 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
 require "require_all"
-require_all "Classes"
+require_all "#Classes"
 
 describe "Exports grid in each resource" do
 	it "Verifies through prompts in command line" do

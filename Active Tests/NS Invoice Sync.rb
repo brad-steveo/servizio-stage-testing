@@ -1,7 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
 require "require_all"
-require_all "Classes"
+require_all "#Classes"
 
 describe "Invoice Creation and NetSuite Sync" do
 	it "Creates an invoice and attempts a sync to NetSuite" do

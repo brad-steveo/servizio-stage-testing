@@ -1,7 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
 require "require_all"
-require_all "Classes"
+require_all "#Classes"
 
 describe "Creates an Invoice" do
 	it "Verifies that Invoice creation and subsequent activity creation was successful" do

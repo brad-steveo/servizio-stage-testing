@@ -1,9 +1,11 @@
 require "selenium-webdriver"
 require "rspec"
+require "require_all"
+require_all "#Classes"
+
+#What are these doing?
 require "active_support"
 require "Date"
-require "require_all"
-require_all "Classes"
 
 describe "Creates an Estimate" do
 	it "Verifies that Estimate Creation was successful" do

@@ -1,7 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
 require "require_all"
-require_all "Classes"
+require_all "#Classes"
 
 describe "Performes a column header search in each resource for the ID and Name columns" do
 	it "Verifies that the search returns the proper amount of records" do

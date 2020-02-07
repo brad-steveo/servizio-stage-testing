@@ -1,7 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
 require "require_all"
-require_all "Classes"
+require_all "#Classes"
 
 describe "Opens Jobs resource and adds a line item" do
 	it "Checks Job Lines resource and verifies top job line" do

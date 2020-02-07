@@ -1,7 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
 require "require_all"
-require_all "Classes"
+require_all "#Classes"
 
 describe "Creates a Patrol" do
 	it "Verifies that Patrol Creation was successful" do

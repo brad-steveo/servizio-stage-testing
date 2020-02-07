@@ -1,7 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
 require "require_all"
-require_all "Classes"
+require_all "#Classes"
 
 describe "Adds a contact to a customer" do
 	it "Verifies that adding contact process was successful" do
