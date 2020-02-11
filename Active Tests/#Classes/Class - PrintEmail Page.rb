@@ -266,7 +266,7 @@ class PrintEmailPage
     wait_for {@driver.find_element(EMAIL_AND_CLOSE_BTN).displayed?}
     email_button = @driver.find_element(EMAIL_AND_CLOSE_BTN)
     email_button.click
-    sleep(1)
+    sleep(3)
     driver.switch_to.alert.accept rescue Selenium::WebDriver::Error::NoAlertOpenError
     sleep(3)
     @driver.switch_to.frame(0)

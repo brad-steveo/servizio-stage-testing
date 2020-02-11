@@ -4,7 +4,8 @@ require "require_all"
 require_all "#Classes"
 
 describe "Invoice Email Test" do
-	it "Opens most recent invoice and sends an email" do
+	it "Opens specified invoice and sends an email" do
+	#Invoice must have been synced to QBO for the print/email option to be visible
 
 		@driver = Selenium::WebDriver.for :chrome
 
@@ -12,9 +13,9 @@ describe "Invoice Email Test" do
 		timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
 		loginname = "seleniumuser@yesco.com"
 		password = "SUyesco123"
+		invoicerefnumber = '1304'
 		emailaddress = ', bstevenson@yesco.com'
 		emailsubject = "Invoice Email (Selenium) #{timestamp}"
-		emailmessage = 'Selenium Test Email Message'
 
 		#Go to page
 		@driver.navigate.to "https://stage.yesco.com/servizio/"
@@ -29,6 +30,7 @@ describe "Invoice Email Test" do
 		invoices = InvoicesResource.new(@driver)
 		printemail = PrintEmailPage.new(@driver)
 		invoices.open_invoices()
+		invoices.search_invoiceid(invoicerefnumber)
 		invoices.top_open()
 		invoices.actions()
 		invoices.actions_printemail()
@@ -36,7 +38,6 @@ describe "Invoice Email Test" do
 		printemail.ok()
 		printemail.email_address(emailaddress)
 		printemail.email_subject(emailsubject)
-		printemail.email_message(emailmessage)
 		printemail.email_close()
 
 		sleep(2)

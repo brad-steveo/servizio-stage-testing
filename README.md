@@ -43,7 +43,7 @@ https://rubygems.org/gems/require_all
 
 Add rspec to PATH:
 
-    export PATH=$PATH:*path to folder where gemfile is located*   
+    export PATH=$PATH: *path to folder where gemfile is located*   
 
 Add RVM to PATH:
 

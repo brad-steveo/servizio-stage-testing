@@ -126,7 +126,7 @@ class InvoicesResource
     sleep(1)
     select_job_next = @driver.find_element(JOB_NEXT_BTN)
     select_job_next.click
-    sleep(1)
+    sleep(4)
     @driver.switch_to.frame(0)
   end
 

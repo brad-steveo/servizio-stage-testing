@@ -475,7 +475,7 @@ class JobsResource
     wait_for {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
-    sleep(2)
+    sleep(3)
   end
 
   #CSS Methods: Popup (Lines)
