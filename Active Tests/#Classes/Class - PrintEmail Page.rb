@@ -160,7 +160,7 @@ class PrintEmailPage
     wait_for {@driver.find_element(CANCEL_BTN).displayed?}
     cancel_button = @driver.find_element(CANCEL_BTN)
     cancel_button.click
-    sleep(2)
+    @driver.switch_to.default_content
     @driver.switch_to.frame(0)
   end
 
@@ -211,14 +211,16 @@ class PrintEmailPage
   end
 
   def email_message(emailmessage)
-    field_click = @driver.find_element(EMAIL_MESSAGE_FIELD)
-    field_click.click
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
+    if @driver.find_element(EMAIL_MESSAGE_FIELD).text == ""
+      field_click = @driver.find_element(EMAIL_MESSAGE_FIELD)
+      field_click.click
+      def wait_for()
+        Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
+      end
+      wait_for {@driver.find_element(EMAIL_MESSAGE_FIELD).displayed?}
+      email_message = @driver.find_element(EMAIL_MESSAGE_FIELD)
+  		email_message.send_keys(emailmessage)
     end
-    wait_for {@driver.find_element(EMAIL_MESSAGE_FIELD).displayed?}
-    email_message = @driver.find_element(EMAIL_MESSAGE_FIELD)
-		email_message.send_keys(emailmessage)
   end
 
   def mailing()
@@ -237,7 +239,7 @@ class PrintEmailPage
     wait_for {@driver.find_element(CLOSE_BTN).displayed?}
     close_button = @driver.find_element(CLOSE_BTN)
     close_button.click
-    sleep(2)
+    @driver.switch_to.default_content
     @driver.switch_to.frame(0)
   end
 
@@ -266,11 +268,14 @@ class PrintEmailPage
     wait_for {@driver.find_element(EMAIL_AND_CLOSE_BTN).displayed?}
     email_button = @driver.find_element(EMAIL_AND_CLOSE_BTN)
     email_button.click
+    #def wait_for2()
+    #  Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
+    #end
+    #wait_for2 {browser.alert.exists?}
     sleep(3)
-    driver.switch_to.alert.accept rescue Selenium::WebDriver::Error::NoAlertOpenError
-    sleep(3)
+    @driver.switch_to.alert.accept rescue Selenium::WebDriver::Error::NoAlertOpenError
+    @driver.switch_to.default_content
     @driver.switch_to.frame(0)
   end
-
 
 end
