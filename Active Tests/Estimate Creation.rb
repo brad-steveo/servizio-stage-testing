@@ -14,7 +14,7 @@ describe "Creates an Estimate" do
 
 		#General Test Variables
 		loginname = "masterchief@yesco.com"
-		password = "yesco123"
+		password = "MCyesco123"
 		loopcount = 2
 		i = 0
 

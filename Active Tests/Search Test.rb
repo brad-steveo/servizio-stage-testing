@@ -11,7 +11,7 @@ describe "Performes a search in each resource" do
 		#Test Variables
 		timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
 		loginname = "masterchief@yesco.com"
-		password = "yesco123"
+		password = "MCyesco123"
 		searchpatrol = "06/25/2019"
 		searchjob = "06/25/2019"
 		searchestimate = "06/25/2019"

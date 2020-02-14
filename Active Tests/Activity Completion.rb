@@ -12,7 +12,7 @@ describe "Creates new basic activity" do
 		timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
 		date = Time.now.strftime("%m/%d/%Y")
 		loginname = "masterchief@yesco.com"
-		password = "yesco123"
+		password = "MCyesco123"
 		loopcount = 2
 		i = 0
 

@@ -11,7 +11,7 @@ describe "Cycles through each main resource" do
 		#Test Variables
 		timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
 		loginname = "masterchief@yesco.com"
-		password = "yesco123"
+		password = "MCyesco123"
 
 		#Go to page
 		@driver.navigate.to "https://stage.yesco.com/servizio/"

@@ -10,7 +10,7 @@ describe "Creates a Patrol" do
 
 		#Test Variables
 		loginname = "masterchief@yesco.com"
-		password = "yesco123"
+		password = "MCyesco123"
 		loopcount = 2
 		i = 0
 

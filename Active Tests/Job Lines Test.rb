@@ -11,7 +11,7 @@ describe "Opens Jobs resource and adds a line item" do
 		# Test Variables
 		timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
 		loginname = "masterchief@yesco.com"
-		password = "yesco123"
+		password = "MCyesco123"
     description1 = "Test1234"
 
 		# Go to page
