@@ -38,12 +38,17 @@ describe "Creates a Patrol" do
 			serviceneeded = "Service is needed #{timestamp}"
 			customer = "Selenium Test Customer"
 
+			currenttopref = patrols.top_refnumber
+
 			patrols.create_patrol()
+			patrols.customer(customer)
 			patrols.submitted_name(submittedname)
 			patrols.location(location)
 			patrols.service_needed(serviceneeded)
-			patrols.customer(customer)
 			patrols.save_close()
+
+			wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+			wait.until {patrols.top_refnumber != currenttopref}
 
 			#Verification
 			print patrols.top_refnumber.text

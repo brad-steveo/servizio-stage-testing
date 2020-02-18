@@ -32,6 +32,7 @@ class PatrolsResource
   BAD_PATROL_TYPE_DROPDOWN = {css: "select[id$='BadPatrolTypeCombobox']"}
   DATE_COMPLETED_FIELD = {css: "input[id$='Patrol_SubmittedName'"}
   CUSTOMER_FIELD = {css: "input[id$=CustomerInput]"}
+  VIEW_CUSTOMER_LINK = {css: "a[id$='ViewCustomerLink']"}
   CANCEL_BTN = {css: "input[value='Cancel']"}
   ACTIONS_BTN = {xpath: "/html/body/form/div[3]/div[1]/div[5]/div[3]/div/div/div[1]/div[2]/span"}
   SAVE_BTN = {css: "input[value='Save']"}
@@ -69,6 +70,9 @@ class PatrolsResource
   #SEARCH_BTN
   #RESET_BTN
 
+  #CSS Selectors: Other
+  FRAME = {css: "iframe[tabindex='0']"}
+
   attr_reader :driver
 
   def initialize(driver)
@@ -90,18 +94,14 @@ class PatrolsResource
   end
 
   def create_patrol()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CREATE_PATROL_BTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CREATE_PATROL_BTN)}
     create_patrol_button = @driver.find_element(CREATE_PATROL_BTN)
     create_patrol_button.click
-    sleep(3)
-    def wait_for2()
-			Selenium::WebDriver::Wait.new(:timeout => 10).until { yield }
-		end
-		wait_for2 {@driver.find_element(id:"WebForm1").displayed?}
-    sleep(2)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait2.until {@driver.find_element(id:"WebForm1").displayed?}
+    wait3 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait3.until {@driver.find_element(FRAME).displayed?}
     @driver.switch_to.frame(0)
   end
 
@@ -110,6 +110,8 @@ class PatrolsResource
   end
 
   def top_refnumber()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(TOP_REFNUMBER).displayed?}
     top_refnumber = @driver.find_element(TOP_REFNUMBER)
   end
 
@@ -124,7 +126,8 @@ class PatrolsResource
     wait_for {@driver.find_element(TOP_REFNUMBER).displayed?}
     top_refnumber = @driver.find_element(TOP_REFNUMBER)
     top_refnumber.click
-    sleep(2)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(FRAME).displayed?}
     @driver.switch_to.frame(0)
   end
 
@@ -145,7 +148,8 @@ class PatrolsResource
     wait_for {@driver.find_element(ACTIONS_VIEWPATROL).displayed?}
     top_viewpatrol = @driver.find_element(ACTIONS_VIEWPATROL)
     top_viewpatrol.click
-    sleep(2)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(FRAME).displayed?}
     @driver.switch_to.frame(1)
   end
 
@@ -156,7 +160,8 @@ class PatrolsResource
     wait_for {@driver.find_element(ACTIONS_CREATEACTIVITY).displayed?}
     top_createactivity = @driver.find_element(ACTIONS_CREATEACTIVITY)
     top_createactivity.click
-    sleep(2)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(FRAME).displayed?}
     @driver.switch_to.frame(1)
   end
 
@@ -167,7 +172,8 @@ class PatrolsResource
     wait_for {@driver.find_element(ACTIONS_CREATEESTIMATE).displayed?}
     top_createestimate = @driver.find_element(ACTIONS_CREATEESTIMATE)
     top_createestimate.click
-    sleep(2)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(FRAME).displayed?}
     @driver.switch_to.frame(1)
   end
 
@@ -178,7 +184,8 @@ class PatrolsResource
     wait_for {@driver.find_element(TOP_PATROL_CREATEJOB).displayed?}
     top_createjob = @driver.find_element(TOP_PATROL_CREATEJOB)
     top_createjob.click
-    sleep(2)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(FRAME).displayed?}
     @driver.switch_to.frame(1)
   end
 
@@ -198,7 +205,8 @@ class PatrolsResource
     wait_for {@driver.find_element(ACTIONS_PRINTEMAIL).displayed?}
     top_printemail = @driver.find_element(ACTIONS_PRINTEMAIL)
     top_printemail.click
-    sleep(2)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(FRAME).displayed?}
     @driver.switch_to.frame(1)
   end
 
@@ -342,7 +350,11 @@ class PatrolsResource
     customer_enter = @driver.find_element(CUSTOMER_FIELD)
     customer_enter.send_keys(customer)
     sleep(1)
+    #Needs wait
 		@driver.action.send_keys(:enter).perform
+    sleep(2)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(VIEW_CUSTOMER_LINK).displayed?}
   end
 
   def cancel()
@@ -374,13 +386,12 @@ class PatrolsResource
   end
 
   def save_close()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
-    sleep(3)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   #CSS Methods: Popup (Contact Info Tab)

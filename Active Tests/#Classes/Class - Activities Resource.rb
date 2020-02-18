@@ -39,6 +39,9 @@ class ActivitiesResource
   SAVE_AND_NEW_BTN = {css: "input[value='Save and New']"}
   SAVE_AND_CLOSE_BTN = {css: "input[value='Save and Close']"}
 
+  #CSS Selectors: Other
+  FRAME = {css: "iframe[tabindex='0']"}
+
   attr_reader :driver
 
   def initialize(driver)
@@ -316,7 +319,6 @@ class ActivitiesResource
     dropdown_list = @driver.find_element(REASON_DROPDOWN)
     options = dropdown_list.find_elements(tag_name: 'option')
     options.each {|option| option.click if option.text == (reasonselect)}
-    sleep(1)
   end
 
   def description(descriptionfield)
@@ -365,7 +367,8 @@ class ActivitiesResource
     wait_for {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
-    sleep(2)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(FRAME).displayed?}
     @driver.switch_to.frame(0)
     @driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
   end

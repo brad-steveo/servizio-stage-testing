@@ -29,10 +29,17 @@ class PrintEmailPage
   PRINT_BTN = {css: "input[value='Print']"}
   EMAIL_AND_CLOSE_BTN = {css: "input[value='Email and Close']"}
 
+  #CSS Selectors: Other
+  FRAME = {css: "iframe[tabindex='0']"}
+  SAVE_AND_CLOSE_BTN = {css: "input[value='Save and Close']"}
+
   attr_reader :driver
 
   def initialize(driver)
     @driver = driver
+  end
+
+  class CustomError < StandardError
   end
 
   #CSS Methods: Selection Page
@@ -268,14 +275,20 @@ class PrintEmailPage
     wait_for {@driver.find_element(EMAIL_AND_CLOSE_BTN).displayed?}
     email_button = @driver.find_element(EMAIL_AND_CLOSE_BTN)
     email_button.click
-    #def wait_for2()
-    #  Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    #end
-    #wait_for2 {browser.alert.exists?}
-    sleep(3)
     @driver.switch_to.alert.accept rescue Selenium::WebDriver::Error::NoAlertOpenError
-    @driver.switch_to.default_content
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(FRAME).displayed?}
     @driver.switch_to.frame(0)
+    #begin
+    #  @driver.switch_to.frame(0)
+    #rescue Selenium::WebDriver::Error::NoSuchFrameError
+    #  begin
+    #  wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    #  wait.until {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
+    #  rescue Selenium::WebDriver::Error::TimeOutError
+    #  end
+    #end
+    #@driver.switch_to.frame(0)
   end
 
 end

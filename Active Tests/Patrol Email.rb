@@ -3,6 +3,7 @@ require "rspec"
 require "require_all"
 require_all "#Classes"
 
+
 describe "Patrol Email Test" do
 	it "Opens most recent patrol and sends an email" do
 
@@ -37,9 +38,6 @@ describe "Patrol Email Test" do
 		printemail.email_subject(emailsubject)
 		#printemail.email_message(emailmessage)
 		printemail.email_close()
-
-		sleep(2)
-
 		patrols.save_close()
 
 	end
