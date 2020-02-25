@@ -43,7 +43,8 @@ describe "Opens top Customer" do
 			activities.description(activitydescription)
 			activities.save_close()
 
-			sleep(5)
+			iframebuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
+			iframebuffer.until {customers.top_activitydescription.text == activitydescription}
 
 			#Verify Activity Creation
 			print customers.top_activitydescription.text

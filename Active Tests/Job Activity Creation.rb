@@ -43,6 +43,9 @@ describe "Opens top Job" do
 			activities.description(activitydescription)
 			activities.save_close()
 
+			iframebuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
+			iframebuffer.until {jobs.top_activitydescription.text == activitydescription}
+
 			#Verify Activity Creation
 			print jobs.top_activitydescription.text
 			expect(jobs.top_activitydescription.text).to eql(activitydescription)

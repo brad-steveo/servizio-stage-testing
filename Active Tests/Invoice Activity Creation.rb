@@ -43,6 +43,9 @@ describe "Creates an Invoice" do
 			activities.description(activitydescription)
 			activities.save_close()
 
+			iframebuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
+			iframebuffer.until {invoices.top_activitydescription.text == activitydescription}
+
 			#Verify Activity Creation
 			print invoices.top_activitydescription.text
 			expect(invoices.top_activitydescription.text).to eql(activitydescription)

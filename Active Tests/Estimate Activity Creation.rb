@@ -43,6 +43,9 @@ describe "Opens top Estimate" do
 			activities.description(activitydescription)
 			activities.save_close()
 
+			iframebuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
+			iframebuffer.until {estimates.top_activitydescription.text == activitydescription}
+
 			#Verify Activity Creation
 			print estimates.top_activitydescription.text
 			expect(estimates.top_activitydescription.text).to eql(activitydescription)

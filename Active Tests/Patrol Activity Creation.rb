@@ -43,6 +43,9 @@ describe "Opens top Patrol" do
 			activities.description(activitydescription)
 			activities.save_close()
 
+			iframebuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
+			iframebuffer.until {patrols.top_activitydescription.text == activitydescription}
+
 			#Verify Activity Creation
 			print patrols.top_activitydescription.text
 			expect(patrols.top_activitydescription.text).to eql(activitydescription)
