@@ -10,12 +10,8 @@ describe "Creates an Invoice" do
 
 		#Test Variables
 		timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
-		loginname = "seleniumuser@yesco.com"
-		password = "SUyesco123"
-		selectjob = "Selenium Test Job"
-		invoiceterms = "Net 30"
-		ponumber = timestamp
-		invoicelocation = "Test Location"
+		loginname = "masterchief@yesco.com"
+		password = "MCyesco123"
 		activitycount = 2
 		i = 0
 

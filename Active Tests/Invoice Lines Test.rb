@@ -13,7 +13,7 @@ describe "Opens Invoices resource and adds a line item" do
 		loginname = "seleniumuser@yesco.com"
 		password = "SUyesco123"
 		invoiceid = "1245"
-    description1 = "Test1234"
+    description1 = "Test1234 #{timestamp}"
 
 		#Go to page
 		@driver.navigate.to "https://stage.yesco.com/servizio/"

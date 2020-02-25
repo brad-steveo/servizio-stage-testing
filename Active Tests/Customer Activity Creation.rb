@@ -43,6 +43,8 @@ describe "Opens top Customer" do
 			activities.description(activitydescription)
 			activities.save_close()
 
+			sleep(5)
+
 			#Verify Activity Creation
 			print customers.top_activitydescription.text
 			expect(customers.top_activitydescription.text).to eql(activitydescription)
