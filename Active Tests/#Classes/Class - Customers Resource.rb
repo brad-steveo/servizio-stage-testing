@@ -142,6 +142,12 @@ class CustomersResource
   #CSS Selectors: Popup (Assets Tab)
   ASSETS_TAB = {css: "a[id$='block_a_10']"} #verifiy this after stage push 2/15/19
 
+  class FrameError < StandardError
+    def initialize(msg='Unable to switch to frame and locate element')
+      super
+    end
+  end
+
   attr_reader :driver
 
   def initialize(driver)
@@ -150,42 +156,42 @@ class CustomersResource
 
   #CSS Methods: Grid
   def open_customers()
-    #def wait_for()
-    #  Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    #end
-    #wait_for {@driver.find_element(CUSTOMERS_OPTN).displayed?}
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(CUSTOMERS_OPTN).displayed?}
     customers_button = @driver.find_element(CUSTOMERS_OPTN)
     customers_button.click
-    #def wait_for2()
-    #  Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    #end
-    #  wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records" }
   end
 
   def create_customer()
-    #def wait_for()
-    #  Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    #end
-    #wait_for {@driver.find_element(CREATE_CUSTOMER_BTN).displayed?}
+    i = 0
+    loopcount = 3
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(CREATE_CUSTOMER_BTN).displayed?}
     create_customer_button = @driver.find_element(CREATE_CUSTOMER_BTN)
     create_customer_button.click
-    #sleep(3)
-    wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait2.until {@driver.find_element(POPUP).displayed?}
-    @driver.switch_to.frame(0)
-    #def wait_for2()
-    #  Selenium::WebDriver::Wait.new(:timeout => 10).until { yield }
-    #end
-    #wait_for2 {@driver.find_element(NAME_FIELD).displayed?}
-    wait3 = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait3.until {@driver.find_element(NAME_FIELD).displayed?}
-    #sleep(2)
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(NAME_FIELD).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(NAME_FIELD).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def top()

@@ -44,7 +44,6 @@ describe "Creates an Customer" do
 			billcity = "Salt Lake City"
 			billstate = "Utah"
 			billzip = "84109"
-			billcontact = "Selenium Test Contact"
 
 			customers.create_customer()
 			customers.name(customername)
@@ -68,8 +67,8 @@ describe "Creates an Customer" do
 
 			customers.save_close()
 
-			iframebuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
-			iframebuffer.until {customers.top.text == customername}
+			closeiframebuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
+			closeiframebuffer.until {customers.top.text == customername}
 
 			#Verification
 			print customers.top_refnumber.text
