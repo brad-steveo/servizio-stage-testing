@@ -11,7 +11,7 @@ describe "Creates an Customer" do
 		#General Test Variables
 		loginname = "masterchief@yesco.com"
 		password = "MCyesco123"
-		loopcount = 2
+		loopcount = 3
 		i = 0
 
 		#Go to page
@@ -60,11 +60,16 @@ describe "Creates an Customer" do
 			customers.bill_zip(billzip)
 			customers.copy_to_site()
 
-			sleep(2)
+			databuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
+			databuffer.until {customers.site_name_verify['value'] == billname}
+
+			ajaxbuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
+			ajaxbuffer.until {customers.ajax.displayed? == false}
 
 			customers.save_close()
 
-			sleep(2)
+			iframebuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
+			iframebuffer.until {customers.top.text == customername}
 
 			#Verification
 			print customers.top_refnumber.text

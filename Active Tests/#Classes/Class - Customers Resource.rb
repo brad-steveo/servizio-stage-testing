@@ -31,6 +31,7 @@ class CustomersResource
   TOP_SITE_CONTACT = {css: "a[id$='wtCustomerTable_ctl03_wtSiteContactLink']"}
 
   #CSS Selectors: Popup
+  POPUP = {css: "div[class='os-internal-ui-widget-overlay']"}
   NAME_FIELD = {css: "input[id$='Customer_Name']"}
   DBA_NAME_FIELD = {css: "input[id$='Customer_DBAName']"}
   LOCATION_DROPDOWN = {css: "select[id$='LocationCombobox']"}
@@ -54,6 +55,7 @@ class CustomersResource
   ACTIONS_BTN = {xpath: "/html/body/form/div[3]/div[1]/div[3]/div[3]/div[1]/div/div[1]/div[2]/span"}
   SAVE_BTN = {css: "input[value='Save']"}
   SAVE_AND_CLOSE_BTN = {css: "input[value='Save and Close']"}
+  AJAX = {css: "div[class='Feedback_AjaxWait']"}
 
   #CSS Selectors: Popup (Contact Info Tab)
   CONTACT_INFO_TAB = {css: "a[id$='block_a_0']"}
@@ -148,32 +150,42 @@ class CustomersResource
 
   #CSS Methods: Grid
   def open_customers()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CUSTOMERS_OPTN).displayed?}
+    #def wait_for()
+    #  Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
+    #end
+    #wait_for {@driver.find_element(CUSTOMERS_OPTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(CUSTOMERS_OPTN).displayed?}
     customers_button = @driver.find_element(CUSTOMERS_OPTN)
     customers_button.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    #def wait_for2()
+    #  Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
+    #end
+    #  wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records" }
   end
 
   def create_customer()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CREATE_CUSTOMER_BTN).displayed?}
+    #def wait_for()
+    #  Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
+    #end
+    #wait_for {@driver.find_element(CREATE_CUSTOMER_BTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(CREATE_CUSTOMER_BTN).displayed?}
     create_customer_button = @driver.find_element(CREATE_CUSTOMER_BTN)
     create_customer_button.click
-    sleep(3)
+    #sleep(3)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait2.until {@driver.find_element(POPUP).displayed?}
     @driver.switch_to.frame(0)
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 10).until { yield }
-    end
-    wait_for2 {@driver.find_element(NAME_FIELD).displayed?}
-    sleep(2)
+    #def wait_for2()
+    #  Selenium::WebDriver::Wait.new(:timeout => 10).until { yield }
+    #end
+    #wait_for2 {@driver.find_element(NAME_FIELD).displayed?}
+    wait3 = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait3.until {@driver.find_element(NAME_FIELD).displayed?}
+    #sleep(2)
   end
 
   def top()
@@ -541,7 +553,7 @@ class CustomersResource
     def wait_for()
       Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
     end
-    wait_for {@driver.find_element(SAVE_BTN).displayed?}
+    wait_for {@driver.find_element(SAVE_BTN).enabled?}
     save = @driver.find_element(SAVE_BTN)
     save.click
   end
@@ -550,10 +562,9 @@ class CustomersResource
     def wait_for()
       Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
     end
-    wait_for {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
+    wait_for {@driver.find_element(SAVE_AND_CLOSE_BTN).enabled?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
-    sleep(3)
   end
 
   #Class Modifiers: Popup (Contact Info Tab)
@@ -603,6 +614,15 @@ class CustomersResource
   def site_name(sitename)
     input_field = @driver.find_element(SITE_NAME)
     input_field.send_keys(sitename)
+  end
+
+  #Used in databuffer wait action
+  def site_name_verify()
+    input_field = @driver.find_element(SITE_NAME)
+  end
+
+  def ajax()
+    display = @driver.find_element(AJAX)
   end
 
   def site_street(sitestreet)
