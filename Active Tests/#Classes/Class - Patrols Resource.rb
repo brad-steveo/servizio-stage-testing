@@ -73,6 +73,19 @@ class PatrolsResource
   #CSS Selectors: Other
   FRAME = {css: "iframe[tabindex='0']"}
 
+  #Custom Errors
+  class FrameError < StandardError
+    def initialize(msg='Unable to switch to frame and locate element')
+      super
+    end
+  end
+
+  class StaleError < StandardError
+    def initialize(msg='Stale reference error')
+      super
+    end
+  end
+
   attr_reader :driver
 
   def initialize(driver)
@@ -81,16 +94,27 @@ class PatrolsResource
 
   #Class Methods: Grid
   def open_patrols()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
+    i = 0
+    loopcount = 5
+    loop do
+      i += 1
+      begin
+      wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+      wait.until {@driver.find_element(CUSTOMERS_OPTN).displayed?}
+      rescue Selenium::WebDriver::Error::StaleElementReferenceError
+        false
+      end
+      if @driver.find_element(CUSTOMERS_OPTN).displayed? == true
+        break
+      end
+      if i == loopcount
+        raise StaleError
+      end
     end
-    wait_for {@driver.find_element(PATROLS_OPTN).displayed?}
     patrols_button = @driver.find_element(PATROLS_OPTN)
     patrols_button.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {driver.find_element(class: "Counter_Message").text != "0 records"}
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   def create_patrol()
@@ -220,19 +244,16 @@ class PatrolsResource
   end
 
   def search_patrol(searchname)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SEARCH_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SEARCH_FIELD).displayed?}
     patrol_search = @driver.find_element(SEARCH_FIELD)
     patrol_search.send_keys(searchname)
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for2 {@driver.find_element(SEARCH_BTN).displayed?}
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(SEARCH_BTN).displayed?}
     search_confirm = @driver.find_element(SEARCH_BTN)
     search_confirm.click
-    sleep(2)
+    wait3 = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait3.until {(@driver.find_element(TOP_PATROL).text.downcase + @driver.find_element(TOP_PATROL_CUSTOMER).text.downcase).include?(searchname)}
   end
 
   def search_patrolid(searchname)
