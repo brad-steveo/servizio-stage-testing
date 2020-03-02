@@ -2,7 +2,6 @@ class SettingsResource
 
   #CSS Selectors: General Business
   SETTINGS_OPTN = {css: "a[id$='Sidebar_Settings']"}
-  ACTIVITIES_OPTN = {css: "a[href^='Activities']"}
   ANNOUNCEMENTS_OPTN = {css: "a[href^='Announcements']"}
   CONTACTS_OPTN = {css: "a[href^='Contacts']"}
   CREWS_OPTN = {css: "a[href^='Crews']"}
@@ -45,34 +44,34 @@ class SettingsResource
   #Class Methods: General Business
   def open_settings()
     @driver.manage.window.resize_to(1400, 1024)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
+    i = 0
+    loopcount = 5
+    loop do
+      i += 1
+      begin
+      wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+      wait.until {@driver.find_element(SETTINGS_OPTN).displayed?}
+      rescue Selenium::WebDriver::Error::StaleElementReferenceError
+        false
+      end
+      if @driver.find_element(SETTINGS_OPTN).displayed? == true
+        break
+      end
+      if i == loopcount
+        raise StaleError
+      end
     end
-    wait_for {@driver.find_element(SETTINGS_OPTN).displayed?}
     settings_button = @driver.find_element(SETTINGS_OPTN)
     settings_button.click
   end
 
-  def open_activities()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ACTIVITIES_OPTN).displayed?}
-    activities_selection = @driver.find_element(ACTIVITIES_OPTN)
-    activities_selection.click
-  end
-
   def open_contacts()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CONTACTS_OPTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CONTACTS_OPTN).displayed?}
     contacts_selection = @driver.find_element(CONTACTS_OPTN)
     contacts_selection.click
-    def wait_for2()
-    	Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until @driver.find_element(class: "Counter_Message").text != "0 records"
   end
 
   def open_crews()
@@ -126,21 +125,21 @@ class SettingsResource
   end
 
   def open_invoicelines()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(INVOICELINES_OPTN).displayed?}
     invoicelines_selection = @driver.find_element(INVOICELINES_OPTN)
     invoicelines_selection.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   def open_joblines()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(JOBLINES_OPTN).displayed?}
     joblines_selection = @driver.find_element(JOBLINES_OPTN)
     joblines_selection.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records" }
   end
 
   def open_productsandservices()

@@ -93,6 +93,19 @@ class EstimatesResource
   #SEARCH_BTN
   #RESET_BTN
 
+  #Custom Errors
+  class FrameError < StandardError
+    def initialize(msg='Unable to switch to frame and locate element')
+      super
+    end
+  end
+
+  class StaleError < StandardError
+    def initialize(msg='Stale reference error')
+      super
+    end
+  end
+
   attr_reader :driver
 
   def initialize(driver)
@@ -101,16 +114,27 @@ class EstimatesResource
 
   #CSS Methods: Grid
   def open_estimates()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
+    i = 0
+    loopcount = 5
+    loop do
+      i += 1
+      begin
+      wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+      wait.until {@driver.find_element(ESTIMATES_OPTN).displayed?}
+      rescue Selenium::WebDriver::Error::StaleElementReferenceError
+        false
+      end
+      if @driver.find_element(ESTIMATES_OPTN).displayed? == true
+        break
+      end
+      if i == loopcount
+        raise StaleError
+      end
     end
-    wait_for {@driver.find_element(ESTIMATES_OPTN).displayed?}
     estimates_button = @driver.find_element(ESTIMATES_OPTN)
     estimates_button.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {driver.find_element(class: "Counter_Message").text != "0 records" }
   end
 
   def create_estimate()

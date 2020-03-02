@@ -62,19 +62,16 @@ class InvoiceLinesResource
   end
 
   def search_invoicelines(searchname)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SEARCH_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SEARCH_FIELD).displayed?}
     invoiceline_search = @driver.find_element(SEARCH_FIELD)
     invoiceline_search.send_keys(searchname)
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for2 {@driver.find_element(SEARCH_BTN).displayed?}
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(SEARCH_BTN).displayed?}
     search_confirm = @driver.find_element(SEARCH_BTN)
     search_confirm.click
-    sleep(2)
+    wait3 = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait3.until {(@driver.find_element(TOP_CUSTOMERNAME).text.downcase + @driver.find_element(TOP_ITEMNAME).text.downcase).include?(searchname)}
   end
 
   def search_id(searchname)

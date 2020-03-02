@@ -100,11 +100,11 @@ class PatrolsResource
       i += 1
       begin
       wait = Selenium::WebDriver::Wait.new(:timeout => 10)
-      wait.until {@driver.find_element(CUSTOMERS_OPTN).displayed?}
+      wait.until {@driver.find_element(PATROLS_OPTN).displayed?}
       rescue Selenium::WebDriver::Error::StaleElementReferenceError
         false
       end
-      if @driver.find_element(CUSTOMERS_OPTN).displayed? == true
+      if @driver.find_element(PATROLS_OPTN).displayed? == true
         break
       end
       if i == loopcount
@@ -257,23 +257,21 @@ class PatrolsResource
   end
 
   def search_patrolid(searchname)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ID_COLUMN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ID_COLUMN).displayed?}
     patrol_search = @driver.find_element(ID_COLUMN)
     patrol_search.send_keys(searchname)
-    sleep(3)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait2.until {@driver.find_element(TOP_REFNUMBER).text.include?(searchname)}
   end
 
   def search_patrolname(searchname)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(NAME_COLUMN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(NAME_COLUMN).displayed?}
     patrol_search = @driver.find_element(NAME_COLUMN)
     patrol_search.send_keys(searchname)
-    sleep(3)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait2.until {@driver.find_element(TOP_PATROL).text.downcase.include?(searchname)}
   end
 
   def search_reset()

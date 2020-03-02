@@ -4,7 +4,7 @@ require "require_all"
 require_all "#Classes"
 
 describe "Performes a search in each resource" do
-	it "Verifies that the search returns the proper amount of records" do
+	it "Verifies that the search returns the proper records" do
 
 		@driver = Selenium::WebDriver.for :chrome
 

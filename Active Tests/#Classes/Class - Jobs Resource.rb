@@ -144,6 +144,19 @@ class JobsResource
   #CSS Selectors: Popup (Assets Tab)
   ASSETS_TAB = {css: "a[id$='block_a_8']"} #verifiy this after stage push 2/15/19
 
+  #Custom Errors
+  class FrameError < StandardError
+    def initialize(msg='Unable to switch to frame and locate element')
+      super
+    end
+  end
+
+  class StaleError < StandardError
+    def initialize(msg='Stale reference error')
+      super
+    end
+  end
+
   attr_reader :driver
 
   def initialize(driver)
@@ -152,16 +165,27 @@ class JobsResource
 
   #CSS Methods: Grid
   def open_jobs()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
+    i = 0
+    loopcount = 5
+    loop do
+      i += 1
+      begin
+      wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+      wait.until {@driver.find_element(JOBS_OPTN).displayed?}
+      rescue Selenium::WebDriver::Error::StaleElementReferenceError
+        false
+      end
+      if @driver.find_element(JOBS_OPTN).displayed? == true
+        break
+      end
+      if i == loopcount
+        raise StaleError
+      end
     end
-    wait_for {@driver.find_element(JOBS_OPTN).displayed?}
     jobs_button = @driver.find_element(JOBS_OPTN)
     jobs_button.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records" }
   end
 
   def create_job()
