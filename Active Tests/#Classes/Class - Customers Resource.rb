@@ -404,27 +404,25 @@ class CustomersResource
     search_confirm = @driver.find_element(SEARCH_BTN)
     search_confirm.click
     wait3 = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait3.until {@driver.find_element(TOP_CUSTOMER).text.downcase.include?(searchname)}
+    wait3.until {@driver.find_element(TOP_CUSTOMER).text.downcase.include?(searchname.downcase)}
   end
 
   def search_customerid(searchname)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ID_COLUMN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ID_COLUMN).displayed?}
     customer_search = @driver.find_element(ID_COLUMN)
     customer_search.send_keys(searchname)
-    sleep(3)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait2.until {@driver.find_element(TOP_REFNUMBER).text.include?(searchname)}
   end
 
   def search_customername(searchname)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(NAME_COLUMN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(NAME_COLUMN).displayed?}
     customer_search = @driver.find_element(NAME_COLUMN)
     customer_search.send_keys(searchname)
-    sleep(3)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait2.until {@driver.find_element(TOP_CUSTOMER).text.downcase.include?(searchname.downcase)}
   end
 
   def search_reset()

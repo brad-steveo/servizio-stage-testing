@@ -46,6 +46,9 @@ describe "Performes a column header search in each resource for the ID and Name 
 		expect(patrols.top_refnumber.text).to include(searchpatrolid)
 
 		patrols.search_reset()
+		ajaxbuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
+		ajaxbuffer.until {patrols.ajax.displayed? == false}
+
 		patrols.search_patrolname(searchpatrolname)
 		print "Patrols Search (NAME): \n"
 		print "%s \n" % patrols.top.text

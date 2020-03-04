@@ -65,44 +65,39 @@ class JobLinesResource
     search_confirm = @driver.find_element(SEARCH_BTN)
     search_confirm.click
     wait3 = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait3.until {(@driver.find_element(TOP_ITEMNAME).text.downcase + @driver.find_element(TOP_JOBNAME).text.downcase).include?(searchname)}
+    wait3.until {(@driver.find_element(TOP_ITEMNAME).text.downcase + @driver.find_element(TOP_JOBNAME).text.downcase).include?(searchname.downcase)}
   end
 
   def search_id(searchname)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ID_COLUMN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ID_COLUMN).displayed?}
     jobline_search = @driver.find_element(ID_COLUMN)
     jobline_search.send_keys(searchname)
-    sleep(3)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait2.until {@driver.find_element(TOP_REFNUMBER).text.include?(searchname)}
   end
 
   def search_itemname(searchname)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ITEMNAME_COLUMN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ITEMNAME_COLUMN).displayed?}
     jobline_search = @driver.find_element(ITEMNAME_COLUMN)
     jobline_search.send_keys(searchname)
-    sleep(3)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait2.until {@driver.find_element(TOP_ITEMNAME).text.downcase.include?(searchname.downcase)}
   end
 
   def search_jobname(searchname)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(JOBNAME_COLUMN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(JOBNAME_COLUMN).displayed?}
     jobline_search = @driver.find_element(JOBNAME_COLUMN)
     jobline_search.send_keys(searchname)
-    sleep(3)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait2.until {@driver.find_element(TOP_JOBNAME).text.downcase.include?(searchname.downcase)}
   end
 
   def search_reset()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(RESET_BTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(RESET_BTN).displayed?}
     search_reset = @driver.find_element(RESET_BTN)
     search_reset.click
     sleep(2)
