@@ -3,7 +3,7 @@ require "rspec"
 require "require_all"
 require_all "#Classes"
 
-describe "Creates an Customer" do
+describe "Creates a Customer" do
 	it "Verifies that Customer Creation was successful" do
 
 		@driver = Selenium::WebDriver.for :chrome
@@ -30,6 +30,7 @@ describe "Creates an Customer" do
 		def customer_creator()
 
 			customers = CustomersResource.new(@driver)
+			buffers = Buffers.new(@driver)
 
 			#Record Variables
 			timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
@@ -62,8 +63,7 @@ describe "Creates an Customer" do
 			databuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
 			databuffer.until {customers.site_name_verify['value'] == billname}
 
-			ajaxbuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
-			ajaxbuffer.until {customers.ajax.displayed? == false}
+			buffers.ajax_buffer()
 
 			customers.save_close()
 

@@ -55,7 +55,6 @@ class CustomersResource
   ACTIONS_BTN = {xpath: "/html/body/form/div[3]/div[1]/div[3]/div[3]/div[1]/div/div[1]/div[2]/span"}
   SAVE_BTN = {css: "input[value='Save']"}
   SAVE_AND_CLOSE_BTN = {css: "input[value='Save and Close']"}
-  AJAX = {css: "div[class='Feedback_AjaxWait']"}
 
   #CSS Selectors: Popup (Contact Info Tab)
   CONTACT_INFO_TAB = {css: "a[id$='block_a_0']"}
@@ -685,10 +684,6 @@ class CustomersResource
   #Used in databuffer wait action
   def site_name_verify()
     input_field = @driver.find_element(SITE_NAME)
-  end
-
-  def ajax()
-    display = @driver.find_element(AJAX)
   end
 
   def site_street(sitestreet)

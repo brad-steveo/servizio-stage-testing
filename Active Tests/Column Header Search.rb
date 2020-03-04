@@ -13,17 +13,17 @@ describe "Performes a column header search in each resource for the ID and Name 
 		loginname = "masterchief@yesco.com"
 		password = "MCyesco123"
 		searchpatrolid = "1001"
-		searchpatrolname = "blaine"
+		searchpatrolname = "parleys"
 		searchjobid = "1001"
-		searchjobname = "back light"
+		searchjobname = "status"
 		searchestimateid = "1001"
-		searchestimatename = "lights out"
+		searchestimatename = "approved"
 		searchinvoiceid = "1001"
-		searchinvoicename = "blaine"
+		searchinvoicename = "kreme"
 		searchcustomerid = "1001"
-		searchcustomername = "blaine"
+		searchcustomername = "rite"
 		searchjoblineid = "1024"
-		searchjoblinejobname = "Stage Test"
+		searchjoblinejobname = "selenium"
 		searchinvoicelineid = "1010"
 		searchinvoicelineinvoiceid = "1016"
 
@@ -36,6 +36,8 @@ describe "Performes a column header search in each resource for the ID and Name 
 		login.enter_password(password)
 		login.sign_in()
 
+		buffers = Buffers.new(@driver)
+
 		# Click on Patrols and search columns
 		patrols = PatrolsResource.new(@driver)
 		patrols.open_patrols()
@@ -46,8 +48,7 @@ describe "Performes a column header search in each resource for the ID and Name 
 		expect(patrols.top_refnumber.text).to include(searchpatrolid)
 
 		patrols.search_reset()
-		ajaxbuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
-		ajaxbuffer.until {patrols.ajax.displayed? == false}
+		buffers.ajax_buffer()
 
 		patrols.search_patrolname(searchpatrolname)
 		print "Patrols Search (NAME): \n"
@@ -65,6 +66,9 @@ describe "Performes a column header search in each resource for the ID and Name 
 		expect(jobs.top_refnumber.text).to include(searchjobid)
 
 		jobs.search_reset()
+		sleep(5)
+		buffers.ajax_buffer()
+
 		jobs.search_jobname(searchjobname)
 		print "Jobs Search (NAME): \n"
 		print "%s \n" % jobs.top.text
@@ -81,6 +85,8 @@ describe "Performes a column header search in each resource for the ID and Name 
 		expect(estimates.top_refnumber.text).to include(searchestimateid)
 
 		estimates.search_reset()
+		buffers.ajax_buffer()
+
 		estimates.search_estimatename(searchestimatename)
 		print "Estimates Search (NAME): \n"
 		print "%s \n" % estimates.top.text
@@ -97,6 +103,8 @@ describe "Performes a column header search in each resource for the ID and Name 
 		expect(invoices.top_refnumber.text).to include(searchinvoiceid)
 
 		invoices.search_reset()
+		buffers.ajax_buffer()
+
 		invoices.search_invoicename(searchinvoicename)
 		print "Invoices Search (NAME): \n"
 		print "%s \n" % invoices.top.text
@@ -113,6 +121,8 @@ describe "Performes a column header search in each resource for the ID and Name 
 		expect(customers.top_refnumber.text).to include(searchcustomerid)
 
 		customers.search_reset()
+		buffers.ajax_buffer()
+
 		customers.search_customername(searchcustomername)
 		print "Customers Search (NAME): \n"
 		print "%s \n" % customers.top.text
@@ -131,6 +141,8 @@ describe "Performes a column header search in each resource for the ID and Name 
 		expect(joblines.top_refnumber.text).to include(searchjoblineid)
 
 		joblines.search_reset()
+		buffers.ajax_buffer()
+
 		joblines.search_jobname(searchjoblinejobname)
 		print "Job Lines Search (NAME): \n"
 		print "%s \n" % joblines.top_jobname.text
@@ -148,6 +160,8 @@ describe "Performes a column header search in each resource for the ID and Name 
 		expect(invoicelines.top_refnumber.text).to include(searchinvoicelineid)
 
 		invoicelines.search_reset()
+		buffers.ajax_buffer()
+
 		invoicelines.search_invoiceid(searchinvoicelineinvoiceid)
 		print "Invoice Lines Search (NAME): \n"
 		print "%s \n" % invoicelines.top_invoiceid.text

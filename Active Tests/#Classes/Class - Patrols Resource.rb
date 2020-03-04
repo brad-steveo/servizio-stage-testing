@@ -72,7 +72,6 @@ class PatrolsResource
 
   #CSS Selectors: Other
   FRAME = {css: "iframe[tabindex='0']"}
-  AJAX = {css: "div[class='Feedback_AjaxWait']"}
 
   #Custom Errors
   class FrameError < StandardError
@@ -330,10 +329,6 @@ class PatrolsResource
     print "Patrols: \n"
     print "%s \n" % patrols_count
     print "Load Time: %s ms \n\n" % loadPerformance
-  end
-
-  def ajax()
-    display = @driver.find_element(AJAX)
   end
 
   #CSS Methods: Popup
