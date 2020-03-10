@@ -33,20 +33,35 @@ describe "Creates new basic activity" do
 
 		loop do
 			i += 1
+			currenttoprecord = activities.top_refnumber.text
 			activities.top_open()
-			activities.complete_activity()
 
-			if activities.date_due_contents.nil? == true
+			if activities.date_due_contents['value'].empty? == true
 				activities.date_due(date)
+				activities.complete_activity()
 				activities.save_close_grid()
+
+				closeiframebuffer1 = Selenium::WebDriver::Wait.new(:timeout => 10)
+				closeiframebuffer1.until {activities.top_refnumber.text != currenttoprecord}
+
 			else
+				activities.complete_activity()
 				activities.save_close_grid()
+
+				closeiframebuffer1 = Selenium::WebDriver::Wait.new(:timeout => 10)
+				closeiframebuffer1.until {activities.top_refnumber.text != currenttoprecord}
+
 			end
 
 			if i == loopcount
 				break
 			end
 		end
+
+		#sleep(3)
+
+		closeiframebuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
+		closeiframebuffer.until {activities.activity_count.text.to_i == (activitycount.to_i - loopcount)}
 
 		print activitycount
 		print "\n"

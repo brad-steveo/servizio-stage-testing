@@ -35,6 +35,9 @@ describe "Creates new basic activity" do
 			activities.description(timestamp)
 			activities.save_close_grid()
 
+			closeiframebuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
+			closeiframebuffer.until {activities.top_description.text == timestamp}
+
 			print activities.top_refnumber.text
 			print "\n"
 			print activities.top_description.text

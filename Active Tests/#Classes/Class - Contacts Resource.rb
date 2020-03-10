@@ -130,10 +130,8 @@ class ContactsResource
   end
 
   def search_reset()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(RESET_BTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(RESET_BTN).displayed?}
     search_reset = @driver.find_element(RESET_BTN)
     search_reset.click
   end

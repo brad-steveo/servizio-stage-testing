@@ -53,7 +53,13 @@ describe "Links a contact to a customer" do
 
 		customers.save_close
 
+		closeiframebuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
+		closeiframebuffer.until {customers.top.displayed?}
+
 		@driver.execute_script("arguments[0].scrollIntoView();", customers.top_site_contact)
+
+		databuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
+		databuffer.until {customers.top_billing_contact.text.include?(contactsearchname)}
 
 		expect(customers.top_billing_contact.text).to include(contactsearchname)
 		expect(customers.top_site_contact.text).to include(contactsearchname)

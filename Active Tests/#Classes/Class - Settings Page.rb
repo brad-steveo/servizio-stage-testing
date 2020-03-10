@@ -71,7 +71,7 @@ class SettingsResource
     contacts_selection = @driver.find_element(CONTACTS_OPTN)
     contacts_selection.click
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait2.until @driver.find_element(class: "Counter_Message").text != "0 records"
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   def open_crews()

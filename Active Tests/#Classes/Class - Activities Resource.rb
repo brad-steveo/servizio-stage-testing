@@ -156,10 +156,8 @@ class ActivitiesResource
   end
 
   def search_reset()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(RESET_BTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(RESET_BTN).displayed?}
     search_reset = @driver.find_element(RESET_BTN)
     search_reset.click
   end
@@ -223,15 +221,13 @@ class ActivitiesResource
   end
 
   def resource_performance()
-    navigationStart = driver.execute_script("return window.performance.timing.navigationStart")
-    responseStart = driver.execute_script("return window.performance.timing.responseStart")
-    domComplete = driver.execute_script("return window.performance.timing.domComplete")
+    navigationStart = @driver.execute_script("return window.performance.timing.navigationStart")
+    responseStart = @driver.execute_script("return window.performance.timing.responseStart")
+    domComplete = @driver.execute_script("return window.performance.timing.domComplete")
     loadPerformance = domComplete - navigationStart
-    def wait_for
-      Selenium::WebDriver::Wait.new(:timeout => 20).until { yield }
-    end
-    wait_for {driver.find_element(class: "Counter_Message").text != "0 records" }
-    activity_records = driver.find_element(class: "Counter_Message")
+    wait = Selenium::WebDriver::Wait.new(:timeout => 20)
+    wait.until {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    activity_records = @driver.find_element(class: "Counter_Message")
     activity_count = activity_records.text
     print "Activities: \n"
     print "%s \n" % activity_count
@@ -380,7 +376,6 @@ class ActivitiesResource
     wait_for {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
-    @driver.switch_to.frame(0) #this may not be needed
   end
 
 end

@@ -425,37 +425,29 @@ class CustomersResource
   end
 
   def search_reset()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(RESET_BTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(RESET_BTN).displayed?}
     search_reset = @driver.find_element(RESET_BTN)
     search_reset.click
   end
 
   def grid_options()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(GRID_OPTIONS_DROPDOWN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(GRID_OPTIONS_DROPDOWN).displayed?}
     grid_options = @driver.find_element(GRID_OPTIONS_DROPDOWN)
     grid_options.click
   end
 
   def export_customers()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(EXPORT_CUSTOMERS).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(EXPORT_CUSTOMERS).displayed?}
     export_customers = @driver.find_element(EXPORT_CUSTOMERS)
     export_customers.click
   end
 
   def show_inactives()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SHOW_INACTIVES).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SHOW_INACTIVES).displayed?}
     show_inactives = @driver.find_element(SHOW_INACTIVES)
     show_inactives.click
   end
@@ -465,15 +457,13 @@ class CustomersResource
   end
 
   def resource_performance()
-    navigationStart = driver.execute_script("return window.performance.timing.navigationStart")
-    responseStart = driver.execute_script("return window.performance.timing.responseStart")
-    domComplete = driver.execute_script("return window.performance.timing.domComplete")
+    navigationStart = @driver.execute_script("return window.performance.timing.navigationStart")
+    responseStart = @driver.execute_script("return window.performance.timing.responseStart")
+    domComplete = @driver.execute_script("return window.performance.timing.domComplete")
     loadPerformance = domComplete - navigationStart
-    def wait_for
-      Selenium::WebDriver::Wait.new(:timeout => 20).until { yield }
-    end
-    wait_for {driver.find_element(class: "Counter_Message").text != "0 records" }
-    customers_records = driver.find_element(class: "Counter_Message")
+    wait = Selenium::WebDriver::Wait.new(:timeout => 20)
+    wait.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
+    customers_records = @driver.find_element(class: "Counter_Message")
     customers_count = customers_records.text
     print "Customers: \n"
     print "%s \n" % customers_count

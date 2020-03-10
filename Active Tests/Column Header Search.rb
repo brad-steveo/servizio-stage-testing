@@ -66,7 +66,6 @@ describe "Performes a column header search in each resource for the ID and Name 
 		expect(jobs.top_refnumber.text).to include(searchjobid)
 
 		jobs.search_reset()
-		sleep(5)
 		buffers.ajax_buffer()
 
 		jobs.search_jobname(searchjobname)

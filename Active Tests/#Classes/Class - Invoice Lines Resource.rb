@@ -143,15 +143,13 @@ class InvoiceLinesResource
   end
 
   def resource_performance()
-    navigationStart = driver.execute_script("return window.performance.timing.navigationStart")
-    responseStart = driver.execute_script("return window.performance.timing.responseStart")
-    domComplete = driver.execute_script("return window.performance.timing.domComplete")
+    navigationStart = @driver.execute_script("return window.performance.timing.navigationStart")
+    responseStart = @driver.execute_script("return window.performance.timing.responseStart")
+    domComplete = @driver.execute_script("return window.performance.timing.domComplete")
     loadPerformance = domComplete - navigationStart
-    def wait_for
-      Selenium::WebDriver::Wait.new(:timeout => 20).until { yield }
-    end
-    wait_for {driver.find_element(GRID_TOTAL).text != "0 records" }
-    invoicelines_records = driver.find_element(GRID_TOTAL)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 20)
+    wait.until {@driver.find_element(GRID_TOTAL).text != "0 records"}
+    invoicelines_records = @driver.find_element(GRID_TOTAL)
     invoicelines_count = invoicelines_records.text
     print "Invoice Lines: \n"
     print "%s \n" % invoicelines_count

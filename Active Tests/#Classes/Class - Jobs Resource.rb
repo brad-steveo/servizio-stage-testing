@@ -355,10 +355,8 @@ class JobsResource
   end
 
   def search_reset()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(RESET_BTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(RESET_BTN).displayed?}
     search_reset = @driver.find_element(RESET_BTN)
     search_reset.click
   end
@@ -395,15 +393,13 @@ class JobsResource
   end
 
   def resource_performance()
-    navigationStart = driver.execute_script("return window.performance.timing.navigationStart")
-    responseStart = driver.execute_script("return window.performance.timing.responseStart")
-    domComplete = driver.execute_script("return window.performance.timing.domComplete")
+    navigationStart = @driver.execute_script("return window.performance.timing.navigationStart")
+    responseStart = @driver.execute_script("return window.performance.timing.responseStart")
+    domComplete = @driver.execute_script("return window.performance.timing.domComplete")
     loadPerformance = domComplete - navigationStart
-    def wait_for
-      Selenium::WebDriver::Wait.new(:timeout => 20).until { yield }
-    end
-    wait_for {driver.find_element(GRID_TOTAL).text != "0 records" }
-    jobs_records = driver.find_element(GRID_TOTAL)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 20)
+    wait.until {@driver.find_element(GRID_TOTAL).text != "0 records"}
+    jobs_records = @driver.find_element(GRID_TOTAL)
     jobs_count = jobs_records.text
     print "Jobs: \n"
     print "%s \n" % jobs_count
