@@ -415,6 +415,10 @@ class CustomersResource
     wait2.until {@driver.find_element(TOP_REFNUMBER).text.include?(searchname)}
   end
 
+  def search_customerid_field()
+    field = @driver.find_element(ID_COLUMN)
+  end
+
   def search_customername(searchname)
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(NAME_COLUMN).displayed?}
@@ -422,6 +426,10 @@ class CustomersResource
     customer_search.send_keys(searchname)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait2.until {@driver.find_element(TOP_CUSTOMER).text.downcase.include?(searchname.downcase)}
+  end
+
+  def search_customername_field()
+    field = @driver.find_element(NAME_COLUMN)
   end
 
   def search_reset()

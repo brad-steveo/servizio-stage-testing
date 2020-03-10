@@ -298,6 +298,10 @@ class EstimatesResource
     wait2.until {@driver.find_element(TOP_REFNUMBER).text.include?(searchname)}
   end
 
+  def search_estimateid_field()
+    field = @driver.find_element(ID_COLUMN)
+  end
+
   def search_estimatename(searchname)
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(NAME_COLUMN).displayed?}
@@ -305,6 +309,10 @@ class EstimatesResource
     estimate_search.send_keys(searchname)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait2.until {@driver.find_element(TOP_ESTIMATE).text.downcase.include?(searchname.downcase)}
+  end
+
+  def search_estimateid_field()
+    field = @driver.find_element(NAME_COLUMN)
   end
 
   def search_reset()

@@ -265,6 +265,10 @@ class PatrolsResource
     wait2.until {@driver.find_element(TOP_REFNUMBER).text.include?(searchname)}
   end
 
+  def search_patrolid_field()
+    field = @driver.find_element(ID_COLUMN)
+  end
+
   def search_patrolname(searchname)
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(NAME_COLUMN).displayed?}
@@ -272,6 +276,10 @@ class PatrolsResource
     patrol_search.send_keys(searchname)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait2.until {@driver.find_element(TOP_PATROL).text.downcase.include?(searchname)}
+  end
+
+  def search_patrolname_field()
+    field = @driver.find_element(NAME_COLUMN)
   end
 
   def search_reset()

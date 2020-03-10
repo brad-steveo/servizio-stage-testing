@@ -277,6 +277,10 @@ class InvoicesResource
     wait2.until {@driver.find_element(TOP_REFNUMBER).text.include?(searchname)}
   end
 
+  def search_invoiceid_field()
+    field = @driver.find_element(ID_COLUMN)
+  end
+
   def search_invoicename(searchname)
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(NAME_COLUMN).displayed?}
@@ -284,6 +288,10 @@ class InvoicesResource
     invoice_search.send_keys(searchname)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait2.until {@driver.find_element(TOP_INVOICE).text.downcase.include?(searchname.downcase)}
+  end
+
+  def search_invoicename_field()
+    field = @driver.find_element(NAME_COLUMN)
   end
 
   def search_reset()

@@ -345,6 +345,10 @@ class JobsResource
     wait2.until {@driver.find_element(TOP_REFNUMBER).text.include?(searchname)}
   end
 
+  def search_jobid_field()
+    field = @driver.find_element(ID_COLUMN)
+  end
+
   def search_jobname(searchname)
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(NAME_COLUMN).displayed?}
@@ -352,6 +356,10 @@ class JobsResource
     job_search.send_keys(searchname)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait2.until {@driver.find_element(TOP_JOB).text.downcase.include?(searchname.downcase)}
+  end
+
+  def search_jobname_field()
+    field = @driver.find_element(NAME_COLUMN)
   end
 
   def search_reset()

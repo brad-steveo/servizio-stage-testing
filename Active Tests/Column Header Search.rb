@@ -49,6 +49,8 @@ describe "Performes a column header search in each resource for the ID and Name 
 
 		patrols.search_reset()
 		buffers.ajax_buffer()
+		patrolswait = Selenium::WebDriver::Wait.new(:timeout => 5)
+		patrolswait.until {patrols.search_patrolid_field['value'].empty? == true}
 
 		patrols.search_patrolname(searchpatrolname)
 		print "Patrols Search (NAME): \n"
@@ -67,6 +69,8 @@ describe "Performes a column header search in each resource for the ID and Name 
 
 		jobs.search_reset()
 		buffers.ajax_buffer()
+		jobswait = Selenium::WebDriver::Wait.new(:timeout => 5)
+		jobswait.until {jobs.search_jobid_field['value'].empty? == true}
 
 		jobs.search_jobname(searchjobname)
 		print "Jobs Search (NAME): \n"
@@ -85,6 +89,8 @@ describe "Performes a column header search in each resource for the ID and Name 
 
 		estimates.search_reset()
 		buffers.ajax_buffer()
+		estimateswait = Selenium::WebDriver::Wait.new(:timeout => 5)
+		estimateswait.until {estimates.search_estimateid_field['value'].empty? == true}
 
 		estimates.search_estimatename(searchestimatename)
 		print "Estimates Search (NAME): \n"
@@ -103,6 +109,8 @@ describe "Performes a column header search in each resource for the ID and Name 
 
 		invoices.search_reset()
 		buffers.ajax_buffer()
+		invoiceswait = Selenium::WebDriver::Wait.new(:timeout => 5)
+		invoiceswait.until {invoices.search_invoiceid_field['value'].empty? == true}
 
 		invoices.search_invoicename(searchinvoicename)
 		print "Invoices Search (NAME): \n"
@@ -121,6 +129,8 @@ describe "Performes a column header search in each resource for the ID and Name 
 
 		customers.search_reset()
 		buffers.ajax_buffer()
+		customerswait = Selenium::WebDriver::Wait.new(:timeout => 5)
+		customerswait.until {customers.search_customerid_field['value'].empty? == true}
 
 		customers.search_customername(searchcustomername)
 		print "Customers Search (NAME): \n"
@@ -141,6 +151,8 @@ describe "Performes a column header search in each resource for the ID and Name 
 
 		joblines.search_reset()
 		buffers.ajax_buffer()
+		joblineswait = Selenium::WebDriver::Wait.new(:timeout => 5)
+		joblineswait.until {joblines.search_id_field['value'].empty? == true}
 
 		joblines.search_jobname(searchjoblinejobname)
 		print "Job Lines Search (NAME): \n"
@@ -160,6 +172,8 @@ describe "Performes a column header search in each resource for the ID and Name 
 
 		invoicelines.search_reset()
 		buffers.ajax_buffer()
+		invoicelineswait = Selenium::WebDriver::Wait.new(:timeout => 5)
+		invoicelineswait.until {invoicelines.search_id_field['value'].empty? == true}
 
 		invoicelines.search_invoiceid(searchinvoicelineinvoiceid)
 		print "Invoice Lines Search (NAME): \n"
