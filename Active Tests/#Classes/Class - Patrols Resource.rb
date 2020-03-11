@@ -290,19 +290,15 @@ class PatrolsResource
   end
 
   def grid_options()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(GRID_OPTIONS_DROPDOWN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(GRID_OPTIONS_DROPDOWN).displayed?}
     grid_options = @driver.find_element(GRID_OPTIONS_DROPDOWN)
     grid_options.click
   end
 
   def export_patrols()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(EXPORT_PATROLS).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(EXPORT_PATROLS).displayed?}
     export_patrols = @driver.find_element(EXPORT_PATROLS)
     export_patrols.click
   end

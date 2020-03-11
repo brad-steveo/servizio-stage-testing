@@ -323,19 +323,15 @@ class EstimatesResource
   end
 
   def grid_options()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(GRID_OPTIONS_DROPDOWN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(GRID_OPTIONS_DROPDOWN).displayed?}
     grid_options = @driver.find_element(GRID_OPTIONS_DROPDOWN)
     grid_options.click
   end
 
   def export_estimates()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(EXPORT_ESTIMATES).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(EXPORT_ESTIMATES).displayed?}
     export_estimates = @driver.find_element(EXPORT_ESTIMATES)
     export_estimates.click
   end

@@ -302,19 +302,15 @@ class InvoicesResource
   end
 
   def grid_options()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(GRID_OPTIONS_DROPDOWN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(GRID_OPTIONS_DROPDOWN).displayed?}
     grid_options = @driver.find_element(GRID_OPTIONS_DROPDOWN)
     grid_options.click
   end
 
   def export_invoices()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(EXPORT_INVOICES).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(EXPORT_INVOICES).displayed?}
     export_jobs = @driver.find_element(EXPORT_INVOICES)
     export_jobs.click
   end

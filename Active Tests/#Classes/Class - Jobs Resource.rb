@@ -370,19 +370,15 @@ class JobsResource
   end
 
   def grid_options()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(GRID_OPTIONS_DROPDOWN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(GRID_OPTIONS_DROPDOWN).displayed?}
     grid_options = @driver.find_element(GRID_OPTIONS_DROPDOWN)
     grid_options.click
   end
 
   def export_jobs()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(EXPORT_JOBS).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(EXPORT_JOBS).displayed?}
     export_jobs = @driver.find_element(EXPORT_JOBS)
     export_jobs.click
   end

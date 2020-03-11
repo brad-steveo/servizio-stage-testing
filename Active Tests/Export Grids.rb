@@ -63,7 +63,6 @@ describe "Exports grid in each resource" do
 		customers.open_customers()
 		customers.grid_options()
 		customers.export_customers()
-		sleep(2)
 
 		print("Customers Exported")
 		print("\n")
@@ -75,7 +74,6 @@ describe "Exports grid in each resource" do
 		joblines = JobLinesResource.new(@driver)
 		joblines.grid_options()
 		joblines.export_joblines()
-		sleep(2)
 
 		print("Job Lines Exported")
 		print("\n")
@@ -86,7 +84,8 @@ describe "Exports grid in each resource" do
 		invoicelines = InvoiceLinesResource.new(@driver)
 		invoicelines.grid_options()
 		invoicelines.export_invoicelines()
-		sleep(2)
+
+		settings.open_settings() #Using this as a buffer so the last file has time to download
 
 		print("Invoice Lines Exported")
 		print("\n")
