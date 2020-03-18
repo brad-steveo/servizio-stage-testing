@@ -118,15 +118,38 @@ class PatrolsResource
   end
 
   def create_patrol()
+    i = 0
+    loopcount = 5
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(CREATE_PATROL_BTN)}
     create_patrol_button = @driver.find_element(CREATE_PATROL_BTN)
     create_patrol_button.click
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait2.until {@driver.find_element(id:"WebForm1").displayed?}
-    wait3 = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait3.until {@driver.find_element(FRAME).displayed?}
-    @driver.switch_to.frame(0)
+    #wait3 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    #wait3.until {@driver.find_element(FRAME).displayed?}
+    #@driver.switch_to.frame(0)
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait3 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait3.until {@driver.find_element(CUSTOMER_FIELD).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(CUSTOMER_FIELD).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def top()
@@ -304,10 +327,8 @@ class PatrolsResource
   end
 
   def show_inactives()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SHOW_INACTIVES).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SHOW_INACTIVES).displayed?}
     show_inactives = @driver.find_element(SHOW_INACTIVES)
     show_inactives.click
   end
