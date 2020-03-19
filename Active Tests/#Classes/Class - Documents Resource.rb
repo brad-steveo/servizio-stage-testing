@@ -18,7 +18,7 @@ class DocumentsResource
   NAME_COLUMN = {css: "input[id$='DocumentTable_ctl02_wt267']"}
   EXTENSION_COLUMN = {css: "input[id$='DocumentTable_ctl02_wt82']"}
 
-  #CSS Selectos: Popup
+  #CSS Selectors: Popup
   SHOWHIDE_UPLOADER = {xpath: "/html/body/form/div[3]/div[1]/div/div/div[1]/div[2]/a/span"}
   #SHOW_INACTIVES selector and method will work in this popup as well.
 

@@ -42,6 +42,10 @@ describe "Creates a Patrol" do
 
 			patrols.create_patrol()
 			patrols.customer(customer)
+
+			buffers = Buffers.new(@driver)
+			buffers.ajax_buffer()
+
 			patrols.submitted_name(submittedname)
 			patrols.location(location)
 			patrols.service_needed(serviceneeded)
