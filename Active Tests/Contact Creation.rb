@@ -44,6 +44,9 @@ describe "Creates a Contact" do
 		contacts.contact_notes(contactnotes)
 		contacts.save_close()
 
+		databuffer = Selenium::WebDriver::Wait.new(:timeout => 5)
+		databuffer.until {contacts.top.text.include?(contactname)}
+
 		#Verification
 		print contacts.top_refnumber.text
 		print " - "

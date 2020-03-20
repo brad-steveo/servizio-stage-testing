@@ -7,6 +7,7 @@ class ContactsResource
       TOP_CONTACT_DOCUMENTS = {css: "a[id$='DocumentsLink']"}
       TOP_CONTACT_INACTIVE = {css: "a[id$='MakeInactiveLink']"}
   TOP_REFNUMBER = {css: "a[id$='ContactTable_ctl03_wtContactIdLink']"}
+  TOP_DESCRIPTION = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/table/tbody/tr[1]/td[4]/div"}
   SEARCH_FIELD = {css: "input[id$='SearchInput']"}
   SEARCH_BTN = {css: "input[value='Search']"}
   RESET_BTN = {css: "input[value='Reset']"}
@@ -54,6 +55,19 @@ class ContactsResource
   CANCEL_LINK_BTN = {css: "input[value='Cancel']"}
   CONFIRM_LINK_BTN = {css: "input[value='Link']"}
 
+  #Custom Errors
+  class FrameError < StandardError
+    def initialize(msg='Unable to switch to frame and locate element')
+      super
+    end
+  end
+
+  class StaleError < StandardError
+    def initialize(msg='Stale reference error')
+      super
+    end
+  end
+
   attr_reader :driver
 
   def initialize(driver)
@@ -62,14 +76,33 @@ class ContactsResource
 
   #Class Methods: Grid
   def create_contact()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CREATE_CONTACT_BTN).displayed?}
+    i = 0
+    loopcount = 5
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CREATE_CONTACT_BTN).displayed?}
     create_contact = @driver.find_element(CREATE_CONTACT_BTN)
     create_contact.click
-    sleep(3)
-    @driver.switch_to.frame(0)
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait3 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait3.until {@driver.find_element(CONTACT_NAME_FIELD).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(CONTACT_NAME_FIELD).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def top()
@@ -80,11 +113,36 @@ class ContactsResource
     top_refnumber = @driver.find_element(TOP_REFNUMBER)
   end
 
+  def top_description()
+    top_description = @driver.find_element(TOP_DESCRIPTION)
+  end
+
   def top_open()
+    i = 0
+    loopcount = 5
     top_refnumber = @driver.find_element(TOP_REFNUMBER)
     top_refnumber.click
-    sleep(2)
-    @driver.switch_to.frame(0)
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait3 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait3.until {@driver.find_element(CONTACT_NAME_FIELD).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(CONTACT_NAME_FIELD).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def top_actions()
@@ -93,40 +151,30 @@ class ContactsResource
   end
 
   def top_documents()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(TOP_CONTACT_DOCUMENTS).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(TOP_CONTACT_DOCUMENTS).displayed?}
     top_documents = @driver.find_element(TOP_CONTACT_DOCUMENTS)
     top_documents.click
   end
 
   def top_inactive()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(TOP_CONTACT_INACTIVE).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(TOP_CONTACT_INACTIVE).displayed?}
     top_makeinactive = @driver.find_element(TOP_CONTACT_INACTIVE)
     top_makeinactive.click
   end
 
   def search_contact(searchname)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SEARCH_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SEARCH_FIELD).displayed?}
     contact_name = @driver.find_element(SEARCH_FIELD)
     contact_name.send_keys(searchname)
-  end
-
-  def search_confirm()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SEARCH_BTN).displayed?}
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(SEARCH_BTN).displayed?}
     search_confirm = @driver.find_element(SEARCH_BTN)
     search_confirm.click
-    sleep(1)
+    wait3 = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait3.until {(top_refnumber = @driver.find_element(TOP_REFNUMBER).text + top_contact = @driver.find_element(TOP_CONTACT).text.downcase + @driver.find_element(TOP_DESCRIPTION).text.downcase).include?(searchname)}
   end
 
   def search_reset()
@@ -137,173 +185,136 @@ class ContactsResource
   end
 
   def grid_options()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(GRID_OPTIONS_DROPDOWN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(GRID_OPTIONS_DROPDOWN).displayed?}
     grid_options = @driver.find_element(GRID_OPTIONS_DROPDOWN)
     grid_options.click
   end
 
   def export_contacts()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(EXPORT_CONTACTS).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(EXPORT_CONTACTS).displayed?}
     export_contacts = @driver.find_element(EXPORT_CONTACTS)
     export_contacts.click
   end
 
   def find_duplicates()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(FIND_DUPLICATES).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(FIND_DUPLICATES).displayed?}
     find_duplicates = @driver.find_element(FIND_DUPLICATES)
     find_duplicates.click
   end
 
   def show_inactives()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SHOW_INACTIVES_CHECKBOX).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SHOW_INACTIVES_CHECKBOX).displayed?}
     show_inactives = @driver.find_element(SHOW_INACTIVES_CHECKBOX)
     show_inactives.click
   end
 
   #Class Methods: Popup
   def contact_name(contactname)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CONTACT_NAME_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CONTACT_NAME_FIELD).displayed?}
     contact_name = @driver.find_element(CONTACT_NAME_FIELD)
     contact_name.send_keys(contactname)
   end
 
   def add_phone()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ADD_PHONE_OPTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ADD_PHONE_OPTN).displayed?}
     add_phone = @driver.find_element(ADD_PHONE_OPTN)
     add_phone.click
   end
 
   def contact_phone1(contactphone1)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CONTACT_PHONE_FIRST).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CONTACT_PHONE_FIRST).displayed?}
     phone_field = @driver.find_element(CONTACT_PHONE_FIRST)
     phone_field.send_keys(contactphone1)
   end
 
   def contact_phone2(contactphone2)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CONTACT_PHONE_SECOND).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CONTACT_PHONE_SECOND).displayed?}
     phone_field = @driver.find_element(CONTACT_PHONE_SECOND)
     phone_field.send_keys(contactphone2)
   end
 
   def contact_phone3(contactphone3)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CONTACT_PHONE_THIRD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CONTACT_PHONE_THIRD).displayed?}
     phone_field = @driver.find_element(CONTACT_PHONE_THIRD)
     phone_field.send_keys(contactphone3)
   end
 
   def add_email
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ADD_EMAIL_OPTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ADD_EMAIL_OPTN).displayed?}
     add_email = @driver.find_element(ADD_EMAIL_OPTN)
     add_email.click
   end
 
   def contact_email1(contactemail1)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {driver.find_element(CONTACT_EMAIL_FIRST).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CONTACT_EMAIL_FIRST).displayed?}
     email_field = @driver.find_element(CONTACT_EMAIL_FIRST)
     email_field.send_keys(contactemail1)
   end
 
   def contact_email2(contactemail2)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CONTACT_EMAIL_SECOND).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CONTACT_EMAIL_SECOND).displayed?}
     email_field = @driver.find_element(CONTACT_EMAIL_SECOND)
     email_field.send_keys(contactemail2)
   end
 
   def contact_email3(contactemail3)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CONTACT_EMAIL_THIRD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CONTACT_EMAIL_THIRD).displayed?}
     email_field = @driver.find_element(CONTACT_EMAIL_THIRD)
     email_field.send_keys(contactemail3)
   end
 
   def contact_notes(contactnotes)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CONTACT_NOTES_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CONTACT_NOTES_FIELD).displayed?}
     contact_notes = @driver.find_element(CONTACT_NOTES_FIELD)
     contact_notes.send_keys(contactnotes)
   end
 
   def cancel()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CANCEL_BTN).displayed?}
+    wait =   Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CANCEL_BTN).displayed?}
     cancel_popup = @driver.find_element(CANCEL_BTN)
     cancel_popup.click
   end
 
   def actions()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ACTIONS_BTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ACTIONS_BTN).displayed?}
     actions_popup = @driver.find_element(ACTIONS_BTN)
     actions_popup.click
   end
 
   def inactive_popup
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(POPUP_INACTIVE).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(POPUP_INACTIVE).displayed?}
     inactive_popup = @driver.find_element(POPUP_INACTIVE)
     inactive_popup.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for2 {@driver.find_element(POPUP_CONFIRM_INACTIVE).displayed?}
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(POPUP_CONFIRM_INACTIVE).displayed?}
     confirm_inactive = @driver.find_element(POPUP_CONFIRM_INACTIVE)
     confirm_inactive.click
   end
 
   def save_close()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
-    sleep(2)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   #CSS Modifiers: Contacts Section (Resource Popups)
