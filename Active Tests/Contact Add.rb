@@ -59,8 +59,12 @@ describe "Adds a contact to a customer" do
 		expect(contacts.first_contact_name.text).to include(contactname)
 		expect(contacts.first_contact_notes.text).to include(contactnotes)
 
+		buffers = Buffers.new(@driver)
+
 		contacts.first_billing_checkbox()
+		buffers.ajax_buffer()
 		contacts.first_site_checkbox()
+		buffers.ajax_buffer()
 
 		customers.save_close
 

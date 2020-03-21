@@ -319,13 +319,12 @@ class ContactsResource
 
   #CSS Modifiers: Contacts Section (Resource Popups)
   def search_contacts_tab(searchname)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CONTACTS_SEARCH_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CONTACTS_SEARCH_FIELD).displayed?}
     contact_name = @driver.find_element(CONTACTS_SEARCH_FIELD)
     contact_name.send_keys(searchname)
-    sleep(1)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(CONTACTS_SEARCH_FIELD)['value'] == searchname}
     button = @driver.find_element(SEARCH_CONTACTS_BTN)
     button.click
   end
@@ -336,34 +335,70 @@ class ContactsResource
   end
 
   def show_inactive_contacts()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SHOW_INACTIVE_CONTACTS).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SHOW_INACTIVE_CONTACTS).displayed?}
     top_makeinactive = @driver.find_element(SHOW_INACTIVE_CONTACTS)
     top_makeinactive.click
   end
 
   def add_contact_button()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ADD_BTN).displayed?}
+    i = 0
+    loopcount = 5
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ADD_BTN).displayed?}
     button = @driver.find_element(ADD_BTN)
     button.click
-    sleep(4)
-    @driver.switch_to.frame(1)
+    loop do
+      i += 1
+      @driver.switch_to.frame(1)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(CONTACT_NAME_FIELD).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(CONTACT_NAME_FIELD).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def link_contact_button()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(LINK_BTN).displayed?}
+    i = 0
+    loopcount = 5
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(LINK_BTN).displayed?}
     button = @driver.find_element(LINK_BTN)
     button.click
-    sleep(2)
-    @driver.switch_to.frame(1)
+    loop do
+      i += 1
+      @driver.switch_to.frame(1)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(LINK_CONTACT_SEARCH).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(LINK_CONTACT_SEARCH).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def first_contact_name()
@@ -375,23 +410,23 @@ class ContactsResource
   end
 
   def first_billing_checkbox()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(FIRST_BILLING_CHKBX).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(FIRST_BILLING_CHKBX).displayed?}
     checkbox = @driver.find_element(FIRST_BILLING_CHKBX)
     checkbox.click
     sleep(1)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(FIRST_BILLING_CHKBX).selected?}
   end
 
   def first_site_checkbox()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(FIRST_SITE_CHKBX).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(FIRST_SITE_CHKBX).displayed?}
     checkbox = @driver.find_element(FIRST_SITE_CHKBX)
     checkbox.click
     sleep(1)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(FIRST_SITE_CHKBX).selected?}
   end
 
   def second_contact_name()
@@ -403,59 +438,102 @@ class ContactsResource
   end
 
   def second_billing_checkbox()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SECOND_BILLING_CHKBX).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SECOND_BILLING_CHKBX).displayed?}
     checkbox = @driver.find_element(SECOND_BILLING_CHKBX)
     checkbox.click
     sleep(1)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(SECOND_BILLING_CHKBX).selected?}
   end
 
   def second_site_checkbox()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SECOND_SITE_CHKBX).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SECOND_SITE_CHKBX).displayed?}
     checkbox = @driver.find_element(SECOND_SITE_CHKBX)
     checkbox.click
     sleep(1)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(SECOND_SITE_CHKBX).selected?}
   end
 
   def remove_top_contact()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(REMOVE_TOP_CONTACT).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(REMOVE_TOP_CONTACT).displayed?}
     button = @driver.find_element(REMOVE_TOP_CONTACT)
     button.click
   end
 
   #CSS Modifiers: Link Contact Popup
   def link_contact(searchname)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(LINK_CONTACT_SEARCH).displayed?}
+    i = 0
+    loopcount = 5
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(LINK_CONTACT_SEARCH).displayed?}
     contact_name = @driver.find_element(LINK_CONTACT_SEARCH)
     contact_name.send_keys(searchname)
     sleep(1)
     @driver.action.send_keys(:enter).perform
     button = @driver.find_element(CONFIRM_LINK_BTN)
     button.click
-    sleep(2)
-    @driver.switch_to.frame(0)
+    sleep(1)
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(FIRST_CONTACT_NAME).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(FIRST_CONTACT_NAME).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def cancel_link_contact()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CANCEL_LINK_BTN).displayed?}
+    i = 0
+    loopcount = 5
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CANCEL_LINK_BTN).displayed?}
     button = @driver.find_element(CANCEL_LINK_BTN)
     button.click
     sleep(2)
-    @driver.switch_to.frame(0)
+    #Needs frame anchor
+    loop do
+      i += 1
+      begin
+      @driver.switch_to.frame(0)
+      rescue
+      Selenium::WebDriver::Error::NoSuchFrameError
+      end
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(SEARCH_FIELD).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(SEARCH_FIELD).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
 end

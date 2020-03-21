@@ -24,12 +24,16 @@ describe "CSS Testing" do
 		login.enter_password(password)
 		login.sign_in()
 
-		patrols = PatrolsResource.new(@driver)
-		patrols.open_patrols()
-
 		#CSS Testing
-		patrols.top_actions
-		patrols.actions_printemail
+		customers = CustomersResource.new(@driver)
+		customers.open_customers()
+
+		contacts = ContactsResource.new(@driver)
+
+		customers.top_open()
+		contacts.link_contact_button()
+		contacts.cancel_link_contact()
+		customers.save_close()
 
 		sleep(5)
 
