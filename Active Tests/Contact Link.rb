@@ -39,9 +39,9 @@ describe "Links a contact to a customer" do
 						false
 					end
 					contacts.remove_top_contact()
-					contacts.link_contact_button()
+					contacts.link_existing_button()
 				else
-					contacts.link_contact_button()
+					contacts.link_existing_button()
 				end
 
 		contacts.link_contact(contactsearchname)

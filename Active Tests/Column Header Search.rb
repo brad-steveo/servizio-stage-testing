@@ -41,7 +41,9 @@ describe "Performes a column header search in each resource for the ID and Name 
 		# Click on Patrols and search columns
 		patrols = PatrolsResource.new(@driver)
 		patrols.open_patrols()
+		buffers.ajax_buffer()
 		patrols.search_patrolid(searchpatrolid)
+		buffers.ajax_buffer()
 		print "Patrols Search (ID): \n"
 		print "%s \n" % patrols.top_refnumber.text
 		print "\n"
@@ -53,6 +55,7 @@ describe "Performes a column header search in each resource for the ID and Name 
 		patrolswait.until {patrols.search_patrolid_field['value'].empty? == true}
 
 		patrols.search_patrolname(searchpatrolname)
+		buffers.ajax_buffer()
 		print "Patrols Search (NAME): \n"
 		print "%s \n" % patrols.top.text
 		print "\n"
@@ -61,7 +64,9 @@ describe "Performes a column header search in each resource for the ID and Name 
 		# Click on Jobs and search columns
 		jobs = JobsResource.new(@driver)
 		jobs.open_jobs()
+		buffers.ajax_buffer()
 		jobs.search_jobid(searchjobid)
+		buffers.ajax_buffer()
 		print "Jobs Search (ID): \n"
 		print "%s \n" % jobs.top_refnumber.text
 		print "\n"
@@ -73,6 +78,7 @@ describe "Performes a column header search in each resource for the ID and Name 
 		jobswait.until {jobs.search_jobid_field['value'].empty? == true}
 
 		jobs.search_jobname(searchjobname)
+		buffers.ajax_buffer()
 		print "Jobs Search (NAME): \n"
 		print "%s \n" % jobs.top.text
 		print "\n"
@@ -81,7 +87,9 @@ describe "Performes a column header search in each resource for the ID and Name 
 		# Click on Estimates and search columns
 		estimates = EstimatesResource.new(@driver)
 		estimates.open_estimates()
+		buffers.ajax_buffer()
 		estimates.search_estimateid(searchestimateid)
+		buffers.ajax_buffer()
 		print "Estimates Search (ID): \n"
 		print "%s \n" % estimates.top_refnumber.text
 		print "\n"
@@ -93,6 +101,7 @@ describe "Performes a column header search in each resource for the ID and Name 
 		estimateswait.until {estimates.search_estimateid_field['value'].empty? == true}
 
 		estimates.search_estimatename(searchestimatename)
+		buffers.ajax_buffer()
 		print "Estimates Search (NAME): \n"
 		print "%s \n" % estimates.top.text
 		print "\n"
@@ -101,7 +110,9 @@ describe "Performes a column header search in each resource for the ID and Name 
 		# Click on Invoices and search columns
 		invoices = InvoicesResource.new(@driver)
 		invoices.open_invoices()
+		buffers.ajax_buffer()
 		invoices.search_invoiceid(searchinvoiceid)
+		buffers.ajax_buffer()
 		print "Invoices Search (ID): \n"
 		print "%s \n" % invoices.top_refnumber.text
 		print "\n"
@@ -113,6 +124,7 @@ describe "Performes a column header search in each resource for the ID and Name 
 		invoiceswait.until {invoices.search_invoiceid_field['value'].empty? == true}
 
 		invoices.search_invoicename(searchinvoicename)
+		buffers.ajax_buffer()
 		print "Invoices Search (NAME): \n"
 		print "%s \n" % invoices.top.text
 		print "\n"
@@ -121,7 +133,9 @@ describe "Performes a column header search in each resource for the ID and Name 
 		# Click on Customers and search columns
 		customers = CustomersResource.new(@driver)
 		customers.open_customers()
+		buffers.ajax_buffer()
 		customers.search_customerid(searchcustomerid)
+		buffers.ajax_buffer()
 		print "Customers Search (ID): \n"
 		print "%s \n" % customers.top_refnumber.text
 		print "\n"
@@ -133,6 +147,7 @@ describe "Performes a column header search in each resource for the ID and Name 
 		customerswait.until {customers.search_customerid_field['value'].empty? == true}
 
 		customers.search_customername(searchcustomername)
+		buffers.ajax_buffer()
 		print "Customers Search (NAME): \n"
 		print "%s \n" % customers.top.text
 		print "\n"
@@ -142,8 +157,10 @@ describe "Performes a column header search in each resource for the ID and Name 
 		settings = SettingsResource.new(@driver)
 		settings.open_settings()
 		settings.open_joblines()
+		buffers.ajax_buffer()
 		joblines = JobLinesResource.new(@driver)
 		joblines.search_id(searchjoblineid)
+		buffers.ajax_buffer()
 		print "Job Lines Search (ID): \n"
 		print "%s \n" % joblines.top_refnumber.text
 		print "\n"
@@ -155,6 +172,7 @@ describe "Performes a column header search in each resource for the ID and Name 
 		joblineswait.until {joblines.search_id_field['value'].empty? == true}
 
 		joblines.search_jobname(searchjoblinejobname)
+		buffers.ajax_buffer()
 		print "Job Lines Search (NAME): \n"
 		print "%s \n" % joblines.top_jobname.text
 		print "\n"
@@ -163,6 +181,7 @@ describe "Performes a column header search in each resource for the ID and Name 
 		# Click on Settings > Invoice Lines and search columns
 		settings.open_settings()
 		settings.open_invoicelines()
+		buffers.ajax_buffer()
 		invoicelines = InvoiceLinesResource.new(@driver)
 		invoicelines.search_id(searchinvoicelineid)
 		print "Invoice Lines Search (ID): \n"
@@ -176,6 +195,7 @@ describe "Performes a column header search in each resource for the ID and Name 
 		invoicelineswait.until {invoicelines.search_id_field['value'].empty? == true}
 
 		invoicelines.search_invoiceid(searchinvoicelineinvoiceid)
+		buffers.ajax_buffer()
 		print "Invoice Lines Search (NAME): \n"
 		print "%s \n" % invoicelines.top_invoiceid.text
 		print "\n"

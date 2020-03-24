@@ -38,8 +38,8 @@ class ContactsResource
   SEARCH_CONTACTS_BTN = {css: "input[value='Search']"}
   RESET_CONTACTS_BTN = {css: "input[value='Reset']"}
   SHOW_INACTIVE_CONTACTS = {css: "input[id$='wtMainContent_wt799_wt16']"}
-  ADD_BTN = {css: "input[value='Add']"}
-  LINK_BTN = {css: "input[value='Link']"}
+  CREATE_NEW_BTN = {css: "input[value='Create New']"}
+  LINK_EXISTING_BTN = {css: "input[value='Link Existing']"}
   FIRST_CONTACT_NAME = {css: "a[id$='ctl03_wtContactLink']"}
   FIRST_CONTACT_NOTES = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[1]/div[5]/div/span[2]/table/tbody/tr/td[2]"}
   FIRST_BILLING_CHKBX = {css: "input[id$='wtContactTable_ctl03_wt32']"}
@@ -341,12 +341,12 @@ class ContactsResource
     top_makeinactive.click
   end
 
-  def add_contact_button()
+  def create_new_button()
     i = 0
     loopcount = 5
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait.until {@driver.find_element(ADD_BTN).displayed?}
-    button = @driver.find_element(ADD_BTN)
+    wait.until {@driver.find_element(CREATE_NEW_BTN).displayed?}
+    button = @driver.find_element(CREATE_NEW_BTN)
     button.click
     loop do
       i += 1
@@ -371,12 +371,12 @@ class ContactsResource
     end
   end
 
-  def link_contact_button()
+  def link_existing_button()
     i = 0
     loopcount = 5
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait.until {@driver.find_element(LINK_BTN).displayed?}
-    button = @driver.find_element(LINK_BTN)
+    wait.until {@driver.find_element(LINK_EXISTING_BTN).displayed?}
+    button = @driver.find_element(LINK_EXISTING_BTN)
     button.click
     loop do
       i += 1
@@ -507,8 +507,6 @@ class ContactsResource
     wait.until {@driver.find_element(CANCEL_LINK_BTN).displayed?}
     button = @driver.find_element(CANCEL_LINK_BTN)
     button.click
-    sleep(2)
-    #Needs frame anchor
     loop do
       i += 1
       begin
@@ -518,13 +516,13 @@ class ContactsResource
       end
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
-        wait2.until {@driver.find_element(SEARCH_FIELD).displayed?}
+        wait2.until {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
       rescue Selenium::WebDriver::Error::TimeOutError
         false
       end
       if
         begin
-          @driver.find_element(SEARCH_FIELD).displayed? == true
+          @driver.find_element(SAVE_AND_CLOSE_BTN).displayed? == true
         rescue Selenium::WebDriver::Error::NoSuchElementError
           false
         end

@@ -333,6 +333,8 @@ class ActivitiesResource
     wait_for {@driver.find_element(CANCEL_BTN).displayed?}
     cancel_popup = @driver.find_element(CANCEL_BTN)
     cancel_popup.click
+    sleep(2)
+    @driver.switch_to.frame(0)
   end
 
   def actions()

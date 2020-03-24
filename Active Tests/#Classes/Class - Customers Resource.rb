@@ -139,7 +139,17 @@ class CustomersResource
   ROUTES_TAB = {css: "a[id$='block_a_9']"}
 
   #CSS Selectors: Popup (Assets Tab)
-  ASSETS_TAB = {css: "a[id$='block_a_10']"} #verifiy this after stage push 2/15/19
+  ASSETS_TAB = {css: "a[id$='block_a_10']"}
+
+  #CSS Selectors: Frame Anchors
+  FRAME = {css: "iframe[tabindex='0']"}
+  ACTIVITY_REASON_DROPDOWN = {css: "select[id$='ActivityReasonCombobox']"}
+  ESTIMATE_NAME_FIELD = {css: "input[id$='Estimate_Name']"}
+  JOB_NAME_FIELD = {css: "input[id$='Job_Name']"}
+  INVOICE_PONUMBER_FIELD = {css: "input[id$='Invoice_PONumber']"}
+  DOCUMENTS_SHOWHIDE_UPLOADER = {xpath: "/html/body/form/div[3]/div[1]/div/div/div[1]/div[2]/a/span"}
+  PRINTEMAIL_PDF_CHECKBOX = {css: "input[id$='AttachPDFInput']"}
+
 
   #Custom Errors
   class FrameError < StandardError
@@ -312,39 +322,123 @@ class CustomersResource
   end
 
   def actions_createactivity()
+    i = 0
+    loopcount = 5
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(ACTIONS_CREATEACTIVITY).displayed?}
     top_createactivity = @driver.find_element(ACTIONS_CREATEACTIVITY)
     top_createactivity.click
-    sleep(2)
-    @driver.switch_to.frame(1)
+    loop do
+      i += 1
+      @driver.switch_to.frame(1)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(ACTIVITY_REASON_DROPDOWN).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(ACTIVITY_REASON_DROPDOWN).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def actions_createestimate()
+    i = 0
+    loopcount = 5
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(ACTIONS_CREATEESTIMATE).displayed?}
     top_createestimate = @driver.find_element(ACTIONS_CREATEESTIMATE)
     top_createestimate.click
-    sleep(2)
-    @driver.switch_to.frame(0)
+    loop do
+      i += 1
+      @driver.switch_to.frame(1)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(ESTIMATE_NAME_FIELD).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(ESTIMATE_NAME_FIELD).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def actions_createjob()
+    i = 0
+    loopcount = 5
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(ACTIONS_CREATEJOB).displayed?}
     top_createjob = @driver.find_element(ACTIONS_CREATEJOB)
     top_createjob.click
-    sleep(2)
-    @driver.switch_to.frame(0)
+    loop do
+      i += 1
+      @driver.switch_to.frame(1)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(JOB_NAME_FIELD).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(JOB_NAME_FIELD).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def actions_createinvoice()
+    i = 0
+    loopcount = 5
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(ACTIONS_CREATEINVOICE).displayed?}
     top_createinvoice = @driver.find_element(ACTIONS_CREATEINVOICE)
     top_createinvoice.click
-    sleep(2)
-    @driver.switch_to.frame(0)
+    loop do
+      i += 1
+      @driver.switch_to.frame(1)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(INVOICE_PONUMBER_FIELD).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(INVOICE_PONUMBER_FIELD).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def actions_duplicatecustomer()
@@ -384,13 +478,35 @@ class CustomersResource
     top_recommend.click
   end
 
-  def actions_documents()
+  def gridactions_documents()
+    #Only available in the grid actions menu
+    i = 0
+    loopcount = 5
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait.until = @driver.find_element(ACTIONS_DOCUMENTS).displayed? #Syntax error if brackets are added?
+    wait.until {@driver.find_element(ACTIONS_DOCUMENTS).displayed?}
     top_documents = @driver.find_element(ACTIONS_DOCUMENTS)
     top_documents.click
-    sleep(2)
-    @driver.switch_to.frame(0)
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(DOCUMENTS_SHOWHIDE_UPLOADER).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(DOCUMENTS_SHOWHIDE_UPLOADER).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def search_customer(searchname)

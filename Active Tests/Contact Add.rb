@@ -42,9 +42,9 @@ describe "Adds a contact to a customer" do
 						false
 					end
 					contacts.remove_top_contact()
-					contacts.add_contact_button()
+					contacts.create_new_button()
 				else
-					contacts.add_contact_button()
+					contacts.create_new_button()
 				end
 
 		contacts.contact_name(contactname)

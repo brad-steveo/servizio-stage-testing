@@ -214,7 +214,7 @@ class PatrolsResource
     top_createactivity.click
     loop do
       i += 1
-      @driver.switch_to.frame(0)
+      @driver.switch_to.frame(1)
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(ACTIVITY_REASON_DROPDOWN).displayed?}
@@ -334,7 +334,7 @@ class PatrolsResource
     top_printemail.click
     loop do
       i += 1
-      @driver.switch_to.frame(0)
+      @driver.switch_to.frame(1)
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(PRINTEMAIL_PDF_CHECKBOX).displayed?}

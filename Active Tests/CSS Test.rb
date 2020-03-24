@@ -28,12 +28,10 @@ describe "CSS Testing" do
 		customers = CustomersResource.new(@driver)
 		customers.open_customers()
 
-		contacts = ContactsResource.new(@driver)
+		documents = DocumentsResource.new(@driver)
 
-		customers.top_open()
-		contacts.link_contact_button()
-		contacts.cancel_link_contact()
-		customers.save_close()
+		customers.top_actions()
+		customers.gridactions_documents()
 
 		sleep(5)
 
