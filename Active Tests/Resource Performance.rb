@@ -57,19 +57,25 @@ describe "Cycles through each main resource" do
 		settings.open_settings()
 		settings.open_joblines()
 		joblines = JobLinesResource.new(@driver)
-		joblines.resource_performance
+		joblines.resource_performance()
 
 		#Click on Settings > Invoice Lines and get load metrics
 		settings.open_settings()
 		settings.open_invoicelines()
 		invoicelines = InvoiceLinesResource.new(@driver)
-		invoicelines.resource_performance
+		invoicelines.resource_performance()
+
+		#Click on Settings > Contacts and get load metrics
+		settings.open_settings()
+		settings.open_contacts()
+		contacts = ContactsResource.new(@driver)
+		contacts.resource_performance()
 
 		#Click on Settings > Documents and get load metrics
 		settings.open_settings()
 		settings.open_documents()
 		documents = DocumentsResource.new(@driver)
-		documents.resource_performance
+		documents.resource_performance()
 
 	end
 end

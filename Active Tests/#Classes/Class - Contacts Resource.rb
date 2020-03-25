@@ -15,6 +15,7 @@ class ContactsResource
     EXPORT_CONTACTS = {css: "a[id$='ExportGridLink']"}
     FIND_DUPLICATES = {css: "a[id$='FindDuplicateLink']"}
     SHOW_INACTIVES_CHECKBOX = {css: "input[id$='ShowInactivesCheckbox']"}
+  GRID_TOTAL = {class: "Counter_Message"}
 
   #CSS Selectors: Popup
   CONTACT_NAME_FIELD = {css: "input[id$='Contact_Name']"}
@@ -210,6 +211,20 @@ class ContactsResource
     wait.until {@driver.find_element(SHOW_INACTIVES_CHECKBOX).displayed?}
     show_inactives = @driver.find_element(SHOW_INACTIVES_CHECKBOX)
     show_inactives.click
+  end
+
+  def resource_performance()
+    navigationStart = @driver.execute_script("return window.performance.timing.navigationStart")
+    responseStart = @driver.execute_script("return window.performance.timing.responseStart")
+    domComplete = @driver.execute_script("return window.performance.timing.domComplete")
+    loadPerformance = domComplete - navigationStart
+    wait = Selenium::WebDriver::Wait.new(:timeout => 20)
+    wait.until {@driver.find_element(GRID_TOTAL).text != "0 records"}
+    contacts_records = @driver.find_element(GRID_TOTAL)
+    contacts_count = contacts_records.text
+    print "Contacts: \n"
+    print "%s \n" % contacts_count
+    print "Load Time: %s ms \n\n" % loadPerformance
   end
 
   #Class Methods: Popup

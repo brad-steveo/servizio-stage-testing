@@ -45,7 +45,6 @@ describe "Invoice Creation and NetSuite Sync" do
 
 		sleep(70)
 		@driver.navigate.refresh
-
 		wait = Selenium::WebDriver::Wait.new(:timeout => 20)
 		wait.until {invoices.top_refnumber.displayed?}
 
