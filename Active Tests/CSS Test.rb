@@ -25,13 +25,12 @@ describe "CSS Testing" do
 		login.sign_in()
 
 		#CSS Testing
-		customers = CustomersResource.new(@driver)
-		customers.open_customers()
+		jobs = JobsResource.new(@driver)
+		jobs.open_jobs()
 
-		documents = DocumentsResource.new(@driver)
-
-		customers.top_actions()
-		customers.gridactions_documents()
+		jobs.top_open()
+		jobs.cancel()
+		jobs.top_open()
 
 		sleep(5)
 

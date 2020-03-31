@@ -296,6 +296,7 @@ class PatrolsResource
   end
 
   def actions_documents()
+    #Only available in grid actions
     i = 0
     loopcount = 5
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)

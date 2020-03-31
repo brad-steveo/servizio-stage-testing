@@ -35,6 +35,9 @@ class SettingsResource
   ROLES_OPTN = {css: "a[href^='Roles2']"}
   TAXRATESANDAGENCIES_OPTN = {css: "a[href^='Tax']"}
 
+  #CSS Selectors: Anchors
+  JOBLINES_TOP_REFNUMBER = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[1]/span"}
+
   attr_reader :driver
 
   def initialize(driver)
@@ -140,6 +143,8 @@ class SettingsResource
     joblines_selection.click
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait3 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait3.until {@driver.find_element(JOBLINES_TOP_REFNUMBER).displayed?}
   end
 
   def open_productsandservices()
