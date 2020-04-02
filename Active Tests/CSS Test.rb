@@ -14,7 +14,7 @@ describe "CSS Testing" do
 		loopcount = 1
 		i = 0
 		test = "Does this appear?"
-		search = "1024"
+		search = "3/25"
 
 		#Go to page
 		@driver.navigate.to "https://stage.yesco.com/servizio/"
@@ -27,14 +27,11 @@ describe "CSS Testing" do
 
 		#CSS Testing
 		buffers = Buffers.new(@driver)
-		jobs = JobsResource.new(@driver)
-		jobs.open_jobs()
+		activities = ActivitiesResource.new(@driver)
 
-		jobs.top_open()
-		jobs.invoices_tab()
-		buffers.ajax_buffer()
-		jobs.search_invoice(search)
-		jobs.top_invoice()
+		activities.open_activities()
+		activities.search_reset()
+		activities.search_activitydescription(search)
 
 		sleep(5)
 
