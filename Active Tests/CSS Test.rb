@@ -14,7 +14,9 @@ describe "CSS Testing" do
 		loopcount = 1
 		i = 0
 		test = "Does this appear?"
-		search = "3/25"
+		test2 = "Sales"
+		search = "626"
+		timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
 
 		#Go to page
 		@driver.navigate.to "https://stage.yesco.com/servizio/"
@@ -27,11 +29,13 @@ describe "CSS Testing" do
 
 		#CSS Testing
 		buffers = Buffers.new(@driver)
-		activities = ActivitiesResource.new(@driver)
+		settings = SettingsResource.new(@driver)
+		documents = DocumentsResource.new(@driver)
 
-		activities.open_activities()
-		activities.search_reset()
-		activities.search_activitydescription(search)
+		settings.open_settings()
+		settings.open_documents()
+		documents.search_name(search)
+		documents.search_reset()
 
 		sleep(5)
 

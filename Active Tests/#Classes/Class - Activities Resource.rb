@@ -293,19 +293,15 @@ class ActivitiesResource
   end
 
   def complete_activity()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(COMPLETE_CHECKBOX).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(COMPLETE_CHECKBOX).displayed?}
     checkbox = @driver.find_element(COMPLETE_CHECKBOX)
     checkbox.click
   end
 
   def complete_patrol()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(COMPLETE_PATROL_CHECKBOX).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(COMPLETE_PATROL_CHECKBOX).displayed?}
     checkbox = @driver.find_element(COMPLETE_PATROL_CHECKBOX)
     checkbox.click
   end
@@ -315,122 +311,141 @@ class ActivitiesResource
   end
 
   def date_due(datedue)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(DATE_DUE_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(DATE_DUE_FIELD).displayed?}
     date_due = @driver.find_element(DATE_DUE_FIELD)
 		date_due.send_keys(datedue)
   end
 
   def date_completed(datecompleted)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(DATE_COMPLETED_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(DATE_COMPLETED_FIELD).displayed?}
     date_completed = @driver.find_element(DATE_COMPLETED_FIELD)
 		date_completed.send_keys(datecompleted)
   end
 
   def date_reminder(datereminder)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(DATE_REMINDER_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(DATE_REMINDER_FIELD).displayed?}
     date_reminder = @driver.find_element(DATE_REMINDER_FIELD)
 		date_reminder.send_keys(datereminder)
   end
 
   def reminder_emails(reminderemails)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(REMINDER_EMAILS_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(REMINDER_EMAILS_FIELD).displayed?}
     reminder_emails = @driver.find_element(REMINDER_EMAILS_FIELD)
 		reminder_emails.send_keys(reminderemails)
   end
 
   def contact_method(typeselect)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CONTACT_METHOD_DROPDOWN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CONTACT_METHOD_DROPDOWN).displayed?}
     dropdown_list = @driver.find_element(CONTACT_METHOD_DROPDOWN)
     options = dropdown_list.find_elements(tag_name: 'option')
     options.each {|option| option.click if option.text == (typeselect)}
   end
 
   def reason(reasonselect)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(REASON_DROPDOWN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(REASON_DROPDOWN).displayed?}
     dropdown_list = @driver.find_element(REASON_DROPDOWN)
     options = dropdown_list.find_elements(tag_name: 'option')
     options.each {|option| option.click if option.text == (reasonselect)}
   end
 
   def description(descriptionfield)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(DESCRIPTION_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(DESCRIPTION_FIELD).displayed?}
     description = @driver.find_element(DESCRIPTION_FIELD)
     description.send_keys(descriptionfield)
   end
 
   def cancel()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CANCEL_BTN).displayed?}
+    i = 0
+    loopcount = 5
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CANCEL_BTN).displayed?}
     cancel_popup = @driver.find_element(CANCEL_BTN)
-    cancel_popup.click
-    sleep(2)
-    @driver.switch_to.frame(0)
+    loop do
+      i += 1
+      cancel_popup.click
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(TOP_REFNUMBER).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(TOP_REFNUMBER).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def actions()
     #Use actions_(action) methods from here
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ACTIONS_BTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ACTIONS_BTN).displayed?}
     actions_popup = @driver.find_element(ACTIONS_BTN)
     actions_popup.click
   end
 
   def save_new()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SAVE_AND_NEW_BTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SAVE_AND_NEW_BTN).displayed?}
     save_and_new = @driver.find_element(SAVE_AND_NEW_BTN)
     save_and_new.click
-    sleep(2)
-    #@driver.switch_to.frame(0)
+    sleep(1)
+    #Having some issues getting this to work with a sleep action
   end
 
   def save_close()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
+    #Use this for saving activities created in other resources
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
-    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait.until {@driver.find_element(FRAME).displayed?}
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(FRAME).displayed?}
     @driver.switch_to.frame(0)
     @driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
   end
 
   def save_close_grid()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
+    i = 0
+    loopcount = 5
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
-    save_and_close.click
+    loop do
+      i += 1
+      save_and_close.click
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(TOP_REFNUMBER).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(TOP_REFNUMBER).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
 end

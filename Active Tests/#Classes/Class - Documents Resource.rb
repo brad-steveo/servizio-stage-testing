@@ -4,6 +4,7 @@ class DocumentsResource
   TOP_NAME = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[3]/div/span"}
   TOP_RESOURCE = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[9]"}
   TOP_EXTENSION = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[11]"}
+  TOP_DESCRIPTION = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[10]"}
   TOP_ACTIONS = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[1]/div/div/div/div[1]/div[1]/span"}
     ACTIONS_DOWNLOAD = {css: "a[id$='GridActionDrop_block_wtMenuLink5_wt199']"}
     ACTIONS_VIEWDOCUMENT = {css: "a[id$='DocumentsLink']"}
@@ -15,8 +16,8 @@ class DocumentsResource
     EXPORT_DOCUMENTS = {css: "a[id$='ExportGridLink']"}
     SHOW_INACTIVES = {css: "input[id$='ShowInactivesCheckbox']"}
   GRID_TOTAL = {class: "Counter_Message"}
-  NAME_COLUMN = {css: "input[id$='DocumentTable_ctl02_wt267']"}
-  EXTENSION_COLUMN = {css: "input[id$='DocumentTable_ctl02_wt82']"}
+  NAME_COLUMN = {css: "input[id$='DocumentTable_ctl02_wt268']"}
+  EXTENSION_COLUMN = {css: "input[id$='DocumentTable_ctl02_wt83']"}
 
   #CSS Selectors: Popup
   SHOWHIDE_UPLOADER = {xpath: "/html/body/form/div[3]/div[1]/div/div/div[1]/div[2]/a/span"}
@@ -41,110 +42,119 @@ class DocumentsResource
     top_record = @driver.find_element(TOP_EXTENSION)
   end
 
+  def top_description()
+    top_record = @driver.find_element(TOP_DESCRIPTION)
+  end
+
   def top_actions()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(TOP_ACTIONS).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(TOP_ACTIONS).displayed?}
     top_actions = @driver.find_element(TOP_ACTIONS)
     top_actions.click
   end
 
   def actions_download()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ACTIONS_DOWNLOAD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ACTIONS_DOWNLOAD).displayed?}
     action = @driver.find_element(ACTIONS_DOWNLOAD)
     action.click
   end
 
   def actions_viewdocument()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ACTIONS_VIEWDOCUMENT).displayed?}
+    i = 0
+    loopcount = 5
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ACTIONS_VIEWDOCUMENT).displayed?}
     action = @driver.find_element(ACTIONS_VIEWDOCUMENT)
     action.click
-    sleep(2)
-    @driver.switch_to.frame(1)
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(SHOWHIDE_UPLOADER).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(SHOWHIDE_UPLOADER).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def actions_makeinactive()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ACTIONS_MAKEINACTIVE).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ACTIONS_MAKEINACTIVE).displayed?}
     action = @driver.find_element(ACTIONS_MAKEINACTIVE)
     action.click
   end
 
   def search_documents(searchname)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SEARCH_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SEARCH_FIELD).displayed?}
     document_search = @driver.find_element(SEARCH_FIELD)
     document_search.send_keys(searchname)
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for2 {@driver.find_element(SEARCH_BTN).displayed?}
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(SEARCH_BTN).displayed?}
     search_confirm = @driver.find_element(SEARCH_BTN)
     search_confirm.click
-    sleep(2)
+    wait3 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait3.until {(@driver.find_element(TOP_NAME).text.downcase + @driver.find_element(TOP_DESCRIPTION).text.downcase).include?(searchname.downcase)}
   end
 
   def search_name(searchname)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(NAME_COLUMN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(NAME_COLUMN).displayed?}
     documents_search = @driver.find_element(NAME_COLUMN)
     documents_search.send_keys(searchname)
-    sleep(3)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(TOP_NAME).text.downcase.include?(searchname.downcase)}
   end
 
   def search_extension(searchname)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(EXTENSION_COLUMN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(EXTENSION_COLUMN).displayed?}
     documents_search = @driver.find_element(EXTENSION_COLUMN)
     documents_search.send_keys(searchname)
-    sleep(3)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(TOP_EXTENSION).text.downcase.include?(searchname.downcase)}
   end
 
   def search_reset()
+    currentrecords = @driver.find_element(class: "Counter_Message").text
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(RESET_BTN).displayed?}
     search_reset = @driver.find_element(RESET_BTN)
     search_reset.click
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != currentrecords}
   end
 
   def grid_options()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(GRID_OPTIONS_DROPDOWN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(GRID_OPTIONS_DROPDOWN).displayed?}
     grid_options = @driver.find_element(GRID_OPTIONS_DROPDOWN)
     grid_options.click
   end
 
   def export_documents()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(EXPORT_DOCUMENTS).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(EXPORT_DOCUMENTS).displayed?}
     export_documents = @driver.find_element(EXPORT_DOCUMENTS)
     export_documents.click
   end
 
   def show_inactives()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SHOW_INACTIVES).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SHOW_INACTIVES).displayed?}
     show_inactives = @driver.find_element(SHOW_INACTIVES)
     show_inactives.click
   end
@@ -169,13 +179,10 @@ class DocumentsResource
 
   #CSS Methods: Popup
   def uploader()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SHOWHIDE_UPLOADER).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SHOWHIDE_UPLOADER).displayed?}
     toggle_uploader = @driver.find_element(SHOWHIDE_UPLOADER)
     toggle_uploader.click
-    sleep(2)
   end
 
 end
