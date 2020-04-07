@@ -196,7 +196,8 @@ class JobsResource
     jobs_button = @driver.find_element(JOBS_OPTN)
     jobs_button.click
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2.until {@driver.find_element(TOP_REFNUMBER).displayed?}
+    #wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records" }
   end
 
   def create_job()
@@ -640,7 +641,7 @@ class JobsResource
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
+    wait2.until {@driver.find_element(TOP_REFNUMBER).displayed?}
   end
 
   #CSS Methods: Popup (Lines)

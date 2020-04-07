@@ -45,6 +45,8 @@ describe "Creates a Job" do
 			specialinstructions = "Special Instructions #{timestamp}"
 			privatenotes = "Private Notes #{timestamp}"
 
+			currenttopref = jobs.top_refnumber.text
+
 			jobs.create_job()
 			jobs.select_customer(select)
 			jobs.name(jobname)
@@ -59,6 +61,9 @@ describe "Creates a Job" do
 			jobs.special_instructions(specialinstructions)
 			jobs.private_notes(privatenotes)
 			jobs.save_close()
+
+			wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+			wait.until {jobs.top_refnumber.text != currenttopref}
 
 			#Verification
 			print jobs.top_refnumber.text
