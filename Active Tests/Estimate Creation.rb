@@ -43,6 +43,8 @@ describe "Creates an Estimate" do
 				expires = (Date.today + 10).strftime("%m/%d/%Y")
 				nte = "1500"
 
+				currenttopref = estimates.top_refnumber.text
+
 				estimates.create_estimate()
 				estimates.select_customer(select)
 				estimates.name(estimatename)
@@ -53,6 +55,9 @@ describe "Creates an Estimate" do
 				estimates.expires_on(expires)
 				estimates.nte(nte)
 				estimates.save_close()
+
+				wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+				wait.until {estimates.top_refnumber.text != currenttopref}
 
 				#Verification
 				print estimates.top_refnumber.text

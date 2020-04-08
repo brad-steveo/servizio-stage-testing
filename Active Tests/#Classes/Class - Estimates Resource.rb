@@ -83,15 +83,22 @@ class EstimatesResource
   SEARCH_ACTIVITY = {css: "input[id$='ActivitiesSearchInput']"}
   TOP_ACTIVITY = {css: "a[id$='ctl03_wtActivityIdLink']"}
   TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[5]/div/div[3]/table/tbody/tr[1]/td[5]"}
-  #SEARCH_BTN
-  #RESET_BTN
+  ESTIMATE_ACTIVITY_SEARCH_BTN = {css: "input[id$='EstimateSearchActivities']"}
+  ESTIMATE_ACTIVITY_RESET_BTN = {css: "input[id$='EstimateResetActivities']"}
 
   #CSS Selectors: Popup (Jobs Tab)
   JOBS_TAB = {css: "a[id$='block_a_5']"}
   SEARCH_JOB = {css: "input[id$='JobSearchInput']"}
   TOP_JOB = {css: "a[id$='ctl03_wtJobIdLink']"}
-  #SEARCH_BTN
-  #RESET_BTN
+  ESTIMATE_JOB_SEARCH_BTN = {css: "input[id$='EstimateSearchJobs']"}
+  ESTIMATE_JOB_RESET_BTN = {css: "input[id$='EstimateResetJobs']"}
+
+  #CSS Selectors: Frame Anchors
+  FRAME = {css: "iframe[tabindex='0']"}
+  ACTIVITY_REASON_DROPDOWN = {css: "select[id$='ActivityReasonCombobox']"}
+  INVOICE_PONUMBER_FIELD = {css: "input[id$='Invoice_PONumber']"}
+  DOCUMENTS_SHOWHIDE_UPLOADER = {xpath: "/html/body/form/div[3]/div[1]/div/div/div[1]/div[2]/a/span"}
+  PRINTEMAIL_PDF_CHECKBOX = {css: "input[id$='AttachPDFInput']"}
 
   #Custom Errors
   class FrameError < StandardError
@@ -134,21 +141,42 @@ class EstimatesResource
     estimates_button = @driver.find_element(ESTIMATES_OPTN)
     estimates_button.click
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait2.until {driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2.until {@driver.find_element(TOP_REFNUMBER).displayed?}
   end
 
   def create_estimate()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CREATE_ESTIMATE_BTN).displayed?}
+    i = 0
+    loopcount = 5
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CREATE_ESTIMATE_BTN).displayed?}
     create_esimate_button = @driver.find_element(CREATE_ESTIMATE_BTN)
     create_esimate_button.click
-    sleep(2)
-    @driver.switch_to.frame(0)
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(CUSTOMER_SEARCH_FIELD).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(CUSTOMER_SEARCH_FIELD).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def select_customer(selectcustomer)
+    i = 0
+    loopcount = 5
     select_customer = @driver.find_element(CUSTOMER_SEARCH_FIELD)
 		select_customer.send_keys(selectcustomer)
 		sleep(1)
@@ -156,8 +184,29 @@ class EstimatesResource
 		sleep(1)
 		select_customer_next = @driver.find_element(CUSTOMER_NEXT_BTN)
 		select_customer_next.click
-		sleep(1)
-		@driver.switch_to.frame(0)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(FRAME).displayed?}
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(NAME_FIELD).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(NAME_FIELD).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def top()
@@ -181,97 +230,195 @@ class EstimatesResource
   end
 
   def top_open()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(TOP_REFNUMBER).displayed?}
+    i = 0
+    loopcount = 5
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(TOP_REFNUMBER).displayed?}
     top_refnumber = @driver.find_element(TOP_REFNUMBER)
     top_refnumber.click
-    sleep(2)
-    @driver.switch_to.frame(0)
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(NAME_FIELD).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(NAME_FIELD).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def top_actions()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(TOP_ESTIMATE_ACTIONS).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(TOP_ESTIMATE_ACTIONS).displayed?}
     top_actions = @driver.find_element(TOP_ESTIMATE_ACTIONS)
     top_actions.click
   end
 
-  def top_viewestimate()
-    #Only accessible in grid actions
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ACTIONS_VIEWESTIMATE).displayed?}
-    top_view = @driver.find_element(ACTIONS_VIEWESTIMATE)
-    top_view.click
-    sleep(2)
-    @driver.switch_to.frame(0)
-  end
-
   def actions_createactivity()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ACTIONS_CREATEACTIVITY).displayed?}
+    i = 0
+    loopcount = 5
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ACTIONS_CREATEACTIVITY).displayed?}
     top_createactivity = @driver.find_element(ACTIONS_CREATEACTIVITY)
     top_createactivity.click
-    sleep(2)
-    @driver.switch_to.frame(0)
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(ACTIVITY_REASON_DROPDOWN).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(ACTIVITY_REASON_DROPDOWN).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def actions_createinvoice()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ACTIONS_CREATEINVOICE).displayed?}
+    i = 0
+    loopcount = 5
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ACTIONS_CREATEINVOICE).displayed?}
     top_createinvoice = @driver.find_element(ACTIONS_CREATEINVOICE)
     top_createinvoice.click
-    sleep(2)
-    @driver.switch_to.frame(0)
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(INVOICE_PONUMBER_FIELD).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(INVOICE_PONUMBER_FIELD).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def actions_documents()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ACTIONS_DOCUMENTS).displayed?}
+    i = 0
+    loopcount = 5
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ACTIONS_DOCUMENTS).displayed?}
     top_documents = @driver.find_element(ACTIONS_DOCUMENTS)
     top_documents.click
-    sleep(2)
-    @driver.switch_to.frame(0)
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(DOCUMENTS_SHOWHIDE_UPLOADER).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(DOCUMENTS_SHOWHIDE_UPLOADER).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def actions_printemail()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ACTIONS_PRINTEMAIL).displayed?}
+    i = 0
+    loopcount = 5
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ACTIONS_PRINTEMAIL).displayed?}
     top_printemail = @driver.find_element(ACTIONS_PRINTEMAIL)
     top_printemail.click
-    sleep(2)
-    @driver.switch_to.frame(0)
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(PRINTEMAIL_PDF_CHECKBOX).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(PRINTEMAIL_PDF_CHECKBOX).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def actions_duplicateestimate()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ACTIONS_DUPLICATEESTIMATE).displayed?}
+    i = 0
+    loopcount = 5
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ACTIONS_DUPLICATEESTIMATE).displayed?}
     top_duplicate = @driver.find_element(ACTIONS_DUPLICATEESTIMATE)
     top_duplicate.click
-    sleep(2)
-    @driver.switch_to.frame(0)
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(NAME_FIELD).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(NAME_FIELD).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def actions_makeinactive()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ACTIONS_MAKEINACTIVE).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ACTIONS_MAKEINACTIVE).displayed?}
     top_makeinactive = @driver.find_element(ACTIONS_MAKEINACTIVE)
     top_makeinactive.click
   end
@@ -337,10 +484,8 @@ class EstimatesResource
   end
 
   def show_inactives()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SHOW_INACTIVES).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SHOW_INACTIVES).displayed?}
     show_inactives = @driver.find_element(SHOW_INACTIVES)
     show_inactives.click
   end
@@ -419,114 +564,93 @@ class EstimatesResource
   end
 
   def cancel()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CANCEL_BTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CANCEL_BTN).displayed?}
     cancel_popup = @driver.find_element(CANCEL_BTN)
     cancel_popup.click
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(TOP_REFNUMBER).displayed?}
   end
 
   def actions()
     #Use actions_(action) methods from here
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ACTIONS_BTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ACTIONS_BTN).displayed?}
     actions_popup = @driver.find_element(ACTIONS_BTN)
     actions_popup.click
   end
 
   def save()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SAVE_BTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SAVE_BTN).displayed?}
     save = @driver.find_element(SAVE_BTN)
     save.click
   end
 
   def save_close()
-    sleep(2)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
-    sleep(3)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(TOP_REFNUMBER).displayed?}
   end
 
   #CSS Methods: Popup (Lines)
   def lines_tab()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(LINES_TAB).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(LINES_TAB).displayed?}
     lines_tab = @driver.find_element(LINES_TAB)
     lines_tab.click
   end
 
   def line1_item(item1)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(LINE1_ITEM_SPAN).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(LINE1_ITEM_SPAN).displayed?}
     span_field = @driver.find_element(LINE1_ITEM_SPAN)
     span_field.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for2 {@driver.find_element(LINE1_SERVICE_DATE).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(LINE1_SERVICE_DATE).displayed?}
     item_field = @driver.find_element(LINE1_SERVICE_DATE)
     item_field.send_keys(item1)
     sleep(1)
     @driver.action.send_keys(:enter).perform
+    sleep(1)
   end
 
   #CSS Methods: Popup (Scheduling)
   def scheduling_tab()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SCHEDULING_TAB).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SCHEDULING_TAB).displayed?}
     scheduling_tab = @driver.find_element(SCHEDULING_TAB)
     scheduling_tab.click
   end
 
   def estimate_cancel(jobcancel)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(JOB_CANCELED_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(JOB_CANCELED_FIELD).displayed?}
     jobcanceled_field = @driver.find_element(JOB_CANCELED_FIELD)
     jobcanceled_field.send_keys(jobcancel)
   end
 
   def estimate_hold(jobhold)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(JOB_HOLD_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(JOB_HOLD_FIELD).displayed?}
     jobhold_field = @driver.find_element(JOB_HOLD_FIELD)
     jobhold_field.send_keys(jobhold)
   end
 
   def estimate_complete(jobcomplete)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(JOB_COMPLETED_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(JOB_COMPLETED_FIELD).displayed?}
     jobcompleted_field = @driver.find_element(JOB_COMPLETED_FIELD)
     jobcompleted_field.send_keys(jobcomplete)
   end
 
   #CSS Methods: Popup (Contacts)
   def contacts_tab()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(CUSTOMER_CONTACTS_TAB).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CUSTOMER_CONTACTS_TAB).displayed?}
     contacts_tab = @driver.find_element(CUSTOMER_CONTACTS_TAB)
     contacts_tab.click
   end
@@ -534,85 +658,89 @@ class EstimatesResource
 
   #CSS Methods: Popup (Notes)
   def notes_tab()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(NOTES_TAB).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(NOTES_TAB).displayed?}
     notes_tab = @driver.find_element(NOTES_TAB)
     notes_tab.click
   end
 
   def scope_of_work(scopeofwork)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SCOPE_OF_WORK_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SCOPE_OF_WORK_FIELD).displayed?}
     scope_of_work = @driver.find_element(SCOPE_OF_WORK_FIELD)
     scope_of_work.send_keys(scopeofwork)
   end
 
   def additional_notes(additionalnotes)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ADDITIONAL_NOTES_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ADDITIONAL_NOTES_FIELD).displayed?}
     additional_notes = @driver.find_element(ADDITIONAL_NOTES_FIELD)
     additional_notes.send_keys(additionalnotes)
   end
 
   def special_instructions(specialinstructions)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SPECIAL_INSTRUCTIONS_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SPECIAL_INSTRUCTIONS_FIELD).displayed?}
     special_instructions = @driver.find_element(SPECIAL_INSTRUCTIONS_FIELD)
     special_instructions.send_keys(specialinstructions)
   end
 
   def private_notes(privatenotes)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(PRIVATE_NOTES_FIELD).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(PRIVATE_NOTES_FIELD).displayed?}
     private_notes = @driver.find_element(PRIVATE_NOTES_FIELD)
     private_notes.send_keys(privatenotes)
   end
 
   #CSS Methods: Popup (Activities)
   def activities_tab()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(ACTIVITIES_TAB).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ACTIVITIES_TAB).displayed?}
     activities_tab = @driver.find_element(ACTIVITIES_TAB)
     activities_tab.click
   end
 
   def search_activity(searchactivity)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SEARCH_ACTIVITY).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SEARCH_ACTIVITY).displayed?}
     activity_search = @driver.find_element(SEARCH_ACTIVITY)
     activity_search.send_keys(searchactivity)
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for2 {@driver.find_element(SEARCH_BTN).displayed?}
-    search_confirm = @driver.find_element(SEARCH_BTN)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(ESTIMATE_ACTIVITY_SEARCH_BTN).displayed?}
+    search_confirm = @driver.find_element(ESTIMATE_ACTIVITY_SEARCH_BTN)
     search_confirm.click
-    sleep(1)
+    wait3 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait3.until {@driver.find_element(TOP_ACTIVITY_DESCRIPTION).downcase.include?(searchactivity.downcase)}
   end
 
   def top_activity()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(TOP_ACTIVITY).displayed?}
+    i = 0
+    loopcount = 5
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(TOP_ACTIVITY).displayed?}
     top_refnumber = @driver.find_element(TOP_ACTIVITY)
     top_refnumber.click
-    sleep(2)
-    @driver.switch_to.frame(0)
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(ACTIVITY_REASON_DROPDOWN).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(ACTIVITY_REASON_DROPDOWN).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def top_activitydescription()
@@ -621,39 +749,53 @@ class EstimatesResource
 
   #CSS Methods: Popup (Jobs)
   def jobs_tab()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(JOBS_TAB).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(JOBS_TAB).displayed?}
     jobs_tab = @driver.find_element(JOBS_TAB)
     jobs_tab.click
   end
 
   def search_job(searchjob)
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SEARCH_JOB).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SEARCH_JOB).displayed?}
     job_search = @driver.find_element(SEARCH_JOB)
     job_search.send_keys(searchjob)
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for2 {@driver.find_element(SEARCH_BTN).displayed?}
-    search_confirm = @driver.find_element(SEARCH_BTN)
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(ESTIMATE_JOB_SEARCH_BTN).displayed?}
+    search_confirm = @driver.find_element(ESTIMATE_JOB_SEARCH_BTN)
     search_confirm.click
-    sleep(1)
+    wait3 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait3.until {@driver.find_element(TOP_JOB).downcase.include?(searchactivity.downcase)}
   end
 
   def top_invoice()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(TOP_JOB).displayed?}
+    i = 0
+    loopcount = 5
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(TOP_JOB).displayed?}
     top_refnumber = @driver.find_element(TOP_JOB)
     top_refnumber.click
-    sleep(2)
-    @driver.switch_to.frame(0)
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(INVOICE_PONUMBER_FIELD).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(INVOICE_PONUMBER_FIELD).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
 end

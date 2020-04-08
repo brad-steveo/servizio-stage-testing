@@ -150,7 +150,6 @@ class CustomersResource
   DOCUMENTS_SHOWHIDE_UPLOADER = {xpath: "/html/body/form/div[3]/div[1]/div/div/div[1]/div[2]/a/span"}
   PRINTEMAIL_PDF_CHECKBOX = {css: "input[id$='AttachPDFInput']"}
 
-
   #Custom Errors
   class FrameError < StandardError
     def initialize(msg='Unable to switch to frame and locate element')

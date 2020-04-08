@@ -55,20 +55,20 @@ class PatrolsResource
   ACTIVITIES_TAB = {css: "a[id$='block_a_1']"}
   SEARCH_ACTIVITY = {css: "input[id$='ActivitiesSearchInput']"}
   TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/form/div[3]/div[1]/div[4]/div[2]/div/div[3]/table/tbody/tr[1]/td[5]"}
-  #SEARCH_BTN
-  #RESET_BTN
+  PATROL_ACTIVITY_SEARCH_BTN = {css: "input[id$='PatrolSearchActivities']"}
+  PATROL_ACTIVITY_RESET_BTN = {css: "input[id$='PatrolResetActivities']"}
 
   #CSS Selectors: Popup (Estimates Tab)
   ESTIMATES_TAB = {css: "a[id$='block_a_2']"}
   SEARCH_ESTIMATE = {css: "input[id$='EstimateSearchInput']"}
-  #SEARCH_BTN
-  #RESET_BTN
+  PATROL_ESTIMATE_SEARCH_BTN = {css: "input[id$='PatrolSearchEstimates']"}
+  PATROL_ESTIMATE_RESET_BTN = {css: "input[id$='PatrolResetEstimates']"}
 
   #CSS Selectors: Popup (Jobs Tab)
   JOBS_TAB = {css: "a[id$='block_a_3']"}
   SEARCH_JOB = {css: "input[id$='JobSearchInput']"}
-  #SEARCH_BTN
-  #RESET_BTN
+  PATROL_JOB_SEARCH_BTN = {css: "input[id$='PatrolSearchJobs']"}
+  PATROL_JOB_RESET_BTN = {css: "input[id$='PatrolResetJobs']"}
 
   #CSS Selectors: Frame Anchors
   FRAME = {css: "iframe[tabindex='0']"}
@@ -519,7 +519,7 @@ class PatrolsResource
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
+    wait2.until {@driver.find_element(TOP_REFNUMBER).displayed?}
   end
 
   #CSS Methods: Popup (Contact Info Tab)
@@ -601,8 +601,8 @@ class PatrolsResource
     activity_search = @driver.find_element(SEARCH_ACTIVITY)
     activity_search.send_keys(searchname)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait2.until {@driver.find_element(SEARCH_BTN).displayed?}
-    search_confirm = @driver.find_element(SEARCH_BTN)
+    wait2.until {@driver.find_element(PATROL_ACTIVITY_SEARCH_BTN).displayed?}
+    search_confirm = @driver.find_element(PATROL_ACTIVITY_SEARCH_BTN)
     search_confirm.click
   end
 
@@ -624,8 +624,8 @@ class PatrolsResource
     estimate_search = @driver.find_element(SEARCH_ESTIMATE)
     estimate_search.send_keys(searchestimate)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait2.until {@driver.find_element(SEARCH_BTN).displayed?}
-    search_confirm = @driver.find_element(SEARCH_BTN)
+    wait2.until {@driver.find_element(PATROL_ESTIMATE_SEARCH_BTN).displayed?}
+    search_confirm = @driver.find_element(PATROL_ESTIMATE_SEARCH_BTN)
     search_confirm.click
   end
 
@@ -643,8 +643,8 @@ class PatrolsResource
     job_search = @driver.find_element(SEARCH_JOB)
     job_search.send_keys(searchjob)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait2.until {@driver.find_element(SEARCH_BTN).displayed?}
-    search_confirm = @driver.find_element(SEARCH_BTN)
+    wait2.until {@driver.find_element(PATROL_JOB_SEARCH_BTN).displayed?}
+    search_confirm = @driver.find_element(PATROL_JOB_SEARCH_BTN)
     search_confirm.click
   end
 

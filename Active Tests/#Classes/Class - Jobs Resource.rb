@@ -125,22 +125,22 @@ class JobsResource
   SEARCH_ACTIVITY = {css: "input[id$='ActivitiesSearchInput']"}
   TOP_ACTIVITY = {css: "a[id$='ctl03_wtActivityIdLink']"}
   TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[5]/div/div[3]/table/tbody/tr[1]/td[5]"}
-  SEARCH_ACTIVITIES_BTN = {css: "input[id$='wtMainContent_wt412']"}
-  RESET_ACTIVITIES_BTN = {css: "input[id$='wtMainContent_wt444']"}
+  JOB_ACTIVITY_SEARCH_BTN = {css: "input[id$='JobSearchActivities']"}
+  JOB_ACTIVITY_RESET_BTN = {css: "input[id$='JobResetActivities']"}
 
   #CSS Selectors: Popup (Invoices Tab)
   INVOICES_TAB = {css: "a[id$='block_a_5']"}
   SEARCH_INVOICE = {css: "input[id$='InvoiceSearchInput']"}
   TOP_INVOICE = {css: "a[id$='ctl03_wtInvoiceIdLink']"}
-  SEARCH_INVOICES_BTN = {css: "input[id$='wtMainContent_wt474']"}
-  RESET_INVOICES_BTN = {css: "input[id$='wtMainContent_wt460']"}
+  JOB_INVOICE_SEARCH_BTN = {css: "input[id$='JobSearchInvoices']"}
+  JOB_INVOICE_RESET_BTN = {css: "input[id$='JobResetInvoices']"}
 
   #CSS Selectors: Popup (Deposits Tab)
   DEPOSITS_TAB = {css: "a[id$='block_a_6']"}
   SEARCH_DEPOSIT = {css: "input[id$='DepositSearchInput']"}
   TOP_DEPOSIT = {css: "a[id$='ctl03_wtDepositInvoiceIdLink']"}
-  SEARCH_DEPOSITS_BTN = {css: "input[id$='wtMainContent_wt734']"}
-  RESET_DEPOSITS_BTN = {css: "input[id$='wtMainContent_wt627']"}
+  JOB_DEPOSIT_SEARCH_BTN = {css: "input[id$='JobSearchDeposits']"}
+  JOB_DEPOSIT_RESET_BTN = {css: "input[id$='JobResetDeposits']"}
 
   #CSS Selectors: Popup (Assets Tab)
   ASSETS_TAB = {css: "a[id$='block_a_8']"}
@@ -1136,8 +1136,8 @@ class JobsResource
     activity_search = @driver.find_element(SEARCH_ACTIVITY)
     activity_search.send_keys(searchactivity)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait2.until {@driver.find_element(SEARCH_ACTIVITIES_BTN).displayed?}
-    search_confirm = @driver.find_element(SEARCH_ACTIVITIES_BTN)
+    wait2.until {@driver.find_element(JOB_ACTIVITY_SEARCH_BTN).displayed?}
+    search_confirm = @driver.find_element(JOB_ACTIVITY_SEARCH_BTN)
     search_confirm.click
     wait3 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait3.until {@driver.find_element(TOP_ACTIVITY_DESCRIPTION).downcase.include?(searchactivity.downcase)}
@@ -1191,8 +1191,8 @@ class JobsResource
     invoice_search = @driver.find_element(SEARCH_INVOICE)
     invoice_search.send_keys(searchinvoice)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait2.until {@driver.find_element(SEARCH_INVOICES_BTN).displayed?}
-    search_confirm = @driver.find_element(SEARCH_INVOICES_BTN)
+    wait2.until {@driver.find_element(JOB_INVOICE_SEARCH_BTN).displayed?}
+    search_confirm = @driver.find_element(JOB_INVOICE_SEARCH_BTN)
     search_confirm.click
     wait3 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(TOP_INVOICE).text.include?(searchinvoice)}
@@ -1242,8 +1242,8 @@ class JobsResource
     deposit_search = @driver.find_element(SEARCH_DEPOSIT)
     deposit_search.send_keys(searchdeposit)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait2.until {@driver.find_element(SEARCH_DEPOSITS_BTN).displayed?}
-    search_confirm = @driver.find_element(SEARCH_DEPOSITS_BTN)
+    wait2.until {@driver.find_element(JOB_DEPOSIT_SEARCH_BTN).displayed?}
+    search_confirm = @driver.find_element(JOB_DEPOSIT_SEARCH_BTN)
     search_confirm.click
     wait3 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait3.until {@driver.find_element(TOP_DEPOSIT).text.include?(searchdeposit)}
