@@ -17,6 +17,22 @@ class JobLinesResource
   ITEMNAME_COLUMN = {css: "input[id$='wtJobLineTable_ctl02_wtItemNameSearchTextInput']"}
   JOBNAME_COLUMN = {css: "input[id$='wtJobLineTable_ctl02_wtJobNameSearchTextInput']"}
 
+  #Frame Anchors
+  JOB_NAME_FIELD = {css: "input[id$='Job_Name']"}
+
+  #Custom Errors
+  class FrameError < StandardError
+    def initialize(msg='Unable to switch to frame and locate element')
+      super
+    end
+  end
+
+  class StaleError < StandardError
+    def initialize(msg='Stale reference error')
+      super
+    end
+  end
+
   attr_reader :driver
 
   def initialize(driver)
@@ -45,14 +61,31 @@ class JobLinesResource
   end
 
   def top_open()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(TOP_JOBNAME).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(TOP_JOBNAME).displayed?}
     top_record = @driver.find_element(TOP_JOBNAME)
     top_record.click
-    sleep(2)
-    @driver.switch_to.frame(0)
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(JOB_NAME_FIELD).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(JOB_NAME_FIELD).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def search_joblines(searchname)
@@ -129,10 +162,8 @@ class JobLinesResource
   end
 
   def show_inactives()
-    def wait_for()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-    wait_for {@driver.find_element(SHOW_INACTIVES).displayed?}
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SHOW_INACTIVES).displayed?}
     show_inactives = @driver.find_element(SHOW_INACTIVES)
     show_inactives.click
   end

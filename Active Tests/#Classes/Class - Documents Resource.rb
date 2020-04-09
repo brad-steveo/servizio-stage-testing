@@ -23,6 +23,19 @@ class DocumentsResource
   SHOWHIDE_UPLOADER = {xpath: "/html/body/form/div[3]/div[1]/div/div/div[1]/div[2]/a/span"}
   #SHOW_INACTIVES selector and method will work in this popup as well.
 
+  #Custom Errors
+  class FrameError < StandardError
+    def initialize(msg='Unable to switch to frame and locate element')
+      super
+    end
+  end
+
+  class StaleError < StandardError
+    def initialize(msg='Stale reference error')
+      super
+    end
+  end
+
   attr_reader :driver
 
   def initialize(driver)

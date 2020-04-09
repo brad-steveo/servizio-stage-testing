@@ -78,53 +78,55 @@ class SettingsResource
   end
 
   def open_crews()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CREWS_OPTN).displayed?}
     crews_selection = @driver.find_element(CREWS_OPTN)
     crews_selection.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   def open_customerassets()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CUSTOMERASSETS_OPTN).displayed?}
     customerassets_selection = @driver.find_element(CUSTOMERASSETS_OPTN)
     customerassets_selection.click
   end
 
   def open_employees()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(EMPLOYEES_OPTN).displayed?}
     employees_selection = @driver.find_element(EMPLOYEES_OPTN)
     employees_selection.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   def open_documents()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(DOCUMENTS_OPTN).displayed?}
     documents_selection = @driver.find_element(DOCUMENTS_OPTN)
     documents_selection.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   def open_timeentries()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(TIMEENTRIES_OPTN).displayed?}
     timeentries_selection = @driver.find_element(TIMEENTRIES_OPTN)
     timeentries_selection.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   def open_timesheets()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(TIMESHEETS_OPTN).displayed?}
     timesheets_selection = @driver.find_element(TIMESHEETS_OPTN)
     timesheets_selection.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   def open_invoicelines()
@@ -142,150 +144,166 @@ class SettingsResource
     joblines_selection = @driver.find_element(JOBLINES_OPTN)
     joblines_selection.click
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
     wait3 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait3.until {@driver.find_element(JOBLINES_TOP_REFNUMBER).displayed?}
   end
 
   def open_productsandservices()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(PRODUCTSANDSERVICES_OPTN).displayed?}
     productsandservices_selection = @driver.find_element(PRODUCTSANDSERVICES_OPTN)
     productsandservices_selection.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   def open_productcategories()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(PRODUCTCATEGORIES_OPTN).displayed?}
     productcategories_selection = @driver.find_element(PRODUCTCATEGORIES_OPTN)
     productcategories_selection.click
   end
 
   def open_announcements()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ANNOUNCEMENTS_OPTN).displayed?}
     announcements_selection = @driver.find_element(ANNOUNCEMENTS_OPTN)
     announcements_selection.click
   end
 
   def open_releasenotes()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(RELEASENOTES_OPTN).displayed?}
     releasenotes_selection = @driver.find_element(RELEASENOTES_OPTN)
     releasenotes_selection.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   def open_royalties()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ROYALTIES_OPTN).displayed?}
     royalties_selection = @driver.find_element(ROYALTIES_OPTN)
     royalties_selection.click
   end
 
   #CSS Methods: Lists
   def open_assetcategories()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ASSETCATEGORIES_OPTN).displayed?}
     assetcategories_selection = @driver.find_element(ASSETCATEGORIES_OPTN)
     assetcategories_selection.click
   end
 
   def open_classes()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CLASSES_OPTN).displayed?}
     classes_selection = @driver.find_element(CLASSES_OPTN)
     classes_selection.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   def open_paymentmethods()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(PAYMENTMETHODS_OPTN).displayed?}
     paymentmethods_selection = @driver.find_element(PAYMENTMETHODS_OPTN)
     paymentmethods_selection.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   def open_priceagreements()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(PRICEAGREEMENTS_OPTN).displayed?}
     priceagreements_selection = @driver.find_element(PRICEAGREEMENTS_OPTN)
     priceagreements_selection.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   def open_terms()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(TERMS_OPTN).displayed?}
     terms_selection = @driver.find_element(TERMS_OPTN)
     terms_selection.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   def open_trucks()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(TRUCKS_OPTN).displayed?}
     trucks_selection = @driver.find_element(TRUCKS_OPTN)
     trucks_selection.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   def open_rmas()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(RMAS_OPTN).displayed?}
     rmas_selection = @driver.find_element(RMAS_OPTN)
     rmas_selection.click
   end
 
   #CSS Methods: Setup
   def open_companysettings()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(COMPANYSETTINGS_OPTN).displayed?}
     companysettings_selection = @driver.find_element(COMPANYSETTINGS_OPTN)
     companysettings_selection.click
   end
 
   def open_chartofaccounts()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(CHARTOFACCOUNTS_OPTN).displayed?}
     chartofaccounts_selection = @driver.find_element(CHARTOFACCOUNTS_OPTN)
     chartofaccounts_selection.click
   end
 
   def open_departments()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(DEPARTMENTS_OPTN).displayed?}
     departments_selection = @driver.find_element(DEPARTMENTS_OPTN)
     departments_selection.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   def open_locations()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(LOCATIONS_OPTN).displayed?}
     locations_selection = @driver.find_element(LOCATIONS_OPTN)
     locations_selection.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   def open_paymentprocessing()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(PAYMENTPROCESSING_OPTN).displayed?}
     paymentprocessing_selection = @driver.find_element(PAYMENTPROCESSING_OPTN)
     paymentprocessing_selection.click
   end
 
   def open_roles()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ROLES_OPTN).displayed?}
     roles_selection = @driver.find_element(ROLES_OPTN)
     roles_selection.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
   def open_taxratesandagencies()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(TAXRATESANDAGENCIES_OPTN).displayed?}
     taxrates_selection = @driver.find_element(TAXRATESANDAGENCIES_OPTN)
     taxrates_selection.click
-    def wait_for2()
-      Selenium::WebDriver::Wait.new(:timeout => 5).until {yield}
-    end
-      wait_for2 {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
 
 end
