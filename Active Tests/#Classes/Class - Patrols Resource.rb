@@ -496,6 +496,8 @@ class PatrolsResource
     wait.until {@driver.find_element(CANCEL_BTN).displayed?}
     cancel_popup = @driver.find_element(CANCEL_BTN)
     cancel_popup.click
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(TOP_REFNUMBER).displayed?}
   end
 
   def actions()
