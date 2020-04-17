@@ -606,6 +606,8 @@ class PatrolsResource
     wait2.until {@driver.find_element(PATROL_ACTIVITY_SEARCH_BTN).displayed?}
     search_confirm = @driver.find_element(PATROL_ACTIVITY_SEARCH_BTN)
     search_confirm.click
+    wait3 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait3.until {@driver.find_element(TOP_ACTIVITY_DESCRIPTION).downcase.include?(searchactivity.downcase)}
   end
 
   def top_activitydescription()

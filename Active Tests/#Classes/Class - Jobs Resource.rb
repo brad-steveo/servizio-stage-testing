@@ -617,7 +617,7 @@ class JobsResource
     cancel_popup = @driver.find_element(CANCEL_BTN)
     cancel_popup.click
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
+    wait2.until {@driver.find_element(TOP_PONUMBER).displayed?}
   end
 
   def actions()
@@ -682,7 +682,6 @@ class JobsResource
     wait.until {@driver.find_element(LINE1_DESCRIPTION).displayed?}
     span_field = @driver.find_element(LINE1_DESCRIPTION)
     span_field.click
-    sleep(1)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {@driver.find_element(LINE1_DESCRIPTION_TEXTAREA).displayed?}
     item_field = @driver.find_element(LINE1_DESCRIPTION_TEXTAREA)
