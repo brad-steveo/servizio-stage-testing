@@ -17,6 +17,8 @@ describe "CSS Testing" do
 		test2 = "Sales"
 		search = "626"
 		timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
+		searchdocumentname = "20200325171116"
+		searchdocumentextension = "png"
 
 		#Go to page
 		@driver.navigate.to "https://stage.yesco.com/servizio/"
@@ -34,8 +36,25 @@ describe "CSS Testing" do
 
 		settings.open_settings()
 		settings.open_documents()
-		documents.search_name(search)
+		buffers.ajax_buffer()
+		documents = DocumentsResource.new(@driver)
+		documents.search_documentname(searchdocumentname)
+		print "Documents Search (NAME): \n"
+		print "%s \n" % documents.top_name.text
+		print "\n"
+		expect(documents.top_name.text).to include(searchdocumentname)
+
 		documents.search_reset()
+		buffers.ajax_buffer()
+		documentswait = Selenium::WebDriver::Wait.new(:timeout => 5)
+		documentswait.until {documents.search_documentname_field['value'].empty? == true}
+
+		documents.search_documentextension(searchdocumentextension)
+		buffers.ajax_buffer()
+		print "Documents Search (EXTENSION): \n"
+		print "%s \n" % documents.top_extension.text
+		print "\n"
+		expect(documents.top_extension.text).to include(searchdocumentextension)
 
 		sleep(5)
 

@@ -28,8 +28,8 @@ describe "Performes a column header search in each resource for the ID and Name 
 		searchjoblinejobname = "selenium"
 		searchinvoicelineid = "1010"
 		searchinvoicelineinvoiceid = "1016"
-		searchdocumentname = ""
-		searchdocumentextension = ""
+		searchdocumentname = "20200325171116"
+		searchdocumentextension = "png"
 
 		# Go to page
 		@driver.navigate.to "https://stage.yesco.com/servizio/"

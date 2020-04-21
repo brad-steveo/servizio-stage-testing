@@ -18,6 +18,8 @@ describe "Invoice Creation and NetSuite Sync" do
 		accountexecutive = "Judd Williams"
 		ponumber = rand 1000001..9999999
 		commissionschedule = "YESCO | T&M Commissions @ 9%"
+		i = 0
+		loopcount = 4
 
 		#Go to page
 		@driver.navigate.to "https://dev.yesco.com/servizio/"
@@ -31,6 +33,9 @@ describe "Invoice Creation and NetSuite Sync" do
 		#Invoice Creation
 		invoices = InvoicesResource.new(@driver)
 		invoices.open_invoices()
+
+		currenttopref = invoices.top_refnumber.text
+
 		invoices.create_invoice()
 		invoices.select_jobdev(selectjob)
 		invoices.terms(invoiceterms)
@@ -43,10 +48,33 @@ describe "Invoice Creation and NetSuite Sync" do
 		invoices.actions_pushtons()
 		invoices.cancel()
 
-		sleep(70)
-		@driver.navigate.refresh
-		wait = Selenium::WebDriver::Wait.new(:timeout => 20)
-		wait.until {invoices.top_refnumber.displayed?}
+		wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+		wait.until {invoices.top_refnumber.text != currenttopref}
+
+		def id_refresher()
+			invoices = InvoicesResource.new(@driver)
+
+			@driver.navigate.refresh
+			wait2 = Selenium::WebDriver::Wait.new(:timeout => 20)
+			begin
+				wait2.until {invoices.top_nsid.text != ""}
+			rescue Selenium::WebDriver::Error::TimeoutError
+				false
+			end
+		end
+
+		loop do
+			i += 1
+			puts id_refresher()
+
+			if (invoices.top_nsid.text != "") == true
+				break
+			end
+
+			if i == loopcount
+				break
+			end
+		end
 
 		#NS Sync Verification
 		print invoices.top_refnumber.text

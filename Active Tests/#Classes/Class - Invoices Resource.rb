@@ -186,11 +186,13 @@ class InvoicesResource
     sleep(1)
     select_job_next = @driver.find_element(JOB_NEXT_BTN)
     select_job_next.click
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(FRAME).displayed?}
     loop do
       i += 1
       @driver.switch_to.frame(0)
       begin
-        wait2 = Selenium::WebDriver::Wait.new(:timeout => 4)
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 8)
         wait2.until {@driver.find_element(INVOICE_DATE_FIELD).displayed?}
       rescue Selenium::WebDriver::Error::TimeOutError
         false
@@ -219,11 +221,13 @@ class InvoicesResource
     sleep(1)
     select_job_next = @driver.find_element(JOB_NEXT_BTN)
     select_job_next.click
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(FRAME).displayed?}
     loop do
       i += 1
       @driver.switch_to.frame(0)
       begin
-        wait2 = Selenium::WebDriver::Wait.new(:timeout => 4)
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 8)
         wait2.until {@driver.find_element(INVOICE_DATE_FIELD).displayed?}
       rescue Selenium::WebDriver::Error::TimeOutError
         false
@@ -269,7 +273,7 @@ class InvoicesResource
   def top_open()
     i = 0
     loopcount = 5
-    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(TOP_REFNUMBER).displayed?}
     top_refnumber = @driver.find_element(TOP_REFNUMBER)
     top_refnumber.click
@@ -297,7 +301,7 @@ class InvoicesResource
   end
 
   def top_actions()
-    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(TOP_INVOICE_ACTIONS).displayed?}
     top_actions = @driver.find_element(TOP_INVOICE_ACTIONS)
     top_actions.click

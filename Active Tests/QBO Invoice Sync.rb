@@ -17,6 +17,8 @@ describe "Invoice Creation and QBO Sync" do
 		ponumber = rand 1000001..9999999
 		invoicelocation = "Test Location"
 		accountexecutive = "Tested Hansen"
+		i = 0
+		loopcount = 5
 
 		#Go to page
 		@driver.navigate.to "https://stage.yesco.com/servizio/"
@@ -27,9 +29,14 @@ describe "Invoice Creation and QBO Sync" do
 		login.enter_password(password)
 		login.sign_in()
 
+		buffers = Buffers.new(@driver)
+
 		#Invoice Creation
 		invoices = InvoicesResource.new(@driver)
 		invoices.open_invoices()
+
+		currenttopref = invoices.top_refnumber.text
+
 		invoices.create_invoice()
 		invoices.select_job(selectjob)
 		invoices.terms(invoiceterms)
@@ -39,12 +46,36 @@ describe "Invoice Creation and QBO Sync" do
 		invoices.save()
 		invoices.actions()
 		invoices.actions_pushtoqbo()
-		sleep(2)
+		buffers.ajax_buffer()
 		invoices.cancel()
 
-		sleep(6)
-		@driver.navigate.refresh
-		sleep(2)
+		wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+		wait.until {invoices.top_refnumber.text != currenttopref}
+
+		def id_refresher()
+			invoices = InvoicesResource.new(@driver)
+
+			@driver.navigate.refresh
+			wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
+			begin
+				wait2.until {invoices.top_qbid.text != ""}
+			rescue Selenium::WebDriver::Error::TimeoutError
+				false
+			end
+		end
+
+		loop do
+			i += 1
+			puts id_refresher()
+
+			if (invoices.top_qbid.text != "") == true
+				break
+			end
+
+			if i == loopcount
+				break
+			end
+		end
 
 		#QBO Sync Verification
 		print "Invoice: %s" % invoices.top_refnumber.text
