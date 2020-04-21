@@ -264,6 +264,10 @@ class ActivitiesResource
     wait2.until {@driver.find_element(TOP_REFNUMBER).text.include?(searchname)}
   end
 
+  def search_activityid_field()
+    field = @driver.find_element(ID_COLUMN)
+  end
+
   def search_activitydescription(searchname)
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(DESCRIPTION_COLUMN).displayed?}

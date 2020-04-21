@@ -16,8 +16,8 @@ class DocumentsResource
     EXPORT_DOCUMENTS = {css: "a[id$='ExportGridLink']"}
     SHOW_INACTIVES = {css: "input[id$='ShowInactivesCheckbox']"}
   GRID_TOTAL = {class: "Counter_Message"}
-  NAME_COLUMN = {css: "input[id$='DocumentTable_ctl02_wt268']"}
-  EXTENSION_COLUMN = {css: "input[id$='DocumentTable_ctl02_wt83']"}
+  NAME_COLUMN = {css: "input[id$='NameSearchTextInput']"}
+  EXTENSION_COLUMN = {css: "input[id$='ExtensionSearchTextInput']"}
 
   #CSS Selectors: Popup
   SHOWHIDE_UPLOADER = {xpath: "/html/body/form/div[3]/div[1]/div/div/div[1]/div[2]/a/span"}
@@ -123,7 +123,7 @@ class DocumentsResource
     wait3.until {(@driver.find_element(TOP_NAME).text.downcase + @driver.find_element(TOP_DESCRIPTION).text.downcase).include?(searchname.downcase)}
   end
 
-  def search_name(searchname)
+  def search_documentname(searchname)
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(NAME_COLUMN).displayed?}
     documents_search = @driver.find_element(NAME_COLUMN)
@@ -132,7 +132,11 @@ class DocumentsResource
     wait2.until {@driver.find_element(TOP_NAME).text.downcase.include?(searchname.downcase)}
   end
 
-  def search_extension(searchname)
+  def search_documentname_field()
+    field = @driver.find_element(NAME_COLUMN)
+  end
+
+  def search_documentextension(searchname)
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(EXTENSION_COLUMN).displayed?}
     documents_search = @driver.find_element(EXTENSION_COLUMN)

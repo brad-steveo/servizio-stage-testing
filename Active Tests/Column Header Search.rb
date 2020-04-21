@@ -12,6 +12,8 @@ describe "Performes a column header search in each resource for the ID and Name 
 		timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
 		loginname = "masterchief@yesco.com"
 		password = "MCyesco123"
+		searchactivityid = "1100"
+		searchactivitydescription = "02/22/2019 12:22:22"
 		searchpatrolid = "1001"
 		searchpatrolname = "parleys"
 		searchjobid = "1001"
@@ -26,6 +28,8 @@ describe "Performes a column header search in each resource for the ID and Name 
 		searchjoblinejobname = "selenium"
 		searchinvoicelineid = "1010"
 		searchinvoicelineinvoiceid = "1016"
+		searchdocumentname = ""
+		searchdocumentextension = ""
 
 		# Go to page
 		@driver.navigate.to "https://stage.yesco.com/servizio/"
@@ -37,6 +41,29 @@ describe "Performes a column header search in each resource for the ID and Name 
 		login.sign_in()
 
 		buffers = Buffers.new(@driver)
+
+		# Click on Activities and search columns
+		activities = ActivitiesResource.new(@driver)
+		activities.open_activities()
+		buffers.ajax_buffer()
+		activities.search_activityid(searchactivityid)
+		buffers.ajax_buffer()
+		print "Activities Search (ID): \n"
+		print "%s \n" % activities.top_refnumber.text
+		print "\n"
+		expect(activities.top_refnumber.text).to include(searchactivityid)
+
+		activities.search_reset()
+		buffers.ajax_buffer()
+		activitieswait = Selenium::WebDriver::Wait.new(:timeout => 5)
+		activitieswait.until {activities.search_activityid_field['value'].empty? == true}
+
+		activities.search_activitydescription(searchactivitydescription)
+		buffers.ajax_buffer()
+		print "Activities Search (DESCRIPTION): \n"
+		print "%s \n" % activities.top_description.text
+		print "\n"
+		expect(activities.top_description.text.downcase).to include(searchactivitydescription)
 
 		# Click on Patrols and search columns
 		patrols = PatrolsResource.new(@driver)
@@ -200,6 +227,29 @@ describe "Performes a column header search in each resource for the ID and Name 
 		print "%s \n" % invoicelines.top_invoiceid.text
 		print "\n"
 		expect(invoicelines.top_invoiceid.text).to include(searchinvoicelineinvoiceid)
+
+		# Click on Settings > Documents and search columns
+		settings.open_settings()
+		settings.open_documents()
+		buffers.ajax_buffer()
+		documents = DocumentsResource.new(@driver)
+		documents.search_documentname(searchdocumentname)
+		print "Documents Search (NAME): \n"
+		print "%s \n" % documents.top_name.text
+		print "\n"
+		expect(documents.top_name.text).to include(searchdocumentname)
+
+		documents.search_reset()
+		buffers.ajax_buffer()
+		documentswait = Selenium::WebDriver::Wait.new(:timeout => 5)
+		documentswait.until {documents.search_documentname_field['value'].empty? == true}
+
+		documents.search_documentextension(searchdocumentextension)
+		buffers.ajax_buffer()
+		print "Documents Search (EXTENSION): \n"
+		print "%s \n" % documents.top_extension.text
+		print "\n"
+		expect(documents.top_extension.text).to include(searchdocumentextension)
 
 	end
 end

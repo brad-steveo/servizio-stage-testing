@@ -12,6 +12,7 @@ describe "Performes a search in each resource" do
 		timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
 		loginname = "masterchief@yesco.com"
 		password = "MCyesco123"
+		searchactivity = "something"
 		searchpatrol = "06/25/2019"
 		searchjob = "06/25/2019"
 		searchestimate = "06/25/2019"
@@ -19,6 +20,7 @@ describe "Performes a search in each resource" do
 		searchcustomer = "06/25/2019"
 		searchjoblines = "stage"
 		searchinvoicelines = "bombay"
+		searchdocuments = "google"
 
 		#Go to page
 		@driver.navigate.to "https://stage.yesco.com/servizio/"
@@ -28,6 +30,17 @@ describe "Performes a search in each resource" do
 		login.enter_loginname(loginname)
 		login.enter_password(password)
 		login.sign_in()
+
+		# Click on Activities and use Google Search
+		activities = ActivitiesResource.new(@driver)
+		activities.open_activities()
+		activities.search_activity(searchactivity)
+
+		print "Activities Search: \n"
+		print "%s \n" % activities.top_description.text
+		print "\n"
+		print "\n"
+		expect(activities.top_description.text.downcase).to include(searchactivity.downcase)
 
 		# Click on Patrols and use Google Search
 		patrols = PatrolsResource.new(@driver)
@@ -102,6 +115,17 @@ describe "Performes a search in each resource" do
 		print "%s \n" % invoicelines.top_customername.text
 		print "\n"
 		expect(invoicelines.top_customername.text.downcase).to include(searchinvoicelines.downcase)
+
+		# Click on Settings > Documents and use Google Search
+		settings.open_settings()
+		settings.open_documents()
+		documents = DocumentsResource.new(@driver)
+		documents.search_documents(searchdocuments)
+
+		print "Documents Search: \n"
+		print "%s \n" % documents.top_description.text
+		print "\n"
+		expect(documents.top_name.text.downcase + documents.top_description.text.downcase).to include(searchdocuments.downcase)
 
 	end
 end
