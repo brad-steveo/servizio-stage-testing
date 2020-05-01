@@ -491,8 +491,22 @@ class JobsResource
   end
 
   def search_jobid(searchname)
-    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait.until {@driver.find_element(ID_COLUMN).displayed?}
+    i = 0
+    loopcount = 5
+    loop do
+      wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+      if
+        begin
+          wait.until {@driver.find_element(ID_COLUMN).displayed?} == true
+        rescue Selenium::WebDriver::Error::StaleElementReferenceError
+          false
+        end
+        break
+        if i == loopcount
+          raise StaleError
+        end
+      end
+    end
     job_search = @driver.find_element(ID_COLUMN)
     job_search.send_keys(searchname)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
@@ -504,8 +518,22 @@ class JobsResource
   end
 
   def search_jobname(searchname)
-    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait.until {@driver.find_element(NAME_COLUMN).displayed?}
+    i = 0
+    loopcount = 5
+    loop do
+      wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+      if
+        begin
+          wait.until {@driver.find_element(NAME_COLUMN).displayed?} == true
+        rescue Selenium::WebDriver::Error::StaleElementReferenceError
+          false
+        end
+        break
+        if i == loopcount
+          raise StaleError
+        end
+      end
+    end
     job_search = @driver.find_element(NAME_COLUMN)
     job_search.send_keys(searchname)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
@@ -517,10 +545,13 @@ class JobsResource
   end
 
   def search_reset()
+    currentrecords = @driver.find_element(class: "Counter_Message").text
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(RESET_BTN).displayed?}
     search_reset = @driver.find_element(RESET_BTN)
     search_reset.click
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != currentrecords}
   end
 
   def grid_options()

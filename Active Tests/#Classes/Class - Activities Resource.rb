@@ -256,8 +256,22 @@ class ActivitiesResource
   end
 
   def search_activityid(searchname)
-    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait.until {@driver.find_element(ID_COLUMN).displayed?}
+    i = 0
+    loopcount = 5
+    loop do
+      wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+      if
+        begin
+          wait.until {@driver.find_element(ID_COLUMN).displayed?}
+        rescue Selenium::WebDriver::Error::StaleElementReferenceError
+          false
+        end
+        break
+        if i == loopcount
+          raise StaleError
+        end
+      end
+    end
     activity_search = @driver.find_element(ID_COLUMN)
     activity_search.send_keys(searchname)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
@@ -269,8 +283,22 @@ class ActivitiesResource
   end
 
   def search_activitydescription(searchname)
-    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait.until {@driver.find_element(DESCRIPTION_COLUMN).displayed?}
+    i = 0
+    loopcount = 5
+    loop do
+      wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+      if
+        begin
+          wait.until {@driver.find_element(DESCRIPTION_COLUMN).displayed?} == true
+        rescue Selenium::WebDriver::Error::StaleElementReferenceError
+          false
+        end
+        break
+        if i == loopcount
+          raise StaleError
+        end
+      end
+    end
     activity_search = @driver.find_element(DESCRIPTION_COLUMN)
     activity_search.send_keys(searchname)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)

@@ -124,8 +124,22 @@ class DocumentsResource
   end
 
   def search_documentname(searchname)
-    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait.until {@driver.find_element(NAME_COLUMN).displayed?}
+    i = 0
+    loopcount = 5
+    loop do
+      wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+      if
+        begin
+          wait.until {@driver.find_element(NAME_COLUMN).displayed?} == true
+        rescue Selenium::WebDriver::Error::StaleElementReferenceError
+          false
+        end
+        break
+        if i == loopcount
+          raise StaleError
+        end
+      end
+    end
     documents_search = @driver.find_element(NAME_COLUMN)
     documents_search.send_keys(searchname)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
@@ -137,8 +151,22 @@ class DocumentsResource
   end
 
   def search_documentextension(searchname)
-    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait.until {@driver.find_element(EXTENSION_COLUMN).displayed?}
+    i = 0
+    loopcount = 5
+    loop do
+      wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+      if
+        begin
+          wait.until {@driver.find_element(EXTENSION_COLUMN).displayed?} == true
+        rescue Selenium::WebDriver::Error::StaleElementReferenceError
+          false
+        end
+        break
+        if i == loopcount
+          raise StaleError
+        end
+      end
+    end
     documents_search = @driver.find_element(EXTENSION_COLUMN)
     documents_search.send_keys(searchname)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)

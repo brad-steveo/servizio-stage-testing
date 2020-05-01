@@ -126,6 +126,7 @@ describe "Performes a column header search in each resource for the ID and Name 
 		buffers.ajax_buffer()
 		estimateswait = Selenium::WebDriver::Wait.new(:timeout => 5)
 		estimateswait.until {estimates.search_estimateid_field['value'].empty? == true}
+		sleep(2)
 
 		estimates.search_estimatename(searchestimatename)
 		buffers.ajax_buffer()

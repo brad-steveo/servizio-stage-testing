@@ -377,8 +377,22 @@ class PatrolsResource
   end
 
   def search_patrolid(searchname)
-    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait.until {@driver.find_element(ID_COLUMN).displayed?}
+    i = 0
+    loopcount = 5
+    loop do
+      wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+      if
+        begin
+          wait.until {@driver.find_element(ID_COLUMN).displayed?} == true
+        rescue Selenium::WebDriver::Error::StaleElementReferenceError
+            false
+        end
+        break
+        if i == loopcount
+          raise StaleError
+        end
+      end
+    end
     patrol_search = @driver.find_element(ID_COLUMN)
     patrol_search.send_keys(searchname)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
@@ -390,8 +404,22 @@ class PatrolsResource
   end
 
   def search_patrolname(searchname)
-    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait.until {@driver.find_element(NAME_COLUMN).displayed?}
+    i = 0
+    loopcount = 5
+    loop do
+      wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+      if
+        begin
+          wait.until {@driver.find_element(NAME_COLUMN).displayed?} == true
+        rescue Selenium::WebDriver::Error::StaleElementReferenceError
+          false
+        end
+        break
+        if i == loopcount
+          raise StaleError
+        end
+      end
+    end
     patrol_search = @driver.find_element(NAME_COLUMN)
     patrol_search.send_keys(searchname)
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
@@ -403,10 +431,13 @@ class PatrolsResource
   end
 
   def search_reset()
+    currentrecords = @driver.find_element(class: "Counter_Message").text
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(RESET_BTN).displayed?}
     search_reset = @driver.find_element(RESET_BTN)
     search_reset.click
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(class: "Counter_Message").text != currentrecords}
   end
 
   def grid_options()
