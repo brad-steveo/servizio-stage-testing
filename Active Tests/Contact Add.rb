@@ -54,7 +54,29 @@ describe "Adds a contact to a customer" do
 		contacts.save_close()
 
 		#Closing a popup within a popup
-		@driver.switch_to.frame(0)
+		i = 0
+		loopcount = 5
+		loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait.until {contacts.first_contact_name.text.include?(contactname)}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          contacts.first_contact_name.displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
 
 		expect(contacts.first_contact_name.text).to include(contactname)
 		expect(contacts.first_contact_notes.text).to include(contactnotes)

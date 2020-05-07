@@ -48,7 +48,7 @@ describe "Invoice Creation and NetSuite Sync" do
 		invoices.actions_pushtons()
 		invoices.cancel()
 
-		wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+		wait = Selenium::WebDriver::Wait.new(:timeout => 20)
 		wait.until {invoices.top_refnumber.text != currenttopref}
 
 		def id_refresher()
