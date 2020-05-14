@@ -27,6 +27,11 @@ describe "Cycles through each main resource" do
 		activities.open_activities()
 		activities.resource_performance()
 
+		#Click on Contracts and get load metrics
+		contracts = ContractsResource.new(@driver)
+		contracts.open_contracts()
+		contracts.resource_performance()
+
 		#Click on Patrols and get load metrics
 		patrols = PatrolsResource.new(@driver)
 		patrols.open_patrols()

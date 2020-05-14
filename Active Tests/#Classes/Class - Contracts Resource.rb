@@ -311,7 +311,7 @@ class ContractsResource
     search_confirm = @driver.find_element(SEARCH_BTN)
     search_confirm.click
     wait3 = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait3.until {@driver.find_element(TOP_CUSTOMER).text.downcase.include?(searchname.downcase)}
+    wait3.until {@driver.find_element(TOP_CONTRACT_NAME).text.downcase.include?(searchname.downcase)}
   end
 
   def search_contractid(searchname)
@@ -385,7 +385,7 @@ class ContractsResource
     grid_options.click
   end
 
-  def export_customers()
+  def export_contracts()
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(EXPORT_CONTRACTS).displayed?}
     export_customers = @driver.find_element(EXPORT_CONTRACTS)

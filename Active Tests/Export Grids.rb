@@ -8,21 +8,21 @@ describe "Exports grid in each resource" do
 
 		@driver = Selenium::WebDriver.for :chrome
 
-		# Test Variables
+		#Test Variables
 		timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
 		loginname = "masterchief@yesco.com"
 		password = "MCyesco123"
 
-		# Go to page
+		#Go to page
 		@driver.navigate.to "https://stage.yesco.com/servizio/"
 
-		# Logging in
+		#Logging in
 		login = ServizioLoginPage.new(@driver)
 		login.enter_loginname(loginname)
 		login.enter_password(password)
 		login.sign_in()
 
-		# Click on Patrols and export grid
+		#Click on Patrols and export grid
 		patrols = PatrolsResource.new(@driver)
 		patrols.open_patrols()
 		patrols.grid_options()
@@ -31,7 +31,7 @@ describe "Exports grid in each resource" do
 		print("Patrols Exported")
 		print("\n")
 
-		# Click on Jobs and export grid
+		#Click on Jobs and export grid
 		jobs = JobsResource.new(@driver)
 		jobs.open_jobs()
 		jobs.grid_options()
@@ -40,7 +40,7 @@ describe "Exports grid in each resource" do
 		print("Jobs Exported")
 		print("\n")
 
-		# Click on Estimates and export grid
+		#Click on Estimates and export grid
 		estimates = EstimatesResource.new(@driver)
 		estimates.open_estimates()
 		estimates.grid_options()
@@ -49,7 +49,7 @@ describe "Exports grid in each resource" do
 		print("Estimates Exported")
 		print("\n")
 
-		# Click on Invoices and export grid
+		#Click on Invoices and export grid
 		invoices = InvoicesResource.new(@driver)
 		invoices.open_invoices()
 		invoices.grid_options()
@@ -58,7 +58,7 @@ describe "Exports grid in each resource" do
 		print("Invoices Exported")
 		print("\n")
 
-		# Click on Customers and export grid
+		#Click on Customers and export grid
 		customers = CustomersResource.new(@driver)
 		customers.open_customers()
 		customers.grid_options()
@@ -67,7 +67,16 @@ describe "Exports grid in each resource" do
 		print("Customers Exported")
 		print("\n")
 
-		# Click on Settings > Job Lines and export grid
+		#Click on Contracts and export grid
+		#contracts = ContractsResource.new(@driver)
+		#contracts.open_contracts()
+		#contracts.grid_options()
+		#contracts.export_contracts()
+
+		#print("Contracts Exported")
+		#print("\n")
+
+		#Click on Settings > Job Lines and export grid
 		settings = SettingsResource.new(@driver)
 		settings.open_settings()
 		settings.open_joblines()
@@ -78,7 +87,7 @@ describe "Exports grid in each resource" do
 		print("Job Lines Exported")
 		print("\n")
 
-		# Click on Settings > Invoice Lines and export grid
+		#Click on Settings > Invoice Lines and export grid
 		settings.open_settings()
 		settings.open_invoicelines()
 		invoicelines = InvoiceLinesResource.new(@driver)

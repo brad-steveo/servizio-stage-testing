@@ -13,6 +13,7 @@ describe "Performes a search in each resource" do
 		loginname = "masterchief@yesco.com"
 		password = "MCyesco123"
 		searchactivity = "something"
+		searchcontract = "2"
 		searchpatrol = "06/25/2019"
 		searchjob = "06/25/2019"
 		searchestimate = "06/25/2019"
@@ -41,6 +42,16 @@ describe "Performes a search in each resource" do
 		print "\n"
 		print "\n"
 		expect(activities.top_description.text.downcase).to include(searchactivity.downcase)
+
+		# Click on Contracts and use Google Search
+		contracts = ContractsResource.new(@driver)
+		contracts.open_contracts()
+		contracts.search_contract(searchcontract)
+
+		print "Contracts Search: \n"
+		print "%s \n" % contracts.top.text
+		print "\n"
+		expect(contracts.top.text.downcase).to include(searchcontract.downcase)
 
 		# Click on Patrols and use Google Search
 		patrols = PatrolsResource.new(@driver)
