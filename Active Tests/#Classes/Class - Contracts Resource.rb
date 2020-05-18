@@ -17,17 +17,17 @@ class ContractsResource
     EXPORT_CONTRACTS = {css: "a[id$='ExportGridLink']"}
     SHOW_INACTIVES = {css: "input[id$='ShowInactivesCheckbox']"}
   GRID_TOTAL = {class: "Counter_Message"}
-  ID_COLUMN = {css: "input[id$='ContractTable_ctl02_wt278']"} #Needs proper CSS
-  NAME_COLUMN = {css: "input[id$='ContractTable_ctl02_wt339']"} #Needs proper CSS
+  ID_COLUMN = {css: "input[id$='ContractTable_ctl02_wtIdSearchTextInput']"}
+  NAME_COLUMN = {css: "input[id$='ContractTable_ctl02_wtNameSearchTextInput']"}
 
   #CSS Selectors: Popup
   NAME_FIELD = {css: "input[id$='Contract_SubmittedName']"}
   LOCATION_DROPDOWN = {css: "select[id$='LocationCombobox']"}
   INSTALLMENT_AMOUNT_FIELD = {css: "input[id$='Contract_InstallmentAmount']"}
   CUSTOMER_FIELD = {css: "input[id$='CustomerInput']"}
-  DETAILS_TEXTAREA = {css: "textarea[id$='Contract_Description']"} #Needs proper CSS
-  COVERAGES_TEXTAREA = {css: "textarea[id$='Contract_Description2']"} #Needs proper CSS
-  SPECIAL_INSTRUCTIONS_TEXTAREA = {css: "textarea[id$='Contract_Description3']"} #Needs proper CSS
+  DETAILS_TEXTAREA = {css: "textarea[id$='Contract_Details']"}
+  COVERAGES_TEXTAREA = {css: "textarea[id$='Contract_Coverages']"}
+  SPECIAL_INSTRUCTIONS_TEXTAREA = {css: "textarea[id$='Contract_Special_Instructions']"}
   START_DATE_FIELD = {css: "input[id$='Contract_DateStart']"}
   END_DATE_FIELD = {css: "input[id$='Contract_DateEnd']"}
   CLOSED_CHECKBOX = {css: "input[id$='Contract_IsClosed']"}
@@ -46,16 +46,16 @@ class ContractsResource
   SEARCH_JOB = {css: "input[id$='wtJobSearchInput']"}
   TOP_JOB_REFNUMBER = {css: "a[id$='wtJobTable_ctl03_wtJobIdLink']"}
   TOP_JOB_NAME = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[2]/div/div[3]/table/tbody/tr/td[2]"}
-  CONTRACT_JOB_SEARCH_BTN = {css: "input[id$='wtMainContent_wt222']"} #Needs proper CSS
-  CONTRACT_JOB_RESET_BTN = {css: "input[id$='wtMainContent_wt209']"} #Needs proper CSS
+  CONTRACT_JOB_SEARCH_BTN = {css: "input[id$='ContractSearchJobs']"}
+  CONTRACT_JOB_RESET_BTN = {css: "input[id$='ContractResetJobs']"}
 
   #CSS Selectors: Popup (Activities Tab)
   ACTIVITIES_TAB = {css: "a[id$='block_a_2']"}
   SEARCH_ACTIVITY = {css: "input[id$='ActivitiesSearchInput']"}
   TOP_ACTIVITY = {css: "a[id$='ctl03_wtActivityIdLink']"}
   TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[3]/div/div[3]/table/tbody/tr/td[5]"}
-  CONTRACT_ACTIVITY_SEARCH_BTN = {css: "input[id$='wtMainContent_wt179']"} #Needs proper CSS
-  CONTRACT_ACTIVITY_RESET_BTN = {css: "input[id$='wtMainContent_wt244']"} #Needs proper CSS
+  CONTRACT_ACTIVITY_SEARCH_BTN = {css: "input[id$='ContractSearchActivities']"}
+  CONTRACT_ACTIVITY_RESET_BTN = {css: "input[id$='ContractResetActivities']"}
 
   #CSS Selectors: Frame Anchors
   ACTIVITY_REASON_DROPDOWN = {css: "select[id$='ActivityReasonCombobox']"}
