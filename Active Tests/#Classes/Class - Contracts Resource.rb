@@ -103,7 +103,7 @@ class ContractsResource
     contracts_button = @driver.find_element(CONTRACTS_OPTN)
     contracts_button.click
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2.until {@driver.find_element(TOP_REFNUMBER).displayed?}
   end
 
   def create_contract()
@@ -437,6 +437,9 @@ class ContractsResource
   def customer(customername)
     input_field = @driver.find_element(CUSTOMER_FIELD)
     input_field.send_keys(customername)
+    sleep(1)
+    @driver.action.send_keys(:enter).perform
+    sleep(1)
   end
 
   def details(detailstext)
