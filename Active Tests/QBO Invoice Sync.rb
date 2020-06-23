@@ -49,6 +49,8 @@ describe "Invoice Creation and QBO Sync" do
 		buffers.ajax_buffer()
 		invoices.cancel()
 
+		sleep(3)
+
 		wait = Selenium::WebDriver::Wait.new(:timeout => 5)
 		wait.until {invoices.top_refnumber.text != currenttopref}
 

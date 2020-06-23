@@ -14,7 +14,7 @@ class InvoicesResource
       ACTIONS_PRINTEMAIL = {css: "a[id$='PrintEmailLink']"}
   TOP_JOBNAME = {css: "a[id$='InvoiceTable_ctl03_wtJobNameLink']"}
   TOP_REFNUMBER = {css: "a[id$='InvoiceTable_ctl03_wtInvoiceIdLink']"}
-  TOP_QBID = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[30]/div"}
+  TOP_QBID = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[31]/div"}
   TOP_NSID = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[30]"}
   TOP_PONUMBER = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[26]"}
   SEARCH_FIELD = {css: "input[id$='SearchInput']"}

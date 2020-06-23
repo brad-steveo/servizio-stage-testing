@@ -11,7 +11,7 @@ describe "Creates a Customer" do
 		#General Test Variables
 		loginname = "masterchief@yesco.com"
 		password = "MCyesco123"
-		loopcount = 2
+		loopcount = 1
 		i = 0
 
 		#Go to page
