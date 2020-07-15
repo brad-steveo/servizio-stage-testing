@@ -57,10 +57,10 @@ class InvoicesResource
     LINE1_ITEM = {css: "input[id$='ctl03_wtInvoiceLine_Item']"}
     LINE1_DESCRIPTION = {css: "span[id$='InvoiceLine_Description_ciw']"}
     LINE1_DESCRIPTION_TEXTAREA = {css: "textarea[id$='InvoiceLineTable_ctl03_wtInvoiceLine_Description']"}
-    LINE1_DELETE = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[1]/div[1]/span[2]/table/tbody/tr[1]/td[13]/div/a/span"}
+    LINE1_DELETE = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[1]/div[1]/span[3]/table/tbody/tr[1]/td[13]/div/a/span"}
   ADD_LINES = {css: "input[id$='wtAddLines']"}
   CLEAR_LINES = {css: "input[id$='wtClearAllLines']"}
-  NEW_LINE_VERIFY = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[1]/div[1]/span[2]/table/tbody/tr[4]/td[2]/div"}
+  NEW_LINE_VERIFY = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[1]/div[1]/span[3]/table/tbody/tr[3]/td[2]/div"}
   SUBTOTAL = {css: "div[id$='SubtotalContainer']"}
   TAX_DROPDOWN = {css: "select[id$='wtJob_TaxCode']"}
   TAXTOTAL = {css: "input[id$='wtTotalTax']"}
