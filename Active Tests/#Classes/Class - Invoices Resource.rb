@@ -55,12 +55,23 @@ class InvoicesResource
     LINE1_ITEM_SPAN = {css: "span[id$='ctl03_wtInvoiceLine_Item_ciw']"}
     LINE1_SERVICE_DATE = {css: "input[id$='ctl03_wtInvoiceLine_ServiceDate']"}
     LINE1_ITEM = {css: "input[id$='ctl03_wtInvoiceLine_Item']"}
-    LINE1_DESCRIPTION = {css: "span[id$='InvoiceLine_Description_ciw']"}
+    LINE1_DESCRIPTION = {css: "span[id$='ctl03_wtInvoiceLine_Description_ciw']"}
     LINE1_DESCRIPTION_TEXTAREA = {css: "textarea[id$='InvoiceLineTable_ctl03_wtInvoiceLine_Description']"}
     LINE1_DELETE = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[1]/div[1]/span[3]/table/tbody/tr[1]/td[13]/div/a/span"}
+
+    LINE2_SERVICE_DATE_SPAN = {css: "span[id$='ctl04_wtInvoiceLine_ServiceDate_ciw']"}
+    LINE2_ITEM_SPAN = {css: "span[id$='ctl04_wtInvoiceLine_Item_ciw']"}
+    LINE2_SERVICE_DATE = {css: "input[id$='ctl04_wtInvoiceLine_ServiceDate']"}
+    LINE2_ITEM = {css: "input[id$='ctl04_wtInvoiceLine_Item']"}
+    LINE2_DESCRIPTION = {css: "span[id$='ctl04_wtInvoiceLine_Description_ciw']"}
+    LINE2_DESCRIPTION_TEXTAREA = {css: "textarea[id$='InvoiceLineTable_ctl04_wtInvoiceLine_Description']"}
+    LINE2_DELETE = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[1]/div[1]/span[3]/table/tbody/tr[2]/td[13]/div/a/span"}
+
   ADD_LINES = {css: "input[id$='wtAddLines']"}
   CLEAR_LINES = {css: "input[id$='wtClearAllLines']"}
+  ADD_DESCRIPTION = {css: "input[id$='wtMainContent_wtAddDescription']"}
   NEW_LINE_VERIFY = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[1]/div[1]/span[3]/table/tbody/tr[3]/td[2]/div"}
+  NEW_LINE2_VERIFY = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[1]/div[1]/span[3]/table/tbody/tr[2]/td[2]/div"}
   SUBTOTAL = {css: "div[id$='SubtotalContainer']"}
   TAX_DROPDOWN = {css: "select[id$='wtJob_TaxCode']"}
   TAXTOTAL = {css: "input[id$='wtTotalTax']"}
@@ -792,6 +803,56 @@ class InvoicesResource
     trashcan.click
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {@driver.find_element(AJAX).displayed? == false}
+    sleep(1)
+  end
+
+  def line2_service_date(servicedate2)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(LINE2_SERVICE_DATE_SPAN).displayed?}
+    span_field = @driver.find_element(LINE2_SERVICE_DATE_SPAN)
+    span_field.click
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(LINE2_SERVICE_DATE).displayed?}
+    servicedate_field = @driver.find_element(LINE2_SERVICE_DATE)
+    servicedate_field.send_keys(servicedate2)
+  end
+
+  def line2_item(item2)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(LINE2_ITEM_SPAN).displayed?}
+    span_field = @driver.find_element(LINE2_ITEM_SPAN)
+    span_field.click
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(LINE2_SERVICE_DATE).displayed?}
+    item_field = @driver.find_element(LINE2_SERVICE_DATE)
+    item_field.send_keys(item2)
+    sleep(1)
+    @driver.action.send_keys(:enter).perform
+    sleep(1)
+  end
+
+  def line2_description(description2)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(LINE2_DESCRIPTION).displayed?}
+    span_field = @driver.find_element(LINE2_DESCRIPTION)
+    span_field.click
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(LINE2_DESCRIPTION_TEXTAREA).displayed?}
+    item_field = @driver.find_element(LINE2_DESCRIPTION_TEXTAREA)
+    item_field.send_keys(description2)
+    sleep(1)
+    @driver.action.send_keys(:enter).perform
+    sleep(1)
+  end
+
+  def line2_delete()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(LINE2_DELETE).displayed?}
+    trashcan = @driver.find_element(LINE2_DELETE)
+    trashcan.click
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(AJAX).displayed? == false}
+    sleep(1)
   end
 
   def add_lines()
@@ -815,6 +876,18 @@ class InvoicesResource
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {@driver.find_element(AJAX).displayed? == false}
     sleep(1) #This button has nothing for me to use to wait for.
+  end
+
+  def add_description()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(ADD_DESCRIPTION).displayed?}
+    @driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+    button = @driver.find_element(ADD_DESCRIPTION)
+    button.click
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(AJAX).displayed? == false}
+    wait3 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait3.until {@driver.find_element(NEW_LINE2_VERIFY).displayed?}
   end
 
   def subtotal()

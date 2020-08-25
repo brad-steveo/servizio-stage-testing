@@ -29,9 +29,11 @@ describe "Opens Invoices resource and adds a line item" do
     invoices.open_invoices()
 		invoices.search_invoiceid(invoiceid)
     invoices.top_open()
-    invoices.line1_delete()
-    invoices.add_lines()
-    invoices.line1_description(description1)
+		sleep(1)
+    invoices.line2_delete()
+    invoices.add_description()
+		sleep(1)
+    invoices.line2_description(description1)
     invoices.save_close()
 
     #Open Settings > Invoice Lines and verifying line item
