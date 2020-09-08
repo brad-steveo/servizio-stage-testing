@@ -5,7 +5,7 @@ class JobLinesResource
   TOP_ITEMNAME = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[2]"}
   TOP_JOBNAME = {css: "a[href^='JobPopup']"}
   TOP_LINENUMBER = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[8]/div"}
-  TOP_DESCRIPTION = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[10]"}
+  TOP_DESCRIPTION = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[11]"}
   SEARCH_FIELD = {css: "input[id$='SearchInput']"}
   SEARCH_BTN = {css: "input[value='Search']"}
   RESET_BTN = {css: "input[value='Reset']"}

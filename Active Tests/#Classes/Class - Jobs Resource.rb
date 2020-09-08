@@ -760,6 +760,7 @@ class JobsResource
     trashcan.click
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {@driver.find_element(AJAX).displayed? == false}
+    sleep(2)
   end
 
   def line2_service_date(servicedate2)
@@ -927,6 +928,7 @@ class JobsResource
     wait2.until {@driver.find_element(AJAX).displayed? == false}
     wait3 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait3.until {@driver.find_element(NEW_LINE_VERIFY).displayed?}
+    sleep(1)
   end
 
   def clear_lines()
