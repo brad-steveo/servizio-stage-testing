@@ -38,6 +38,8 @@ describe "Creates new basic activity" do
 			closeiframebuffer = Selenium::WebDriver::Wait.new(:timeout => 10)
 			closeiframebuffer.until {activities.top_description.text == timestamp}
 
+			@driver.execute_script("arguments[0].scrollIntoView();", activities.top_due)
+
 			print activities.top_refnumber.text
 			print "\n"
 			print activities.top_description.text

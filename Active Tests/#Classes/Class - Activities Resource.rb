@@ -4,11 +4,11 @@ class ActivitiesResource
   ACTIVITIES_OPTN = {css: "a[id$='Sidebar_Activities']"}
   ACTIVITIES_COUNT = {xpath: "/html/body/form/div[3]/div[2]/span/div[1]/div/div[2]/div[1]/div/a/div/span"}
   TOP_REFNUMBER = {css: "a[id$='ActivityTable_ctl03_wtActivityIDLink']"}
-  TOP_DESCRIPTION = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[3]"}
-  TOP_CREATED = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[4]"}
-  TOP_CREATED_DATE = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[5]"}
-  TOP_ASSIGNED = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[8]"}
-  TOP_DUE = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[9]"}
+  TOP_DESCRIPTION = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[4]"}
+  TOP_CREATED = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[5]"}
+  TOP_CREATED_DATE = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[6]"}
+  TOP_ASSIGNED = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[9]"}
+  TOP_DUE = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[10]"}
     TOP_ACTIVITY_ACTIONS = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[1]/div/div/div[1]/div[1]/span"}
       ACTIONS_COMPLETE = {css: "a[id$='CompleteActivityLink']"}
       ACTIONS_DOCUMENTS = {css: "a[id$='DocumentsLink']"}
