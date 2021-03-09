@@ -19,8 +19,8 @@ class ContactsResource
 
   #CSS Selectors: Popup
   CONTACT_NAME_FIELD = {css: "input[id$='Contact_Name']"}
-  ADD_PHONE_OPTN = {css: "a[tabindex='2']"}
-  ADD_EMAIL_OPTN = {css: "a[tabindex='3']"}
+  ADD_PHONE_OPTN = {css: "a[id$='wtAddPhoneLink']"}
+  ADD_EMAIL_OPTN = {css: "a[id$='wtAddEmailLink']"}
   CONTACT_PHONE_FIRST = {css: "input[id$='ctl00_wtPhoneInput']"}
   CONTACT_PHONE_SECOND = {css: "input[id$='ctl02_wtPhoneInput']"}
   CONTACT_PHONE_THIRD = {css: "input[id$='ctl04_wtPhoneInput']"}
