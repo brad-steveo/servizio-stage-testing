@@ -52,9 +52,18 @@ class ContactsResource
   REMOVE_TOP_CONTACT = {css: "input[id$='wtContactTable_ctl03_wtRemoveCustomerContactButton']"}
 
   #CSS Selectors: Link Contact Popup
-  LINK_CONTACT_SEARCH = {css: "input[id$='wtMainContent_wtContactSearchInput']"}
-  CANCEL_LINK_BTN = {css: "input[value='Cancel']"}
-  CONFIRM_LINK_BTN = {css: "input[value='Link']"}
+  LINK_CONTACT_SEARCH_NAME = {css: "input[id$='wtMainContent_wt5']"}
+  LINK_CONTACT_SEARCH_DESCRIPTION = {css: "input[id$='wtMainContent_wt39']"}
+  LINK_CONTACT_SEARCH_PHONE = {css: "input[id$='wtMainContent_wt13']"}
+  LINK_CONTACT_SEARCH_EMAIL = {css: "input[id$='wtMainContent_wt20']"}
+  LINK_TOP_CONTACT_NAME = {xpath: "/html/body/form/div[3]/div[1]/div/div[2]/table/tbody/tr[1]/td[1]/div/span"}
+  LINK_TOP_CONTACT_DESCRIPTION = {xpath: "/html/body/form/div[3]/div[1]/div/div[2]/table/tbody/tr/td[2]/div/span"}
+  LINK_TOP_CONTACT_PHONE = {xpath: "/html/body/form/div[3]/div[1]/div/div[2]/table/tbody/tr[1]/td[3]/div/span"}
+  LINK_TOP_CONTACT_EMAIL = {xpath: "/html/body/form/div[3]/div[1]/div/div[2]/table/tbody/tr/td[4]/div/span"}
+  LINK_TOP_CONTACT_LINK = {css: "a[id$='wtContactTable_ctl03_wtLinkContact']"}
+  LINK_CONTACT_SEARCH = {css: "input[id$='wtMainContent_wtButtonSearch']"}
+  #CANCEL_LINK_BTN = {css: "input[value='Cancel']"}
+  #CONFIRM_LINK_BTN = {css: "input[value='Link']"}
 
   #Custom Errors
   class FrameError < StandardError
@@ -404,7 +413,7 @@ class ContactsResource
       end
       if
         begin
-          @driver.find_element(LINK_CONTACT_SEARCH).displayed? == true
+          @driver.find_element(LINK_CONTACT_SEARCH_NAME).displayed? == true
         rescue Selenium::WebDriver::Error::NoSuchElementError
           false
         end
@@ -484,12 +493,12 @@ class ContactsResource
     i = 0
     loopcount = 5
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait.until {@driver.find_element(LINK_CONTACT_SEARCH).displayed?}
-    contact_name = @driver.find_element(LINK_CONTACT_SEARCH)
+    wait.until {@driver.find_element(LINK_CONTACT_SEARCH_NAME).displayed?}
+    contact_name = @driver.find_element(LINK_CONTACT_SEARCH_NAME)
     contact_name.send_keys(searchname)
     sleep(1)
     @driver.action.send_keys(:enter).perform
-    button = @driver.find_element(CONFIRM_LINK_BTN)
+    button = @driver.find_element(LINK_TOP_CONTACT_LINK)
     button.click
     sleep(1)
     loop do
