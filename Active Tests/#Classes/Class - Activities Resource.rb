@@ -17,7 +17,7 @@ class ActivitiesResource
   SEARCH_BTN = {css: "input[value='Search']"}
   RESET_BTN = {css: "input[value='Reset']"}
   CREATE_ACTIVITY = {css: "a[id$='wtCreateActivityLink']"}
-  GRID_OPTIONS_DROPDOWN = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/div[2]/div/div[1]/div/span"}
+  GRID_OPTIONS_DROPDOWN = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[2]/div[2]/div[2]/div/div[1]/div/span"}
     EXPORT_ACTIVITIES = {css: "a[id$='ExportGridLink']"}
     SHOW_INACTIVES = {css: "input[id$='ShowInactivesCheckbox']"}
   ID_COLUMN = {css: "input[id$='wtActivityTable_ctl02_wtIdSearchTextInput']"}
