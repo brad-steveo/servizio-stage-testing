@@ -13,6 +13,7 @@ class PatrolsResource
       ACTIONS_DOCUMENTS = {css: "a[id$='DocumentsLink']"}
       ACTIONS_PRINTEMAIL = {css: "a[id$='PrintEmailLink']"}
       ACTIONS_MAKEINACTIVE = {css: "a[id$='MakeInactiveLink']"}
+        PUSH_CONFIRM = {css: "a[class='conf-dialog-button blue']"}
   TOP_REFNUMBER = {css: "a[id$='wtPatrolTable_ctl03_wtPatrolIdLink']"}
   SEARCH_FIELD = {css: "input[id$='SearchInput']"}
   SEARCH_BTN = {css: "input[value='Search']"}
@@ -357,10 +358,17 @@ class PatrolsResource
   end
 
   def actions_makeinactive()
+    currenttopref = @driver.find_element(TOP_REFNUMBER).text
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(ACTIONS_MAKEINACTIVE).displayed?}
     top_makeinactive = @driver.find_element(ACTIONS_MAKEINACTIVE)
     top_makeinactive.click
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(PUSH_CONFIRM).displayed?}
+    confirm = @driver.find_element(PUSH_CONFIRM)
+    confirm.click
+    wait3 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait3.until {@driver.find_element(TOP_REFNUMBER).text != currenttopref}
   end
 
   def search_patrol(searchname)

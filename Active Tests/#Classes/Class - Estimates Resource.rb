@@ -16,6 +16,7 @@ class EstimatesResource
       ACTIONS_PRINTEMAIL = {css: "a[id$='PrintEmailLink']"}
       ACTIONS_DUPLICATEESTIMATE = {css: "a[id$='DuplicateEstimateLink']"}
       ACTIONS_MAKEINACTIVE = {css: "a[id$='MakeInactiveLink']"}
+        PUSH_CONFIRM = {css: "a[class='conf-dialog-button blue']"}
   TOP_REFNUMBER = {css: "a[id$='EstimateTable_ctl03_wtEstimateIdLink']"}
   TOP_STATUS = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[7]"}
   TOP_STAGE = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[9]"}
@@ -417,10 +418,17 @@ class EstimatesResource
   end
 
   def actions_makeinactive()
+    currenttopref = @driver.find_element(TOP_REFNUMBER).text
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(ACTIONS_MAKEINACTIVE).displayed?}
     top_makeinactive = @driver.find_element(ACTIONS_MAKEINACTIVE)
     top_makeinactive.click
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(PUSH_CONFIRM).displayed?}
+    confirm = @driver.find_element(PUSH_CONFIRM)
+    confirm.click
+    wait3 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait3.until {@driver.find_element(TOP_REFNUMBER).text != currenttopref}
   end
 
   def search_estimate(searchname)
