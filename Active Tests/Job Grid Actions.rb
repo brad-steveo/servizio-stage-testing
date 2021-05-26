@@ -27,7 +27,7 @@ describe "Makes top job inactive using grid actions menu" do
 		jobs = JobsResource.new(@driver)
 		jobs.open_jobs()
 
-    #Make top estimate inactive
+    #Make top job inactive
     def makejobinactive()
 
       jobs = JobsResource.new(@driver)

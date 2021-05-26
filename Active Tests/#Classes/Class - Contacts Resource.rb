@@ -6,6 +6,7 @@ class ContactsResource
     TOP_CONTACT_ACTIONS = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/table/tbody/tr[1]/td[1]/div/div/div[1]/div[1]/span"}
       TOP_CONTACT_DOCUMENTS = {css: "a[id$='DocumentsLink']"}
       TOP_CONTACT_INACTIVE = {css: "a[id$='MakeInactiveLink']"}
+        PUSH_CONFIRM = {css: "a[class='conf-dialog-button blue']"}
   TOP_REFNUMBER = {css: "a[id$='ContactTable_ctl03_wtContactIdLink']"}
   TOP_DESCRIPTION = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/table/tbody/tr[1]/td[4]/div"}
   SEARCH_FIELD = {css: "input[id$='SearchInput']"}
@@ -160,18 +161,25 @@ class ContactsResource
     top_contactactions.click
   end
 
-  def top_documents()
+  def actions_documents()
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(TOP_CONTACT_DOCUMENTS).displayed?}
     top_documents = @driver.find_element(TOP_CONTACT_DOCUMENTS)
     top_documents.click
   end
 
-  def top_inactive()
+  def actions_makeinactive()
+    currenttopref = @driver.find_element(TOP_REFNUMBER).text
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(TOP_CONTACT_INACTIVE).displayed?}
     top_makeinactive = @driver.find_element(TOP_CONTACT_INACTIVE)
     top_makeinactive.click
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(PUSH_CONFIRM).displayed?}
+    confirm = @driver.find_element(PUSH_CONFIRM)
+    confirm.click
+    wait3 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait3.until {@driver.find_element(TOP_REFNUMBER).text != currenttopref}
   end
 
   def search_contact(searchname)
