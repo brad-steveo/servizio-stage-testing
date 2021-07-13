@@ -120,6 +120,7 @@ class JobLinesResource
     end
     jobline_search = @driver.find_element(ID_COLUMN)
     jobline_search.send_keys(searchname)
+    @driver.action.send_keys(:enter).perform
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait2.until {@driver.find_element(TOP_REFNUMBER).text.include?(searchname)}
   end
@@ -147,6 +148,7 @@ class JobLinesResource
     end
     jobline_search = @driver.find_element(ITEMNAME_COLUMN)
     jobline_search.send_keys(searchname)
+    @driver.action.send_keys(:enter).perform
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait2.until {@driver.find_element(TOP_ITEMNAME).text.downcase.include?(searchname.downcase)}
   end
@@ -174,6 +176,7 @@ class JobLinesResource
     end
     jobline_search = @driver.find_element(JOBNAME_COLUMN)
     jobline_search.send_keys(searchname)
+    @driver.action.send_keys(:enter).perform
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait2.until {@driver.find_element(TOP_JOBNAME).text.downcase.include?(searchname.downcase)}
   end

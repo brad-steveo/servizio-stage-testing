@@ -13,7 +13,7 @@ describe "Performes a column header search in the Contracts resource for the ID 
 		loginname = "masterchief@yesco.com"
 		password = "MCyesco123"
     searchcontractid = "1001"
-		searchcontractname = "2"
+		searchcontractname = "05/18/2021"
 
 		# Go to page
 		@driver.navigate.to "https://stage.yesco.com/servizio/"

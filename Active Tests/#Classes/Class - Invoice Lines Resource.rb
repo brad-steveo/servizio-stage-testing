@@ -128,6 +128,7 @@ class InvoiceLinesResource
     end
     invoiceline_search = @driver.find_element(ID_COLUMN)
     invoiceline_search.send_keys(searchname)
+    @driver.action.send_keys(:enter).perform
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait2.until {@driver.find_element(TOP_REFNUMBER).text.include?(searchname)}
   end
@@ -155,6 +156,7 @@ class InvoiceLinesResource
     end
     invoiceline_search = @driver.find_element(INVOICEID_COLUMN)
     invoiceline_search.send_keys(searchname)
+    @driver.action.send_keys(:enter).perform
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait2.until {@driver.find_element(TOP_INVOICEREFNUMBER).text.include?(searchname)}
   end
@@ -182,6 +184,7 @@ class InvoiceLinesResource
     end
     invoiceline_search = @driver.find_element(ITEMNAME_COLUMN)
     invoiceline_search.send_keys(searchname)
+    @driver.action.send_keys(:enter).perform
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait2.until {@driver.find_element(TOP_ITEMNAME).text.downcase.include?(searchname.downcase)}
   end

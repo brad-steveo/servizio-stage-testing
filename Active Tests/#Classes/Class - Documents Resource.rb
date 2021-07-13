@@ -142,6 +142,7 @@ class DocumentsResource
     end
     documents_search = @driver.find_element(NAME_COLUMN)
     documents_search.send_keys(searchname)
+    @driver.action.send_keys(:enter).perform
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {@driver.find_element(TOP_NAME).text.downcase.include?(searchname.downcase)}
   end
@@ -169,6 +170,7 @@ class DocumentsResource
     end
     documents_search = @driver.find_element(EXTENSION_COLUMN)
     documents_search.send_keys(searchname)
+    @driver.action.send_keys(:enter).perform
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {@driver.find_element(TOP_EXTENSION).text.downcase.include?(searchname.downcase)}
   end

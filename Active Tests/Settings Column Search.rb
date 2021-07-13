@@ -47,6 +47,7 @@ describe "Performes a column header search in various Settings resources" do
 		buffers.ajax_buffer()
 		joblineswait = Selenium::WebDriver::Wait.new(:timeout => 5)
 		joblineswait.until {joblines.search_id_field['value'].empty? == true}
+		sleep(1)
 
 		joblines.search_jobname(searchjoblinejobname)
 		buffers.ajax_buffer()
@@ -70,6 +71,7 @@ describe "Performes a column header search in various Settings resources" do
 		buffers.ajax_buffer()
 		invoicelineswait = Selenium::WebDriver::Wait.new(:timeout => 5)
 		invoicelineswait.until {invoicelines.search_id_field['value'].empty? == true}
+		sleep(1)
 
 		invoicelines.search_invoiceid(searchinvoicelineinvoiceid)
 		buffers.ajax_buffer()
@@ -93,6 +95,7 @@ describe "Performes a column header search in various Settings resources" do
 		buffers.ajax_buffer()
 		documentswait = Selenium::WebDriver::Wait.new(:timeout => 5)
 		documentswait.until {documents.search_documentname_field['value'].empty? == true}
+		sleep(1)
 
 		documents.search_documentextension(searchdocumentextension)
 		buffers.ajax_buffer()

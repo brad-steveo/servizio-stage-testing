@@ -14,7 +14,7 @@ class InvoicesResource
       ACTIONS_PRINTEMAIL = {css: "a[id$='PrintEmailLink']"}
   TOP_JOBNAME = {css: "a[id$='InvoiceTable_ctl03_wtJobNameLink']"}
   TOP_REFNUMBER = {css: "a[id$='InvoiceTable_ctl03_wtInvoiceIdLink']"}
-  TOP_QBID = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[32]/div"}
+  TOP_QBID = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[33]/div"}
   TOP_NSID = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[30]"}
   TOP_PONUMBER = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[26]"}
   SEARCH_FIELD = {css: "input[id$='SearchInput']"}
@@ -440,6 +440,7 @@ class InvoicesResource
     end
     invoice_search = @driver.find_element(ID_COLUMN)
     invoice_search.send_keys(searchname)
+    @driver.action.send_keys(:enter).perform
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait2.until {@driver.find_element(TOP_REFNUMBER).text.include?(searchname)}
   end
@@ -467,6 +468,7 @@ class InvoicesResource
     end
     invoice_search = @driver.find_element(NAME_COLUMN)
     invoice_search.send_keys(searchname)
+    @driver.action.send_keys(:enter).perform
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait2.until {@driver.find_element(TOP_INVOICE).text.downcase.include?(searchname.downcase)}
   end

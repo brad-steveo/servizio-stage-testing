@@ -282,6 +282,7 @@ class ActivitiesResource
     end
     activity_search = @driver.find_element(ID_COLUMN)
     activity_search.send_keys(searchname)
+    @driver.action.send_keys(:enter).perform
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {@driver.find_element(TOP_REFNUMBER).text.include?(searchname)}
   end
@@ -309,6 +310,7 @@ class ActivitiesResource
     end
     activity_search = @driver.find_element(DESCRIPTION_COLUMN)
     activity_search.send_keys(searchname)
+    @driver.action.send_keys(:enter).perform
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {@driver.find_element(TOP_DESCRIPTION).text.include?(searchname)}
   end
