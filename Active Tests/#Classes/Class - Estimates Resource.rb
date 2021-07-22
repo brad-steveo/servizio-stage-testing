@@ -210,6 +210,41 @@ class EstimatesResource
     end
   end
 
+  def dev_select_customer(selectcustomer)
+    i = 0
+    loopcount = 5
+    select_customer = @driver.find_element(CUSTOMER_SEARCH_FIELD)
+    select_customer.send_keys(selectcustomer)
+    sleep(2)
+    @driver.action.send_keys(:enter).perform
+    sleep(2)
+    select_customer_next = @driver.find_element(CUSTOMER_NEXT_BTN)
+    select_customer_next.click
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(FRAME).displayed?}
+    loop do
+      i += 1
+      @driver.switch_to.frame(0)
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(NAME_FIELD).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(NAME_FIELD).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
+  end
+
   def top()
     top_record = @driver.find_element(TOP_ESTIMATE)
   end
