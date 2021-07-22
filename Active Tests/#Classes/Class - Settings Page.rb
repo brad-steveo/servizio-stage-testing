@@ -68,6 +68,28 @@ class SettingsResource
     settings_button.click
   end
 
+  def open_dev_settings()
+    i = 0
+    loopcount = 5
+    loop do
+      i += 1
+      begin
+      wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+      wait.until {@driver.find_element(SETTINGS_OPTN).displayed?}
+      rescue Selenium::WebDriver::Error::StaleElementReferenceError
+        false
+      end
+      if @driver.find_element(SETTINGS_OPTN).displayed? == true
+        break
+      end
+      if i == loopcount
+        raise StaleError
+      end
+    end
+    settings_button = @driver.find_element(SETTINGS_OPTN)
+    settings_button.click
+  end
+
   def open_contacts()
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(CONTACTS_OPTN).displayed?}

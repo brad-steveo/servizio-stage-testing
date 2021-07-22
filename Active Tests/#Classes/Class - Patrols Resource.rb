@@ -532,6 +532,15 @@ class PatrolsResource
     wait.until {@driver.find_element(VIEW_CUSTOMER_LINK).displayed?}
   end
 
+  def dev_customer(customer)
+    customer_enter = @driver.find_element(CUSTOMER_FIELD)
+    customer_enter.send_keys(customer)
+    sleep(3)
+    @driver.action.send_keys(:enter).perform
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(VIEW_CUSTOMER_LINK).displayed?}
+  end
+
   def cancel()
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(CANCEL_BTN).displayed?}
