@@ -526,7 +526,7 @@ class PatrolsResource
   def customer(customer)
     customer_enter = @driver.find_element(CUSTOMER_FIELD)
     customer_enter.send_keys(customer)
-    sleep(1)
+    sleep(3)
 		@driver.action.send_keys(:enter).perform
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(VIEW_CUSTOMER_LINK).displayed?}
