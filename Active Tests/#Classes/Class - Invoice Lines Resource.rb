@@ -10,7 +10,7 @@ class InvoiceLinesResource
   SEARCH_FIELD = {css: "input[id$='SearchInput']"}
   SEARCH_BTN = {css: "input[value='Search']"}
   RESET_BTN = {css: "input[value='Reset']"}
-  GRID_OPTIONS_DROPDOWN = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[2]/div[2]/div[2]/div/div[1]/div/span"}
+  GRID_OPTIONS_DROPDOWN = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[2]/div[2]/div/div/div[1]/div/span"}
     EXPORT_INVOICELINES = {css: "a[id$='ExportGridLink']"}
     SHOW_INACTIVES = {css: "input[id$='ShowInactivesCheckbox']"}
   GRID_TOTAL = {class: "Counter_Message"}
@@ -215,6 +215,7 @@ class InvoiceLinesResource
     wait.until {@driver.find_element(EXPORT_INVOICELINES).displayed?}
     export_invoicelines = @driver.find_element(EXPORT_INVOICELINES)
     export_invoicelines.click
+    sleep(2)
   end
 
   def show_inactives()

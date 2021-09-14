@@ -462,6 +462,7 @@ class PatrolsResource
     wait.until {@driver.find_element(EXPORT_PATROLS).displayed?}
     export_patrols = @driver.find_element(EXPORT_PATROLS)
     export_patrols.click
+    sleep(2)
   end
 
   def show_inactives()

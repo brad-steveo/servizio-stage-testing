@@ -214,6 +214,7 @@ class ContactsResource
     wait.until {@driver.find_element(EXPORT_CONTACTS).displayed?}
     export_contacts = @driver.find_element(EXPORT_CONTACTS)
     export_contacts.click
+    sleep(2)
   end
 
   def find_duplicates()
