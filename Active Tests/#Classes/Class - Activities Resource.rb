@@ -456,8 +456,9 @@ class ActivitiesResource
     wait.until {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
-    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait2.until {@driver.find_element(FRAME).displayed?}
+    #wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    #wait2.until {@driver.find_element(FRAME).displayed?}
+    @driver.switch_to.default_content
     @driver.switch_to.frame(0)
     @driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
   end
@@ -471,6 +472,7 @@ class ActivitiesResource
     loop do
       i += 1
       save_and_close.click
+      @driver.switch_to.default_content
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(TOP_REFNUMBER).displayed?}

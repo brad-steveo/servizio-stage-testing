@@ -26,7 +26,7 @@ describe "Links a contact to a customer" do
 
 		customers = CustomersResource.new(@driver)
 		customers.open_customers()
-		customers.search_customerid(customerid)
+		#customers.search_customerid(customerid)
 		customers.top_open()
 
 		@driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")

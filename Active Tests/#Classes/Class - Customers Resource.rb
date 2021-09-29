@@ -199,13 +199,27 @@ class CustomersResource
   def create_customer()
     i = 0
     loopcount = 5
+    f = 0
+    frameloopcount = 10
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(CREATE_CUSTOMER_BTN).displayed?}
     create_customer_button = @driver.find_element(CREATE_CUSTOMER_BTN)
     create_customer_button.click
     loop do
       i += 1
-      @driver.switch_to.frame(0)
+        loop do
+          f += 1
+          begin
+            @driver.switch_to.default_content
+            @driver.switch_to.frame(0)
+          rescue Selenium::WebDriver::Error::NoSuchFrameError
+            false
+          end
+          break
+          if f == frameloopcount
+            raise FrameError
+          end
+        end
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(NAME_FIELD).displayed?}
@@ -257,13 +271,27 @@ class CustomersResource
   def top_open()
     i = 0
     loopcount = 5
+    f = 0
+    frameloopcount = 10
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(TOP_REFNUMBER).displayed?}
     top_refnumber = @driver.find_element(TOP_REFNUMBER)
     top_refnumber.click
     loop do
       i += 1
-      @driver.switch_to.frame(0)
+        loop do
+          f += 1
+          begin
+            @driver.switch_to.default_content
+            @driver.switch_to.frame(0)
+          rescue Selenium::WebDriver::Error::NoSuchFrameError
+            false
+          end
+          break
+          if f == frameloopcount
+            raise FrameError
+          end
+        end
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(NAME_FIELD).displayed?}
@@ -769,6 +797,7 @@ class CustomersResource
     wait_for {@driver.find_element(SAVE_AND_CLOSE_BTN).enabled?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
+    @driver.switch_to.default_content
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {@driver.find_element(TOP_REFNUMBER).displayed?}
   end

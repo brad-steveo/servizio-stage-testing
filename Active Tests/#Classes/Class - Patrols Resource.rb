@@ -18,7 +18,7 @@ class PatrolsResource
   SEARCH_FIELD = {css: "input[id$='SearchInput']"}
   SEARCH_BTN = {css: "input[value='Search']"}
   RESET_BTN = {css: "input[value='Reset']"}
-  GRID_OPTIONS_DROPDOWN = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[2]/div[2]/div[2]/div/div[1]/span"}
+  GRID_OPTIONS_DROPDOWN = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[2]/div[2]/div/div/div[1]/div/span"}
     EXPORT_PATROLS = {css: "a[id$='ExportGridLink']"}
     SHOW_INACTIVES = {css: "input[id$='ShowInactivesCheckbox']"}
   GRID_TOTAL = {class: "Counter_Message"}
@@ -529,6 +529,7 @@ class PatrolsResource
     customer_enter.send_keys(customer)
     sleep(3)
 		@driver.action.send_keys(:enter).perform
+    sleep(1)
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(VIEW_CUSTOMER_LINK).displayed?}
   end
@@ -571,6 +572,7 @@ class PatrolsResource
     wait.until {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
+    @driver.switch_to.default_content
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {@driver.find_element(TOP_REFNUMBER).displayed?}
   end

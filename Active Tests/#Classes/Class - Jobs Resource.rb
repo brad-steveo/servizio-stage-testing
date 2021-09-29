@@ -148,6 +148,7 @@ class JobsResource
 
   #CSS Selectors: Frame Anchors
   FRAME = {css: "iframe[tabindex='0']"}
+  FORM = {css: "form[id='WebForm1']"}
   ACTIVITY_REASON_DROPDOWN = {css: "select[id$='ActivityReasonCombobox']"}
   INVOICE_PONUMBER_FIELD = {css: "input[id$='Invoice_PONumber']"}
   DOCUMENTS_SHOWHIDE_UPLOADER = {xpath: "/html/body/form/div[3]/div[1]/div/div/div[1]/div[2]/a/span"}
@@ -233,7 +234,9 @@ class JobsResource
 
   def select_customer(selectcustomer)
     i = 0
-    loopcount = 5
+    loopcount = 15
+    f = 0
+    frameloopcount = 10
     select_customer = @driver.find_element(CUSTOMER_SEARCH_FIELD)
 		select_customer.send_keys(selectcustomer)
 		sleep(1)
@@ -241,11 +244,21 @@ class JobsResource
 		sleep(1)
 		select_customer_next = @driver.find_element(CUSTOMER_NEXT_BTN)
 		select_customer_next.click
-    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait.until {@driver.find_element(FRAME).displayed?}
     loop do
       i += 1
-      @driver.switch_to.frame(0)
+        loop do
+          f += 1
+          begin
+            @driver.switch_to.default_content
+            @driver.switch_to.frame(0)
+          rescue Selenium::WebDriver::Error::NoSuchFrameError
+            false
+          end
+          break
+          if f == frameloopcount
+            raise FrameError
+          end
+        end
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(NAME_FIELD).displayed?}
@@ -269,6 +282,8 @@ class JobsResource
   def dev_select_customer(selectcustomer)
     i = 0
     loopcount = 5
+    f = 0
+    frameloopcount = 10
     select_customer = @driver.find_element(CUSTOMER_SEARCH_FIELD)
     select_customer.send_keys(selectcustomer)
     sleep(2)
@@ -276,11 +291,21 @@ class JobsResource
     sleep(2)
     select_customer_next = @driver.find_element(CUSTOMER_NEXT_BTN)
     select_customer_next.click
-    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait.until {@driver.find_element(FRAME).displayed?}
     loop do
       i += 1
-      @driver.switch_to.frame(0)
+        loop do
+          f += 1
+          begin
+            @driver.switch_to.default_content
+            @driver.switch_to.frame(0)
+          rescue Selenium::WebDriver::Error::NoSuchFrameError
+            false
+          end
+          break
+          if f == frameloopcount
+            raise FrameError
+          end
+        end
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(NAME_FIELD).displayed?}
@@ -717,6 +742,7 @@ class JobsResource
     wait.until {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
+    @driver.switch_to.default_content
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {@driver.find_element(TOP_REFNUMBER).displayed?}
   end

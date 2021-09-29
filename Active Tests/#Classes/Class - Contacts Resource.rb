@@ -43,9 +43,9 @@ class ContactsResource
   CREATE_NEW_BTN = {css: "input[value='Create New']"}
   LINK_EXISTING_BTN = {css: "input[value='Link Existing']"}
   FIRST_CONTACT_NAME = {css: "a[id$='ctl03_wtContactLink']"}
-  FIRST_CONTACT_NOTES = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[1]/div[5]/div/span[2]/table/tbody/tr/td[2]"}
-  FIRST_BILLING_CHKBX = {css: "input[id$='wtContactTable_ctl03_wt32']"}
-  FIRST_SITE_CHKBX = {css: "input[id$='wtContactTable_ctl03_wt37']"}
+  FIRST_CONTACT_NOTES = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[1]/div[5]/div/span[2]/table/tbody/tr/td[3]"}
+  FIRST_BILLING_CHKBX = {css: "input[id$='wtMainContent_wt831_wtContactTable_ctl03_wt35']"}
+  FIRST_SITE_CHKBX = {css: "input[id$='wtMainContent_wt831_wtContactTable_ctl03_wt40']"}
   SECOND_CONTACT_NAME = {css: "a[id$='wtContactTable_ctl04_wtContactLink']"}
   SECOND_CONTACT_NOTES = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[1]/div[5]/div/span[2]/table/tbody/tr[2]/td[2]"}
   SECOND_BILLING_CHKBX = {css: "input[id$='wtContactTable_ctl04_wt32']"}
@@ -75,6 +75,12 @@ class ContactsResource
 
   class StaleError < StandardError
     def initialize(msg='Stale reference error')
+      super
+    end
+  end
+
+  class TestError < StandardError
+    def initialize(msg='Test Error')
       super
     end
   end
@@ -346,6 +352,13 @@ class ContactsResource
     wait.until {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
+  end
+
+  def save_close_grid()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
+    save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
+    save_and_close.click
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records"}
   end
@@ -377,17 +390,30 @@ class ContactsResource
   def create_new_button()
     i = 0
     loopcount = 5
+    f = 0
+    frameloopcount = 10
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(CREATE_NEW_BTN).displayed?}
     button = @driver.find_element(CREATE_NEW_BTN)
     button.click
     loop do
       i += 1
-      @driver.switch_to.frame(1)
+        loop do
+          f += 1
+          begin
+            @driver.switch_to.frame(1)
+          rescue Selenium::WebDriver::Error::NoSuchFrameError
+            false
+          end
+          break
+          if f == frameloopcount
+            raise FrameError
+          end
+        end
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(CONTACT_NAME_FIELD).displayed?}
-      rescue Selenium::WebDriver::Error::TimeOutError
+      rescue Selenium::WebDriver::Error::TimeoutError
         false
       end
       if
@@ -399,7 +425,7 @@ class ContactsResource
         break
       end
       if i == loopcount
-        raise FrameError
+        raise TestError
       end
     end
   end
@@ -501,6 +527,8 @@ class ContactsResource
   def link_contact(searchname)
     i = 0
     loopcount = 5
+    f = 0
+    frameloopcount = 10
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(LINK_CONTACT_SEARCH_NAME).displayed?}
     contact_name = @driver.find_element(LINK_CONTACT_SEARCH_NAME)
@@ -512,7 +540,19 @@ class ContactsResource
     sleep(1)
     loop do
       i += 1
-      @driver.switch_to.frame(0)
+        loop do
+          f += 1
+          begin
+            @driver.switch_to.default_content
+            @driver.switch_to.frame(0)
+          rescue Selenium::WebDriver::Error::NoSuchFrameError
+            false
+          end
+          break
+          if f == frameloopcount
+            raise FrameError
+          end
+        end
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(FIRST_CONTACT_NAME).displayed?}

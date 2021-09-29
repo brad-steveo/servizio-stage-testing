@@ -514,6 +514,7 @@ class ContractsResource
     wait_for {@driver.find_element(SAVE_AND_CLOSE_BTN).enabled?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
+    @driver.switch_to.default_content
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {@driver.find_element(TOP_REFNUMBER).displayed?}
   end

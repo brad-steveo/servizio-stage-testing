@@ -170,7 +170,7 @@ class InvoicesResource
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(JOB_SEARCH_FIELD).displayed?}
-      rescue Selenium::WebDriver::Error::TimeOutError
+      rescue Selenium::WebDriver::Error::TimeoutError
         false
       end
       if
@@ -190,6 +190,8 @@ class InvoicesResource
   def select_job(selectjob)
     i = 0
     loopcount = 5
+    f = 0
+    frameloopcount = 10
     select_job = @driver.find_element(JOB_SEARCH_FIELD)
     select_job.send_keys(selectjob)
     sleep(1)
@@ -197,15 +199,25 @@ class InvoicesResource
     sleep(1)
     select_job_next = @driver.find_element(JOB_NEXT_BTN)
     select_job_next.click
-    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait.until {@driver.find_element(FRAME).displayed?}
     loop do
       i += 1
-      @driver.switch_to.frame(0)
+        loop do
+          f += 1
+          begin
+            @driver.switch_to.default_content
+            @driver.switch_to.frame(0)
+          rescue Selenium::WebDriver::Error::NoSuchFrameError
+            false
+          end
+          break
+          if f == frameloopcount
+            raise FrameError
+          end
+        end
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 8)
         wait2.until {@driver.find_element(INVOICE_DATE_FIELD).displayed?}
-      rescue Selenium::WebDriver::Error::TimeOutError
+      rescue Selenium::WebDriver::Error::TimeoutError
         false
       end
       if
@@ -618,6 +630,7 @@ class InvoicesResource
     wait.until {@driver.find_element(CANCEL_BTN).displayed?}
     cancel_popup = @driver.find_element(CANCEL_BTN)
     cancel_popup.click
+    @driver.switch_to.default_content
   end
 
   def actions()
@@ -748,6 +761,7 @@ class InvoicesResource
     wait.until {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
+    @driver.switch_to.default_content
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {@driver.find_element(TOP_REFNUMBER).displayed?}
   end
