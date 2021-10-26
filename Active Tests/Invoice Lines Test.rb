@@ -35,6 +35,7 @@ describe "Opens Invoices resource and adds a line item" do
 		sleep(1)
     invoices.line2_description(description1)
     invoices.save_close()
+		sleep(3)
 
     #Open Settings > Invoice Lines and verifying line item
     settings = SettingsResource.new(@driver)

@@ -215,7 +215,7 @@ class JobsResource
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(CUSTOMER_SEARCH_FIELD).displayed?}
-      rescue Selenium::WebDriver::Error::TimeOutError
+      rescue Selenium::WebDriver::Error::TimeoutError
         false
       end
       if
@@ -262,7 +262,7 @@ class JobsResource
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(NAME_FIELD).displayed?}
-      rescue Selenium::WebDriver::Error::TimeOutError
+      rescue Selenium::WebDriver::Error::TimeoutError
         false
       end
       if
@@ -309,7 +309,7 @@ class JobsResource
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(NAME_FIELD).displayed?}
-      rescue Selenium::WebDriver::Error::TimeOutError
+      rescue Selenium::WebDriver::Error::TimeoutError
         false
       end
       if
@@ -355,7 +355,7 @@ class JobsResource
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(NAME_FIELD).displayed?}
-      rescue Selenium::WebDriver::Error::TimeOutError
+      rescue Selenium::WebDriver::Error::TimeoutError
         false
       end
       if
@@ -392,7 +392,7 @@ class JobsResource
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(ACTIVITY_REASON_DROPDOWN).displayed?}
-      rescue Selenium::WebDriver::Error::TimeOutError
+      rescue Selenium::WebDriver::Error::TimeoutError
         false
       end
       if
@@ -423,7 +423,7 @@ class JobsResource
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(INVOICE_PONUMBER_FIELD).displayed?}
-      rescue Selenium::WebDriver::Error::TimeOutError
+      rescue Selenium::WebDriver::Error::TimeoutError
         false
       end
       if
@@ -454,7 +454,7 @@ class JobsResource
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(DOCUMENTS_SHOWHIDE_UPLOADER).displayed?}
-      rescue Selenium::WebDriver::Error::TimeOutError
+      rescue Selenium::WebDriver::Error::TimeoutError
         false
       end
       if
@@ -484,7 +484,7 @@ class JobsResource
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(PRINTEMAIL_PDF_CHECKBOX).displayed?}
-      rescue Selenium::WebDriver::Error::TimeOutError
+      rescue Selenium::WebDriver::Error::TimeoutError
         false
       end
       if
@@ -514,7 +514,7 @@ class JobsResource
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(NAME_FIELD).displayed?}
-      rescue Selenium::WebDriver::Error::TimeOutError
+      rescue Selenium::WebDriver::Error::TimeoutError
         false
       end
       if
@@ -1260,7 +1260,7 @@ class JobsResource
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(ACTIVITY_REASON_DROPDOWN).displayed?}
-      rescue Selenium::WebDriver::Error::TimeOutError
+      rescue Selenium::WebDriver::Error::TimeoutError
         false
       end
       if
@@ -1315,7 +1315,7 @@ class JobsResource
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(INVOICE_PONUMBER_FIELD).displayed?}
-      rescue Selenium::WebDriver::Error::TimeOutError
+      rescue Selenium::WebDriver::Error::TimeoutError
         false
       end
       if
@@ -1366,7 +1366,7 @@ class JobsResource
       begin
         wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
         wait2.until {@driver.find_element(INVOICE_PONUMBER_FIELD).displayed?}
-      rescue Selenium::WebDriver::Error::TimeOutError
+      rescue Selenium::WebDriver::Error::TimeoutError
         false
       end
       if

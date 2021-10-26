@@ -352,6 +352,9 @@ class ContactsResource
     wait.until {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
+    @driver.switch_to.default_content
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait2.until {@driver.find_element(TOP_REFNUMBER).displayed?}
   end
 
   def save_close_grid()
