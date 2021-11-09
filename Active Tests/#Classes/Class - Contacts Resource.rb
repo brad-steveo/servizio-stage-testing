@@ -348,13 +348,47 @@ class ContactsResource
   end
 
   def save_close()
+    i = 0
+    loopcount = 5
+    f = 0
+    frameloopcount = 10
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
-    @driver.switch_to.default_content
-    wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
-    wait2.until {@driver.find_element(TOP_REFNUMBER).displayed?}
+    loop do
+      i += 1
+        loop do
+          f += 1
+          begin
+            @driver.switch_to.default_content
+            @driver.switch_to.frame(0)
+          rescue Selenium::WebDriver::Error::NoSuchFrameError
+            false
+          end
+          break
+          if f == frameloopcount
+            raise FrameError
+          end
+        end
+      begin
+        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
+        wait2.until {@driver.find_element(FIRST_CONTACT_NAME).displayed?}
+      rescue Selenium::WebDriver::Error::TimeOutError
+        false
+      end
+      if
+        begin
+          @driver.find_element(FIRST_CONTACT_NAME).displayed? == true
+        rescue Selenium::WebDriver::Error::NoSuchElementError
+          false
+        end
+        break
+      end
+      if i == loopcount
+        raise FrameError
+      end
+    end
   end
 
   def save_close_grid()
