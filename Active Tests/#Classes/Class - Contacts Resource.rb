@@ -3,7 +3,7 @@ class ContactsResource
   #CSS Selectors: Grid
   CREATE_CONTACT_BTN = {css: "a[id$='AddContactLink']"}
   TOP_CONTACT = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/table/tbody/tr[1]/td[3]/div"}
-    TOP_CONTACT_ACTIONS = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/table/tbody/tr[1]/td[1]/div/div/div[1]/div[1]/span"}
+    TOP_CONTACT_ACTIONS = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[4]/table/tbody/tr[1]/td[1]/div/div/div[1]/div[1]/span"}
       TOP_CONTACT_DOCUMENTS = {css: "a[id$='DocumentsLink']"}
       TOP_CONTACT_INACTIVE = {css: "a[id$='MakeInactiveLink']"}
         PUSH_CONFIRM = {css: "a[class='conf-dialog-button blue']"}
@@ -356,39 +356,7 @@ class ContactsResource
     wait.until {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
-    loop do
-      i += 1
-        loop do
-          f += 1
-          begin
-            @driver.switch_to.default_content
-            @driver.switch_to.frame(0)
-          rescue Selenium::WebDriver::Error::NoSuchFrameError
-            false
-          end
-          break
-          if f == frameloopcount
-            raise FrameError
-          end
-        end
-      begin
-        wait2 = Selenium::WebDriver::Wait.new(:timeout => 2)
-        wait2.until {@driver.find_element(FIRST_CONTACT_NAME).displayed?}
-      rescue Selenium::WebDriver::Error::TimeOutError
-        false
-      end
-      if
-        begin
-          @driver.find_element(FIRST_CONTACT_NAME).displayed? == true
-        rescue Selenium::WebDriver::Error::NoSuchElementError
-          false
-        end
-        break
-      end
-      if i == loopcount
-        raise FrameError
-      end
-    end
+    sleep(2)
   end
 
   def save_close_grid()
