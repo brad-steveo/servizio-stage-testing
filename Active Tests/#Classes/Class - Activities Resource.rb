@@ -8,7 +8,7 @@ class ActivitiesResource
   TOP_CREATED = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[5]"}
   TOP_CREATED_DATE = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[6]"}
   TOP_ASSIGNED = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[9]"}
-  TOP_DUE = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[10]"}
+  TOP_DUE = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[11]"}
     TOP_ACTIVITY_ACTIONS = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[1]/div/div/div[1]/div[1]/span"}
       ACTIONS_COMPLETE = {css: "a[id$='CompleteActivityLink']"}
       ACTIONS_DOCUMENTS = {css: "a[id$='DocumentsLink']"}
