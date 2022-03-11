@@ -21,6 +21,7 @@ class PatrolsResource
   GRID_OPTIONS_DROPDOWN = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[2]/div[2]/div/div/div[1]/div/span"}
     EXPORT_PATROLS = {css: "a[id$='ExportGridLink']"}
     SHOW_INACTIVES = {css: "input[id$='ShowInactivesCheckbox']"}
+    SHOW_OLDPATROLS = {css: "input[id$='wtCheckboxShowPast90Days']"}
   GRID_TOTAL = {class: "Counter_Message"}
   ID_COLUMN = {css: "input[id$='wtIdSearchTextInput']"}
   NAME_COLUMN = {css: "input[id$='wtSubmittedNameSearchTextInput']"}
@@ -455,6 +456,7 @@ class PatrolsResource
     wait.until {@driver.find_element(GRID_OPTIONS_DROPDOWN).displayed?}
     grid_options = @driver.find_element(GRID_OPTIONS_DROPDOWN)
     grid_options.click
+    sleep(2)
   end
 
   def export_patrols()
@@ -470,6 +472,14 @@ class PatrolsResource
     wait.until {@driver.find_element(SHOW_INACTIVES).displayed?}
     show_inactives = @driver.find_element(SHOW_INACTIVES)
     show_inactives.click
+  end
+
+  def show_oldpatrols()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SHOW_OLDPATROLS).displayed?}
+    show_oldpatrols = @driver.find_element(SHOW_OLDPATROLS)
+    show_oldpatrols.click
+    sleep(2)
   end
 
   def grid_total()

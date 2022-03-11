@@ -29,6 +29,8 @@ describe "Performes a column header search in the Patrols resource for the ID an
     # Click on Patrols and search columns
     patrols = PatrolsResource.new(@driver)
     patrols.open_patrols()
+		patrols.grid_options()
+		patrols.show_oldpatrols()
     buffers.ajax_buffer()
     patrols.search_patrolid(searchpatrolid)
     buffers.ajax_buffer()

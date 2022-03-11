@@ -23,9 +23,12 @@ describe "Performes a search in the Patrols resource" do
 		login.enter_password(password)
 		login.sign_in()
 
-		#Click on Patrols and use Google Search
+		#Click on Patrols, Expose patrols older than 90 days, and use Google Search
 		patrols = PatrolsResource.new(@driver)
 		patrols.open_patrols()
+		patrols.grid_options()
+		patrols.show_oldpatrols()
+
 		patrols.search_patrol(searchpatrol)
 
 		print "Patrols Search: \n"
