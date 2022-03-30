@@ -51,46 +51,46 @@ describe "Adds a contact to a customer" do
 		contacts.contact_phone1(contactphone1)
 		contacts.contact_email1(contactemail1)
 		contacts.contact_notes(contactnotes)
-		contacts.save_close()
+		contacts.save_close_popup()
 
 		#Closing a popup within a popup
-		i = 0
-		loopcount = 5
-		f = 0
-		frameloopcount = 10
-		loop do
-	      i += 1
-				loop do
-					f += 1
-					begin
-						@driver.switch_to.default_content
-						@driver.switch_to.frame(0)
-					rescue Selenium::WebDriver::Error::NoSuchFrameError
-						false
-					end
-					break
-					if f == frameloopcount
-						raise FrameError
-					end
-				end
-      begin
-        wait = Selenium::WebDriver::Wait.new(:timeout => 2)
-        wait.until {contacts.first_contact_name.text.include?(contactname)}
-      rescue Selenium::WebDriver::Error::TimeOutError
-        false
-      end
-      if
-        begin
-          contacts.first_contact_name.displayed? == true
-        rescue Selenium::WebDriver::Error::NoSuchElementError
-          false
-        end
-        break
-      end
-      if i == loopcount
-        raise FrameError
-      end
-    end
+		# i = 0
+		# loopcount = 5
+		# f = 0
+		# frameloopcount = 10
+		# loop do
+	  #     i += 1
+		# 		loop do
+		# 			f += 1
+		# 			begin
+		# 				@driver.switch_to.default_content
+		# 				@driver.switch_to.frame(0)
+		# 			rescue Selenium::WebDriver::Error::NoSuchFrameError
+		# 				false
+		# 			end
+		# 			break
+		# 			if f == frameloopcount
+		# 				raise FrameError
+		# 			end
+		# 		end
+    #   begin
+    #     wait = Selenium::WebDriver::Wait.new(:timeout => 2)
+    #     wait.until {contacts.first_contact_name.text.include?(contactname)}
+    #   rescue Selenium::WebDriver::Error::TimeOutError
+    #     false
+    #   end
+    #   if
+    #     begin
+    #       contacts.first_contact_name.displayed? == true
+    #     rescue Selenium::WebDriver::Error::NoSuchElementError
+    #       false
+    #     end
+    #     break
+    #   end
+    #   if i == loopcount
+    #     raise FrameError
+    #   end
+    # end
 
 		expect(contacts.first_contact_name.text).to include(contactname)
 		expect(contacts.first_contact_notes.text).to include(contactnotes)

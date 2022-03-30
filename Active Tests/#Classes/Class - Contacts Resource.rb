@@ -2,7 +2,7 @@ class ContactsResource
 
   #CSS Selectors: Grid
   CREATE_CONTACT_BTN = {css: "a[id$='AddContactLink']"}
-  TOP_CONTACT = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/table/tbody/tr[1]/td[3]/div"}
+  TOP_CONTACT = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[4]/table/tbody/tr[1]/td[3]/div"}
     TOP_CONTACT_ACTIONS = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[4]/table/tbody/tr[1]/td[1]/div/div/div[1]/div[1]/span"}
       TOP_CONTACT_DOCUMENTS = {css: "a[id$='DocumentsLink']"}
       TOP_CONTACT_INACTIVE = {css: "a[id$='MakeInactiveLink']"}
@@ -44,8 +44,8 @@ class ContactsResource
   LINK_EXISTING_BTN = {css: "input[value='Link Existing']"}
   FIRST_CONTACT_NAME = {css: "a[id$='ctl03_wtContactLink']"}
   FIRST_CONTACT_NOTES = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[1]/div[5]/div/span[2]/table/tbody/tr/td[3]"}
-  FIRST_BILLING_CHKBX = {css: "input[id$='wtMainContent_wt831_wtContactTable_ctl03_wt35']"}
-  FIRST_SITE_CHKBX = {css: "input[id$='wtMainContent_wt831_wtContactTable_ctl03_wt40']"}
+  FIRST_BILLING_CHKBX = {css: "input[id$='wtContactTable_ctl03_wt35']"}
+  FIRST_SITE_CHKBX = {css: "input[id$='wtContactTable_ctl03_wt40']"}
   SECOND_CONTACT_NAME = {css: "a[id$='wtContactTable_ctl04_wtContactLink']"}
   SECOND_CONTACT_NOTES = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[1]/div[5]/div/span[2]/table/tbody/tr[2]/td[2]"}
   SECOND_BILLING_CHKBX = {css: "input[id$='wtContactTable_ctl04_wt32']"}
@@ -356,7 +356,22 @@ class ContactsResource
     wait.until {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
     save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
     save_and_close.click
-    sleep(2)
+    @driver.switch_to.default_content
+  end
+
+  def save_close_popup()
+    i = 0
+    loopcount = 5
+    f = 0
+    frameloopcount = 10
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(SAVE_AND_CLOSE_BTN).displayed?}
+    save_and_close = @driver.find_element(SAVE_AND_CLOSE_BTN)
+    save_and_close.click
+    sleep(1)
+    @driver.switch_to.default_content
+    sleep(1)
+    @driver.switch_to.frame(0)
   end
 
   def save_close_grid()
