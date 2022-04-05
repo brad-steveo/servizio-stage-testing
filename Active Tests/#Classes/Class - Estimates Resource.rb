@@ -43,7 +43,7 @@ class EstimatesResource
   ACCOUNT_EXECUTIVE_DROPDOWN = {css: "select[id$='AccountExecutive']"}
   NTE_FIELD = {css: "input[id$='NotToExceed']"}
   CANCEL_BTN = {css: "input[value='Cancel']"}
-  ACTIONS_BTN = {xpath: "/html/body/form/div[3]/div[1]/div[3]/div[2]/div/div/div/div[1]/div[2]/span"}
+  ACTIONS_BTN = {xpath: "/html/body/form/span/div/div[1]/div[3]/div[2]/div/div/div/div[1]/div[2]/span"}
   SAVE_BTN = {css: "input[value='Save']"}
   SAVE_AND_CLOSE_BTN = {css: "input[value='Save and Close']"}
 
@@ -83,7 +83,7 @@ class EstimatesResource
   ACTIVITIES_TAB = {css: "a[id$='block_a_4']"}
   SEARCH_ACTIVITY = {css: "input[id$='ActivitiesSearchInput']"}
   TOP_ACTIVITY = {css: "a[id$='ctl03_wtActivityIdLink']"}
-  TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[5]/div/div[3]/table/tbody/tr[1]/td[5]"}
+  TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/form/span/div/div[1]/div[2]/div[5]/div/div[3]/table/tbody/tr[1]/td[5]"}
   ESTIMATE_ACTIVITY_SEARCH_BTN = {css: "input[id$='EstimateSearchActivities']"}
   ESTIMATE_ACTIVITY_RESET_BTN = {css: "input[id$='EstimateResetActivities']"}
 

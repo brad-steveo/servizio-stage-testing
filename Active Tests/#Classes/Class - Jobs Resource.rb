@@ -40,7 +40,7 @@ class JobsResource
   ACCOUNT_EXECUTIVE_DROPDOWN = {css: "select[id$='AccountExecutive']"}
   NTE_FIELD = {css: "input[id$='NotToExceed']"}
   CANCEL_BTN = {css: "input[value='Cancel']"}
-  ACTIONS_BTN = {xpath: "/html/body/form/div[3]/div[1]/div[3]/div[3]/div/div/div[1]/div[2]/span"}
+  ACTIONS_BTN = {xpath: "/html/body/form/span/div/div[1]/div[3]/div[3]/div/div/div[1]/div[2]/span"}
   SAVE_BTN = {css: "input[value='Save']"}
   SAVE_AND_CLOSE_BTN = {css: "input[value='Save and Close']"}
 
@@ -56,7 +56,7 @@ class JobsResource
     LINE1_QUANTITY = {css: "input[id$='ctl03_wtJobLine_Qty']"}
     LINE1_TOTAL_SPAN = {css: "span[id$='ctl03_wtJobLine_Amount_ciw']"}
     LINE1_TOTAL = {css: "input[id$='ctl03_wtJobLine_Amount']"}
-    LINE1_DELETE = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[1]/div[1]/span[3]/table/tbody/tr/td[15]/div/a/span"}
+    LINE1_DELETE = {xpath: "/html/body/form/span/div/div[1]/div[2]/div[1]/div[1]/span[3]/table/tbody/tr[1]/td[15]/div/a/span"}
     LINE2_SERVICE_DATE_SPAN = {css: "span[id$='ctl04_wtJobLine_ServiceDate_ciw']"}
     LINE2_ITEM_SPAN = {css: "span[id$='ctl04_wtJobLine_Item_ciw']"}
     LINE2_SERVICE_DATE = {css: "input[id$='ctl04_wtJobLine_ServiceDate']"}
@@ -81,7 +81,7 @@ class JobsResource
     LINE3_DELETE = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[1]/div[1]/span[2]/table/tbody/tr[3]/td[15]/div/a/span"}
   ADD_LINES = {css: "input[id$='wtAddLines']"}
   CLEAR_LINES = {css: "input[id$='wtClearAllLines']"}
-  NEW_LINE_VERIFY = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[1]/div[1]/span[3]/table/tbody/tr[3]/td[2]/div"}
+  NEW_LINE_VERIFY = {xpath: "/html/body/form/span/div/div[1]/div[2]/div[1]/div[1]/span[3]/table/tbody/tr[4]/td[2]/div"}
   SUBTOTAL = {css: "div[id$='SubtotalContainer']"}
   TAX_DROPDOWN = {css: "select[id$='wtJob_TaxCode']"}
   TAXTOTAL = {css: "input[id$='wtTotalTax']"}
@@ -125,7 +125,7 @@ class JobsResource
   ACTIVITIES_TAB = {css: "a[id$='block_a_4']"}
   SEARCH_ACTIVITY = {css: "input[id$='ActivitiesSearchInput']"}
   TOP_ACTIVITY = {css: "a[id$='ctl03_wtActivityIdLink']"}
-  TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/form/div[3]/div[1]/div[2]/div[5]/div/div[3]/table/tbody/tr[1]/td[5]"}
+  TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/form/span/div/div[1]/div[2]/div[5]/div/div[3]/table/tbody/tr/td[5]"}
   JOB_ACTIVITY_SEARCH_BTN = {css: "input[id$='JobSearchActivities']"}
   JOB_ACTIVITY_RESET_BTN = {css: "input[id$='JobResetActivities']"}
 
