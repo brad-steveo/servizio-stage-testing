@@ -228,7 +228,9 @@ class PrintEmailPage
     @driver.switch_to.alert.accept rescue Selenium::WebDriver::Error::NoAlertOpenError
     #wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     #wait2.until {@driver.find_element(FRAME).displayed?}
+    sleep(2)
     @driver.switch_to.default_content
+    sleep(2)
     @driver.switch_to.frame(0)
   end
 
