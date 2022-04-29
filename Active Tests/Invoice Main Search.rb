@@ -10,9 +10,9 @@ describe "Performes a search in the Invoices resource" do
 
 		#Test Variables
 		timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
-		loginname = "masterchief@yesco.com"
-		password = "MCyesco123"
-		searchinvoice = "06/12/2019"
+		loginname = "test123255@yesco.com"
+		password = "THyesco123"
+		searchinvoice = "Test 9"
 
 		#Go to page
 		@driver.navigate.to "https://stage.yesco.com/servizio/"
