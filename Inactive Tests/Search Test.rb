@@ -22,6 +22,7 @@ describe "Performes a search in each resource" do
 		searchjoblines = "stage"
 		searchinvoicelines = "bombay"
 		searchdocuments = "google"
+		test = "test"
 
 		#Go to page
 		@driver.navigate.to "https://stage.yesco.com/servizio/"
