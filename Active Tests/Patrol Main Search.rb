@@ -1,10 +1,12 @@
 require "selenium-webdriver"
 require "rspec"
+require "webdrivers"
+require "watir"
 require "require_all"
 require_all "#Classes"
 
-describe "Performes a search in the Patrols resource" do
-	it "Verifies that the search returns the proper records" do
+	describe 'Patrol Main Search' do
+	it "Performes a global search in the Patrols resource" do
 
 		@driver = Selenium::WebDriver.for :chrome
 
@@ -31,7 +33,7 @@ describe "Performes a search in the Patrols resource" do
 
 		patrols.search_patrol(searchpatrol)
 
-		print "Patrols Search: \n"
+		print "Test Search: \n"
 		print "%s \n" % patrols.top.text + patrols.top_customer.text
 		print "\n"
 		print "\n"
