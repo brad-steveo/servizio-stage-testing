@@ -122,6 +122,8 @@ class PatrolsResource
     patrols_button.click
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {driver.find_element(class: "Counter_Message").text != "0 records"}
+    wait3 = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait3.until {@driver.find_element(TOP_REFNUMBER).displayed? == true}
   end
 
   def create_patrol()

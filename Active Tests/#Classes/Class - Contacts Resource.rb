@@ -122,6 +122,11 @@ class ContactsResource
     end
   end
 
+  def resource_open()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_REFNUMBER).displayed? == true}
+  end
+
   def top()
     top_contact = @driver.find_element(TOP_CONTACT)
   end

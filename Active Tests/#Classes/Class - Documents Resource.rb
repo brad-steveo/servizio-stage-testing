@@ -43,6 +43,11 @@ class DocumentsResource
   end
 
   #CSS Methods: Grid
+  def resource_open()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_NAME).displayed? == true}
+  end
+
   def top_name()
     top_record = @driver.find_element(TOP_NAME)
   end

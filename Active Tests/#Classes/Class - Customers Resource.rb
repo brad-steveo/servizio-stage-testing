@@ -193,7 +193,7 @@ class CustomersResource
     customers_button = @driver.find_element(CUSTOMERS_OPTN)
     customers_button.click
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait2.until {@driver.find_element(class: "Counter_Message").text != "0 records" }
+    wait2.until {@driver.find_element(TOP_REFNUMBER).displayed? == true}
   end
 
   def create_customer()

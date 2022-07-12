@@ -60,6 +60,11 @@ class JobLinesResource
     top_record = @driver.find_element(TOP_DESCRIPTION)
   end
 
+  def resource_open()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_REFNUMBER).displayed? == true}
+  end
+
   def top_open()
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(TOP_JOBNAME).displayed?}
