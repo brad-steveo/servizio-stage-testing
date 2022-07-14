@@ -15,6 +15,7 @@ class PatrolsResource
       ACTIONS_MAKEINACTIVE = {css: "a[id$='MakeInactiveLink']"}
         PUSH_CONFIRM = {css: "a[class='conf-dialog-button blue']"}
   TOP_REFNUMBER = {css: "a[id$='wtPatrolTable_ctl03_wtPatrolIdLink']"}
+  TOP_DATESENT = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[15]"}
   SEARCH_FIELD = {css: "input[id$='SearchInput']"}
   SEARCH_BTN = {css: "input[value='Search']"}
   RESET_BTN = {css: "input[value='Reset']"}
@@ -166,6 +167,36 @@ class PatrolsResource
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(TOP_REFNUMBER).displayed?}
     top_refnumber = @driver.find_element(TOP_REFNUMBER)
+  end
+
+  def top_datesent()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(TOP_DATESENT).displayed?}
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_DATESENT).text != ""}
+    #@driver.execute_script("arguments[0].scrollIntoView();", @driver.find_element(TOP_DATESENT))
+    # def datesent_refresher()
+    #   @driver.navigate.refresh
+    #   wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    #   begin
+    #     wait.until {@driver.find_element(TOP_DATESENT).text != ""}
+    #   rescue Selenium::WebDriver::Error::TimeoutError
+    #     false
+    #   end
+    # end
+    # i = 0
+    # loopcount = 5
+    # loop do
+    #   i += 1
+    #   puts datesent_refresher()
+    #   if (@driver.find_element(TOP_DATESENT).text != "") == true
+    #     break
+    #   end
+    #   if i == loopcount
+    #     break
+    #   end
+    # end
+    top_datesent = @driver.find_element(TOP_DATESENT)
   end
 
   def top_customer()
@@ -451,6 +482,9 @@ class PatrolsResource
     search_reset.click
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {@driver.find_element(class: "Counter_Message").text != currentrecords}
+    wait3 = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait3.until {@driver.find_element(TOP_REFNUMBER).displayed? == true}
+    sleep(2)
   end
 
   def grid_options()

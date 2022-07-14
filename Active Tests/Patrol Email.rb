@@ -4,8 +4,8 @@ require "require_all"
 require_all "#Classes"
 
 
-describe "Patrol Email Test" do
-	it "Opens most recent patrol and sends an email" do
+describe "Patrol Email" do
+	it "Opens the top patrol record and emails it from Servizio" do
 
 		@driver = Selenium::WebDriver.for :chrome
 

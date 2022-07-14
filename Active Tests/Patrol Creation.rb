@@ -3,8 +3,8 @@ require "rspec"
 require "require_all"
 require_all "#Classes"
 
-describe "Creates a Patrol" do
-	it "Verifies that Patrol Creation was successful" do
+describe "Patrol Creation" do
+	it "Creates a new patrol record" do
 
 		@driver = Selenium::WebDriver.for :chrome
 

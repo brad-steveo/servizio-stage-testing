@@ -3,8 +3,8 @@ require "rspec"
 require "require_all"
 require_all "#Classes"
 
-describe "Makes top patrol inactive using grid actions menu" do
-	it "Verifies that top patrol was made inactive" do
+describe "Patrol Grid Actions" do
+	it "Makes top patrol inactive using grid actions menu" do
 
 		@driver = Selenium::WebDriver.for :chrome
 
