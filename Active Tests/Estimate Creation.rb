@@ -3,8 +3,8 @@ require "rspec"
 require "require_all"
 require_all "#Classes"
 
-describe "Creates an Estimate" do
-	it "Verifies that Estimate Creation was successful" do
+describe "Estimate Creation" do
+	it "Creates a new estimate record" do
 
 		@driver = Selenium::WebDriver.for :chrome
 

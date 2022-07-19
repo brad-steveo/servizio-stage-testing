@@ -27,19 +27,22 @@ require_all "#Classes"
     emailsubject = "Patrol Email (Selenium) #{timestamp}"
     emailmessage = 'Selenium Test Email Message'
 
-		#Go to page
+		#Test Classes
+		login = ServizioLoginPage.new(@driver)
+		patrols = PatrolsResource.new(@driver)
+		buffers = Buffers.new(@driver)
+		activities = ActivitiesResource.new(@driver)
+		printemail = PrintEmailPage.new(@driver)
+
+		#Setup
 		@driver.navigate.to "https://stage.yesco.com/servizio/"
     @driver.manage.window.resize_to(1400, 1024)
-
-		#Logging in
-		login = ServizioLoginPage.new(@driver)
 		login.enter_loginname(loginname)
 		login.enter_password(password)
 		login.sign_in()
 
-		patrols = PatrolsResource.new(@driver)
-    buffers = Buffers.new(@driver)
-    it "Performes a global search in the Patrols resource" do
+		#Test Examples
+    it "Performes a global search" do
   		patrols.open_patrols()
   		patrols.grid_options()
   		patrols.show_oldpatrols()
@@ -84,7 +87,6 @@ require_all "#Classes"
   		expect(patrols.top.text).to include(submittedname)
     end
 
-    activities = ActivitiesResource.new(@driver)
     it "Creates a new activity on a patrol record" do
       patrols.top_open()
       patrols.activities_tab()
@@ -100,7 +102,6 @@ require_all "#Classes"
       patrols.save_close()
     end
 
-    printemail = PrintEmailPage.new(@driver)
     it "Opens the top patrol record and emails it from Servizio" do
       patrols.top_open()
       patrols.actions()
@@ -116,7 +117,7 @@ require_all "#Classes"
       expect(patrols.top_datesent.text).to eql(dateonly)
     end
 
-    it "Makes top patrol inactive using grid actions menu" do
+    it "Makes top patrol record inactive using grid actions menu" do
       toppatrol = patrols.top_refnumber.text
       patrols.top_actions()
       patrols.actions_makeinactive()

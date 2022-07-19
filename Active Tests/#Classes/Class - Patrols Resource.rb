@@ -127,6 +127,12 @@ class PatrolsResource
     wait3.until {@driver.find_element(TOP_REFNUMBER).displayed? == true}
   end
 
+  def refresh_grid()
+    @driver.navigate.refresh
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_REFNUMBER).displayed?}
+  end
+
   def create_patrol()
     i = 0
     loopcount = 5
@@ -484,7 +490,7 @@ class PatrolsResource
     wait2.until {@driver.find_element(class: "Counter_Message").text != currentrecords}
     wait3 = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait3.until {@driver.find_element(TOP_REFNUMBER).displayed? == true}
-    sleep(2)
+    sleep(4)
   end
 
   def grid_options()

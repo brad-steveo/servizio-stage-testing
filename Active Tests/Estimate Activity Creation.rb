@@ -3,8 +3,8 @@ require "rspec"
 require "require_all"
 require_all "#Classes"
 
-describe "Opens top Estimate" do
-	it "Creates and verifies Activity creation was successful" do
+describe "Estimate Activity Creation" do
+	it "Creates a new activity on an estimate record" do
 
 		@driver = Selenium::WebDriver.for :chrome
 

@@ -3,8 +3,8 @@ require "rspec"
 require "require_all"
 require_all "#Classes"
 
-describe "Makes top estimate inactive using grid actions menu" do
-	it "Verifies that top estimate was made inactive" do
+describe "Estimate Grid Actions" do
+	it "Makes top estimate inactive using grid actions menu" do
 
 		@driver = Selenium::WebDriver.for :chrome
 

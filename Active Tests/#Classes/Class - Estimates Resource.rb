@@ -21,6 +21,7 @@ class EstimatesResource
   TOP_STATUS = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[7]"}
   TOP_STAGE = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[9]"}
   TOP_TYPE = {xpath: "/html/body/form/div[3]/div[3]/div[1]/div[2]/div[1]/div[3]/span/table/tbody/tr[1]/td[10]/div"}
+  TOP_DATESENT = {css: "span[id$='wtEstimateTable_ctl03_wtDateSent']"}
   SEARCH_FIELD = {css: "input[id$='SearchInput']"}
   SEARCH_BTN = {css: "input[value='Search']"}
   RESET_BTN = {css: "input[value='Reset']"}
@@ -269,6 +270,12 @@ class EstimatesResource
     end
   end
 
+  def refresh_grid()
+    @driver.navigate.refresh
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_REFNUMBER).displayed?}
+  end
+
   def top()
     top_record = @driver.find_element(TOP_ESTIMATE)
   end
@@ -287,6 +294,15 @@ class EstimatesResource
 
   def top_type()
     top_refnumber = @driver.find_element(TOP_TYPE)
+  end
+
+  def top_datesent()
+    @driver.execute_script("arguments[0].scrollIntoView();", @driver.find_element(TOP_DATESENT))
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(TOP_DATESENT).displayed?}
+    wait2 = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_DATESENT).text != ""}
+    top_datesent = @driver.find_element(TOP_DATESENT)
   end
 
   def top_open()
@@ -567,6 +583,7 @@ class EstimatesResource
     search_reset.click
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {@driver.find_element(class: "Counter_Message").text != currentrecords}
+    sleep(4)
   end
 
   def grid_options()

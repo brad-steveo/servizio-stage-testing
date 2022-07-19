@@ -3,8 +3,8 @@ require "rspec"
 require "require_all"
 require_all "#Classes"
 
-describe "Estimates Email Test" do
-	it "Opens most recent estimate and sends an email" do
+describe "Estimate Email Test" do
+	it "Opens the top estimate record and emails it from Servizio" do
 
 		@driver = Selenium::WebDriver.for :chrome
 
