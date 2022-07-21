@@ -4,7 +4,7 @@ require "require_all"
 require_all "#Classes"
 
 describe "Job Email Test" do
-	it "Opens most recent job and sends an email" do
+	it "Opens the top job record and emails it from Servizio" do
 
 		@driver = Selenium::WebDriver.for :chrome
 

@@ -3,8 +3,8 @@ require "rspec"
 require "require_all"
 require_all "#Classes"
 
-describe "Opens Jobs resource and adds a line item" do
-	it "Checks Job Lines resource and verifies top job line" do
+describe "Job Lines Test" do
+	it "Adds a new line item to a job record and checks for them in the Job Lines resource" do
 
 		@driver = Selenium::WebDriver.for :chrome
 

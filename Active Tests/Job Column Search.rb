@@ -3,8 +3,8 @@ require "rspec"
 require "require_all"
 require_all "#Classes"
 
-describe "Performes a column header search in the Jobs resource for the ID and Name columns" do
-	it "Verifies that the search returns the proper amount of records" do
+describe "Job Column Search" do
+	it "Performes a column header search in the Jobs resource in the ID and Name columns" do
 
 		@driver = Selenium::WebDriver.for :chrome
 

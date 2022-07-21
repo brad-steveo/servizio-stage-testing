@@ -326,6 +326,12 @@ class JobsResource
     end
   end
 
+  def refresh_grid()
+    @driver.navigate.refresh
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_REFNUMBER).displayed?}
+  end
+
   def top()
     top_record = @driver.find_element(TOP_JOB)
   end
@@ -622,6 +628,7 @@ class JobsResource
     search_reset.click
     wait2 = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait2.until {@driver.find_element(class: "Counter_Message").text != currentrecords}
+    sleep (4)
   end
 
   def grid_options()

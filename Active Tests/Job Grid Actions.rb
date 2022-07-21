@@ -3,8 +3,8 @@ require "rspec"
 require "require_all"
 require_all "#Classes"
 
-describe "Makes top job inactive using grid actions menu" do
-	it "Verifies that top job was made inactive" do
+describe "Job Grid Actions" do
+	it "Makes top job inactive using grid actions menu" do
 
 		@driver = Selenium::WebDriver.for :chrome
 

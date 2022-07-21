@@ -3,8 +3,8 @@ require "rspec"
 require "require_all"
 require_all "#Classes"
 
-describe "Performes a search in the Jobs resource" do
-	it "Verifies that the search returns the proper records" do
+describe "Job Main Search" do
+	it "Performes a global search in the Jobs resource" do
 
 		@driver = Selenium::WebDriver.for :chrome
 

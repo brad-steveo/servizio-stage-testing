@@ -3,8 +3,8 @@ require "rspec"
 require "require_all"
 require_all "#Classes"
 
-describe "Creates a Job" do
-	it "Verifies that Job Creation was successful" do
+describe "Job Creation" do
+	it "Creates a new job record" do
 
 		@driver = Selenium::WebDriver.for :chrome
 
