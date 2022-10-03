@@ -10,17 +10,16 @@ describe "React Login Test" do
 
 		#Test Variables
 		loginname = "bstevenson@yesco.com"
-		password = "V0idL0st"
+		password = "BSyesco2113"
 
 		#Go to page
 		@driver.navigate.to "https://dev.yesco.com/servizioreact/"
 
 		#Logging in
 		login = ServizioLoginPage.new(@driver)
-		login.google_login()
-    login.enter_loginname(loginname)
+		login.enter_username(loginname)
     login.enter_password(password)
-    sleep(5)
+		login.sign_in()
 
 	end
 end
