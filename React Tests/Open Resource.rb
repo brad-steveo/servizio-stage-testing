@@ -11,6 +11,7 @@ describe "React Login Test" do
 		#Test Variables
 		loginname = "bstevenson@yesco.com"
 		password = "BSyesco2113"
+		resource1 = "Jobs"
 
 		#Go to page
 		@driver.navigate.to "https://dev.yesco.com/servizioreact/"
@@ -20,6 +21,9 @@ describe "React Login Test" do
 		login.enter_username(loginname)
     login.enter_password(password)
 		login.sign_in()
+
+		home = ServizioHome.new(@driver)
+		home.open_resource(resource1)
 
 	end
 end

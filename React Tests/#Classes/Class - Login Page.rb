@@ -1,4 +1,4 @@
-class ServizioLoginPage
+class ServizioLogin
 
   #CSS Selectors
   USERNAME_FIELD = {css: "input[id$='Input_UsernameVal']"}
