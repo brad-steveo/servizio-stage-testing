@@ -16,6 +16,12 @@ class ServizioHome
   SECOND_TAB_TITLE = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/div/div[1]/div[3]/div/span"}
   SECOND_TAB_CLOSE = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/div/div[1]/div[3]/div/i"}
 
+  class StaleError < StandardError
+    def initialize(msg='Stale reference error')
+      super
+    end
+  end
+
   attr_reader :driver
 
   def initialize(driver)

@@ -27,21 +27,16 @@ describe "Test Name" do
 	login.sign_in()
 
 	#Text Examples
-	#it "Perform a column header search in the ID column" do
-		#home.open_resource(resource1)
-	#end
+	it "Perform a column header search in the ID column" do
+		home.open_resource(resource1)
+		patrols.old_patrols()
+		patrols.search_id(idsearch)
+
+		expect(patrols.top_ref.text.downcase).to include(idsearch)
+	end
 
   #it "Perform a column header search in the NAME column" do
 
   #end
-
-  it "Create a new patrol record" do
-    home.open_resource(resource1)
-    sleep(3)
-    patrols.old_patrols()
-    sleep(3)
-    patrols.search_id(idsearch)
-    sleep(3)
-  end
 
 end

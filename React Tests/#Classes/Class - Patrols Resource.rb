@@ -16,7 +16,7 @@ class PatrolsResource
   end
 
   #Class Methods
-  def top()
+  def top_ref()
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(TOP_REF).displayed?}
     top_record = @driver.find_element(TOP_REF)
@@ -88,7 +88,9 @@ class PatrolsResource
     wait.until {@driver.find_element(ID_COLUMN).displayed?}
     search = @driver.find_element(ID_COLUMN)
     search.send_keys(searchname)
+    sleep(1)
     @driver.action.send_keys(:enter).perform
+    sleep(1)
     wait.until {@driver.find_element(TOP_REF).text.include?(searchname)}
   end
 

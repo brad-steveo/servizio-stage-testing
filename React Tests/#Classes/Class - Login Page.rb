@@ -32,5 +32,6 @@ class ServizioLogin
   	login_button.click
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(SERVIZIO_LOGO).displayed?}
+    sleep(3)
   end
 end
