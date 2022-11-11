@@ -14,6 +14,7 @@ describe "Test Name" do
 	password = "BSyesco2113"
   resource1 = "Patrols"
   idsearch = "1500"
+	namesearch = "Selenium Test"
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
@@ -32,11 +33,20 @@ describe "Test Name" do
 		patrols.old_patrols()
 		patrols.search_id(idsearch)
 
-		expect(patrols.top_ref.text.downcase).to include(idsearch)
+		expect(patrols.top_ref.text.downcase).to include(idsearch.downcase)
 	end
 
-  #it "Perform a column header search in the NAME column" do
+  it "Perform a column header search in the NAME column" do
+		patrols.search_reset()
+		patrols.search_name(namesearch)
 
-  #end
+		expect(patrols.top_name.text.downcase).to include(namesearch.downcase)
+  end
+
+	it "Create a patrol record" do
+		patrols.search_reset()
+		patrols.new_patrol()
+		sleep(4)
+	end
 
 end
