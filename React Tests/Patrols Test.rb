@@ -15,6 +15,8 @@ describe "Test Name" do
   resource1 = "Patrols"
   idsearch = "1500"
 	namesearch = "Selenium Test"
+	submittedname = "Selenium Test #{timestamp}"
+	location = "RM - Salt Lake"
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
@@ -45,8 +47,17 @@ describe "Test Name" do
 
 	it "Create a patrol record" do
 		patrols.search_reset()
+		patrols.old_patrols()
 		patrols.new_patrol()
-		sleep(4)
+		patrols.submitted_name(submittedname)
+		patrols.location(location)
+		patrols.save_close()
+
+		expect(patrols.top_name.text.downcase).to include(submittedname.downcase)
 	end
 
+	#Make Inactive
+	#Activity Creation
+	#Print/Email
+	
 end

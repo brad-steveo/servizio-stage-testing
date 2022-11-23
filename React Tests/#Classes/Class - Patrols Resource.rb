@@ -21,7 +21,7 @@ class PatrolsResource
   LOCATION_DROPDOWN = {css: "select[id='b22-b5-Locations']"}
   ACCOUNT_EXECUTIVE_DROPDOWN = {css: "select[id='b22-b5-AccountExecutives']"}
   SAVE_BUTTON = {css: "button[id='b22-b5-SaveButton']"}
-  SAVE_CLOSE_BUTTONE = {css: "button[id='b22-b5-SaveAndCloseButton']"}
+  SAVE_CLOSE_BUTTON = {css: "button[id='b22-b5-SaveAndCloseButton']"}
 
 
   attr_reader :driver
@@ -142,6 +142,22 @@ class PatrolsResource
     wait.until {@driver.find_element(SUBMITTED_NAME_FIELD).displayed?}
     field = @driver.find_element(SUBMITTED_NAME_FIELD)
     field.send_keys(submittedname)
+  end
+
+  def location(locationselect)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(LOCATION_DROPDOWN).displayed?}
+    dropdown_list = @driver.find_element(LOCATION_DROPDOWN)
+    options = dropdown_list.find_elements(tag_name: 'option')
+    options.each {|option| option.click if option.text == (locationselect)}
+  end
+
+  def save_close()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(SAVE_CLOSE_BUTTON).displayed?}
+    button = @driver.find_element(SAVE_CLOSE_BUTTON)
+    button.click
+    sleep(2) #Could maybe use a rescue loop here
   end
 
 end
