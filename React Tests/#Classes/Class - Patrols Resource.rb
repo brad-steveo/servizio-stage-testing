@@ -1,8 +1,8 @@
 class PatrolsResource
 
   #CSS Selectors: Grid
-  TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[4]/table/tbody/tr[1]/td[2]/a/span"}
-  TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[4]/table/tbody/tr[1]/td[3]/span"}
+  TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/a/span"}
+  TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/span"}
   GRID_ACTIONS = {css: "div[class='dropdown-header select']"}
   NEW_PATROL = {css: "div[id='b20-b4-b3-NewTitlePlaceholder']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}

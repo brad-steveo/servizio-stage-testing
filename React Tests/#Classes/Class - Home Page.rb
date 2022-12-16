@@ -1,8 +1,9 @@
 class ServizioHome
 
   #CSS Selectors
-  RESOURCE_MENU = {css: "div[class='choices__list choices__list--single']"}
-  FIND_RESOURCE = {css: "input[title='Find a Resource']"}
+  RESOURCE_MENU = {css: "div[class='vscomp-toggle-button']"}
+  FIND_RESOURCE = {css: "input[class='vscomp-search-input']"}
+  CLEAR_RESOURCE_SEARCH = {css: "div[class='vscomp-clear-button toggle-button-child']"}
   GRID = {css: "table[role='grid']"}
   HOME_TAB = {css: "div[id='b7-Title']"}
   WIDGET_GALLERY = {css: "div[class='osui-gallery']"}
@@ -10,8 +11,8 @@ class ServizioHome
   GLOBAL_TOP = {xpath: "/html/body/div/div/div/div/div/div/header/div/div/div[3]/div/nav/div[2]/div[2]/div/div[2]/div/div/div"}
   GLOBAL_TOP_ID = {xpath: "/html/body/div/div/div/div/div/div/header/div/div/div[3]/div/nav/div[2]/div[2]/div/div[2]/div/div/div/div[2]/div/div/mark"}
   FIRST_TAB = {css: "div[id='$b7']"}
-  FIRST_TAB_TITLE = {xpath: "/html/body/div/div/div/div/div/div/div/div/div[3]/div/div/div[1]/div[2]/div/span"}
-  FIRST_TAB_CLOSE = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/div/div[1]/div[2]/div/i"}
+  FIRST_TAB_TITLE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/header/div[1]/div[2]/button/div/span"}
+  FIRST_TAB_CLOSE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/header/div[1]/div[2]/button/div/i"}
   SECOND_TAB = {css: "div[id='$b8']"}
   SECOND_TAB_TITLE = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/div/div[1]/div[3]/div/span"}
   SECOND_TAB_CLOSE = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/div/div[1]/div[3]/div/i"}
@@ -41,6 +42,13 @@ class ServizioHome
     @driver.action.send_keys(:enter).perform
     sleep(1)
     wait.until {@driver.find_element(GRID).displayed?}
+  end
+
+  def resource_search_clear()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(CLEAR_RESOURCE_SEARCH).displayed?}
+    close = @driver.find_element(CLEAR_RESOURCE_SEARCH)
+    close.click
   end
 
   def home_tab()

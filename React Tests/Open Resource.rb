@@ -8,8 +8,8 @@ describe "Resource Test" do
 	@driver = Selenium::WebDriver.for :chrome
 
 	#Test Variables
-	loginname = "bstevenson@yesco.com"
-	password = "BSyesco2113"
+	loginname = "masterchief@yesco.com"
+	password = "MCyesco123"
 	resource1 = "Activities"
 	resource2 = "Patrols"
 	resource3 = "Estimates"
@@ -37,7 +37,7 @@ describe "Resource Test" do
 	routes = RoutesResource.new(@driver)
 
 	#Setup
-	@driver.navigate.to "https://dev.yesco.com/servizioreact/"
+	@driver.navigate.to "https://stage.yesco.com/servizioreact/"
 	login.enter_username(loginname)
 	login.enter_password(password)
 	login.sign_in()
@@ -45,68 +45,74 @@ describe "Resource Test" do
 	#Text Examples
 	it "Open the Activities Resource" do
 		home.open_resource(resource1)
-		recordtest = activities.top.text
+		recordtest = activities.top_ref.text
 		expect(recordtest).not_to eql("")
 	end
 
 	it "Export the Activities grid" do
 		activities.export_grid()
 		home.close_tab()
+		home.resource_search_clear()
 	end
 
 	it "Open the Patrols Resource" do
 		home.open_resource(resource2)
-		recordtest = patrols.top.text
+		recordtest = patrols.top_ref.text
 		expect(recordtest).not_to eql("")
 	end
 
 	it "Export the Patrols grid" do
 		patrols.export_grid()
 		home.close_tab()
+		home.resource_search_clear()
 	end
 
 	it "Open the Estimates Resource" do
 		home.open_resource(resource3)
-		recordtest = estimates.top.text
+		recordtest = estimates.top_ref.text
 		expect(recordtest).not_to eql("")
 	end
 
 	it "Export the Estimates grid" do
 		estimates.export_grid()
 		home.close_tab()
+		home.resource_search_clear()
 	end
 
 	it "Open the Jobs Resource" do
 		home.open_resource(resource4)
-		recordtest = jobs.top.text
+		recordtest = jobs.top_ref.text
 		expect(recordtest).not_to eql("")
 	end
 
 	it "Export the Jobs grid" do
 		jobs.export_grid()
 		home.close_tab()
+		home.resource_search_clear()
 	end
 
 	it "Open the Invoices Resource" do
 		home.open_resource(resource5)
-		recordtest = invoices.top.text
+		recordtest = invoices.top_ref.text
 		expect(recordtest).not_to eql("")
 	end
 
 	it "Export the Invoices grid" do
 		invoices.export_grid()
 		home.close_tab()
+		home.resource_search_clear()
 	end
 
 	it "Open the Customers Resource" do
 		home.open_resource(resource6)
-		recordtest = customers.top.text
+		recordtest = customers.top_ref.text
 		expect(recordtest).not_to eql("")
 	end
 
 	it "Export the Customers grid" do
 		customers.export_grid()
 		home.close_tab()
+		home.resource_search_clear()
 	end
 
 	#Job Lines Resource tests need to go here when ready.
@@ -122,6 +128,7 @@ describe "Resource Test" do
 	it "Export the Contacts grid" do
 		contacts.export_grid()
 		home.close_tab()
+		home.resource_search_clear()
 	end
 
 	#Contracts Resource tests need to go here when ready.

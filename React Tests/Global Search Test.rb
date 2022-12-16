@@ -10,19 +10,19 @@ describe "Global Search Test" do
 	#Test Variables
   timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
   dateonly = Time.now.strftime("%m/%d/%Y")
-	loginname = "bstevenson@yesco.com"
-	password = "BSyesco2113"
-  searchtest1 = "Patrol: 3200"
-  searchtest2 = "Job: 2028"
+	loginname = "masterchief@yesco.com"
+	password = "MCyesco123"
+  searchtest1 = "Patrol: 1010"
+  searchtest2 = "Job: 1400"
   searchtest3 = "Estimate: 1117"
-  searchtest4 = "Customer: 426079"
+  searchtest4 = "Customer: 1113"
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
   home = ServizioHome.new(@driver)
 
 	#Setup
-	@driver.navigate.to "https://dev.yesco.com/servizioreact/"
+	@driver.navigate.to "https://stage.yesco.com/servizioreact/"
 	login.enter_username(loginname)
 	login.enter_password(password)
 	login.sign_in()
