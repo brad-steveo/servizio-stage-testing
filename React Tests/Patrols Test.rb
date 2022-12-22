@@ -57,7 +57,10 @@ describe "Test Name" do
 	end
 
 	#Make Inactive
+	it "Make a record inactive using grid actions" do
+		
+	end
 	#Activity Creation
 	#Print/Email
-	
+
 end

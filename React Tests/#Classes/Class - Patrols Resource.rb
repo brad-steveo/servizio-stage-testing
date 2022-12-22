@@ -3,7 +3,11 @@ class PatrolsResource
   #CSS Selectors: Grid
   TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/a/span"}
   TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/span"}
-  GRID_ACTIONS = {css: "div[class='dropdown-header select']"}
+  TOP_ACTIONS = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div[1]/div/i"}
+    GRID_CREATE_ACTIVITY = {css: "a[id$='CreateActivityLink']"}
+    GRID_PRINT_EMAIL = {}
+    GRID_MAKE_INACTIVE = {}
+  GRID_MENU = {css: "div[class='dropdown-header select']"}
   NEW_PATROL = {css: "div[id='b20-b4-b3-NewTitlePlaceholder']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
   SHOW_INACTIVES = {css: "input[id$='SwitchShowInactives']"}
@@ -52,9 +56,9 @@ class PatrolsResource
 
   def new_patrol()
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait.until {@driver.find_element(GRID_ACTIONS).displayed?}
+    wait.until {@driver.find_element(GRID_MENU).displayed?}
     wait.until {@driver.find_element(TOP_REF).displayed?}
-    grid_actions = @driver.find_element(GRID_ACTIONS)
+    grid_actions = @driver.find_element(GRID_MENU)
     grid_actions.click
     wait.until {@driver.find_element(NEW_PATROL).displayed?}
     option = @driver.find_element(NEW_PATROL)
@@ -68,10 +72,10 @@ class PatrolsResource
 
   def export_grid()
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait.until {@driver.find_element(GRID_ACTIONS).displayed?}
+    wait.until {@driver.find_element(GRID_MENU).displayed?}
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(TOP_REF).displayed?}
-    grid_actions = @driver.find_element(GRID_ACTIONS)
+    grid_actions = @driver.find_element(GRID_MENU)
     grid_actions.click
     wait.until {@driver.find_element(EXPORT_GRID).displayed?}
     option = @driver.find_element(EXPORT_GRID)
@@ -81,10 +85,10 @@ class PatrolsResource
 
   def show_inactives()
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait.until {@driver.find_element(GRID_ACTIONS).displayed?}
+    wait.until {@driver.find_element(GRID_MENU).displayed?}
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(TOP_REF).displayed?}
-    grid_actions = @driver.find_element(GRID_ACTIONS)
+    grid_actions = @driver.find_element(GRID_MENU)
     grid_actions.click
     wait.until {@driver.find_element(SHOW_INACTIVES).displayed?}
     option = @driver.find_element(SHOW_INACTIVES)
@@ -94,15 +98,15 @@ class PatrolsResource
 
   def old_patrols()
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait.until {@driver.find_element(GRID_ACTIONS).displayed?}
+    wait.until {@driver.find_element(GRID_MENU).displayed?}
     wait.until {@driver.find_element(TOP_REF).displayed?}
-    grid_actions = @driver.find_element(GRID_ACTIONS)
+    grid_actions = @driver.find_element(GRID_MENU)
     grid_actions.click
     wait.until {@driver.find_element(OLD_PATROLS).displayed?}
     option = @driver.find_element(OLD_PATROLS)
     option.click
     sleep(2)
-    grid_actions = @driver.find_element(GRID_ACTIONS)
+    grid_actions = @driver.find_element(GRID_MENU)
     grid_actions.click
   end
 
