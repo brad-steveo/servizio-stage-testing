@@ -7,6 +7,7 @@ class PatrolsResource
     GRID_CREATE_ACTIVITY = {css: "a[id$='CreateActivityLink']"}
     GRID_PRINT_EMAIL = {}
     GRID_MAKE_INACTIVE = {}
+  TOP_SENT_ON = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[16]/span"}
   GRID_MENU = {css: "div[class='dropdown-header select']"}
   NEW_PATROL = {css: "div[id='b20-b4-b3-NewTitlePlaceholder']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
@@ -24,6 +25,14 @@ class PatrolsResource
   SCOPE_OF_WORK_TEXTAREA = {css: "textarea[id='b22-b5-TextArea_Description']"}
   LOCATION_DROPDOWN = {css: "select[id='b22-b5-Locations']"}
   ACCOUNT_EXECUTIVE_DROPDOWN = {css: "select[id='b22-b5-AccountExecutives']"}
+  ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/header/div[1]/div[2]/button"}
+    ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[2]/article/div/div/div/table/thead/tr/th[1]"}
+    TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[2]/article/div/div/div/table/tbody/tr[1]/td[1]/a/span"}
+    TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[2]/article/div/div/div/table/tbody/tr[1]/td[4]/span"}
+    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/header/div[1]/div[4]/button/div/span"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b22-b5-b25-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b22-b5-b25-GridActionsCreateActivity']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id='b22-b5-b25-GridActionsPrintEmail']"}
   SAVE_BUTTON = {css: "button[id='b22-b5-SaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id='b22-b5-SaveAndCloseButton']"}
 
@@ -45,6 +54,12 @@ class PatrolsResource
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(TOP_NAME).displayed?}
     top_record = @driver.find_element(TOP_NAME)
+  end
+
+  def top_sent()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_SENT_ON).displayed?}
+    top_record = @driver.find_element(TOP_SENT_ON)
   end
 
   def top_open()
@@ -154,6 +169,46 @@ class PatrolsResource
     dropdown_list = @driver.find_element(LOCATION_DROPDOWN)
     options = dropdown_list.find_elements(tag_name: 'option')
     options.each {|option| option.click if option.text == (locationselect)}
+  end
+
+  def top_activity()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_ACTIVITY_REF).displayed?}
+    top = @driver.find_element(TOP_ACTIVITY_REF)
+  end
+
+  def top_activity_description()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_ACTIVITY_DESCRIPTION).displayed?}
+    description = @driver.find_element(TOP_ACTIVITY_DESCRIPTION)
+  end
+
+  def create_activity()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(ACTIVITIES_SUBTAB).displayed?}
+    tab = @driver.find_element(ACTIVITIES_SUBTAB)
+    tab.click
+    sleep(5)
+    wait.until {@driver.find_element(ACTIVITIES_ID_COLUMN).displayed?}
+    actions = @driver.find_element(DETAIL_ACTIONS_MENU)
+    actions.click
+    wait.until {@driver.find_element(DETAIL_CREATE_ACTIVITY).displayed?}
+    createactivity = @driver.find_element(DETAIL_CREATE_ACTIVITY)
+    createactivity.click
+    wait.until {@driver.find_element(THIRD_TAB).displayed?}
+    wait.until {@driver.find_element(THIRD_TAB).text.include?("New Activity")}
+  end
+
+  def print_email()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(DETAIL_ACTIONS_MENU).displayed?}
+    actions = @driver.find_element(DETAIL_ACTIONS_MENU)
+    actions.click
+    wait.until {@driver.find_element(DETAIL_PRINT_EMAIL).displayed?}
+    printemail = @driver.find_element(DETAIL_PRINT_EMAIL)
+    printemail.click
+    wait.until {@driver.find_element(THIRD_TAB).displayed?}
+    wait.until {@driver.find_element(THIRD_TAB).text.include?("Print/Email")}
   end
 
   def save_close()

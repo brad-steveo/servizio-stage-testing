@@ -16,12 +16,19 @@ describe "Test Name" do
   idsearch = "1500"
 	namesearch = "Selenium Test"
 	submittedname = "Selenium Test #{timestamp}"
-	location = "RM - Salt Lake"
+	activityreason = "Sales"
+	activitycontactmethod = "Email"
+	activitydescription = "Selenium Test #{timestamp}"
+	emailaddressfrom = "bstevenson@yesco.com"
+	emailsubject = "Patrol Email (Selenium) #{timestamp}"
+	emailmessage = 'Selenium Test Email Message'
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
   home = ServizioHome.new(@driver)
   patrols = PatrolsResource.new(@driver)
+	activities = ActivitiesResource.new(@driver)
+	printemail = PrintEmailResource.new(@driver)
 
 	#Setup
 	@driver.navigate.to "https://dev.yesco.com/servizioreact/"
@@ -56,11 +63,34 @@ describe "Test Name" do
 		expect(patrols.top_name.text.downcase).to include(submittedname.downcase)
 	end
 
-	#Make Inactive
-	it "Make a record inactive using grid actions" do
-		
+	it "Open top record and create an activity" do
+		patrols.top_open()
+		patrols.create_activity()
+		activities.reason(activityreason)
+		activities.contact_method(activitycontactmethod)
+		activities.description(activitydescription)
+		activities.save_close()
+
+		expect(patrols.top_activity_description.text.downcase).to include(activitydescription.downcase)
+
+		patrols.save_close()
 	end
-	#Activity Creation
-	#Print/Email
+
+	it "Open top record and email" do
+		currentsent = patrols.top_sent.text
+		patrols.top_open()
+		patrols.print_email()
+		printemail.email_from(emailaddressfrom)
+		printemail.email_subject(emailsubject)
+		printemail.email_message(emailmessage)
+		printemail.save_close()
+		patrols.save_close()
+
+		expect(patrols.top_sent.text).not_to eql(currentsent)
+	end
+
+	it "Make top record inactive using grid actions" do
+
+	end
 
 end
