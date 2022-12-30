@@ -16,12 +16,16 @@ describe "Test Name" do
 	activityreason = "Sales"
 	activitycontactmethod = "Email"
 	activitydescription = "Selenium Test #{timestamp}"
+	emailaddressfrom = "bstevenson@yesco.com"
+	emailsubject = "Patrol Email (Selenium) #{timestamp}"
+	emailmessage = 'Selenium Test Email Message'
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
 	home = ServizioHome.new(@driver)
 	patrols = PatrolsResource.new(@driver)
 	activities = ActivitiesResource.new(@driver)
+	printemail = PrintEmailResource.new(@driver)
 
 	#Setup
 	@driver.navigate.to "https://stage.yesco.com/servizioreact/"
@@ -33,16 +37,11 @@ describe "Test Name" do
 	it "Open top patrol and create an activity" do
 		home.open_resource(resource1)
 
-		currentsent = patrols.top_sent.text
-		patrols.top_open()
-		patrols.print_email()
-		printemail.email_from(emailaddressfrom)
-		printemail.email_subject(emailsubject)
-		printemail.email_message(emailmessage)
-		printemail.save_close()
-		patrols.save_close()
+		toprecord = patrols.top_ref.text
+		patrols.make_inactive()
 
-		expect(patrols.top_sent.text).not_to eql(currentsent)
+		expect(patrols.top_ref.text).not_to eql(toprecord)
+
 	end
 
 end

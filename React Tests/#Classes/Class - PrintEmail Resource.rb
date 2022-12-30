@@ -119,6 +119,7 @@ class PrintEmailResource
     wait.until {@driver.find_element(EMAIL_CLOSE_BUTTON).displayed?}
     button = @driver.find_element(EMAIL_CLOSE_BUTTON)
     button.click
+    sleep(3)
   end
 
 end

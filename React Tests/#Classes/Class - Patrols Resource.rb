@@ -5,8 +5,9 @@ class PatrolsResource
   TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/span"}
   TOP_ACTIONS = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div[1]/div/i"}
     GRID_CREATE_ACTIVITY = {css: "a[id$='CreateActivityLink']"}
-    GRID_PRINT_EMAIL = {}
-    GRID_MAKE_INACTIVE = {}
+    GRID_PRINT_EMAIL = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div[2]/div/a[5]"}
+    GRID_MAKE_INACTIVE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div[2]/div/a[6]"}
+      MAKE_INACTIVE_CONFIRM = {xpath: "/html/body/div[7]/div/div/div/div/div/div/div/div[3]/button[1]"}
   TOP_SENT_ON = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[16]/span"}
   GRID_MENU = {css: "div[class='dropdown-header select']"}
   NEW_PATROL = {css: "div[id='b20-b4-b3-NewTitlePlaceholder']"}
@@ -33,6 +34,7 @@ class PatrolsResource
   DETAIL_ACTIONS_MENU = {css: "div[id='b22-b5-b25-b1-DropdownHeader']"}
     DETAIL_CREATE_ACTIVITY = {css: "span[id='b22-b5-b25-GridActionsCreateActivity']"}
     DETAIL_PRINT_EMAIL = {css: "span[id='b22-b5-b25-GridActionsPrintEmail']"}
+  CANCEL_BUTTON = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[2]/div/button"}
   SAVE_BUTTON = {css: "button[id='b22-b5-SaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id='b22-b5-SaveAndCloseButton']"}
 
@@ -67,6 +69,22 @@ class PatrolsResource
     wait.until {@driver.find_element(TOP_REF).displayed?}
     top_record = @driver.find_element(TOP_REF)
     top_record.click
+  end
+
+  def make_inactive()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_REF).displayed?}
+    toprecord = @driver.find_element(TOP_REF)
+    wait.until {@driver.find_element(TOP_ACTIONS).displayed?}
+    actions = @driver.find_element(TOP_ACTIONS)
+    actions.click
+    wait.until {@driver.find_element(GRID_MAKE_INACTIVE).displayed?}
+    makeinactive = @driver.find_element(GRID_MAKE_INACTIVE)
+    makeinactive.click
+    wait.until {@driver.find_element(MAKE_INACTIVE_CONFIRM).displayed?}
+    confirm = @driver.find_element(MAKE_INACTIVE_CONFIRM)
+    confirm.click
+    wait.until {@driver.find_element(TOP_REF) != toprecord}
   end
 
   def new_patrol()
@@ -209,6 +227,14 @@ class PatrolsResource
     printemail.click
     wait.until {@driver.find_element(THIRD_TAB).displayed?}
     wait.until {@driver.find_element(THIRD_TAB).text.include?("Print/Email")}
+  end
+
+  def cancel()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(CANCEL_BUTTON).displayed?}
+    button = @driver.find_element(CANCEL_BUTTON)
+    button.click
+    sleep(2)
   end
 
   def save_close()

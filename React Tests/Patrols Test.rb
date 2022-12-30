@@ -31,7 +31,7 @@ describe "Test Name" do
 	printemail = PrintEmailResource.new(@driver)
 
 	#Setup
-	@driver.navigate.to "https://dev.yesco.com/servizioreact/"
+	@driver.navigate.to "https://stage.yesco.com/servizioreact/"
 	login.enter_username(loginname)
 	login.enter_password(password)
 	login.sign_in()
@@ -77,20 +77,22 @@ describe "Test Name" do
 	end
 
 	it "Open top record and email" do
-		currentsent = patrols.top_sent.text
 		patrols.top_open()
 		patrols.print_email()
 		printemail.email_from(emailaddressfrom)
 		printemail.email_subject(emailsubject)
 		printemail.email_message(emailmessage)
-		printemail.save_close()
-		patrols.save_close()
+		printemail.email_close()
+		patrols.cancel()
 
-		expect(patrols.top_sent.text).not_to eql(currentsent)
+		expect(patrols.top_sent.text).not_to eql("")
 	end
 
 	it "Make top record inactive using grid actions" do
+		toprecord = patrols.top_ref.text
+		patrols.make_inactive()
 
+		expect(patrols.top_ref.text).not_to eql(toprecord)
 	end
 
 end
