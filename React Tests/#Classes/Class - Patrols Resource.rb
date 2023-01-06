@@ -4,10 +4,10 @@ class PatrolsResource
   TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/a/span"}
   TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/span"}
   TOP_ACTIONS = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div[1]/div/i"}
-    GRID_CREATE_ACTIVITY = {css: "a[id$='CreateActivityLink']"}
+    GRID_CREATE_ACTIVITY = {css: "a[id$='GridActionsCreateActivityLink']"}
     GRID_PRINT_EMAIL = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div[2]/div/a[5]"}
-    GRID_MAKE_INACTIVE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div[2]/div/a[6]"}
-      MAKE_INACTIVE_CONFIRM = {xpath: "/html/body/div[7]/div/div/div/div/div/div/div/div[3]/button[1]"}
+    GRID_MAKE_INACTIVE = {css: "a[id$='GridActionsMakeInactiveLink']"}
+      MAKE_INACTIVE_CONFIRM = {css: "span[id$='ConfirmButton']"}
   TOP_SENT_ON = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[16]/span"}
   GRID_MENU = {css: "div[class='dropdown-header select']"}
   NEW_PATROL = {css: "div[id='b20-b4-b3-NewTitlePlaceholder']"}
@@ -15,10 +15,12 @@ class PatrolsResource
   SHOW_INACTIVES = {css: "input[id$='SwitchShowInactives']"}
   OLD_PATROLS = {css: "input[id$='SwitchShowOldPatrols']"}
   ID_COLUMN = {css: "input[id='b20-b4-b6-Input_SearchVar']"}
+  ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/i"}
   NAME_COLUMN = {css: "input[id='b20-b4-b8-Input_SearchVar']"}
+  NAME_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/i[2]"}
   SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
   CUSTOMER_SELECT_SEARCH = {css: "input[id='b22-b5-b7-CustomerSearch']"}
-  TOP_CUSTOMER_SELECT = {xpath: "/html/body/div[6]/div/div/div/div/div/div[3]/div/div[1]/div/div/div[3]/button"}
+  TOP_CUSTOMER_SELECT = {xpath: "/html/body/div[7]/div/div/div/div/div/div[3]/div/div[1]/div/div/div[3]/button"}
 
   #CSS Selectors: Detail
   SUBMITTED_NAME_FIELD = {css: "input[id='b22-b5-Input_SubmittedName']"}
@@ -34,7 +36,7 @@ class PatrolsResource
   DETAIL_ACTIONS_MENU = {css: "div[id='b22-b5-b25-b1-DropdownHeader']"}
     DETAIL_CREATE_ACTIVITY = {css: "span[id='b22-b5-b25-GridActionsCreateActivity']"}
     DETAIL_PRINT_EMAIL = {css: "span[id='b22-b5-b25-GridActionsPrintEmail']"}
-  CANCEL_BUTTON = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[2]/div/button"}
+  CANCEL_BUTTON = {css: "button[id='b22-b5-CancelButton']"}
   SAVE_BUTTON = {css: "button[id='b22-b5-SaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id='b22-b5-SaveAndCloseButton']"}
 
@@ -154,6 +156,14 @@ class PatrolsResource
     wait.until {@driver.find_element(TOP_REF).text.include?(searchname)}
   end
 
+  def search_id_clear()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(ID_COLUMN_CLEAR).displayed?}
+    button = @driver.find_element(ID_COLUMN_CLEAR)
+    button.clear
+    sleep(2)
+  end
+
   def search_name(searchname)
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(NAME_COLUMN).displayed?}
@@ -163,6 +173,14 @@ class PatrolsResource
     @driver.action.send_keys(:enter).perform
     sleep(1)
     wait.until {@driver.find_element(TOP_NAME).text.include?(searchname)}
+  end
+
+  def search_name_clear()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(NAME_COLUMN_CLEAR).displayed?}
+    button = @driver.find_element(NAME_COLUMN_CLEAR)
+    button.clear
+    sleep(2)
   end
 
   def search_reset()

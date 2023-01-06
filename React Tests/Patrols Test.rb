@@ -10,8 +10,8 @@ describe "Test Name" do
 	#Test Variables
   timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
   dateonly = Time.now.strftime("%m/%d/%Y")
-	loginname = "bstevenson@yesco.com"
-	password = "BSyesco2113"
+	loginname = "masterchief@yesco.com"
+	password = "MCyesco123"
   resource1 = "Patrols"
   idsearch = "1500"
 	namesearch = "Selenium Test"
@@ -19,7 +19,6 @@ describe "Test Name" do
 	activityreason = "Sales"
 	activitycontactmethod = "Email"
 	activitydescription = "Selenium Test #{timestamp}"
-	emailaddressfrom = "bstevenson@yesco.com"
 	emailsubject = "Patrol Email (Selenium) #{timestamp}"
 	emailmessage = 'Selenium Test Email Message'
 
@@ -57,7 +56,7 @@ describe "Test Name" do
 		patrols.old_patrols()
 		patrols.new_patrol()
 		patrols.submitted_name(submittedname)
-		patrols.location(location)
+		#patrols.location(location)
 		patrols.save_close()
 
 		expect(patrols.top_name.text.downcase).to include(submittedname.downcase)
@@ -73,17 +72,20 @@ describe "Test Name" do
 
 		expect(patrols.top_activity_description.text.downcase).to include(activitydescription.downcase)
 
-		patrols.save_close()
+		patrols.cancel()
 	end
 
 	it "Open top record and email" do
 		patrols.top_open()
 		patrols.print_email()
-		printemail.email_from(emailaddressfrom)
+		printemail.email_from(loginname)
 		printemail.email_subject(emailsubject)
 		printemail.email_message(emailmessage)
 		printemail.email_close()
 		patrols.cancel()
+		home.close_tab()
+		home.resource_search_clear()
+		home.open_resource(resource1)
 
 		expect(patrols.top_sent.text).not_to eql("")
 	end

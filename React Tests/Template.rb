@@ -37,10 +37,15 @@ describe "Test Name" do
 	it "Open top patrol and create an activity" do
 		home.open_resource(resource1)
 
-		toprecord = patrols.top_ref.text
-		patrols.make_inactive()
+		patrols.top_open()
+		patrols.print_email()
+		printemail.email_from(emailaddressfrom)
+		printemail.email_subject(emailsubject)
+		printemail.email_message(emailmessage)
+		printemail.email_close()
+		patrols.cancel()
 
-		expect(patrols.top_ref.text).not_to eql(toprecord)
+		expect(patrols.top_sent.text).not_to eql("")
 
 	end
 
