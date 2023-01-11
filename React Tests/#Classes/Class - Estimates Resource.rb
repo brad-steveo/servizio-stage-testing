@@ -1,6 +1,6 @@
 class EstimatesResource
 
-  #CSS Selectors
+  #CSS Selectors: Grid
   TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/a/span"}
   TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/span"}
   TOP_ACTIONS = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]"}
@@ -18,6 +18,25 @@ class EstimatesResource
   NAME_COLUMN = {css: "input[id='b20-b20-b7-Input_SearchVar']"}
   NAME_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[3]/div/div/i[2]"}
   SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
+
+  #CSS Selectors: Detail
+  NAME_FIELD = {css: "input[id$='Input_DBAName']"}
+  LOCATION_DROPDOWN = {css: "select[id$='LocationDropdown']"}
+  TYPE_DROPDOWN = {css: "select[id$='EstimateTypeDropdown']"}
+  STAGE_DROPDOWN = {css: "select[id$='EstimateStageDropdown']"}
+  AE_DROPDOWN = {css: "select[id$='AccountExecDropdown']"}
+  NTE_FIELD = {css: "input[id$='Input_NTE']"}
+  ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/header/div[1]/div[5]/button"}
+    ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[5]/article/div/div/div/table/thead/tr/th[1]"}
+    TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[5]/article/div/div/div/table/tbody/tr/td[1]/a/span"}
+    TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[5]/article/div/div/div/table/tbody/tr/td[4]/span"}
+    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/header/div[1]/div[4]/button/div/span"}
+  DETAIL_ACTIONS_MENU = {css: "div[id$='DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id$='GridActionsCreateActivity']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id$='GridActionsPrintEmail']"}
+  CANCEL_BUTTON = {css: "button[id='']"}
+  SAVE_BUTTON = {css: "button[id='']"}
+  SAVE_CLOSE_BUTTON = {css: "button[id='']"}
 
   attr_reader :driver
 
@@ -149,5 +168,106 @@ class EstimatesResource
     sleep(2)
   end
 
+  #Class Methods: Detail
+  def name(estimatename)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(NAME_FIELD).displayed?}
+    field = @driver.find_element(NAME_FIELD)
+    field.send_keys(estimatename)
+  end
+
+  def location(locationselect)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(LOCATION_DROPDOWN).displayed?}
+    dropdown_list = @driver.find_element(LOCATION_DROPDOWN)
+    options = dropdown_list.find_elements(tag_name: 'option')
+    options.each {|option| option.click if option.text == (locationselect)}
+  end
+
+  def type(typeselect)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TYPE_DROPDOWN).displayed?}
+    dropdown_list = @driver.find_element(TYPE_DROPDOWN)
+    options = dropdown_list.find_elements(tag_name: 'option')
+    options.each {|option| option.click if option.text == (typeselect)}
+  end
+
+  def stage(stageselect)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(STAGE_DROPDOWN).displayed?}
+    dropdown_list = @driver.find_element(STAGE_DROPDOWN)
+    options = dropdown_list.find_elements(tag_name: 'option')
+    options.each {|option| option.click if option.text == (stageselect)}
+  end
+
+  def account_executive(aeselect)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(AE_DROPDOWN).displayed?}
+    dropdown_list = @driver.find_element(AE_DROPDOWN)
+    options = dropdown_list.find_elements(tag_name: 'option')
+    options.each {|option| option.click if option.text == (aeselect)}
+  end
+
+  def nte(nteinput)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(NTE_FIELD).displayed?}
+    field = @driver.find_element(NTE_FIELD)
+    field.send_keys(nteinput)
+  end
+
+  def top_activity()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_ACTIVITY_REF).displayed?}
+    top = @driver.find_element(TOP_ACTIVITY_REF)
+  end
+
+  def top_activity_description()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_ACTIVITY_DESCRIPTION).displayed?}
+    description = @driver.find_element(TOP_ACTIVITY_DESCRIPTION)
+  end
+
+  def create_activity()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(ACTIVITIES_SUBTAB).displayed?}
+    tab = @driver.find_element(ACTIVITIES_SUBTAB)
+    tab.click
+    sleep(5)
+    wait.until {@driver.find_element(ACTIVITIES_ID_COLUMN).displayed?}
+    actions = @driver.find_element(DETAIL_ACTIONS_MENU)
+    actions.click
+    wait.until {@driver.find_element(DETAIL_CREATE_ACTIVITY).displayed?}
+    createactivity = @driver.find_element(DETAIL_CREATE_ACTIVITY)
+    createactivity.click
+    wait.until {@driver.find_element(THIRD_TAB).displayed?}
+    wait.until {@driver.find_element(THIRD_TAB).text.include?("New Activity")}
+  end
+
+  def print_email()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(DETAIL_ACTIONS_MENU).displayed?}
+    actions = @driver.find_element(DETAIL_ACTIONS_MENU)
+    actions.click
+    wait.until {@driver.find_element(DETAIL_PRINT_EMAIL).displayed?}
+    printemail = @driver.find_element(DETAIL_PRINT_EMAIL)
+    printemail.click
+    wait.until {@driver.find_element(THIRD_TAB).displayed?}
+    wait.until {@driver.find_element(THIRD_TAB).text.include?("Print/Email")}
+  end
+
+  def cancel()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(CANCEL_BUTTON).displayed?}
+    button = @driver.find_element(CANCEL_BUTTON)
+    button.click
+    sleep(2)
+  end
+
+  def save_close()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(SAVE_CLOSE_BUTTON).displayed?}
+    button = @driver.find_element(SAVE_CLOSE_BUTTON)
+    button.click
+    sleep(2)
 
 end

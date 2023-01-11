@@ -14,7 +14,9 @@ describe "Estimates Test" do
   password = "MCyesco123"
   resource1 = "Estimates"
   idsearch = "1285"
-  namesearch = "Selenium Test"
+  namesearch = "Selenium Job"
+  estimatename = "Selenium Estimate #{timestamp}"
+  estimatetype = "Service"
 
   #Test Classes
   login = ServizioLogin.new(@driver)
@@ -42,6 +44,16 @@ describe "Estimates Test" do
     estimates.search_name(namesearch)
 
     expect(estimates.top_name.text.downcase).to include(namesearch.downcase)
+  end
+
+  it "Create an Estimate record" do
+    estimates.search_reset()
+    estimates.new_estimate()
+    estimates.name(estimatename)
+    estimates.type(estimatetype)
+    estimates.save_close()
+
+    expect(estimates.top_name.text.downcase).to include(estimatename.downcase)
   end
 
 end
