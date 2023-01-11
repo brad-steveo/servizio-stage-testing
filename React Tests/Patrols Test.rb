@@ -3,7 +3,7 @@ require "rspec"
 require "require_all"
 require_all "#Classes"
 
-describe "Test Name" do
+describe "Patrols Test" do
 
 	@driver = Selenium::WebDriver.for :chrome
 
