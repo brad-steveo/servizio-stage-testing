@@ -17,6 +17,12 @@ describe "Estimates Test" do
   namesearch = "Selenium Job"
   estimatename = "Selenium Estimate #{timestamp}"
   estimatetype = "Service"
+  estimatecustomer = "1031"
+  activityreason = "Sales"
+  activitycontactmethod = "Email"
+  activitydescription = "Selenium Test #{timestamp}"
+  emailsubject = "Estimate Email (Selenium) #{timestamp}"
+  emailmessage = "Selenium Test Email Message"
 
   #Test Classes
   login = ServizioLogin.new(@driver)
@@ -51,9 +57,45 @@ describe "Estimates Test" do
     estimates.new_estimate()
     estimates.name(estimatename)
     estimates.type(estimatetype)
+    estimates.customer_select(estimatecustomer)
     estimates.save_close()
 
     expect(estimates.top_name.text.downcase).to include(estimatename.downcase)
+  end
+
+  it "Open top record and create an activity" do
+    estimates.top_open()
+    estimates.create_activity()
+    activities.reason(activityreason)
+    activities.contact_method(activitycontactmethod)
+    activities.description(activitydescription)
+    activities.save_close()
+
+    expect(estimates.top_activity_description.text.downcase).to include(activitydescription.downcase)
+
+    estimates.cancel()
+  end
+
+  it "Open top record and email" do
+    estimates.top_open()
+    estimates.print_email()
+    printemail.email_from(loginname)
+    printemail.email_subject(emailsubject)
+    printemail.email_message(emailmessage)
+    printemail.email_close()
+    estimates.cancel()
+    home.close_tab()
+    home.resource_search_clear()
+    home.open_resource(resource1)
+
+    expect(estimates.top_sent.text).not_to eql("")
+  end
+
+  it "Make top record inactive using grid actions" do
+    toprecord = estimates.top_ref.text
+    estimates.make_inactive()
+
+    expect(estimates.top_ref.text).not_to eql(toprecord)
   end
 
 end

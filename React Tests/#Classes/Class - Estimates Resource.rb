@@ -1,7 +1,7 @@
 class EstimatesResource
 
   #CSS Selectors: Grid
-  TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/a/span"}
+  TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div[1]/a/span"}
   TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/span"}
   TOP_ACTIONS = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]"}
     GRID_CREATE_ACTIVITY = {css: "a[id$='GridActionsCreateActivityLink']"}
@@ -24,6 +24,9 @@ class EstimatesResource
   LOCATION_DROPDOWN = {css: "select[id$='LocationDropdown']"}
   TYPE_DROPDOWN = {css: "select[id$='EstimateTypeDropdown']"}
   STAGE_DROPDOWN = {css: "select[id$='EstimateStageDropdown']"}
+  CUSTOMER_SELECT = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[1]/div/div[2]/div[5]/div/button"}
+  CUSTOMER_SELECT_SEARCH = {css: "input[id$='CustomerSearch']"}
+    TOP_CUSTOMER_SELECT = {xpath: "/html/body/div[19]/div/div/div/div/div/div[3]/div/div[1]/div/div/div[3]/button"}
   AE_DROPDOWN = {css: "select[id$='AccountExecDropdown']"}
   NTE_FIELD = {css: "input[id$='Input_NTE']"}
   ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/header/div[1]/div[5]/button"}
@@ -31,12 +34,13 @@ class EstimatesResource
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[5]/article/div/div/div/table/tbody/tr/td[1]/a/span"}
     TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[5]/article/div/div/div/table/tbody/tr/td[4]/span"}
     THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/header/div[1]/div[4]/button/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id$='DropdownHeader']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id$='GridActionsCreateActivity']"}
-    DETAIL_PRINT_EMAIL = {css: "span[id$='GridActionsPrintEmail']"}
-  CANCEL_BUTTON = {css: "button[id='']"}
-  SAVE_BUTTON = {css: "button[id='']"}
-  SAVE_CLOSE_BUTTON = {css: "button[id='']"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b22-b21-b42-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b22-b21-b42-GridActionsCreateActivity']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id='b22-b21-b42-GridActionsPrintEmail']"}
+  #CANCEL_BUTTON = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[2]/div/button"}
+  CANCEL_BUTTON = {css: "button[id$='CancelButton']"}
+  SAVE_BUTTON = {css: "button[id$='SaveButton']"}
+  SAVE_CLOSE_BUTTON = {css: "button[id$='SaveAndCloseButton']"}
 
   attr_reader :driver
 
@@ -200,6 +204,23 @@ class EstimatesResource
     options.each {|option| option.click if option.text == (stageselect)}
   end
 
+  def customer_select(customersearch)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(CUSTOMER_SELECT).displayed?}
+    button = @driver.find_element(CUSTOMER_SELECT)
+    button.click
+    wait.until {@driver.find_element(CUSTOMER_SELECT_SEARCH)}
+    field = @driver.find_element(CUSTOMER_SELECT_SEARCH)
+    field.send_keys(customersearch)
+    sleep(1)
+    @driver.action.send_keys(:enter).perform
+    sleep(1)
+    wait.until {@driver.find_element(TOP_CUSTOMER_SELECT).displayed?}
+    button2 = @driver.find_element(TOP_CUSTOMER_SELECT)
+    button2.click
+    sleep(2)
+  end
+
   def account_executive(aeselect)
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(AE_DROPDOWN).displayed?}
@@ -232,10 +253,11 @@ class EstimatesResource
     wait.until {@driver.find_element(ACTIVITIES_SUBTAB).displayed?}
     tab = @driver.find_element(ACTIVITIES_SUBTAB)
     tab.click
-    sleep(5)
+    sleep(2)
     wait.until {@driver.find_element(ACTIVITIES_ID_COLUMN).displayed?}
     actions = @driver.find_element(DETAIL_ACTIONS_MENU)
     actions.click
+    sleep(2)
     wait.until {@driver.find_element(DETAIL_CREATE_ACTIVITY).displayed?}
     createactivity = @driver.find_element(DETAIL_CREATE_ACTIVITY)
     createactivity.click
@@ -269,5 +291,6 @@ class EstimatesResource
     button = @driver.find_element(SAVE_CLOSE_BUTTON)
     button.click
     sleep(2)
+  end
 
 end

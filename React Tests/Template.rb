@@ -12,7 +12,7 @@ describe "Test Name" do
   dateonly = Time.now.strftime("%m/%d/%Y")
 	loginname = "bstevenson@yesco.com"
 	password = "BSyesco2113"
-	resource1 = "Patrols"
+	resource1 = "Estimates"
 	activityreason = "Sales"
 	activitycontactmethod = "Email"
 	activitydescription = "Selenium Test #{timestamp}"
@@ -24,6 +24,7 @@ describe "Test Name" do
 	login = ServizioLogin.new(@driver)
 	home = ServizioHome.new(@driver)
 	patrols = PatrolsResource.new(@driver)
+	estimates = EstimatesResource.new(@driver)
 	activities = ActivitiesResource.new(@driver)
 	printemail = PrintEmailResource.new(@driver)
 
@@ -37,16 +38,18 @@ describe "Test Name" do
 	it "Open top patrol and create an activity" do
 		home.open_resource(resource1)
 
-		patrols.top_open()
-		patrols.print_email()
-		printemail.email_from(emailaddressfrom)
-		printemail.email_subject(emailsubject)
-		printemail.email_message(emailmessage)
-		printemail.email_close()
-		patrols.cancel()
+		estimates.top_open()
+		estimates.print_email()
+    printemail.email_from(loginname)
+    printemail.email_subject(emailsubject)
+    printemail.email_message(emailmessage)
+    printemail.email_close()
+    estimates.cancel()
+    home.close_tab()
+    home.resource_search_clear()
+    home.open_resource(resource1)
 
-		expect(patrols.top_sent.text).not_to eql("")
-
+    expect(estimates.top_sent.text).not_to eql("")
 	end
 
 end

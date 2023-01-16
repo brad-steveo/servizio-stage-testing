@@ -1,20 +1,20 @@
 class PrintEmailResource
 
   #CSS Selectors
-  EMAIL_ADDRESS = {css: "input[id='b24-b30-Input_EmailAddress']"}
-  EMAIL_FROM = {css: "input[id='b24-b30-Input_EmailFrom']"}
-  EMAIL_CC = {css: "input[id='b24-b30-Input_EmailCC']"}
-  EMAIL_BCC = {css: "input[id='b24-b30-Input_EmailBCC']"}
-  EMAIL_SUBJECT = {css: "input[id='b24-b30-Input_EmailSubject']"}
-  EMAIL_MESSAGE = {css: "textarea[id='b24-b30-TextArea_EmailMessage']"}
-  PDF_ATTACHEMENT_CHECKBOX = {css: "input[id='b24-b30-CB_IncludePDF']"}
-  IMAGE_ATTACHEMENT_CHECKBOX = {css: "input[id='b24-b30-CB_IncludeImages']"}
-  TERMS_CHECKBOX = {css: "input[id='b24-b30-CB_IncludeTerms']"}
-  ACTIVITIES_CHECKBOX = {css: "input[id='b24-b30-CB_CreateActivity']"}
-  NO_SERVICE_NEEDED_CHECKBOX = {css: "input[id='b24-b30-CB_NoServiceNeeded']"}
-  SCOPE_OF_WORK_CHECKBOX = {css: "input[id='b24-b30-CB_ScopeAsMessage']"}
-  CANCEL_BUTTON = {css: "button[id='b24-b30-CancelBtn']"}
-  EMAIL_CLOSE_BUTTON = {css: "button[id='b24-b30-EmailCloseBtn']"}
+  EMAIL_ADDRESS = {css: "input[id$='Input_EmailAddress']"}
+  EMAIL_FROM = {css: "input[id$='Input_EmailFrom']"}
+  EMAIL_CC = {css: "input[id$='Input_EmailCC']"}
+  EMAIL_BCC = {css: "input[id$='Input_EmailBCC']"}
+  EMAIL_SUBJECT = {css: "input[id$='Input_EmailSubject']"}
+  EMAIL_MESSAGE = {css: "textarea[id$='TextArea_EmailMessage']"}
+  PDF_ATTACHEMENT_CHECKBOX = {css: "input[id$='CB_IncludePDF']"}
+  IMAGE_ATTACHEMENT_CHECKBOX = {css: "input[id$='CB_IncludeImages']"}
+  TERMS_CHECKBOX = {css: "input[id$='CB_IncludeTerms']"}
+  ACTIVITIES_CHECKBOX = {css: "input[id$='CB_CreateActivity']"}
+  NO_SERVICE_NEEDED_CHECKBOX = {css: "input[id$='CB_NoServiceNeeded']"}
+  SCOPE_OF_WORK_CHECKBOX = {css: "input[id$='CB_ScopeAsMessage']"}
+  CANCEL_BUTTON = {css: "button[id$='CancelBtn']"}
+  EMAIL_CLOSE_BUTTON = {css: "button[id$='EmailCloseBtn']"}
 
   attr_reader :driver
 

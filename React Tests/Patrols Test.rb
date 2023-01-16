@@ -20,7 +20,7 @@ describe "Patrols Test" do
 	activitycontactmethod = "Email"
 	activitydescription = "Selenium Test #{timestamp}"
 	emailsubject = "Patrol Email (Selenium) #{timestamp}"
-	emailmessage = 'Selenium Test Email Message'
+	emailmessage = "Selenium Test Email Message"
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
