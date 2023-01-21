@@ -34,10 +34,9 @@ class EstimatesResource
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[5]/article/div/div/div/table/tbody/tr/td[1]/a/span"}
     TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[5]/article/div/div/div/table/tbody/tr/td[4]/span"}
     THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/header/div[1]/div[4]/button/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b22-b21-b42-b1-DropdownHeader']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id='b22-b21-b42-GridActionsCreateActivity']"}
-    DETAIL_PRINT_EMAIL = {css: "span[id='b22-b21-b42-GridActionsPrintEmail']"}
-  #CANCEL_BUTTON = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[2]/div/button"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b22-b21-b43-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b22-b21-b43-GridActionsCreateActivity']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id='b22-b21-b43-GridActionsPrintEmail']"}
   CANCEL_BUTTON = {css: "button[id$='CancelButton']"}
   SAVE_BUTTON = {css: "button[id$='SaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='SaveAndCloseButton']"}
@@ -153,7 +152,7 @@ class EstimatesResource
     sleep(1)
     @driver.action.send_keys(:enter).perform
     sleep(1)
-    wait.until {@driver.find_element(TOP_NAME).text.include?(searchname)}
+    wait.until {@driver.find_element(TOP_NAME).text.downcase.include?(searchname.downcase)}
   end
 
   def search_name_clear()

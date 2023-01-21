@@ -10,21 +10,21 @@ describe "Test Name" do
 	#Test Variables
   timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
   dateonly = Time.now.strftime("%m/%d/%Y")
-	loginname = "bstevenson@yesco.com"
-	password = "BSyesco2113"
-	resource1 = "Estimates"
-	activityreason = "Sales"
-	activitycontactmethod = "Email"
-	activitydescription = "Selenium Test #{timestamp}"
-	emailaddressfrom = "bstevenson@yesco.com"
-	emailsubject = "Patrol Email (Selenium) #{timestamp}"
-	emailmessage = 'Selenium Test Email Message'
+	loginname = "masterchief@yesco.com"
+	password = "MCyesco123"
+	resource1 = "Jobs"
+	idsearch = "1500"
+	namesearch = "Stage Testing"
+	customersearch = "1031"
+	jobname = "Selenium Test Job #{timestamp}"
+	jobtype = "Service"
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
 	home = ServizioHome.new(@driver)
 	patrols = PatrolsResource.new(@driver)
 	estimates = EstimatesResource.new(@driver)
+	jobs = JobsResource.new(@driver)
 	activities = ActivitiesResource.new(@driver)
 	printemail = PrintEmailResource.new(@driver)
 
@@ -35,21 +35,11 @@ describe "Test Name" do
 	login.sign_in()
 
 	#Text Examples
-	it "Open top patrol and create an activity" do
-		home.open_resource(resource1)
-
-		estimates.top_open()
-		estimates.print_email()
-    printemail.email_from(loginname)
-    printemail.email_subject(emailsubject)
-    printemail.email_message(emailmessage)
-    printemail.email_close()
-    estimates.cancel()
-    home.close_tab()
-    home.resource_search_clear()
+	it "Make Inactive" do
     home.open_resource(resource1)
+		toprecord = jobs.top_ref.text
+    jobs.make_inactive()
 
-    expect(estimates.top_sent.text).not_to eql("")
+    expect(jobs.top_ref.text).not_to eql(toprecord)
 	end
-
 end
