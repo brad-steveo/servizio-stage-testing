@@ -36,8 +36,8 @@ class JobsResource
   DETAIL_ACTIONS_MENU = {css: "div[id='b22-b13-b57-b1-DropdownHeader']"}
     DETAIL_CREATE_ACTIVITY = {css: "span[id='b22-b13-b57-GridActionsCreateActivity']"}
     DETAIL_PRINT_EMAIL = {css: "span[id='b22-b13-b57-GridActionsPrintEmail']"}
-  CANCEL_BUTTON = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[2]/div/button"}
-  #CANCEL_BUTTON = {css: "button[id$='CancelButton']"}
+  #CANCEL_BUTTON = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[2]/div/button"}
+  CANCEL_BUTTON = {css: "button[id$='CancelButton']"}
   SAVE_BUTTON = {css: "button[id$='SaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='SaveAndCloseButton']"}
 
