@@ -18,7 +18,7 @@ describe "React Login Test" do
 		#Logging in
 		login = ServizioLogin.new(@driver)
 		login.enter_username(loginname)
-    login.enter_password(password)
+    	login.enter_password(password)
 		login.sign_in()
 
 	end
