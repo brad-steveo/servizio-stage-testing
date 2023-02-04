@@ -92,7 +92,7 @@ class CustomersResource
     wait.until {@driver.find_element(NEW_CUSTOMER).displayed?}
     new_customer = @driver.find_element(NEW_CUSTOMER)
     new_customer.click
-    sleep(2)
+    sleep(6)
   end
 
   def search_id(searchname)

@@ -17,7 +17,9 @@ describe "Customers Test" do
   namesearch = "Selenium Test Customer"
   customername = "Selenium Customer #{timestamp}"
   dbaname = "YESCO"
+  stage = "Customer"
   patroltype = "Yes"
+  timezone = "(UTC-07:00) Mountain Time (US & Canada)"
   specialinstructions = "Customer special instructions #{timestamp}"
   patrolinstructions = "Patroller instructions #{timestamp}"
   customerphone = "123.456.7890"
@@ -26,6 +28,9 @@ describe "Customers Test" do
   billcity = "Salt Lake City"
   billstate = "Utah"
   billzip = "84109"
+  activityreason = "Sales"
+	activitycontactmethod = "Email"
+	activitydescription = "Selenium Test #{timestamp}"
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
@@ -54,27 +59,39 @@ describe "Customers Test" do
     expect(customers.top_name.text.downcase).to include(namesearch.downcase)
   end
 
-  it "Create a Customer record" do
+	it "Create a Customer record" do
     customers.search_reset()
-    customers.new_customer()
-    customers.name(customername)
-    customers.dba_name(dbaname)
-    customers.patrol_type(patroltype)
-    customers.special_instructions(specialinstructions)
-    customers.patrol_instructions(patrolinstructions)
-    customers.phone(customerphone)
-    customers.billing_name(billname)
-    customers.billing_street(billstreet)
-    customers.billing_city(billcity)
-    customers.billing_state(billstate)
-    customers.billing_zip(billzip)
-    customers.save_close()
+		customers.new_customer()
+		customers.name(customername)
+		customers.dba_name(dbaname)
+		customers.stage(stage)
+		customers.patrol_type(patroltype)
+		customers.timezone(timezone)
+		customers.special_instructions(specialinstructions)
+		customers.patrol_instructions(patrolinstructions)
+		customers.phone(customerphone)
+		customers.billing_name(billname)
+		customers.billing_street(billstreet)
+		customers.billing_city(billcity)
+		customers.billing_state(billstate)
+		customers.billing_zip(billzip)
+		customers.copy_to_site()
+		customers.save_close()
+	
+		expect(customers.top_name.text.downcase).to include(customername.downcase)
+	  end
 
-    expect(customers.top_name.text.downcase).to include(customername.downcase)
-  end
+  it "Open top record and create an activity" do
+    customers.top_open()
+    customers.create_activity()
+    activities.reason(activityreason)
+    activities.contact_method(activitycontactmethod)
+    activities.description(activitydescription)
+    activities.save_close()
 
-  it "Test" do
+    expect(customers.top_activity_description.text.downcase).to include(activitydescription.downcase)
 
+    customers.cancel()
   end
   
 end
