@@ -8,7 +8,7 @@ class CustomersResource
     GRID_CREATE_ACTIVITY = {css: "span[id='b20-b8-l1_0-455_0-b48-GridActionsCreateActivity']"}
   GRID_MENU = {css: "div[class='dropdown-header select']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
-  NEW_CUSTOMER = {css: "div[id='b20-b8-b2-NewTitlePlaceholder']"}
+  NEW_CUSTOMER = {css: "div[id$='NewTitlePlaceholder']"}
   ID_COLUMN = {css: "input[id='b20-b8-b5-Input_SearchVar']"}
   ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/i"}
   NAME_COLUMN = {css: "input[id='b20-b8-b7-Input_SearchVar']"}

@@ -1,11 +1,11 @@
 require "selenium-webdriver"
 require "rspec"
 require "require_all"
-require_all "#Classes"
+require_all "/Users/Brad/Documents/YESCO Stage Testing/servizio-stage-testing/React Tests/#Classes"
 
 describe "Customers Test" do
 
-	@driver = Selenium::WebDriver.for :chrome
+  @driver = Selenium::WebDriver.for :chrome
 
 	#Test Variables
   timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")

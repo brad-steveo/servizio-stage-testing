@@ -1,7 +1,7 @@
 require "selenium-webdriver"
 require "rspec"
 require "require_all"
-require_all "#Classes"
+require_all "/Users/Brad/Documents/YESCO Stage Testing/servizio-stage-testing/React Tests/#Classes"
 
 describe "Global Search Test" do
 
