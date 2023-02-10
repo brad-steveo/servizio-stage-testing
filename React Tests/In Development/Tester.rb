@@ -3,7 +3,7 @@ require "rspec"
 require "require_all"
 require_all "/Users/Brad/Documents/YESCO Stage Testing/servizio-stage-testing/React Tests/#Classes"
 
-describe "Test Name" do
+describe "Single Example Test" do
 
 	@driver = Selenium::WebDriver.for :chrome
 
