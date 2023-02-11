@@ -14,6 +14,9 @@ describe "Invoices Test" do
     resource1 = "Invoices"
     idsearch = "1024"
     customersearch = "Selenium Test Customer"
+    activityreason = "Sales"
+	activitycontactmethod = "Email"
+	activitydescription = "Selenium Test #{timestamp}"
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
@@ -41,6 +44,19 @@ describe "Invoices Test" do
 
         expect(invoices.top_customer.text.downcase).to include(customersearch.downcase)
     end
+
+    it "Open top record and create an activity" do
+        invoices.top_open()
+        invoices.create_activity()
+        activities.reason(activityreason)
+        activities.contact_method(activitycontactmethod)
+        activities.description(activitydescription)
+        activities.save_close()
+    
+        expect(invoices.top_activity_description.text.downcase).to include(activitydescription.downcase)
+    
+        invoices.cancel()
+      end
 
   
 end

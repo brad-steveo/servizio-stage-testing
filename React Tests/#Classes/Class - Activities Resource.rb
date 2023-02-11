@@ -6,11 +6,11 @@ class ActivitiesResource
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
 
   #CSS Selectors: Detail
-  REASON_DROPDOWN = {css: "select[id='b24-b33-ReasonDropdown']"}
-  CONTACT_METHOD_DROPDOWN = {css: "select[id='b24-b33-Dropdown2']"}
-  DESCRIPTION = {css: "textarea[id='b24-b33-TextArea_Description']"}
-  COMPLETE_ACTIVITY_CHECKBOX = {css: "input[id='b24-b33-CompleteActivityCheckbox']"}
-  SAVE_CLOSE_BUTTON = {css: "button[id='b24-b33-SaveAndCloseButton']"}
+  REASON_DROPDOWN = {css: "select[id$='ReasonDropdown']"}
+  CONTACT_METHOD_DROPDOWN = {css: "select[id$='Dropdown2']"}
+  DESCRIPTION = {css: "textarea[id$='TextArea_Description']"}
+  COMPLETE_ACTIVITY_CHECKBOX = {css: "input[id$='CompleteActivityCheckbox']"}
+  SAVE_CLOSE_BUTTON = {css: "button[id$='SaveAndCloseButton']"}
 
   attr_reader :driver
 
@@ -68,6 +68,7 @@ class ActivitiesResource
   end
 
   def save_close()
+    sleep(2)
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(SAVE_CLOSE_BUTTON).displayed?}
     button = @driver.find_element(SAVE_CLOSE_BUTTON)

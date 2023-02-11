@@ -17,7 +17,17 @@ class InvoicesResource
   SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
 
   #CSS Selectors: Detail
-
+  ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/header/div[1]/div[4]/button"}
+    ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[4]/article/div/div/table/thead/tr/th[1]"}
+    TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[1]/a/span"}
+    TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[4]/span"}
+    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/header/div[1]/div[4]/button/div/span"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b23-b40-b27-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b23-b40-b27-GridActionsCreateActivity']"}
+  CANCEL_BUTTON = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[2]/div/button"}
+  #CANCEL_BUTTON = {css: "button[id$='CancelButton']"}
+  SAVE_BUTTON = {css: "button[id$='SaveButton']"}
+  SAVE_CLOSE_BUTTON = {css: "button[id$='SaveAndCloseButton']"}
 
   attr_reader :driver
 
@@ -116,5 +126,62 @@ class InvoicesResource
   end
 
   #CSS Mehtods: Detail
+  def top_activity()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_ACTIVITY_REF).displayed?}
+    top = @driver.find_element(TOP_ACTIVITY_REF)
+  end
+
+  def top_activity_description()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_ACTIVITY_DESCRIPTION).displayed?}
+    description = @driver.find_element(TOP_ACTIVITY_DESCRIPTION)
+  end
+
+  def create_activity()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(ACTIVITIES_SUBTAB).displayed?}
+    tab = @driver.find_element(ACTIVITIES_SUBTAB)
+    tab.click
+    sleep(2)
+    wait.until {@driver.find_element(ACTIVITIES_ID_COLUMN).displayed?}
+    actions = @driver.find_element(DETAIL_ACTIONS_MENU)
+    actions.click
+    sleep(2)
+    wait.until {@driver.find_element(DETAIL_CREATE_ACTIVITY).displayed?}
+    createactivity = @driver.find_element(DETAIL_CREATE_ACTIVITY)
+    createactivity.click
+    wait.until {@driver.find_element(THIRD_TAB).displayed?}
+    wait.until {@driver.find_element(THIRD_TAB).text.include?("New Activity")}
+    sleep(2)
+  end
+
+  def print_email()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(DETAIL_ACTIONS_MENU).displayed?}
+    actions = @driver.find_element(DETAIL_ACTIONS_MENU)
+    actions.click
+    wait.until {@driver.find_element(DETAIL_PRINT_EMAIL).displayed?}
+    printemail = @driver.find_element(DETAIL_PRINT_EMAIL)
+    printemail.click
+    wait.until {@driver.find_element(THIRD_TAB).displayed?}
+    wait.until {@driver.find_element(THIRD_TAB).text.include?("Print/Email")}
+  end
+
+  def cancel()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(CANCEL_BUTTON).displayed?}
+    button = @driver.find_element(CANCEL_BUTTON)
+    button.click
+    sleep(2)
+  end
+
+  def save_close()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(SAVE_CLOSE_BUTTON).displayed?}
+    button = @driver.find_element(SAVE_CLOSE_BUTTON)
+    button.click
+    sleep(2)
+  end
 
 end
