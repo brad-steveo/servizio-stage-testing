@@ -69,7 +69,6 @@ describe "Customers Test" do
 		customers.timezone(timezone)
 		customers.special_instructions(specialinstructions)
 		customers.patrol_instructions(patrolinstructions)
-		customers.phone(customerphone)
 		customers.billing_name(billname)
 		customers.billing_street(billstreet)
 		customers.billing_city(billcity)

@@ -26,6 +26,9 @@ describe "Single Example Test" do
 	billcity = "Salt Lake City"
 	billstate = "Utah"
 	billzip = "84109"
+	activityreason = "Sales"
+	activitycontactmethod = "Email"
+	activitydescription = "Selenium Test #{timestamp}"
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
@@ -44,26 +47,18 @@ describe "Single Example Test" do
 	login.sign_in()
 
 	#Text Examples
-	it "Create a Customer record" do
+	  it "Open top record and create an activity" do
 		home.open_resource(resource1)
 
-		customers.new_customer()
-		customers.name(customername)
-		customers.dba_name(dbaname)
-		customers.stage(stage)
-		customers.patrol_type(patroltype)
-		customers.timezone(timezone)
-		customers.special_instructions(specialinstructions)
-		customers.patrol_instructions(patrolinstructions)
-		customers.phone(customerphone)
-		customers.billing_name(billname)
-		customers.billing_street(billstreet)
-		customers.billing_city(billcity)
-		customers.billing_state(billstate)
-		customers.billing_zip(billzip)
-		customers.copy_to_site()
-		customers.save_close()
+		customers.top_open()
+		customers.create_activity()
+		activities.reason(activityreason)
+		activities.contact_method(activitycontactmethod)
+		activities.description(activitydescription)
+		activities.save_close()
 	
-		expect(customers.top_name.text.downcase).to include(customername.downcase)
+		expect(customers.top_activity_description.text.downcase).to include(activitydescription.downcase)
+	
+		customers.cancel()
 	  end
 end

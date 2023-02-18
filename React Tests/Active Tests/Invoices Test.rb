@@ -17,12 +17,15 @@ describe "Invoices Test" do
     activityreason = "Sales"
 	activitycontactmethod = "Email"
 	activitydescription = "Selenium Test #{timestamp}"
+    emailsubject = "Invoice Email (Selenium) #{timestamp}"
+	emailmessage = 'Selenium Test Email Message'
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
 	home = ServizioHome.new(@driver)
     invoices = InvoicesResource.new(@driver)
 	activities = ActivitiesResource.new(@driver)
+    printemail = PrintEmailResource.new(@driver)
 
 	#Setup
 	@driver.navigate.to "https://stage.yesco.com/servizioreact/"
@@ -31,8 +34,17 @@ describe "Invoices Test" do
 	login.sign_in()
 
 	#Text Examples
-    it "Perform a column header search in the ID column" do
+    it "Opens the Invoices resource" do
         home.open_resource(resource1)
+        recordtest = invoices.top_ref.text
+        expect(recordtest).not_to eql("")
+    end
+
+    it "Exports the Invoices grid" do
+        invoices.export_grid()
+    end
+
+    it "Perform a column header search in the ID column" do
         invoices.search_id(idsearch)
 
         expect(invoices.top_ref.text).to include(idsearch)
@@ -46,6 +58,7 @@ describe "Invoices Test" do
     end
 
     it "Open top record and create an activity" do
+        invoices.search_reset()
         invoices.top_open()
         invoices.create_activity()
         activities.reason(activityreason)
@@ -56,7 +69,17 @@ describe "Invoices Test" do
         expect(invoices.top_activity_description.text.downcase).to include(activitydescription.downcase)
     
         invoices.cancel()
-      end
+    end
 
+    it "Open top record and email" do
+        invoices.top_open()
+        invoices.print_email()
+        printemail.email_from(loginname)
+        printemail.email_subject(emailsubject)
+        printemail.email_message(emailmessage)
+        printemail.email_close()
+        invoices.cancel()
+        sleep(2)
+    end
   
 end

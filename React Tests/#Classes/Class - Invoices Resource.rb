@@ -10,9 +10,9 @@ class InvoicesResource
   NEW_INVOICE = {css: "div[id='b21-b39-b2-NewTitlePlaceholder']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
   SHOW_INACTIVES = {css: "input[id$='SwitchShowInactives']"}
-  ID_COLUMN = {css: "input[id='b21-b39-b5-Input_SearchVar']"}
+  ID_COLUMN = {css: "input[id$='b5-Input_SearchVar']"}
   ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[3]/div/div/i[2]"}
-  CUSTOMER_COLUMN = {css: "input[id='b21-b39-b7-Input_SearchVar']"}
+  CUSTOMER_COLUMN = {css: "input[id$='b7-Input_SearchVar']"}
   CUSTOMER_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[3]/div/div/i[2]"}
   SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
 
@@ -22,10 +22,10 @@ class InvoicesResource
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[1]/a/span"}
     TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[4]/span"}
     THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/header/div[1]/div[4]/button/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b23-b40-b27-b1-DropdownHeader']"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b23-b40-b27-b1-DropdownHeaderContent_placeholder']"}
     DETAIL_CREATE_ACTIVITY = {css: "span[id='b23-b40-b27-GridActionsCreateActivity']"}
-  CANCEL_BUTTON = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[2]/div/button"}
-  #CANCEL_BUTTON = {css: "button[id$='CancelButton']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id='b23-b40-b27-GridActionsPrintEmail']"}
+  CANCEL_BUTTON = {css: "button[id$='CancelButton']"}
   SAVE_BUTTON = {css: "button[id$='SaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='SaveAndCloseButton']"}
 

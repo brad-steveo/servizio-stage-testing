@@ -10,7 +10,7 @@ class ActivitiesResource
   CONTACT_METHOD_DROPDOWN = {css: "select[id$='Dropdown2']"}
   DESCRIPTION = {css: "textarea[id$='TextArea_Description']"}
   COMPLETE_ACTIVITY_CHECKBOX = {css: "input[id$='CompleteActivityCheckbox']"}
-  SAVE_CLOSE_BUTTON = {css: "button[id$='SaveAndCloseButton']"}
+  SAVE_CLOSE_BUTTON = {css: "button[id='b25-b33-SaveAndCloseButton']"}
 
   attr_reader :driver
 
@@ -68,7 +68,7 @@ class ActivitiesResource
   end
 
   def save_close()
-    sleep(2)
+    sleep(5)
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(SAVE_CLOSE_BUTTON).displayed?}
     button = @driver.find_element(SAVE_CLOSE_BUTTON)
