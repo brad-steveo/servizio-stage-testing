@@ -13,9 +13,9 @@ class EstimatesResource
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
   NEW_ESTIMATE = {css: "div[id='b20-b20-b2-NewTitlePlaceholder']"}
   SHOW_INACTIVES = {css: "input[id$='SwitchShowInactives']"}
-  ID_COLUMN = {css: "input[id='b20-b20-b5-Input_SearchVar']"}
+  ID_COLUMN = {css: "input[id$='b5-Input_SearchVar']"}
   ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[3]/div/i"}
-  NAME_COLUMN = {css: "input[id='b20-b20-b7-Input_SearchVar']"}
+  NAME_COLUMN = {css: "input[id$='b7-Input_SearchVar']"}
   NAME_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[3]/div/div/i[2]"}
   SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
 
@@ -37,9 +37,9 @@ class EstimatesResource
   DETAIL_ACTIONS_MENU = {css: "div[id='b22-b21-b43-b1-DropdownHeader']"}
     DETAIL_CREATE_ACTIVITY = {css: "span[id='b22-b21-b43-GridActionsCreateActivity']"}
     DETAIL_PRINT_EMAIL = {css: "span[id='b22-b21-b43-GridActionsPrintEmail']"}
-  CANCEL_BUTTON = {css: "button[id$='CancelButton']"}
-  SAVE_BUTTON = {css: "button[id$='SaveButton']"}
-  SAVE_CLOSE_BUTTON = {css: "button[id$='SaveAndCloseButton']"}
+  CANCEL_BUTTON = {css: "button[id$='EstimateCancelButton']"}
+  SAVE_BUTTON = {css: "button[id$='EstimateSaveButton']"}
+  SAVE_CLOSE_BUTTON = {css: "button[id$='EstimateSaveAndCloseButton']"}
 
   attr_reader :driver
 

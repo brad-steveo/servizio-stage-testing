@@ -25,9 +25,9 @@ class InvoicesResource
   DETAIL_ACTIONS_MENU = {css: "div[id='b23-b40-b27-b1-DropdownHeaderContent_placeholder']"}
     DETAIL_CREATE_ACTIVITY = {css: "span[id='b23-b40-b27-GridActionsCreateActivity']"}
     DETAIL_PRINT_EMAIL = {css: "span[id='b23-b40-b27-GridActionsPrintEmail']"}
-  CANCEL_BUTTON = {css: "button[id$='CancelButton']"}
-  SAVE_BUTTON = {css: "button[id$='SaveButton']"}
-  SAVE_CLOSE_BUTTON = {css: "button[id$='SaveAndCloseButton']"}
+  CANCEL_BUTTON = {css: "button[id$='InvoiceCancelButton']"}
+  SAVE_BUTTON = {css: "button[id$='InvoiceSaveButton']"}
+  SAVE_CLOSE_BUTTON = {css: "button[id$='InvoiceSaveAndCloseButton']"}
 
   attr_reader :driver
 
