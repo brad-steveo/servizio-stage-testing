@@ -38,22 +38,31 @@ describe "Jobs Test" do
 	login.sign_in()
 
 	#Text Examples
-  it "Perform a column header search in the ID column" do
-    home.open_resource(resource1)
+  it "Open the Jobs Resource" do
+		home.open_resource(resource1)
+		recordtest = jobs.top_ref.text
+		expect(recordtest).not_to eql("")
+	end
+
+	it "Export the Jobs grid" do
+		jobs.export_grid()
+	end
+
+  it "Perform a column header search in the ID column" do)
     jobs.search_id(idsearch)
 
     expect(jobs.top_ref.text).to include(idsearch)
+    jobs.search_reset()
   end
 
   it "Perform a column header search in the NAME column" do
-    jobs.search_reset()
     jobs.search_name(namesearch)
 
     expect(jobs.top_name.text.downcase).to include(namesearch.downcase)
+    jobs.search_reset()
   end
 
   it "Create a Job record" do
-    jobs.search_reset()
     jobs.new_job(customersearch)
 		jobs.name(jobname)
 		jobs.type(jobtype)

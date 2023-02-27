@@ -9,7 +9,7 @@ class CustomersResource
   GRID_MENU = {css: "div[class='dropdown-header select']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
   NEW_CUSTOMER = {css: "div[id$='NewTitlePlaceholder']"}
-  ID_COLUMN = {css: "input[id$='b5-Input_SearchVar']"}
+  ID_COLUMN = {css: "input[id$='b5-ColumnSearchID']"}
   ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/i"}
   NAME_COLUMN = {css: "input[id$='b7-Input_SearchVar']"}
   NAME_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/i[2]"}

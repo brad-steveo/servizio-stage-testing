@@ -48,17 +48,17 @@ describe "Invoices Test" do
         invoices.search_id(idsearch)
 
         expect(invoices.top_ref.text).to include(idsearch)
+        invoices.search_reset()
     end
 
     it "Perform a column header search in the CUSTOMER column" do
-        invoices.search_reset()
         invoices.search_customer(customersearch)
 
         expect(invoices.top_customer.text.downcase).to include(customersearch.downcase)
+        invoices.search_reset()
     end
 
     it "Open top record and create an activity" do
-        invoices.search_reset()
         invoices.top_open()
         invoices.create_activity()
         activities.reason(activityreason)

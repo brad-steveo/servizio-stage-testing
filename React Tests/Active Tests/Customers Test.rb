@@ -45,22 +45,31 @@ describe "Customers Test" do
 	login.sign_in()
 
 	#Text Examples
+	it "Open the Customers Resource" do
+		home.open_resource(resource1)
+		recordtest = customers.top_ref.text
+		expect(recordtest).not_to eql("")
+	end
+
+	#it "Export the Customers grid" do
+	#	customers.export_grid()
+	#end
+
   it "Perform a column header search in the ID column" do
-    home.open_resource(resource1)
     customers.search_id(idsearch)
 
     expect(customers.top_ref.text).to include(idsearch)
+    customers.search_reset()
   end
 
   it "Perform a column header search in the NAME column" do
-    customers.search_reset()
     customers.search_name(namesearch)
 
     expect(customers.top_name.text.downcase).to include(namesearch.downcase)
+    customers.search_reset()
   end
 
 	it "Create a Customer record" do
-    customers.search_reset()
 		customers.new_customer()
 		customers.name(customername)
 		customers.dba_name(dbaname)

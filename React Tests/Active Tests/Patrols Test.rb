@@ -36,23 +36,32 @@ describe "Patrols Test" do
 	login.sign_in()
 
 	#Text Examples
-	it "Perform a column header search in the ID column" do
+	it "Open the Patrols Resource" do
 		home.open_resource(resource1)
+		recordtest = patrols.top_ref.text
+		expect(recordtest).not_to eql("")
+	end
+
+	it "Export the Patrols grid" do
+		patrols.export_grid()
+	end
+
+	it "Perform a column header search in the ID column" do
 		patrols.old_patrols()
 		patrols.search_id(idsearch)
 
 		expect(patrols.top_ref.text.downcase).to include(idsearch.downcase)
+		patrols.search_reset()
 	end
 
   it "Perform a column header search in the NAME column" do
-		patrols.search_reset()
 		patrols.search_name(namesearch)
 
 		expect(patrols.top_name.text.downcase).to include(namesearch.downcase)
+		patrols.search_reset()
   end
 
 	it "Create a patrol record" do
-		patrols.search_reset()
 		patrols.old_patrols()
 		patrols.new_patrol()
 		patrols.submitted_name(submittedname)

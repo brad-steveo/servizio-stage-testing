@@ -38,22 +38,31 @@ describe "Estimates Test" do
   login.sign_in()
 
   #Text Examples
+  it "Open the Estimates Resource" do
+		home.open_resource(resource1)
+		recordtest = estimates.top_ref.text
+		expect(recordtest).not_to eql("")
+	end
+
+	it "Export the Estimates grid" do
+		estimates.export_grid()
+	end
+
   it "Perform a column header search in the ID column" do
-    home.open_resource(resource1)
     estimates.search_id(idsearch)
 
     expect(estimates.top_ref.text.downcase).to include(idsearch.downcase)
+    estimates.search_reset()
   end
 
   it "Perform a column header search in the NAME column" do
-    estimates.search_reset()
     estimates.search_name(namesearch)
 
     expect(estimates.top_name.text.downcase).to include(namesearch.downcase)
+    estimates.search_reset()
   end
 
   it "Create an Estimate record" do
-    estimates.search_reset()
     estimates.new_estimate()
     estimates.name(estimatename)
     estimates.type(estimatetype)
