@@ -51,9 +51,9 @@ describe "Customers Test" do
 		expect(recordtest).not_to eql("")
 	end
 
-	#it "Export the Customers grid" do
-	#	customers.export_grid()
-	#end
+	it "Export the Customers grid" do
+		customers.export_grid()
+	end
 
   it "Perform a column header search in the ID column" do
     customers.search_id(idsearch)

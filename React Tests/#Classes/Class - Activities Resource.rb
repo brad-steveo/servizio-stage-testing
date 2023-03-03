@@ -1,16 +1,26 @@
 class ActivitiesResource
 
   #CSS Selectors: Grid
-  TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/a/span"}
-  GRID_ACTIONS = {css: "div[class='dropdown-header select']"}
+  TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div[1]/a/span"}
+  TOP_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[4]/span"}
+  TOP_COMPLETED = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[12]/div/span"}
+  GRID_MENU = {css: "div[class='dropdown-header select']"}
+  NEW_ACTIVITY = {css: "div[id$='NewTitlePlaceholder']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
+  ID_COLUMN = {css: "input[id$='b5-ColumnSearchID']"}
+  ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[3]/div/div/i"}
+  DESCRIPTION_COLUMN = {css: "input[id$='b9-Input_SearchVar']"}
+  DESCRIPTION_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[4]/div[3]/div/div/div/i[2]"}
+  SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
 
   #CSS Selectors: Detail
   REASON_DROPDOWN = {css: "select[id$='ReasonDropdown']"}
   CONTACT_METHOD_DROPDOWN = {css: "select[id$='Dropdown2']"}
   DESCRIPTION = {css: "textarea[id$='TextArea_Description']"}
   COMPLETE_ACTIVITY_CHECKBOX = {css: "input[id$='CompleteActivityCheckbox']"}
-  SAVE_CLOSE_BUTTON = {css: "button[id='b25-b33-SaveAndCloseButton']"}
+  CANCEL_BUTTON = {css: "button[id$='ActivityCancelButton']"}
+  SAVE_BUTTON = {css: "button[id$='ActivitySaveButton']"}
+  SAVE_CLOSE_BUTTON = {css: "button[id$='ActivitySaveAndCloseButton']"}
 
   attr_reader :driver
 
@@ -25,14 +35,90 @@ class ActivitiesResource
     top_record = @driver.find_element(TOP_REF)
   end
 
+  def top_description()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_DESCRIPTION).displayed?}
+    top_record = @driver.find_element(TOP_DESCRIPTION)
+  end
+
+  def top_completed()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_COMPLETED).displayed?}
+    top_record = @driver.find_element(TOP_COMPLETED)
+  end
+
+  def top_open()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_REF).displayed?}
+    top_record = @driver.find_element(TOP_REF)
+    top_record.click
+  end
+
   def export_grid()
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait.until {@driver.find_element(GRID_ACTIONS).displayed?}
-    grid_actions = @driver.find_element(GRID_ACTIONS)
+    wait.until {@driver.find_element(GRID_MENU).displayed?}
+    grid_actions = @driver.find_element(GRID_MENU)
     grid_actions.click
     wait.until {@driver.find_element(EXPORT_GRID).displayed?}
     export_grid = @driver.find_element(EXPORT_GRID)
     export_grid.click
+    sleep(2)
+  end
+
+  def new_activity()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(GRID_MENU).displayed?}
+    grid_actions = @driver.find_element(GRID_MENU)
+    grid_actions.click
+    wait.until {@driver.find_element(NEW_ACTIVITY).displayed?}
+    export_grid = @driver.find_element(NEW_ACTIVITY)
+    export_grid.click
+    sleep(2)
+  end
+
+  def search_id(searchname)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(ID_COLUMN).displayed?}
+    search = @driver.find_element(ID_COLUMN)
+    search.send_keys(searchname)
+    sleep(1)
+    @driver.action.send_keys(:enter).perform
+    sleep(1)
+    wait.until {@driver.find_element(TOP_REF).text.include?(searchname)}
+  end
+
+  def search_id_clear()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(ID_COLUMN_CLEAR).displayed?}
+    button = @driver.find_element(ID_COLUMN_CLEAR)
+    button.clear
+    sleep(2)
+  end
+
+  def search_description(searchname)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(DESCRIPTION_COLUMN).displayed?}
+    search = @driver.find_element(DESCRIPTION_COLUMN)
+    search.send_keys(searchname)
+    sleep(1)
+    @driver.action.send_keys(:enter).perform
+    sleep(1)
+    wait.until {@driver.find_element(TOP_DESCRIPTION).text.downcase.include?(searchname.downcase)}
+  end
+
+  def search_description_clear()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(DESCRIPTION_COLUMN_CLEAR).displayed?}
+    button = @driver.find_element(DESCRIPTION_COLUMN_CLEAR)
+    button.clear
+    sleep(2)
+  end
+
+  def search_reset()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(SEARCH_RESET).displayed?}
+    button = @driver.find_element(SEARCH_RESET)
+    button.click
     sleep(2)
   end
 

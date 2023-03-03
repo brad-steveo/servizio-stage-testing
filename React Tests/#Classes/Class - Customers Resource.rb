@@ -4,9 +4,8 @@ class CustomersResource
   TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div[1]/a/span"}
   TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/div[1]/span"}
   TOP_ACTIONS = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div[1]/div/i"}
-  GRID_ACTIONS = {css: "div[class='dropdown-header select']"}
-    GRID_CREATE_ACTIVITY = {css: "span[id='b20-b8-l1_0-455_0-b48-GridActionsCreateActivity']"}
   GRID_MENU = {css: "div[class='dropdown-header select']"}
+    GRID_CREATE_ACTIVITY = {css: "span[id='b20-b8-l1_0-455_0-b48-GridActionsCreateActivity']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
   NEW_CUSTOMER = {css: "div[id$='NewTitlePlaceholder']"}
   ID_COLUMN = {css: "input[id$='b5-ColumnSearchID']"}
@@ -74,8 +73,8 @@ class CustomersResource
 
   def export_grid()
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait.until {@driver.find_element(GRID_ACTIONS).displayed?}
-    grid_actions = @driver.find_element(GRID_ACTIONS)
+    wait.until {@driver.find_element(GRID_MENU).displayed?}
+    grid_actions = @driver.find_element(GRID_MENU)
     grid_actions.click
     wait.until {@driver.find_element(EXPORT_GRID).displayed?}
     export_grid = @driver.find_element(EXPORT_GRID)
@@ -85,8 +84,8 @@ class CustomersResource
 
   def new_customer()
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait.until {@driver.find_element(GRID_ACTIONS).displayed?}
-    grid_actions = @driver.find_element(GRID_ACTIONS)
+    wait.until {@driver.find_element(GRID_MENU).displayed?}
+    grid_actions = @driver.find_element(GRID_MENU)
     grid_actions.click
     wait.until {@driver.find_element(NEW_CUSTOMER).displayed?}
     new_customer = @driver.find_element(NEW_CUSTOMER)
