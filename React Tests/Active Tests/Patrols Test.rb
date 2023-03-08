@@ -61,7 +61,7 @@ describe "Patrols Test" do
 		patrols.search_reset()
   end
 
-	it "Create a patrol record" do
+	it "Create a Patrol record" do
 		patrols.old_patrols()
 		patrols.new_patrol()
 		patrols.submitted_name(submittedname)
