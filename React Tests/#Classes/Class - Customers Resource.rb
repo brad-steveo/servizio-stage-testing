@@ -4,6 +4,8 @@ class CustomersResource
   TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div[1]/a/span"}
   TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/div[1]/span"}
   TOP_ACTIONS = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div[1]/div/i"}
+  TOP_BILLING_CONTACT = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[16]"}
+  TOP_SITE_CONTACT = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[15]"}
   GRID_MENU = {css: "div[class='dropdown-header select']"}
     GRID_CREATE_ACTIVITY = {css: "span[id='b20-b8-l1_0-455_0-b48-GridActionsCreateActivity']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
@@ -34,6 +36,15 @@ class CustomersResource
   BILLINGZIP = {css: "input[id$='Input_BillPostalCode']"}
   BILLINGCOUNTRY = {css: "input[id$='Input_BillCountry']"}
   COPTYTOSITE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[2]/div[2]/a/img"}
+  LINK_EXISTING_BUTTON = {css: "button[id$='LinkExisting']"}
+  LINK_CONTACT_SEARCH = {css: "input[id$='ContactSearch']"}
+  LINK_CONTACT_TOP_NAME = {xpath: "/html/body/div[6]/div/div/div/div/div/div[4]/div/div[1]/div/div/div[2]/div[1]/span"}
+  LINK_CONTACT_TOP_SELECT = {xpath: "/html/body/div[6]/div/div/div/div/div/div[4]/div/div[1]/div/div/div[3]/button"}
+  ADD_NEW_BUTTON = {css: "button[id$='AddNew']"}
+  TOP_CONTACT_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[4]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[3]/div/div/table/tbody/tr[1]/td[1]/div/a/span"}
+  TOP_CONTACT_BILLING_CHECKBOX = {css: "input[id$='0-CheckboxBilling']"}
+  TOP_CONTACT_SITE_CHECKBOX = {css: "input[id$='0-CheckboxSite']"}
+  TOP_CONTACT_REMOVE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[4]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[3]/div/div/table/tbody/tr[1]/td[9]/a/i"}
   ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/header/div[1]/div[3]/button/div/span"}
     ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[3]/article/div/table/thead/tr/th[1]"}
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[3]/article/div/table/tbody/tr/td[1]/a/span"}
@@ -62,6 +73,18 @@ class CustomersResource
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(TOP_NAME).displayed?}
     top_record = @driver.find_element(TOP_NAME)
+  end
+
+  def top_billing_contact()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_BILLING_CONTACT).displayed?}
+    top_record = @driver.find_element(TOP_BILLING_CONTACT)
+  end
+
+  def top_site_contact()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_SITE_CONTACT).displayed?}
+    top_record = @driver.find_element(TOP_SITE_CONTACT)
   end
 
   def top_open()
@@ -279,6 +302,94 @@ class CustomersResource
     option = @driver.find_element(COPTYTOSITE)
     option.click
     sleep(1)
+  end
+
+  def link_existing_contact(contactsearch)
+    if
+      begin
+        @driver.find_element(TOP_CONTACT_NAME).exists? == true
+      rescue Selenium::WebDriver::Error::NoSuchElementError
+        false
+      end
+      removeicon = @driver.find_element(TOP_CONTACT_REMOVE)
+      removeicon.click
+      sleep(1)
+      wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+      wait.until {@driver.find_element(LINK_EXISTING_BUTTON).displayed?}
+      button = @driver.find_element(LINK_EXISTING_BUTTON)
+      button.click
+      sleep(1)
+      wait.until {@driver.find_element(LINK_CONTACT_SEARCH).displayed?}
+      search = @driver.find_element(LINK_CONTACT_SEARCH)
+      search.send_keys(contactsearch)
+      sleep(1)
+      @driver.action.send_keys(:enter).perform
+      sleep(1)
+      wait.until {@driver.find_element(LINK_CONTACT_TOP_NAME).text.include?(contactsearch)}
+      wait.until {@driver.find_element(LINK_CONTACT_TOP_SELECT).displayed?}
+      selectbutton = @driver.find_element(LINK_CONTACT_TOP_SELECT)
+      selectbutton.click
+      sleep(2)
+    else
+      wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+      wait.until {@driver.find_element(LINK_EXISTING_BUTTON).displayed?}
+      button = @driver.find_element(LINK_EXISTING_BUTTON)
+      button.click
+      sleep(1)
+      wait.until {@driver.find_element(LINK_CONTACT_SEARCH).displayed?}
+      search = @driver.find_element(LINK_CONTACT_SEARCH)
+      search.send_keys(contactsearch)
+      sleep(1)
+      @driver.action.send_keys(:enter).perform
+      sleep(1)
+      wait.until {@driver.find_element(LINK_CONTACT_TOP_NAME).text.include?(contactsearch)}
+      wait.until {@driver.find_element(LINK_CONTACT_TOP_SELECT).displayed?}
+      selectbutton = @driver.find_element(LINK_CONTACT_TOP_SELECT)
+      selectbutton.click
+      sleep(2)
+    end
+  end
+
+  def add_new_contact()
+    if
+      begin
+        @driver.find_element(TOP_CONTACT_NAME).exists? == true
+      rescue Selenium::WebDriver::Error::NoSuchElementError
+        false
+      end
+      removeicon = @driver.find_element(TOP_CONTACT_REMOVE)
+      removeicon.click
+      sleep(1)
+      wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+      wait.until {@driver.find_element(ADD_NEW_BUTTON).displayed?}
+      button = @driver.find_element(ADD_NEW_BUTTON)
+      button.click
+      wait.until {@driver.find_element(THIRD_TAB).displayed?}
+      wait.until {@driver.find_element(THIRD_TAB).text.include?("New Contact")}
+    else
+      wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+      wait.until {@driver.find_element(ADD_NEW_BUTTON).displayed?}
+      button = @driver.find_element(ADD_NEW_BUTTON)
+      button.click
+      wait.until {@driver.find_element(THIRD_TAB).displayed?}
+      wait.until {@driver.find_element(THIRD_TAB).text.include?("New Contact")}
+    end
+  end
+
+  def make_top_contact_billing()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_CONTACT_BILLING_CHECKBOX).displayed?}
+    checkbox = @driver.find_element(TOP_CONTACT_BILLING_CHECKBOX)
+    checkbox.click
+    sleep(2)
+  end
+
+  def make_top_contact_site()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_CONTACT_SITE_CHECKBOX).displayed?}
+    checkbox = @driver.find_element(TOP_CONTACT_SITE_CHECKBOX)
+    checkbox.click
+    sleep(2)
   end
 
   def top_activity()
