@@ -20,9 +20,9 @@ class ContactsResource
   PHONE_FIELD_1 = {css: "input[id$='0-Input_Phone']"}
   EMAIL_FIELD_1 = {css: "input[id$='0-Input_Email']"}
   DESCRIPTION_TEXTAREA = {css: "textarea[id$='TextArea_Description']"}
-  CANCEL_BUTTON = {css: "button[id$='CustomerCancelButton']"}
-  SAVE_BUTTON = {css: "button[id$='CustomerSaveButton']"}
-  SAVE_CLOSE_BUTTON = {css: "button[id$='CustomerSaveAndCloseButton']"}
+  CANCEL_BUTTON = {css: "button[id$='b31-CancelButton']"}
+  SAVE_BUTTON = {css: "button[id$='b31-SaveButton']"}
+  SAVE_CLOSE_BUTTON = {css: "button[id$='b31-SaveAndCloseButton']"}
 
   attr_reader :driver
 

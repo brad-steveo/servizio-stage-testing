@@ -10,25 +10,20 @@ describe "Single Example Test" do
 	#Test Variables
   	timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
   	dateonly = Time.now.strftime("%m/%d/%Y")
-	loginname = "masterchief@yesco.com"
-	password = "MCyesco123"
-	resource1 = "Customers"
-	customername = "Selenium Customer #{timestamp}"
-	dbaname = "YESCO"
-	stage = "Customer"
-	patroltype = "Yes"
-	timezone = "(UTC-07:00) Mountain Time (US & Canada)"
-	specialinstructions = "Customer special instructions #{timestamp}"
-	patrolinstructions = "Patroller instructions #{timestamp}"
-	customerphone = "123.456.7890"
-	billname = "YESCO"
-	billstreet = "2401 Foothill Dr."
-	billcity = "Salt Lake City"
-	billstate = "Utah"
-	billzip = "84109"
-	activityreason = "Sales"
-	activitycontactmethod = "Email"
-	activitydescription = "Selenium Test #{timestamp}"
+    loginname = "masterchief@yesco.com"
+    password = "MCyesco123"
+    resource1 = "Contacts"
+    resource2 = "Customers"
+    idsearch = "1041"
+    namesearch = "Selenium Test Contact"
+    contactlink = "Selenium Test Contact"
+    contactname = "Selenium Test #{timestamp}"
+    contactjobtitle = "Selenium"
+    contactphone = "5553331111"
+    contactemail = "noreply@yesco.com"
+    contactdescription = "Description for Selenium Test #{timestamp}"
+	customersearch = "1340"
+	customersearch2 = "1341"
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
@@ -39,6 +34,7 @@ describe "Single Example Test" do
 	customers = CustomersResource.new(@driver)
 	activities = ActivitiesResource.new(@driver)
 	printemail = PrintEmailResource.new(@driver)
+	contacts = ContactsResource.new(@driver)
 
 	#Setup
 	@driver.navigate.to "https://stage.yesco.com/servizioreact/"
@@ -47,18 +43,61 @@ describe "Single Example Test" do
 	login.sign_in()
 
 	#Text Examples
-	  it "Open top record and create an activity" do
-		home.open_resource(resource1)
+    it "Open the Contacts Resource" do
+        home.open_resource(resource1)
+        recordtest = contacts.top_ref.text
+		expect(recordtest).not_to eql("")
+    end
 
-		customers.top_open()
-		customers.create_activity()
-		activities.reason(activityreason)
-		activities.contact_method(activitycontactmethod)
-		activities.description(activitydescription)
-		activities.save_close()
-	
-		expect(customers.top_activity_description.text.downcase).to include(activitydescription.downcase)
-	
-		customers.cancel()
-	  end
+    it "Export the Contacts grid" do
+        contacts.export_grid()
+    end
+    
+    it "Perform a column header search in the ID column" do
+        contacts.search_id(idsearch)
+        
+        expect(contacts.top_ref.text).to include(idsearch)
+        contacts.search_reset()
+    end
+        
+    it "Perform a column header search in the NAME column" do
+        contacts.search_name(namesearch)
+        
+        expect(contacts.top_name.text.downcase).to include(namesearch.downcase)
+        contacts.search_reset()
+    end
+
+	it "Go to Customers Resource, open top record, link an existing contact" do
+        home.close_tab()
+        home.open_resource(resource2)
+        recordtest = contacts.top_ref.text
+		expect(recordtest).not_to eql("")
+
+		customers.search_id(customersearch)
+        customers.top_open()
+        customers.link_existing_contact(contactlink)
+        customers.make_top_contact_billing()
+        customers.make_top_contact_site()
+        customers.save_close()
+        expect(customers.top_billing_contact.text.downcase).to include(contactlink.downcase)
+        expect(customers.top_site_contact.text.downcase).to include(contactlink.downcase)
+    end
+
+	it "Go to Customers Resource, open top record, add a new contact" do
+		customers.search_reset()
+        customers.search_id(customersearch2)
+        customers.top_open()
+        customers.add_new_contact()
+        contacts.name(contactname)
+        contacts.job_title(contactjobtitle)
+        contacts.phone(contactphone)
+        contacts.email(contactemail)
+        contacts.description(contactdescription)
+        contacts.save_close()
+        customers.make_top_contact_billing()
+        customers.make_top_contact_site()
+        customers.save_close()
+        expect(customers.top_billing_contact.text.downcase).to include(contactname.downcase)
+        expect(customers.top_site_contact.text.downcase).to include(contactname.downcase)
+    end
 end

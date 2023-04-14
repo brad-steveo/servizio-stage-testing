@@ -38,13 +38,13 @@ class CustomersResource
   COPTYTOSITE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[2]/div[2]/a/img"}
   LINK_EXISTING_BUTTON = {css: "button[id$='LinkExisting']"}
   LINK_CONTACT_SEARCH = {css: "input[id$='ContactSearch']"}
-  LINK_CONTACT_TOP_NAME = {xpath: "/html/body/div[6]/div/div/div/div/div/div[4]/div/div[1]/div/div/div[2]/div[1]/span"}
-  LINK_CONTACT_TOP_SELECT = {xpath: "/html/body/div[6]/div/div/div/div/div/div[4]/div/div[1]/div/div/div[3]/button"}
+  LINK_CONTACT_TOP_NAME = {xpath: "/html/body/div[6]/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div[1]/div/div/div[2]/div[1]/span"}
+  LINK_CONTACT_TOP_SELECT = {xpath: "/html/body/div[6]/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div[1]/div/div/div[3]/button"}
   ADD_NEW_BUTTON = {css: "button[id$='AddNew']"}
   TOP_CONTACT_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[4]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[3]/div/div/table/tbody/tr[1]/td[1]/div/a/span"}
   TOP_CONTACT_BILLING_CHECKBOX = {css: "input[id$='0-CheckboxBilling']"}
   TOP_CONTACT_SITE_CHECKBOX = {css: "input[id$='0-CheckboxSite']"}
-  TOP_CONTACT_REMOVE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[4]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[3]/div/div/table/tbody/tr[1]/td[9]/a/i"}
+  TOP_CONTACT_REMOVE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[3]/div/div/table/tbody/tr[1]/td[9]/a/i"}
   ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/header/div[1]/div[3]/button/div/span"}
     ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[3]/article/div/table/thead/tr/th[1]"}
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[3]/article/div/table/tbody/tr/td[1]/a/span"}
@@ -305,9 +305,11 @@ class CustomersResource
   end
 
   def link_existing_contact(contactsearch)
-    if
+    if 
       begin
-        @driver.find_element(TOP_CONTACT_NAME).exists? == true
+        sleep(2)
+        @driver.find_element(TOP_CONTACT_REMOVE).displayed? == true
+        sleep(2)
       rescue Selenium::WebDriver::Error::NoSuchElementError
         false
       end
@@ -324,7 +326,7 @@ class CustomersResource
       search.send_keys(contactsearch)
       sleep(1)
       @driver.action.send_keys(:enter).perform
-      sleep(1)
+      sleep(2)
       wait.until {@driver.find_element(LINK_CONTACT_TOP_NAME).text.include?(contactsearch)}
       wait.until {@driver.find_element(LINK_CONTACT_TOP_SELECT).displayed?}
       selectbutton = @driver.find_element(LINK_CONTACT_TOP_SELECT)
@@ -341,7 +343,7 @@ class CustomersResource
       search.send_keys(contactsearch)
       sleep(1)
       @driver.action.send_keys(:enter).perform
-      sleep(1)
+      sleep(2)
       wait.until {@driver.find_element(LINK_CONTACT_TOP_NAME).text.include?(contactsearch)}
       wait.until {@driver.find_element(LINK_CONTACT_TOP_SELECT).displayed?}
       selectbutton = @driver.find_element(LINK_CONTACT_TOP_SELECT)
@@ -353,7 +355,9 @@ class CustomersResource
   def add_new_contact()
     if
       begin
-        @driver.find_element(TOP_CONTACT_NAME).exists? == true
+        sleep(2)
+        @driver.find_element(TOP_CONTACT_REMOVE).displayed? == true
+        sleep(2)
       rescue Selenium::WebDriver::Error::NoSuchElementError
         false
       end

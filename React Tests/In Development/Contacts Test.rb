@@ -15,6 +15,8 @@ describe "Contacts Test" do
     resource2 = "Customers"
     idsearch = "1041"
     namesearch = "Selenium Test Contact"
+    customersearch1 = "1340"
+    customersearch2 = ""
     contactlink = "Selenium Test Contact"
     contactname = "Selenium Test #{timestamp}"
     contactjobtitle = "Selenium"
@@ -60,22 +62,24 @@ describe "Contacts Test" do
         contacts.search_reset()
     end
 
-    it "Go to Customers Resource, open top record, link an existing contact" do
+	it "Go to Customers Resource, open top record, link an existing contact" do
         home.close_tab()
         home.open_resource(resource2)
         recordtest = contacts.top_ref.text
 		expect(recordtest).not_to eql("")
 
+		customers.search_id(customersearch1)
         customers.top_open()
         customers.link_existing_contact(contactlink)
         customers.make_top_contact_billing()
         customers.make_top_contact_site()
         customers.save_close()
-        expect(customers.top_billing_contact).text.downcase.to include(contactlink.downcase)
-        expect(customers.top_site_contact).text.downcase.to include(contactlink.downcase)
+        expect(customers.top_billing_contact.text.downcase).to include(contactlink.downcase)
+        expect(customers.top_site_contact.text.downcase).to include(contactlink.downcase)
     end
 
     it "Go to Customers Resource, open top record, add a new contact" do
+        customers.search_id(customersearch2)
         customers.top_open()
         customers.add_new_contact()
         contact.name(contactname)
@@ -87,8 +91,8 @@ describe "Contacts Test" do
         customers.make_top_contact_billing()
         customers.make_top_contact_site()
         customers.save_close()
-        expect(customers.top_billing_contact).text.downcase.to include(contactname.downcase)
-        expect(customers.top_site_contact).text.downcase.to include(contactname.downcase)
+        expect(customers.top_billing_contact.text.downcase).to include(contactname.downcase)
+        expect(customers.top_site_contact.text.downcase).to include(contactname.downcase)
     end
   
 end
