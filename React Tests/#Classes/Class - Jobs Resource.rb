@@ -29,6 +29,7 @@ class JobsResource
   AE_DROPDOWN = {css: "select[id$='AccountExecDropdown']"}
   NTE_FIELD = {css: "input[id$='Input_NotToExceed']"}
   LINE_ITEMS_SUBTAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/header/div[1]/div[1]/button/div/span"}
+    ADD_LINES = {css: "button[text='Add Line Item']"}
     TOP_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr/td[7]/div/div[1]/span"}
     TOP_BOX_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr[1]/td[7]/div/div[1]"}
     TOP_DESCRIPTION_TEXTAREA = {css: "textarea[id$='0-TextArea_Description]"}
@@ -247,19 +248,34 @@ class JobsResource
     field.send_keys(nteinput)
   end
 
-  def top_line(description)
+  def top_line(descriptiontext)
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
-    if
-      begin
-        sleep(2)
-        @driver.find_element(TOP_DESCRIPTION).text == ""
-        sleep(2)
-      rescue Selenium::WebDriver::Error::NoSuchElementError
-        false
-      end
-      print("No Text")
+    wait.until {@driver.find_element(TOP_DESCRIPTION).displayed?}
+    if @driver.find_element(TOP_DESCRIPTION).text == ""
+      descbox = @driver.find_element(TOP_BOX_DESCRIPTION)
+      sleep(1)
+      descbox.click
+      sleep(1)
+      wait.until {@driver.find_element(TOP_DESCRIPTION_TEXTAREA).displayed?}
+      desc = @driver.find_element(TOP_DESCRIPTION_TEXTAREA)
+      desc.send_keys(descriptiontext)
     else
-      print("There is text")
+      delete = @driver.find_element(TOP_LINE_DELETE)
+      sleep(1)
+      delete.click
+      sleep(1)
+      wait.until {@driver.find_element(ADD_LINES).displayed?}
+      button = @driver.find_element(ADD_LINES)
+      sleep(1)
+      button.click
+      sleep(1)
+      descbox = @driver.find_element(TOP_BOX_DESCRIPTION)
+      sleep(1)
+      descbox.click
+      sleep(1)
+      wait.until {@driver.find_element(TOP_DESCRIPTION_TEXTAREA).displayed?}
+      desc = @driver.find_element(TOP_DESCRIPTION_TEXTAREA)
+      desc.send_keys(descriptiontext)
     end
   end
 

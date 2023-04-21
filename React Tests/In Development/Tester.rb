@@ -13,6 +13,7 @@ describe "Single Example Test" do
     loginname = "masterchief@yesco.com"
     password = "MCyesco123"
     resource1 = "Jobs"
+    description = "Selenium Test Job Line 123"
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
@@ -35,7 +36,7 @@ describe "Single Example Test" do
     it "Open the Contacts Resource" do
         home.open_resource(resource1)
         jobs.top_open()
-        jobs.top_line()
+        jobs.top_line(description)
     end
 
 end
