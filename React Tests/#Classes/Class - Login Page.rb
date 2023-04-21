@@ -14,7 +14,7 @@ class ServizioLogin
 
   #Class Methods
   def enter_username(loginname)
-    wait = Selenium::WebDriver::Wait.new(:timeout => 30)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 60)
     wait.until {@driver.find_element(USERNAME_FIELD).displayed?}
   	username_field = @driver.find_element(USERNAME_FIELD)
   	username_field.send_keys(loginname)

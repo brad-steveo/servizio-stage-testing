@@ -28,6 +28,11 @@ class JobsResource
   PO_NUMBER_FIELD = {css: "input[id$='Input_PONumber']"}
   AE_DROPDOWN = {css: "select[id$='AccountExecDropdown']"}
   NTE_FIELD = {css: "input[id$='Input_NotToExceed']"}
+  LINE_ITEMS_SUBTAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/header/div[1]/div[1]/button/div/span"}
+    TOP_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr/td[7]/div/div[1]/span"}
+    TOP_BOX_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr[1]/td[7]/div/div[1]"}
+    TOP_DESCRIPTION_TEXTAREA = {css: "textarea[id$='0-TextArea_Description]"}
+    TOP_LINE_DELETE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr/td[14]/a[2]/i"}
   ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/header/div[1]/div[5]/button/div/span"}
     ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[5]/article/div/div/table/thead/tr/th[1]"}
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[5]/article/div/div/table/tbody/tr/td[1]/a/span"}
@@ -240,6 +245,22 @@ class JobsResource
     wait.until {@driver.find_element(NTE_FIELD).displayed?}
     field = @driver.find_element(NTE_FIELD)
     field.send_keys(nteinput)
+  end
+
+  def top_line(description)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    if
+      begin
+        sleep(2)
+        @driver.find_element(TOP_DESCRIPTION).text == ""
+        sleep(2)
+      rescue Selenium::WebDriver::Error::NoSuchElementError
+        false
+      end
+      print("No Text")
+    else
+      print("There is text")
+    end
   end
 
   def top_activity()

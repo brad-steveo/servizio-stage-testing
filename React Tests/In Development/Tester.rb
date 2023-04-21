@@ -12,18 +12,7 @@ describe "Single Example Test" do
   	dateonly = Time.now.strftime("%m/%d/%Y")
     loginname = "masterchief@yesco.com"
     password = "MCyesco123"
-    resource1 = "Contacts"
-    resource2 = "Customers"
-    idsearch = "1041"
-    namesearch = "Selenium Test Contact"
-    contactlink = "Selenium Test Contact"
-    contactname = "Selenium Test #{timestamp}"
-    contactjobtitle = "Selenium"
-    contactphone = "5553331111"
-    contactemail = "noreply@yesco.com"
-    contactdescription = "Description for Selenium Test #{timestamp}"
-	customersearch = "1340"
-	customersearch2 = "1341"
+    resource1 = "Jobs"
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
@@ -45,59 +34,8 @@ describe "Single Example Test" do
 	#Text Examples
     it "Open the Contacts Resource" do
         home.open_resource(resource1)
-        recordtest = contacts.top_ref.text
-		expect(recordtest).not_to eql("")
+        jobs.top_open()
+        jobs.top_line()
     end
 
-    it "Export the Contacts grid" do
-        contacts.export_grid()
-    end
-    
-    it "Perform a column header search in the ID column" do
-        contacts.search_id(idsearch)
-        
-        expect(contacts.top_ref.text).to include(idsearch)
-        contacts.search_reset()
-    end
-        
-    it "Perform a column header search in the NAME column" do
-        contacts.search_name(namesearch)
-        
-        expect(contacts.top_name.text.downcase).to include(namesearch.downcase)
-        contacts.search_reset()
-    end
-
-	it "Go to Customers Resource, open top record, link an existing contact" do
-        home.close_tab()
-        home.open_resource(resource2)
-        recordtest = contacts.top_ref.text
-		expect(recordtest).not_to eql("")
-
-		customers.search_id(customersearch)
-        customers.top_open()
-        customers.link_existing_contact(contactlink)
-        customers.make_top_contact_billing()
-        customers.make_top_contact_site()
-        customers.save_close()
-        expect(customers.top_billing_contact.text.downcase).to include(contactlink.downcase)
-        expect(customers.top_site_contact.text.downcase).to include(contactlink.downcase)
-    end
-
-	it "Go to Customers Resource, open top record, add a new contact" do
-		customers.search_reset()
-        customers.search_id(customersearch2)
-        customers.top_open()
-        customers.add_new_contact()
-        contacts.name(contactname)
-        contacts.job_title(contactjobtitle)
-        contacts.phone(contactphone)
-        contacts.email(contactemail)
-        contacts.description(contactdescription)
-        contacts.save_close()
-        customers.make_top_contact_billing()
-        customers.make_top_contact_site()
-        customers.save_close()
-        expect(customers.top_billing_contact.text.downcase).to include(contactname.downcase)
-        expect(customers.top_site_contact.text.downcase).to include(contactname.downcase)
-    end
 end
