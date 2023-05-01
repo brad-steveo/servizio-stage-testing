@@ -37,6 +37,8 @@ describe "Single Example Test" do
         home.open_resource(resource1)
         jobs.top_open()
         jobs.top_line(description)
+		jobs.save_close()
+		sleep(2)
     end
 
 end

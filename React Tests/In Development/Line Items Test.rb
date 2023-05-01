@@ -15,12 +15,16 @@ describe "Template" do
     resource2 = "Invoices"
     resource3 = "Job Lines"
     resource4 = "Invoice Lines"
+    joblinedesc = "Selenium Test Job Line #{timestamp}"
+    invoicelinedesc = "Selenium Test Invoice Line #{timestamp}"
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
 	home = ServizioHome.new(@driver)
     jobs = JobsResource.new(@driver)
+    joblines = JobLinesResource.new(@driver)
     invoices = InvoicesResource.new(@driver)
+    invoicelines = InvoiceLinesResource.new(@driver)
 	
 	#Setup
 	@driver.navigate.to "https://stage.yesco.com/servizioreact/"
@@ -31,7 +35,12 @@ describe "Template" do
 	#Text Examples
     it "First Example" do
         home.open_resource(resource1)
+        jobs.top_open()
+        jobs.top_line(joblinedesc)
+        jobs.save_close()
+        home.open_resource(resource3)
         
+        expect(joblines.top_name.text.downcase).to include(joblinedesc.downcase)
     end
   
 end
