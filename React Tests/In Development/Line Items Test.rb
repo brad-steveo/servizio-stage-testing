@@ -33,7 +33,7 @@ describe "Template" do
 	login.sign_in()
 
 	#Text Examples
-    it "First Example" do
+    it "Create a new line item on a job and verify in the Job Lines resource" do
         home.open_resource(resource1)
         jobs.top_open()
         jobs.top_line(joblinedesc)
