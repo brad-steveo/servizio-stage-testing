@@ -12,11 +12,14 @@ describe "Contracts Test" do
     loginname = "masterchief@yesco.com"
     password = "MCyesco123"
     resource1 = "Contracts"
+	idsearch = ""
+	namesearch = ""
+	contractname = ""
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
 	home = ServizioHome.new(@driver)
-    invoices = InvoicesResource.new(@driver)
+    contracts = ContractsResource.new(@driver)
 	activities = ActivitiesResource.new(@driver)
 
 	#Setup
@@ -26,9 +29,34 @@ describe "Contracts Test" do
 	login.sign_in()
 
 	#Text Examples
-    it "First Example" do
-        home.open_resource(resource1)
-        
-    end
+	it "Open the Contracts Resource" do
+		home.open_resource(resource1)
+		recordtest = contracts.top_ref.text
+		expect(recordtest).not_to eql("")
+	end
+
+	it "Export the Contracts grid" do
+		contracts.export_grid()
+	end
+	
+	it "Perform a column header search in the ID column" do
+		contracts.search_id(idsearch)
+		
+		expect(contracts.top_ref.text).to include(idsearch)
+		contracts.search_reset()
+	end
+		
+	it "Perform a column header search in the NAME column" do
+		contracts.search_name(namesearch)
+		
+		expect(contracts.top_description.text.downcase).to include(namesearch.downcase)
+		contracts.search_reset()
+	end
+
+	it "Create a Contract record" do
+
+	
+		expect(contracts.top_name.text.downcase).to include(contractname.downcase)
+	end
   
 end

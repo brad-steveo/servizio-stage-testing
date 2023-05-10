@@ -1,6 +1,16 @@
 class ContractsResource
 
     #CSS Selectors: Grid
+    TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div[1]/a/span"}
+    TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/span"}
+    GRID_MENU = {css: "div[class='dropdown-header select']"}
+    EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
+    SHOW_INACTIVES = {css: "input[id$='SwitchShowInactives']"}
+    ID_COLUMN = {css: "input[id$='b5-ColumnSearchID']"}
+    ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/i"}
+    NAME_COLUMN = {css: "input[id$='b7-Input_SearchVar']"}
+    NAME_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/i[2]"}
+    SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
   
     #CSS Selectors: Detail
 
