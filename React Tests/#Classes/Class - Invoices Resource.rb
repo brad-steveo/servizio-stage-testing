@@ -1,7 +1,7 @@
 class InvoicesResource
 
   #CSS Selectors: Grid
-  TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div/a/span"}
+  TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div[1]/a/span"}
   TOP_CUSTOMER = {xpath: '/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/span'}
   TOP_ACTIONS = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div[1]/div/i"}
     GRID_CREATE_ACTIVITY = {css: "a[id$='GridActionsCreateActivity']"}
@@ -53,6 +53,18 @@ class InvoicesResource
     wait.until {@driver.find_element(TOP_REF).displayed?}
     top_record = @driver.find_element(TOP_REF)
     top_record.click
+  end
+
+  def new_invoice()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(GRID_MENU).displayed?}
+    wait.until {@driver.find_element(TOP_REF).displayed?}
+    grid_actions = @driver.find_element(GRID_MENU)
+    grid_actions.click
+    wait.until {@driver.find_element(NEW_INVOICE).displayed?}
+    option = @driver.find_element(NEW_INVOICE)
+    option.click
+    sleep(2)
   end
 
   def export_grid()

@@ -38,9 +38,22 @@ describe "Template" do
         jobs.top_open()
         jobs.top_line(joblinedesc)
         jobs.save_close()
+        home.first_tab_close()
         home.open_resource(resource3)
         
         expect(joblines.top_name.text.downcase).to include(joblinedesc.downcase)
+        home.first_tab_close()
+    end
+
+    it "Create a new line item on an invoice and verify in the Invoice Lines resource" do
+        home.open_resource(resource2)
+        invoices.top_open()
+        invoices.top_line(invoicelinedesc)
+        invoices.save_close()
+        home.first_tab_close()
+        home.open_resource(resource4)
+        
+        expect(invoicelines.top_name.text.downcase).to include(invoicelinedesc.downcase)
     end
   
 end

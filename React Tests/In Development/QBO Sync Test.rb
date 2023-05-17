@@ -17,7 +17,6 @@ describe "QBO Sync Test" do
 	login = ServizioLogin.new(@driver)
 	home = ServizioHome.new(@driver)
     invoices = InvoicesResource.new(@driver)
-	activities = ActivitiesResource.new(@driver)
 
 	#Setup
 	@driver.navigate.to "https://stage.yesco.com/servizioreact/"
