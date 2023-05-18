@@ -41,9 +41,11 @@ class JobsResource
     ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[5]/article/div/div/table/thead/tr/th[1]"}
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[5]/article/div/div/table/tbody/tr/td[1]/a/span"}
     TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[5]/article/div/div/table/tbody/tr/td[4]/span"}
-    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/header/div[1]/div[4]/button/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b22-b13-b57-b1-DropdownHeader']"}
+    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/header/div[1]/div[3]/button/div/div/span"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b22-b15-b71-b1-DropdownHeader']"}
     DETAIL_CREATE_ACTIVITY = {css: "span[id='b22-b13-b57-GridActionsCreateActivity']"}
+    DETAIL_CREATE_INVOICE = {css: "span[id='b22-b15-b71-GridActionsCreateInvoice']"}
+      DUP_INVOICE_CONFIRM = {css: "span[id='b22-b15-b71-b7-b1-ConfirmButton']"}
     DETAIL_PRINT_EMAIL = {css: "span[id='b22-b13-b57-GridActionsPrintEmail']"}
   CANCEL_BUTTON = {css: "button[id$='JobCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='JobSaveButton']"}
@@ -312,6 +314,27 @@ class JobsResource
     printemail.click
     wait.until {@driver.find_element(THIRD_TAB).displayed?}
     wait.until {@driver.find_element(THIRD_TAB).text.include?("Print/Email")}
+  end
+
+  def createinvoicefromjob()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(DETAIL_ACTIONS_MENU).displayed?}
+    actions = @driver.find_element(DETAIL_ACTIONS_MENU)
+    actions.click
+    wait.until {@driver.find_element(DETAIL_CREATE_INVOICE).displayed?}
+    createinvoice = @driver.find_element(DETAIL_CREATE_INVOICE)
+    createinvoice.click
+    sleep(2)
+    if driver.find_element(DUP_INVOICE_CONFIRM).displayed?
+      confirm = driver.find_element(DUP_INVOICE_CONFIRM)
+      confirm.click
+      wait.until {@driver.find_element(THIRD_TAB).displayed?}
+      wait.until {@driver.find_element(THIRD_TAB).text.include?("New Invoice")}
+    else
+      wait.until {@driver.find_element(THIRD_TAB).displayed?}
+      wait.until {@driver.find_element(THIRD_TAB).text.include?("New Invoice")}
+    end
+    sleep(2)
   end
 
   def cancel()

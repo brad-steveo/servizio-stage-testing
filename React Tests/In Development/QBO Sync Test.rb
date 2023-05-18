@@ -9,13 +9,17 @@ describe "QBO Sync Test" do
     #Test Variables
     timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
     dateonly = Time.now.strftime("%m/%d/%Y")
-    loginname = "masterchief@yesco.com"
-    password = "MCyesco123"
-    resource1 = "Invoices"
+    loginname = "seleniumuser@yesco.com"
+    password = "SUyesco123"
+    resource1 = "Jobs"
+	resource2 = "Invoices"
+	jobsearch = "Selenium Test Job"
+	jobsearchref = "1001"
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
 	home = ServizioHome.new(@driver)
+	jobs = JobsResource.new(@driver)
     invoices = InvoicesResource.new(@driver)
 
 	#Setup
@@ -25,9 +29,23 @@ describe "QBO Sync Test" do
 	login.sign_in()
 
 	#Text Examples
-    it "First Example" do
-        home.open_resource(resource1)
-        
+    it "Open Selenium Test Job using Global Search" do
+		home.global_search(jobsearch)
+		expect(home.first_tab_title.text.downcase).to include(jobsearchref.downcase)	  
     end
+
+	it "Create an invoice from a job and sync to QBO" do
+		jobs.createinvoicefromjob()
+		invoices.save()
+		sleep(4)
+		invoices.sync_to_qbo()
+		home.second_tab_close()
+		home.first_tab_close()
+		home.open_resource(resource2)
+		print "Invoice: %s" % invoices.top_ref.text
+		print "\nQBID: "
+		print invoices.top_qbid.text
+		expect(invoices.top_qbid.text).not_to eq("")
+	end
   
 end
