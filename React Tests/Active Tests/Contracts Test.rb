@@ -12,9 +12,12 @@ describe "Contracts Test" do
     loginname = "masterchief@yesco.com"
     password = "MCyesco123"
     resource1 = "Contracts"
-	idsearch = ""
-	namesearch = ""
-	contractname = ""
+	idsearch = "1068"
+	namesearch = "Stage Testing"
+	contractname = "Selenium Contract #{timestamp}"
+	customername = "Selenium Test Customer"
+	contractdetails = "Selenium Contract Details #{timestamp}"
+	contracttype = "Service"
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
@@ -49,12 +52,17 @@ describe "Contracts Test" do
 	it "Perform a column header search in the NAME column" do
 		contracts.search_name(namesearch)
 		
-		expect(contracts.top_description.text.downcase).to include(namesearch.downcase)
+		expect(contracts.top_name.text.downcase).to include(namesearch.downcase)
 		contracts.search_reset()
 	end
 
 	it "Create a Contract record" do
-
+		contracts.new_contract()
+		contracts.name(contractname)
+		contracts.link_customer(customername)
+		contracts.details(contractdetails)
+		contracts.type(contracttype)
+		contracts.save_close()
 	
 		expect(contracts.top_name.text.downcase).to include(contractname.downcase)
 	end
