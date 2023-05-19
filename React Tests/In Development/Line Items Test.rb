@@ -41,7 +41,7 @@ describe "Template" do
         home.first_tab_close()
         home.open_resource(resource3)
         
-        expect(joblines.top_name.text.downcase).to include(joblinedesc.downcase)
+        expect(joblines.top_description.text.downcase).to include(joblinedesc.downcase)
         home.first_tab_close()
     end
 
