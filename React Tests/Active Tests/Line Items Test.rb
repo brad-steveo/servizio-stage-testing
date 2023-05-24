@@ -53,7 +53,7 @@ describe "Template" do
         home.first_tab_close()
         home.open_resource(resource4)
         
-        expect(invoicelines.top_name.text.downcase).to include(invoicelinedesc.downcase)
+        expect(invoicelines.top_description.text.downcase).to include(invoicelinedesc.downcase)
     end
   
 end

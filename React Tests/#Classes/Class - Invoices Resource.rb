@@ -18,6 +18,15 @@ class InvoicesResource
   SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
 
   #CSS Selectors: Detail
+  LINE_ITEMS_SUBTAB = {css: "div[id$='b8-Title']"}
+  ADD_LINES = {css: "button[id$='AddLineItemButton']"}
+  CLEAR_LINES = {css: "button[id$='ClearAllLinesButton']"}
+  ADD_DESCRIPTION = {css: "button[id$='AddDescriptionButton']"}
+  TOP_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr/td[7]/div[2]/div[1]/span"}
+  TOP_BOX_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr[1]/td[7]/div/div[1]"}
+  TOP_HIDDEN_DESCRIPTION = {xpath: "/html/body/div[2]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr/td[7]/div/div[2]"}
+  TOP_DESCRIPTION_TEXTAREA = {css: "textarea[id$='Input_InvoiceLineDescription']"} 
+  TOP_LINE_DELETE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr/td[14]/a[2]/i"}
   ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/header/div[1]/div[4]/button"}
     ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[4]/article/div/div/table/thead/tr/th[1]"}
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[1]/a/span"}
@@ -147,6 +156,28 @@ class InvoicesResource
   end
 
   #CSS Mehtods: Detail
+  def top_line(descriptiontext)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(CLEAR_LINES).displayed?}
+    clear = @driver.find_element(CLEAR_LINES)
+    sleep(1)
+    clear.click
+    sleep(1)
+    wait.until {@driver.find_element(ADD_DESCRIPTION).displayed?}
+    add = @driver.find_element(ADD_DESCRIPTION)
+    sleep(1)
+    add.click
+    sleep(1)
+    descbox = @driver.find_element(TOP_BOX_DESCRIPTION)
+    sleep(1)
+    descbox.click
+    sleep(2)
+    wait.until {@driver.find_element(TOP_DESCRIPTION_TEXTAREA).displayed?}
+    desc = @driver.find_element(TOP_DESCRIPTION_TEXTAREA)
+    desc.send_keys(descriptiontext)
+    sleep(3)
+  end
+
   def top_activity()
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(TOP_ACTIVITY_REF).displayed?}
