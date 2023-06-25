@@ -2,7 +2,7 @@ class ContractsResource
 
     #CSS Selectors: Grid
     TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div[1]/a/span"}
-    TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/span"}
+    TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/div/span"}
     GRID_MENU = {css: "div[class='dropdown-header select']"}
       NEW_CONTRACT = {css: "div[id$='NewTitlePlaceholder']"}
       EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}

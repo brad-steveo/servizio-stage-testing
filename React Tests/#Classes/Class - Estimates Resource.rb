@@ -11,13 +11,15 @@ class EstimatesResource
   TOP_SENT_ON = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[18]"}
   GRID_MENU = {css: "div[class='dropdown-header select']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
-  NEW_ESTIMATE = {css: "div[id='b20-b20-b2-NewTitlePlaceholder']"}
+  NEW_ESTIMATE = {css: "div[id='b24-b22-b2-NewTitlePlaceholder']"}
   SHOW_INACTIVES = {css: "input[id$='SwitchShowInactives']"}
-  ID_COLUMN = {css: "input[id$='b5-Input_SearchVar']"}
+  ID_COLUMN = {css: "input[id$='b7-ColumnSearchID']"}
   ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[3]/div/i"}
-  NAME_COLUMN = {css: "input[id$='b7-Input_SearchVar']"}
+  NAME_COLUMN = {css: "input[id$='b9-Input_SearchVar']"}
   NAME_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[3]/div/div/i[2]"}
   SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
+  CUSTOMER_SELECT_SEARCH = {css: "input[id$='b4-CustomerSearch']"}
+  TOP_CUSTOMER_SELECT = {xpath: "/html/body/div[20]/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div[1]/div/div/div[3]/button"}
 
   #CSS Selectors: Detail
   NAME_FIELD = {css: "input[id$='Input_DBAName']"}
@@ -25,18 +27,18 @@ class EstimatesResource
   TYPE_DROPDOWN = {css: "select[id$='EstimateTypeDropdown']"}
   STAGE_DROPDOWN = {css: "select[id$='EstimateStageDropdown']"}
   CUSTOMER_SELECT = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[1]/div/div[2]/div[5]/div/button"}
-  CUSTOMER_SELECT_SEARCH = {css: "input[id$='CustomerSearch']"}
-    TOP_CUSTOMER_SELECT = {xpath: "/html/body/div[19]/div/div/div/div/div/div[3]/div/div[1]/div/div/div[3]/button"}
+  DETAIL_CUSTOMER_SELECT_SEARCH = {css: "input[id$='CustomerSearch']"}
+    DETAIL_TOP_CUSTOMER_SELECT = {xpath: "/html/body/div[19]/div/div/div/div/div/div[3]/div/div[1]/div/div/div[3]/button"}
   AE_DROPDOWN = {css: "select[id$='AccountExecDropdown']"}
   NTE_FIELD = {css: "input[id$='Input_NTE']"}
   ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/header/div[1]/div[5]/button"}
     ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[5]/article/div/div/div/table/thead/tr/th[1]"}
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[5]/article/div/div/div/table/tbody/tr/td[1]/a/span"}
     TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[5]/article/div/div/div/table/tbody/tr/td[4]/span"}
-    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/header/div[1]/div[4]/button/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b22-b21-b43-b1-DropdownHeader']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id='b22-b21-b43-GridActionsCreateActivity']"}
-    DETAIL_PRINT_EMAIL = {css: "span[id='b22-b21-b43-GridActionsPrintEmail']"}
+    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/header/div[1]/div[4]/button/div/div/span"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b26-b23-b51-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b26-b23-b51-GridActionsCreateActivity']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id='b26-b23-b51-GridActionsPrintEmail']"}
   CANCEL_BUTTON = {css: "button[id$='EstimateCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='EstimateSaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='EstimateSaveAndCloseButton']"}
@@ -89,7 +91,7 @@ class EstimatesResource
     wait.until {@driver.find_element(TOP_REF) != toprecord}
   end
 
-  def new_estimate()
+  def new_estimate(customerselect)
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(GRID_MENU).displayed?}
     wait.until {@driver.find_element(TOP_REF).displayed?}
@@ -99,12 +101,22 @@ class EstimatesResource
     option = @driver.find_element(NEW_ESTIMATE)
     option.click
     sleep(2)
+    wait.until {@driver.find_element(CUSTOMER_SELECT_SEARCH).displayed?}
+    customersearch = @driver.find_element(CUSTOMER_SELECT_SEARCH)
+    customersearch.send_keys(customerselect)
+    sleep(1)
+    @driver.action.send_keys(:enter).perform
+    sleep(1)
+    wait.until {@driver.find_element(TOP_CUSTOMER_SELECT).displayed?}
+    button = @driver.find_element(TOP_CUSTOMER_SELECT)
+    button.click
+    sleep(2)
   end
 
   def export_grid()
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait.until {@driver.find_element(GRID_ACTIONS).displayed?}
-    grid_actions = @driver.find_element(GRID_ACTIONS)
+    wait.until {@driver.find_element(GRID_MENU).displayed?}
+    grid_actions = @driver.find_element(GRID_MENU)
     grid_actions.click
     wait.until {@driver.find_element(EXPORT_GRID).displayed?}
     export_grid = @driver.find_element(EXPORT_GRID)
@@ -208,14 +220,14 @@ class EstimatesResource
     wait.until {@driver.find_element(CUSTOMER_SELECT).displayed?}
     button = @driver.find_element(CUSTOMER_SELECT)
     button.click
-    wait.until {@driver.find_element(CUSTOMER_SELECT_SEARCH)}
-    field = @driver.find_element(CUSTOMER_SELECT_SEARCH)
+    wait.until {@driver.find_element(DETAIL_CUSTOMER_SELECT_SEARCH)}
+    field = @driver.find_element(DETAILCUSTOMER_SELECT_SEARCH)
     field.send_keys(customersearch)
     sleep(1)
     @driver.action.send_keys(:enter).perform
     sleep(1)
-    wait.until {@driver.find_element(TOP_CUSTOMER_SELECT).displayed?}
-    button2 = @driver.find_element(TOP_CUSTOMER_SELECT)
+    wait.until {@driver.find_element(DETAIL_TOP_CUSTOMER_SELECT).displayed?}
+    button2 = @driver.find_element(DETAIL_TOP_CUSTOMER_SELECT)
     button2.click
     sleep(2)
   end

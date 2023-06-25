@@ -15,9 +15,9 @@ describe "Estimates Test" do
   resource1 = "Estimates"
   idsearch = "1285"
   namesearch = "Selenium Job"
+  customername = "Selenium Test Customer"
   estimatename = "Selenium Estimate #{timestamp}"
   estimatetype = "Service"
-  estimatecustomer = "1031"
   activityreason = "Sales"
   activitycontactmethod = "Email"
   activitydescription = "Selenium Test #{timestamp}"
@@ -63,10 +63,9 @@ describe "Estimates Test" do
   end
 
   it "Create an Estimate record" do
-    estimates.new_estimate()
+    estimates.new_estimate(customername)
     estimates.name(estimatename)
     estimates.type(estimatetype)
-    estimates.customer_select(estimatecustomer)
     estimates.save_close()
 
     expect(estimates.top_name.text.downcase).to include(estimatename.downcase)

@@ -7,9 +7,8 @@ class ServizioHome
   GRID = {css: "table[role='grid']"}
   HOME_TAB = {css: "div[id='b7-Title']"}
   WIDGET_GALLERY = {css: "div[class='osui-gallery']"}
-  GLOBAL_SEARCH = {css: "input[id='b2-b3-Input_ResourceSearch']"}
-  GLOBAL_TOP = {xpath: "/html/body/div/div/div/div/div/div/header/div/div/div[3]/div/nav/div[2]/div[2]/div/div[2]/div/div/div"}
-  GLOBAL_TOP_ID = {xpath: "/html/body/div/div/div/div/div/div/header/div/div/div[3]/div/nav/div[2]/div[2]/div/div[2]/div/div/div/div[2]/div/div/mark"}
+  GLOBAL_SEARCH = {css: "input[id$='Input_ResourceSearch']"}
+  GLOBAL_TOP_ID = {xpath: "/html/body/div[1]/div/div/div/div/div/header/div/div/div/div/nav/div[2]/div[2]/div/div[2]/div/div[1]/div/div[2]/div/div/mark"}
   FIRST_TAB = {css: "div[id='$b7']"}
   FIRST_TAB_TITLE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/header/div[1]/div[2]/button/div/div/span"}
   FIRST_TAB_CLOSE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/header/div[1]/div[2]/button/div/i"}
@@ -72,8 +71,8 @@ class ServizioHome
     search = @driver.find_element(GLOBAL_SEARCH)
     search.send_keys(keyword)
     sleep(1)
-    wait.until {@driver.find_element(GLOBAL_TOP).displayed?}
-    top_result = @driver.find_element(GLOBAL_TOP)
+    wait.until {@driver.find_element(GLOBAL_TOP_ID).displayed?}
+    top_result = @driver.find_element(GLOBAL_TOP_ID)
     top_result.click
     sleep(1)
   end

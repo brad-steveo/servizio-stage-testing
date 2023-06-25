@@ -4,8 +4,8 @@ class CustomersResource
   TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div[1]/a/span"}
   TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/div[1]/span"}
   TOP_ACTIONS = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div[1]/div/i"}
-  TOP_BILLING_CONTACT = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[16]"}
-  TOP_SITE_CONTACT = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[15]"}
+  TOP_BILLING_CONTACT = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[17]/a/span"}
+  TOP_SITE_CONTACT = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[16]/a/span"}
   GRID_MENU = {css: "div[class='dropdown-header select']"}
     GRID_CREATE_ACTIVITY = {css: "span[id='b20-b8-l1_0-455_0-b48-GridActionsCreateActivity']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
@@ -36,6 +36,7 @@ class CustomersResource
   BILLINGZIP = {css: "input[id$='Input_BillPostalCode']"}
   BILLINGCOUNTRY = {css: "input[id$='Input_BillCountry']"}
   COPTYTOSITE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[2]/div[2]/a/img"}
+  TOP_CONTACT_DELETE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[3]/div/div/table/tbody/tr[1]/td[9]/a/i"}
   LINK_EXISTING_BUTTON = {css: "button[id$='LinkExisting']"}
   LINK_CONTACT_SEARCH = {css: "input[id$='ContactSearch']"}
   LINK_CONTACT_TOP_NAME = {xpath: "/html/body/div[6]/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div[1]/div/div/div[2]/div[1]/span"}
@@ -46,12 +47,12 @@ class CustomersResource
   TOP_CONTACT_SITE_CHECKBOX = {css: "input[id$='0-CheckboxSite']"}
   TOP_CONTACT_REMOVE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[3]/div/div/table/tbody/tr[1]/td[9]/a/i"}
   ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/header/div[1]/div[3]/button/div/span"}
-    ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[3]/article/div/table/thead/tr/th[1]"}
+    ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[3]/article/div/div/table/thead/tr/th[1]"}
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[3]/article/div/table/tbody/tr/td[1]/a/span"}
-    TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[3]/article/div/table/tbody/tr/td[6]/span"}
-    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/header/div[1]/div[4]/button/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b23-b9-b51-b1-DropdownHeaderContent_placeholder']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id='b23-b9-b51-GridActionsCreateActivity']"}
+    TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[3]/article/div/div/table/tbody/tr/td[6]/span"}
+    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/header/div[1]/div[4]/button/div/div/span"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b26-b10-b52-b1-DropdownHeaderContent_placeholder']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b26-b10-b52-GridActionsCreateActivity']"}
   CANCEL_BUTTON = {css: "button[id$='CustomerCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='CustomerSaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='CustomerSaveAndCloseButton']"}
@@ -304,6 +305,15 @@ class CustomersResource
     sleep(1)
   end
 
+  def delete_top_contact()
+    sleep(3)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(TOP_CONTACT_DELETE).displayed?}
+    option = @driver.find_element(TOP_CONTACT_DELETE)
+    option.click
+    sleep(1)
+  end
+
   def link_existing_contact(contactsearch)
     if 
       begin
@@ -381,6 +391,7 @@ class CustomersResource
   end
 
   def make_top_contact_billing()
+    sleep(2)
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(TOP_CONTACT_BILLING_CHECKBOX).displayed?}
     checkbox = @driver.find_element(TOP_CONTACT_BILLING_CHECKBOX)
@@ -389,6 +400,7 @@ class CustomersResource
   end
 
   def make_top_contact_site()
+    sleep(2)
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(TOP_CONTACT_SITE_CHECKBOX).displayed?}
     checkbox = @driver.find_element(TOP_CONTACT_SITE_CHECKBOX)

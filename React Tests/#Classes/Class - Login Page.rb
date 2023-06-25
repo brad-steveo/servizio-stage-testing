@@ -4,7 +4,7 @@ class ServizioLogin
   USERNAME_FIELD = {css: "input[id$='Input_UsernameVal']"}
   PASSWORD_FIELD = {css: "input[id$='Input_PasswordVal']"}
   LOGIN_BTN = {xpath: "/html/body/div/div/div/div/div/div/div/div/form/div[2]/div[2]/div/div/button"}
-  SERVIZIO_LOGO = {xpath: "/html/body/div/div/div/div/div/div/header/div/div/div[3]/div/nav/div[1]/div/div/span"}
+  SERVIZIO_LOGO = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/header/div/div/div/div/nav/div[1]/div/div/span"}
 
   attr_reader :driver
 

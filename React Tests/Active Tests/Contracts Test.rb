@@ -17,7 +17,7 @@ describe "Contracts Test" do
 	contractname = "Selenium Contract #{timestamp}"
 	customername = "Selenium Test Customer"
 	contractdetails = "Selenium Contract Details #{timestamp}"
-	contracttype = "Service"
+	contracttype = "Quoted Service"
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)

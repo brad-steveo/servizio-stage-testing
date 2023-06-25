@@ -3,7 +3,7 @@ class ActivitiesResource
   #CSS Selectors: Grid
   TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div[1]/a/span"}
   TOP_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[4]/span"}
-  TOP_COMPLETED = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[12]/div/span"}
+  TOP_COMPLETED = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[12]/span"}
   GRID_MENU = {css: "div[class='dropdown-header select']"}
   NEW_ACTIVITY = {css: "div[id$='NewTitlePlaceholder']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
@@ -129,6 +129,7 @@ class ActivitiesResource
     dropdown_list = @driver.find_element(REASON_DROPDOWN)
     options = dropdown_list.find_elements(tag_name: 'option')
     options.each {|option| option.click if option.text == (reasonselect)}
+    sleep(2)
   end
 
   def contact_method(contactmethodselect)

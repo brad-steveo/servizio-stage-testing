@@ -40,6 +40,7 @@ describe "Activities Test" do
   end
 
   it "Perform a column header search in the ID column" do
+    activities.search_reset()
     activities.search_id(idsearch)
     
     expect(activities.top_ref.text).to include(idsearch)
