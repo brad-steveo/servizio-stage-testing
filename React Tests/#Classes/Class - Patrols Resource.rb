@@ -1,44 +1,46 @@
 class PatrolsResource
 
   #CSS Selectors: Grid
-  TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/a/span"}
-  TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/span"}
-  TOP_ACTIONS = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div[1]/div/i"}
+  TOP_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div/a/span"}
+  TOP_NAME = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/span"}
+  TOP_ACTIONS = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]"}
     GRID_CREATE_ACTIVITY = {css: "a[id$='GridActionsCreateActivityLink']"}
     GRID_PRINT_EMAIL = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div[2]/div/a[5]"}
     GRID_MAKE_INACTIVE = {css: "a[id$='GridActionsMakeInactiveLink']"}
       MAKE_INACTIVE_CONFIRM = {css: "span[id$='ConfirmButton']"}
-  TOP_SENT_ON = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[16]/span"}
+  TOP_SENT_ON = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[18]"}
   GRID_MENU = {css: "div[class='dropdown-header select']"}
-  NEW_PATROL = {css: "div[id='b20-b4-b3-NewTitlePlaceholder']"}
+  NEW_PATROL = {css: "div[id='b54-b6-b3-NewTitlePlaceholder']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
   SHOW_INACTIVES = {css: "input[id$='SwitchShowInactives']"}
   OLD_PATROLS = {css: "input[id$='SwitchShowOldPatrols']"}
   ID_COLUMN = {css: "input[id$='b7-ColumnSearchID']"}
-  ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/i"}
+  ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/i"}
   NAME_COLUMN = {css: "input[id$='b9-Input_SearchVar']"}
-  NAME_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/i[2]"}
+  NAME_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/i[2]"}
   SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
-  CUSTOMER_SELECT_SEARCH = {css: "input[id='b22-b5-b7-CustomerSearch']"}
-  TOP_CUSTOMER_SELECT = {xpath: "/html/body/div[7]/div/div/div/div/div/div[3]/div/div[1]/div/div/div[3]/button"}
+  RESOURCE_REFRESH = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[1]/div[1]/div[1]/div/div[2]/i"}
+  CUSTOMER_SELECT_SEARCH = {css: "input[id$='b8-CustomerSearch']"}
+  CUSTOMER_SEARCH_BUTTON = {css: "button[class$='primary searchButton']"}
+  TOP_CUSTOMER_SELECT = {xpath: "/html/body/div[7]/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div[1]/div/div/div[3]/button"}
 
   #CSS Selectors: Detail
-  SUBMITTED_NAME_FIELD = {css: "input[id='b22-b5-Input_SubmittedName']"}
-  BAD_PATROL_DROPDOWN = {css: "select[id='b22-b5-BadCustomer_Dropdown']"}
-  SCOPE_OF_WORK_TEXTAREA = {css: "textarea[id='b22-b5-TextArea_Description']"}
-  LOCATION_DROPDOWN = {css: "select[id='b22-b5-Locations']"}
-  ACCOUNT_EXECUTIVE_DROPDOWN = {css: "select[id='b22-b5-AccountExecutives']"}
-  ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/header/div[1]/div[2]/button"}
-    ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[2]/article/div/div/div/table/thead/tr/th[1]"}
-    TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[2]/article/div/div/div/table/tbody/tr[1]/td[1]/a/span"}
-    TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[2]/article/div/div/div/table/tbody/tr[1]/td[4]/span"}
-    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/header/div[1]/div[4]/button/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b22-b5-b25-b1-DropdownHeader']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id='b22-b5-b25-GridActionsCreateActivity']"}
-    DETAIL_PRINT_EMAIL = {css: "span[id='b22-b5-b25-GridActionsPrintEmail']"}
-  CANCEL_BUTTON = {css: "button[id='b22-b5-CancelButton']"}
-  SAVE_BUTTON = {css: "button[id='b22-b5-SaveButton']"}
-  SAVE_CLOSE_BUTTON = {css: "button[id='b22-b5-SaveAndCloseButton']"}
+  SUBMITTED_NAME_FIELD = {css: "input[id$='Input_SubmittedName']"}
+  BAD_PATROL_DROPDOWN = {css: "select[id$='BadCustomer_Dropdown']"}
+  SCOPE_OF_WORK_TEXTAREA = {css: "textarea[id$=TextArea_Description']"}
+  LOCATION_DROPDOWN = {css: "select[id$='Locations']"}
+  ACCOUNT_EXECUTIVE_DROPDOWN = {css: "select[id$='AccountExecutives']"}
+  ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[3]/div/section/header/div[1]/div[2]/button/div/span"}
+    ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[3]/div/section/section/div/div[2]/article/div/div/div/table/thead/tr/th[1]"}
+    TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[3]/div/section/section/div/div[2]/article/div/div/div/table/tbody/tr[1]/td[1]/a/span"}
+    TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[3]/div/section/section/div/div[2]/article/div/div/div/table/tbody/tr[1]/td[6]/span"}
+    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div[4]/div/button/div/div/span"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b56-b7-b34-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b56-b7-b34-GridActionsCreateActivity']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id='b56-b7-b34-GridActionsPrintEmail']"}
+  CANCEL_BUTTON = {css: "button[id='b56-b7-CancelButton']"}
+  SAVE_BUTTON = {css: "button[id='b56-b7-SaveButton']"}
+  SAVE_CLOSE_BUTTON = {css: "button[id='b56-b7-SaveAndCloseButton']"}
 
 
   attr_reader :driver
@@ -89,7 +91,7 @@ class PatrolsResource
     wait.until {@driver.find_element(TOP_REF) != toprecord}
   end
 
-  def new_patrol()
+  def new_patrol(customer)
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(GRID_MENU).displayed?}
     wait.until {@driver.find_element(TOP_REF).displayed?}
@@ -98,6 +100,13 @@ class PatrolsResource
     wait.until {@driver.find_element(NEW_PATROL).displayed?}
     option = @driver.find_element(NEW_PATROL)
     option.click
+    sleep(2)
+    wait.until {@driver.find_element(CUSTOMER_SELECT_SEARCH).displayed?}
+    customersearch = @driver.find_element(CUSTOMER_SELECT_SEARCH)
+    customersearch.send_keys(customer)
+    sleep(2)
+    customersearchbutton = @driver.find_element(CUSTOMER_SEARCH_BUTTON)
+    customersearchbutton.click
     sleep(2)
     wait.until {@driver.find_element(TOP_CUSTOMER_SELECT).displayed?}
     top_customer = @driver.find_element(TOP_CUSTOMER_SELECT)
@@ -191,6 +200,14 @@ class PatrolsResource
     sleep(2)
   end
 
+  def resource_refresh()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(RESOURCE_REFRESH).displayed?}
+    button = @driver.find_element(RESOURCE_REFRESH)
+    button.click
+    sleep(2)
+  end
+
   #Class Methods: Detail
   def submitted_name(submittedname)
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
@@ -248,7 +265,7 @@ class PatrolsResource
   end
 
   def cancel()
-    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 30)
     wait.until {@driver.find_element(CANCEL_BUTTON).displayed?}
     button = @driver.find_element(CANCEL_BUTTON)
     button.click

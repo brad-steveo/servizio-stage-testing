@@ -10,17 +10,18 @@ describe "Patrols Test" do
 	#Test Variables
   timestamp = Time.now.strftime("%m/%d/%Y %I:%M:%S")
   dateonly = Time.now.strftime("%m/%d/%Y")
-	loginname = "masterchief@yesco.com"
-	password = "MCyesco123"
+  loginname = "masterchief@yesco.com"
+  password = "MCyesco123"
   resource1 = "Patrols"
   idsearch = "1500"
-	namesearch = "Selenium Test"
-	submittedname = "Selenium Test #{timestamp}"
-	activityreason = "Sales"
-	activitycontactmethod = "Email"
-	activitydescription = "Selenium Test #{timestamp}"
-	emailsubject = "Patrol Email (Selenium) #{timestamp}"
-	emailmessage = "Selenium Test Email Message"
+  namesearch = "Selenium Test"
+  customer = "Selenium Test Customer"
+  submittedname = "Selenium Test #{timestamp}"
+  activityreason = "Sales"
+  activitycontactmethod = "Email"
+  activitydescription = "Selenium Test #{timestamp}"
+  emailsubject = "Patrol Email (Selenium) #{timestamp}"
+  emailmessage = "Selenium Test Email Message"
 
 	#Test Classes
 	login = ServizioLogin.new(@driver)
@@ -63,7 +64,7 @@ describe "Patrols Test" do
 
 	it "Create a Patrol record" do
 		patrols.old_patrols()
-		patrols.new_patrol()
+		patrols.new_patrol(customer)
 		patrols.submitted_name(submittedname)
 		#patrols.location(location)
 		patrols.save_close()
@@ -92,9 +93,7 @@ describe "Patrols Test" do
 		printemail.email_message(emailmessage)
 		printemail.email_close()
 		patrols.cancel()
-		home.close_tab()
-		home.resource_search_clear()
-		home.open_resource(resource1)
+		patrols.resource_refresh()
 
 		expect(patrols.top_sent.text).not_to eql("")
 	end

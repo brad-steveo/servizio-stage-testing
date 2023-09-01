@@ -16,7 +16,7 @@ class ActivitiesResource
   #CSS Selectors: Detail
   REASON_DROPDOWN = {css: "select[id$='ReasonDropdown']"}
   CONTACT_METHOD_DROPDOWN = {css: "select[id$='Dropdown2']"}
-  DESCRIPTION = {css: "textarea[id$='TextArea_Description']"}
+  DESCRIPTION = {css: "textarea[id$='b58-b37-TextArea_Description']"}
   COMPLETE_ACTIVITY_CHECKBOX = {css: "input[id$='CompleteActivityCheckbox']"}
   CANCEL_BUTTON = {css: "button[id$='ActivityCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='ActivitySaveButton']"}
@@ -138,6 +138,7 @@ class ActivitiesResource
     dropdown_list = @driver.find_element(CONTACT_METHOD_DROPDOWN)
     options = dropdown_list.find_elements(tag_name: 'option')
     options.each {|option| option.click if option.text == (contactmethodselect)}
+    sleep(2)
   end
 
   def description(activitydescription)

@@ -48,7 +48,7 @@ describe "Jobs Test" do
 		jobs.export_grid()
 	end
 
-  it "Perform a column header search in the ID column" do)
+  it "Perform a column header search in the ID column" do
     jobs.search_id(idsearch)
 
     expect(jobs.top_ref.text).to include(idsearch)

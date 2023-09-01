@@ -92,9 +92,7 @@ describe "Estimates Test" do
     printemail.email_message(emailmessage)
     printemail.email_close()
     estimates.cancel()
-    home.close_tab()
-    home.resource_search_clear()
-    home.open_resource(resource1)
+    estimates.resource_refresh()
 
     expect(estimates.top_sent.text).not_to eql("")
   end

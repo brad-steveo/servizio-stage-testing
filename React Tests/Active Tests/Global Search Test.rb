@@ -12,7 +12,7 @@ describe "Global Search Test" do
   dateonly = Time.now.strftime("%m/%d/%Y")
 	loginname = "masterchief@yesco.com"
 	password = "MCyesco123"
-  searchtest1 = "Patrol: 1010"
+  searchtest1 = "Patrol: 1011"
   searchtest2 = "Job: 1400"
   searchtest3 = "Estimate: 1117"
   searchtest4 = "Customer: 1113"

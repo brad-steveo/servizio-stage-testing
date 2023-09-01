@@ -9,12 +9,12 @@ class ServizioHome
   WIDGET_GALLERY = {css: "div[class='osui-gallery']"}
   GLOBAL_SEARCH = {css: "input[id$='Input_ResourceSearch']"}
   GLOBAL_TOP_ID = {xpath: "/html/body/div[1]/div/div/div/div/div/header/div/div/div/div/nav/div[2]/div[2]/div/div[2]/div/div[1]/div/div[2]/div/div/mark"}
-  FIRST_TAB = {css: "div[id='$b7']"}
-  FIRST_TAB_TITLE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/header/div[1]/div[2]/button/div/div/span"}
-  FIRST_TAB_CLOSE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/header/div[1]/div[2]/button/div/i"}
-  SECOND_TAB = {css: "div[id='$b8']"}
-  SECOND_TAB_TITLE = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div/div/div[1]/div[3]/div/span"}
-  SECOND_TAB_CLOSE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/header/div[1]/div[3]/button/div/i"}
+  FIRST_TAB = {css: "div[id='Tab1']"}
+  FIRST_TAB_TITLE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div[2]/div/button/div/div/span"}
+  FIRST_TAB_CLOSE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div[2]/div/button/div/i"}
+  SECOND_TAB = {css: "div[id='Tab2']"}
+  SECOND_TAB_TITLE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div[3]/div/button/div/div/span"}
+  SECOND_TAB_CLOSE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div[3]/div/button/div/i"}
 
   class StaleError < StandardError
     def initialize(msg='Stale reference error')
@@ -74,7 +74,7 @@ class ServizioHome
     wait.until {@driver.find_element(GLOBAL_TOP_ID).displayed?}
     top_result = @driver.find_element(GLOBAL_TOP_ID)
     top_result.click
-    sleep(1)
+    sleep(3)
   end
 
   def global_search_clear()
