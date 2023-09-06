@@ -72,6 +72,7 @@ describe "Invoices Test" do
     end
 
     it "Open top record and email" do
+        invoices.search_id(idsearch)
         invoices.top_open()
         invoices.print_email()
         printemail.email_from(loginname)

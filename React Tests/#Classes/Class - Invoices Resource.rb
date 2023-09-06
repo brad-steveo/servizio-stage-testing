@@ -1,42 +1,43 @@
 class InvoicesResource
 
   #CSS Selectors: Grid
-  TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div[1]/a/span"}
-  TOP_CUSTOMER = {xpath: '/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/span'}
-  TOP_QBID = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[32]/span"}
-  TOP_ACTIONS = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div[1]/div/i"}
+  TOP_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/div/div/div/div[1]/a/span"}
+  TOP_CUSTOMER = {xpath: '/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[4]/a/div/span'}
+  TOP_QBID = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[33]/span"}
+  TOP_ACTIONS = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div/div/div[1]/div/i"}
     GRID_CREATE_ACTIVITY = {css: "a[id$='GridActionsCreateActivity']"}
     GRID_PRINT_EMAIL = {css: "a[id$='GridActionsPrintEmail']"}
   GRID_ACTIONS = {css: "div[class='dropdown-header select']"}
-  NEW_INVOICE = {css: "div[id='b21-b39-b2-NewTitlePlaceholder']"}
+  NEW_INVOICE = {css: "div[id$='b2-NewTitlePlaceholder']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
   SHOW_INACTIVES = {css: "input[id$='SwitchShowInactives']"}
   ID_COLUMN = {css: "input[id$='b5-Input_SearchVar']"}
-  ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[3]/div/div/i[2]"}
+  ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[3]/div/div/i[2]"}
   CUSTOMER_COLUMN = {css: "input[id$='b7-Input_SearchVar']"}
-  CUSTOMER_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[3]/div/div/i[2]"}
+  CUSTOMER_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div/div[2]/table/thead/tr/th[4]/div[3]/div/div/i[2]"}
   SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
+  RESOURCE_REFRESH = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div/div[1]/div[1]/div[1]/div/div[2]/i"}
 
   #CSS Selectors: Detail
   LINE_ITEMS_SUBTAB = {css: "div[id$='b8-Title']"}
   ADD_LINES = {css: "button[id$='AddLineItemButton']"}
   CLEAR_LINES = {css: "button[id$='ClearAllLinesButton']"}
   ADD_DESCRIPTION = {css: "button[id$='AddDescriptionButton']"}
-  TOP_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr/td[7]/div[2]/div[1]/span"}
-  TOP_BOX_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr[1]/td[7]/div/div[1]"}
+  TOP_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[4]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr[1]/td[6]/div[2]/div[1]/span"}
+  TOP_BOX_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[4]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr[1]/td[6]/div[2]/div[1]"}
   TOP_HIDDEN_DESCRIPTION = {xpath: "/html/body/div[2]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr/td[7]/div/div[2]"}
   TOP_DESCRIPTION_TEXTAREA = {css: "textarea[id$='Input_InvoiceLineDescription']"} 
-  TOP_LINE_DELETE = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr/td[14]/a[2]/i"}
-  ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/header/div[1]/div[4]/button"}
-    ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[4]/article/div/div/table/thead/tr/th[1]"}
-    TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[1]/a/span"}
-    TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[4]/span"}
-    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/header/div[1]/div[4]/button/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b24-b42-b31-b1-DropdownHeader']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id='b23-b40-b27-GridActionsCreateActivity']"}
-    DETAIL_SYNC_TO_QBO = {css: "span[id='b24-b42-b32-GridActionsSyncToQBO']"}
-      CONFIRM_SYNC = {css: "span[id='b24-b42-b32-b2-b1-ConfirmButton']"}
-    DETAIL_PRINT_EMAIL = {css: "span[id='b23-b40-b27-GridActionsPrintEmail']"}
+  TOP_LINE_DELETE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[4]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr[1]/td[14]/a[2]/i"}
+  ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/header/div[1]/div[4]/button/div/span"}
+    ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[4]/article/div/div/table/thead/tr/th[1]/div"}
+    TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[1]/a/span"}
+    TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[6]/span"}
+    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/header/div[1]/div[4]/div/button/div/div/span"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b56-b45-b31-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b56-b45-b31-GridActionsCreateActivity']"}
+    DETAIL_SYNC_TO_QBO = {css: "span[id='b56-b45-b32-GridActionsSyncToQBO']"}
+      CONFIRM_SYNC = {css: "span[id$='b1-ConfirmButton']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id='b56-b45-b31-GridActionsPrintEmail']"}
   CANCEL_BUTTON = {css: "button[id$='InvoiceCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='InvoiceSaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='InvoiceSaveAndCloseButton']"}
@@ -151,6 +152,14 @@ class InvoicesResource
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(SEARCH_RESET).displayed?}
     button = @driver.find_element(SEARCH_RESET)
+    button.click
+    sleep(2)
+  end
+
+  def resource_refresh()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(RESOURCE_REFRESH).displayed?}
+    button = @driver.find_element(RESOURCE_REFRESH)
     button.click
     sleep(2)
   end
