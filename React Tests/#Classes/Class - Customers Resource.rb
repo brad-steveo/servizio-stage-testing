@@ -36,7 +36,7 @@ class CustomersResource
   BILLINGSTATE = {css: "input[id$='Input_BillCountrySubDivisionCode']"}
   BILLINGZIP = {css: "input[id$='Input_BillPostalCode']"}
   BILLINGCOUNTRY = {css: "input[id$='Input_BillCountry']"}
-  COPTYTOSITE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[1]/div[2]/div[2]/a/img"}
+  COPTYTOSITE = {css: "a[title='Copy billing address to site']"}
   TOP_CONTACT_DELETE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[3]/div/div/table/tbody/tr[1]/td[9]/a/i"}
   LINK_EXISTING_BUTTON = {css: "button[id$='LinkExisting']"}
   LINK_CONTACT_SEARCH = {css: "input[id$='ContactSearch']"}

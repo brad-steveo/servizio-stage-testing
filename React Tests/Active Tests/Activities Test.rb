@@ -67,6 +67,7 @@ describe "Activities Test" do
     activities.top_open()
     activities.complete_activity_checkbox()
     activities.save_close()
+    activities.resource_refresh()
 
     expect(activities.top_completed.text).not_to eql("")
   end
