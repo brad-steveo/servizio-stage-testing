@@ -44,11 +44,11 @@ class JobsResource
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[5]/article/div/div/table/tbody/tr/td[1]/a/span"}
     TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[5]/article/div/div/table/tbody/tr/td[6]/span"}
     THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/header/div[1]/div[4]/div/button/div/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b56-b16-b71-b1-DropdownHeader']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id='b56-b16-b71-GridActionsCreateActivity']"}
-    DETAIL_CREATE_INVOICE = {css: "span[id='b56-b16-b71-GridActionsCreateInvoice']"}
-      DUP_INVOICE_CONFIRM = {css: "span[id='b22-b15-b71-b7-b1-ConfirmButton']"}
-    DETAIL_PRINT_EMAIL = {css: "span[id='b56-b16-b71-GridActionsPrintEmail']"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b54-b17-b73-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b54-b17-b73-GridActionsCreateActivity']"}
+    DETAIL_CREATE_INVOICE = {css: "span[id='b54-b17-b73-GridActionsCreateInvoiceLink']"}
+      DUP_INVOICE_CONFIRM = {css: "span[id$='b1-ConfirmButton']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id='b54-b17-b73-GridActionsPrintEmail']"}
   CANCEL_BUTTON = {css: "button[id$='JobCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='JobSaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='JobSaveAndCloseButton']"}

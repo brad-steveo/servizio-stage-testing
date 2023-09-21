@@ -1,24 +1,25 @@
 class ContractsResource
 
     #CSS Selectors: Grid
-    TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div[1]/a/span"}
-    TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/div/span"}
+    TOP_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div/a/span"}
+    TOP_NAME = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/div/span"}
     GRID_MENU = {css: "div[class='dropdown-header select']"}
       NEW_CONTRACT = {css: "div[id$='NewTitlePlaceholder']"}
       EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
       SHOW_INACTIVES = {css: "input[id$='SwitchShowInactives']"}
     ID_COLUMN = {css: "input[id$='b5-ColumnSearchID']"}
-    ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/i"}
+    ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/i"}
     NAME_COLUMN = {css: "input[id$='b7-Input_SearchVar']"}
-    NAME_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/i[2]"}
+    NAME_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/i[2]"}
     SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
   
     #CSS Selectors: Detail
     NAME_FIELD = {css: "input[id$='Input_Name']"}
     INSTALLMENT_AMOUNT_FIELD = {css: "input[id$='Input_InstallmentAmount']"}
-    CUSTOMER_SELECT = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div/div/div[1]/div[3]/div[3]/button"}
+    CUSTOMER_SELECT = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[1]/div/div[1]/div[3]/div[3]/button"}
       CUSTOMER_SEARCH = {css: "input[id$='CustomerSearch']"}
-      TOP_CUSTOMER_SELECT = {xpath: "/html/body/div[9]/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div/div/div/div[3]/button"}
+      CUSTOMER_SEARCH_BUTTON = {css: "button[class$='searchButton']"}
+      TOP_CUSTOMER_SELECT = {xpath: "/html/body/div[9]/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div[1]/div/div/div[3]/button"}
     DETAILS_TEXTAREA = {css: "textarea[id$='TextArea_Details']"}
     COVERAGES_TEXTAREA = {css: "textarea[id$='TextArea_Coverages']"}
     SPECIAL_INSTRUCTIONS_TEXTAREA = {css: "textarea[id$='TextArea_SpecialInstructions']"}
@@ -147,7 +148,8 @@ class ContractsResource
       field = @driver.find_element(CUSTOMER_SEARCH)
       field.send_keys(customername)
       sleep(1)
-      @driver.action.send_keys(:enter).perform
+      searchbutton = @driver.find_element(CUSTOMER_SEARCH_BUTTON)
+      searchbutton.click
       sleep(1)
       wait.until {@driver.find_element(TOP_CUSTOMER_SELECT).displayed?}
       select = @driver.find_element(TOP_CUSTOMER_SELECT)

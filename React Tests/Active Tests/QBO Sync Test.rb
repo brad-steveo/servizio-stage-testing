@@ -13,7 +13,7 @@ describe "QBO Sync Test" do
     password = "SUyesco123"
     resource1 = "Jobs"
 	resource2 = "Invoices"
-	jobsearch = "Selenium Test Job"
+	jobsearch = "job: Selenium Test Job"
 	jobsearchref = "1001"
 
 	#Test Classes

@@ -1,17 +1,17 @@
 class ContactsResource
 
   #CSS Selectors: Grid
-  TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div[1]/a/span"}
-  TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/span"}
-  TOP_ACTIONS = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div/div/div[1]/div/i"}
+  TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div/a/span"}
+  TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]"}
+  TOP_ACTIONS = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div/div/div[1]/div/i"}
     GRID_MAKE_INACTIVE = {css: "span[id$='GridActionsMakeInactive']"}
   GRID_MENU = {css: "div[class='dropdown-header select']"}
     NEW_CONTACT = {css: "div[id$='NewTitlePlaceholder']"}
     EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
   ID_COLUMN = {css: "input[id$='b5-ColumnSearchID']"}
-  ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[3]/div/i"}
+  ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[3]/div/i"}
   NAME_COLUMN = {css: "input[id$='b7-Input_SearchVar']"}
-  NAME_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[3]/div/div/i[2]"}
+  NAME_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[3]/div/div/i[2]"}
   SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
 
   #CSS Selectors: Detail
@@ -20,9 +20,9 @@ class ContactsResource
   PHONE_FIELD_1 = {css: "input[id$='0-Input_Phone']"}
   EMAIL_FIELD_1 = {css: "input[id$='0-Input_Email']"}
   DESCRIPTION_TEXTAREA = {css: "textarea[id$='TextArea_Description']"}
-  CANCEL_BUTTON = {css: "button[id$='b31-CancelButton']"}
-  SAVE_BUTTON = {css: "button[id$='b31-SaveButton']"}
-  SAVE_CLOSE_BUTTON = {css: "button[id$='b31-SaveAndCloseButton']"}
+  CANCEL_BUTTON = {css: "button[id$='b34-CancelButton']"}
+  SAVE_BUTTON = {css: "button[id$='b34-SaveButton']"}
+  SAVE_CLOSE_BUTTON = {css: "button[id$='b34-SaveAndCloseButton']"}
 
   attr_reader :driver
 
