@@ -29,9 +29,12 @@ describe "QBO Sync Test" do
 	login.sign_in()
 
 	#Text Examples
-    it "Open Selenium Test Job using Global Search" do
-		home.global_search(jobsearch)
-		expect(home.first_tab_title.text.downcase).to include(jobsearchref.downcase)	  
+    it "Open Selenium Test Job" do
+		home.open_resource(resource1)
+		recordtest = jobs.top_ref.text
+		expect(recordtest).not_to eql("")
+		jobs.search_id(jobsearchref)
+		jobs.top_open()  
     end
 
 	it "Create an invoice from a job and sync to QBO" do
@@ -45,6 +48,7 @@ describe "QBO Sync Test" do
 		print "Invoice: %s" % invoices.top_ref.text
 		print "\nQBID: "
 		print invoices.top_qbid.text
+		print "\n"
 		expect(invoices.top_qbid.text).not_to eq("")
 	end
   

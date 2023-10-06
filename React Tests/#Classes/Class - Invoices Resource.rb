@@ -3,7 +3,7 @@ class InvoicesResource
   #CSS Selectors: Grid
   TOP_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/div/div/div/div[1]/a/span"}
   TOP_CUSTOMER = {xpath: '/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[4]/a/div/span'}
-  TOP_QBID = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[33]/span"}
+  TOP_QBID = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[33]/span"}
   TOP_ACTIONS = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div/div/div[1]/div/i"}
     GRID_CREATE_ACTIVITY = {css: "a[id$='GridActionsCreateActivity']"}
     GRID_PRINT_EMAIL = {css: "a[id$='GridActionsPrintEmail']"}
@@ -33,11 +33,11 @@ class InvoicesResource
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[1]/a/span"}
     TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[6]/span"}
     THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/header/div[1]/div[4]/div/button/div/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b56-b45-b31-b1-DropdownHeader']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id='b56-b45-b31-GridActionsCreateActivity']"}
-    DETAIL_SYNC_TO_QBO = {css: "span[id='b56-b45-b32-GridActionsSyncToQBO']"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b58-b45-b32-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b56-b45-b32-GridActionsCreateActivity']"}
+    DETAIL_SYNC_TO_QBO = {css: "span[id='b58-b45-b33-GridActionsSyncToQBO']"}
       CONFIRM_SYNC = {css: "span[id$='b1-ConfirmButton']"}
-    DETAIL_PRINT_EMAIL = {css: "span[id='b56-b45-b31-GridActionsPrintEmail']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id='b56-b45-b32-GridActionsPrintEmail']"}
   CANCEL_BUTTON = {css: "button[id$='InvoiceCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='InvoiceSaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='InvoiceSaveAndCloseButton']"}
