@@ -97,6 +97,7 @@ class ServizioHome
     wait.until {@driver.find_element(FIRST_TAB_CLOSE).displayed?}
     tab = @driver.find_element(FIRST_TAB_CLOSE)
     tab.click
+    sleep(2)
   end
 
   def first_tab_title()

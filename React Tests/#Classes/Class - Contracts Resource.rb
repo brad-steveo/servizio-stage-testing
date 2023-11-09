@@ -11,14 +11,14 @@ class ContractsResource
     ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/i"}
     NAME_COLUMN = {css: "input[id$='b7-Input_SearchVar']"}
     NAME_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/i[2]"}
-    SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
+    SEARCH_RESET = {css: "div[title='Grid is currently being filtered. Click to remove all filters.']"}
   
     #CSS Selectors: Detail
     NAME_FIELD = {css: "input[id$='Input_Name']"}
     INSTALLMENT_AMOUNT_FIELD = {css: "input[id$='Input_InstallmentAmount']"}
     CUSTOMER_SELECT = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[1]/div/div[1]/div[3]/div[3]/button"}
       CUSTOMER_SEARCH = {css: "input[id$='CustomerSearch']"}
-      CUSTOMER_SEARCH_BUTTON = {css: "button[class$='searchButton']"}
+      CUSTOMER_SEARCH_BUTTON = {css: "button[id$='CustomerSearchButton']"}
       TOP_CUSTOMER_SELECT = {xpath: "/html/body/div[9]/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div[1]/div/div/div[3]/button"}
     DETAILS_TEXTAREA = {css: "textarea[id$='TextArea_Details']"}
     COVERAGES_TEXTAREA = {css: "textarea[id$='TextArea_Coverages']"}
@@ -26,7 +26,7 @@ class ContractsResource
     LOCATION_DROPDOWN = {css: "select[id$='LocationDropdown']"}
     AE_DROPDOWN = {css: "select[id$='AccountExecDropdown']"}
     TYPE_DROPDOWN = {css: "select[id$='TypeDropdown']"}
-    CANCEL_BUTTON = #{css: "button[id$='ActivityCancelButton']"}
+    CANCEL_BUTTON = {css: "button[id$='CancelButton']"}
     SAVE_BUTTON = {css: "button[id$='SaveButton']"}
     SAVE_CLOSE_BUTTON = {css: "button[id$='SaveAndCloseButton']"}
 

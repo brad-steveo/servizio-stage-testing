@@ -2,22 +2,23 @@ class ActivitiesResource
 
   #CSS Selectors: Grid
   TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div[1]/a/span"}
-  TOP_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[4]/span"}
+  TOP_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[5]"}
   TOP_COMPLETED = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[12]/span"}
   GRID_MENU = {css: "div[class='dropdown-header select']"}
   NEW_ACTIVITY = {css: "div[id$='NewTitlePlaceholder']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
   ID_COLUMN = {css: "input[id$='b5-ColumnSearchID']"}
   ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[3]/div/div/i"}
-  DESCRIPTION_COLUMN = {css: "input[id$='b9-Input_SearchVar']"}
-  DESCRIPTION_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[4]/div[3]/div/div/div/i[2]"}
-  SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
+  DESCRIPTION_COLUMN = {css: "input[id$='b11-Input_SearchVar']"}
+  DESCRIPTION_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[5]/div[3]/div/div/div/i[2]"}
+  SEARCH_RESET = {css: "div[title='Grid is currently being filtered. Click to remove all filters.']"}
   RESOURCE_REFRESH = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[1]/div[1]/div/div/div[2]/i"}
 
   #CSS Selectors: Detail
   REASON_DROPDOWN = {css: "select[id$='ReasonDropdown']"}
   CONTACT_METHOD_DROPDOWN = {css: "select[id$='Dropdown2']"}
-  DESCRIPTION = {css: "textarea[id$='TextArea_Description']"}
+  DESCRIPTIONCLICK = {xpath: "/html/body/div[2]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[4]/article/div/div/div/div/div[1]/div/form/div[9]/div[2]"}
+  DESCRIPTION = {css: "textarea[id='b56-b38-TextArea_Description']"}
   COMPLETE_ACTIVITY_CHECKBOX = {css: "input[id$='CompleteActivityCheckbox']"}
   CANCEL_BUTTON = {css: "button[id$='ActivityCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='ActivitySaveButton']"}
@@ -151,7 +152,7 @@ class ActivitiesResource
   end
 
   def description(activitydescription)
-    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(DESCRIPTION).displayed?}
     field = @driver.find_element(DESCRIPTION)
     field.send_keys(activitydescription)

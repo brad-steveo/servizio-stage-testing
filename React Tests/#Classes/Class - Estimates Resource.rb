@@ -17,10 +17,10 @@ class EstimatesResource
   ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[3]/div/i"}
   NAME_COLUMN = {css: "input[id$='b9-Input_SearchVar']"}
   NAME_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[3]/div/div/i[2]"}
-  SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
+  SEARCH_RESET = {css: "div[title='Grid is currently being filtered. Click to remove all filters.']"}
   RESOURCE_REFRESH = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[1]/div[1]/div/div/div[2]/i"}
   CUSTOMER_SELECT_SEARCH = {css: "input[id$='CustomerSearch']"}
-  CUSTOMER_SEARCH_BUTTON = {css: "button[class$='primary searchButton']"}
+  CUSTOMER_SEARCH_BUTTON = {css: "button[id$='CustomerSearchButton']"}
   TOP_CUSTOMER_SELECT = {xpath: "/html/body/div[19]/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div[1]/div/div/div[3]/button"}
 
   #CSS Selectors: Detail
@@ -38,9 +38,9 @@ class EstimatesResource
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[5]/article/div/div/div/table/tbody/tr/td[1]/a/span"}
     TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[5]/article/div/div/div/table/tbody/tr/td[6]/span"}
     THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div[4]/div/button/div/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b56-b25-b50-b1-DropdownHeader']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id='b56-b25-b50-GridActionsCreateActivity']"}
-    DETAIL_PRINT_EMAIL = {css: "span[id='b56-b25-b50-GridActionsPrintEmail']"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b56-b26-b57-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b56-b26-b57-GridActionsCreateActivity']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id='b56-b26-b57-GridActionsPrintEmail']"}
   CANCEL_BUTTON = {css: "button[id$='EstimateCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='EstimateSaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='EstimateSaveAndCloseButton']"}

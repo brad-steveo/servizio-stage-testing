@@ -14,7 +14,7 @@ class CustomersResource
   ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/i"}
   NAME_COLUMN = {css: "input[id$='b7-Input_SearchVar']"}
   NAME_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/i[2]"}
-  SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
+  SEARCH_RESET = {css: "div[title='Grid is currently being filtered. Click to remove all filters.']"}
   RESOURCE_REFRESH = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[1]/div[1]/div/div/div[2]/i"}
 
   #CSS Selectors: Detail
@@ -52,8 +52,8 @@ class CustomersResource
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[3]/article/div/div/table/tbody/tr[1]/td[1]/a/span"}
     TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[3]/article/div/div/table/tbody/tr[1]/td[6]/span"}
     THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/header/div[1]/div[4]/div/button/div/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b56-b12-b52-b1-DropdownHeaderContent_placeholder']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id='b56-b12-b52-GridActionsCreateActivity']"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b56-b12-b55-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b56-b12-b55-GridActionsCreateActivity']"}
   CANCEL_BUTTON = {css: "button[id$='CustomerCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='CustomerSaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='CustomerSaveAndCloseButton']"}

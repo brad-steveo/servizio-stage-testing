@@ -12,14 +12,14 @@ class ContactsResource
   ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[3]/div/i"}
   NAME_COLUMN = {css: "input[id$='b7-Input_SearchVar']"}
   NAME_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[3]/div/div/i[2]"}
-  SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
+  SEARCH_RESET = {css: "div[title='Grid is currently being filtered. Click to remove all filters.']"}
 
   #CSS Selectors: Detail
   NAME_FIELD = {css: "input[id$='Input_Name']"}
   JOB_TITLE_FIELD = {css: "input[id$='Input_JobTitle']"}
   PHONE_FIELD_1 = {css: "input[id$='0-Input_Phone']"}
   EMAIL_FIELD_1 = {css: "input[id$='0-Input_Email']"}
-  DESCRIPTION_TEXTAREA = {css: "textarea[id$='TextArea_Description']"}
+  DESCRIPTION_TEXTAREA = {css: "textarea[id='b56-b34-TextArea_Description']"}
   CANCEL_BUTTON = {css: "button[id$='b34-CancelButton']"}
   SAVE_BUTTON = {css: "button[id$='b34-SaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='b34-SaveAndCloseButton']"}

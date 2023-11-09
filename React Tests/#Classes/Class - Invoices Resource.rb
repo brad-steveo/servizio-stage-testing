@@ -15,7 +15,7 @@ class InvoicesResource
   ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[3]/div/div/i[2]"}
   CUSTOMER_COLUMN = {css: "input[id$='b7-Input_SearchVar']"}
   CUSTOMER_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div/div[2]/table/thead/tr/th[4]/div[3]/div/div/i[2]"}
-  SEARCH_RESET = {css: "i[title='Grid is currently being filtered. Click to remove all filters.']"}
+  SEARCH_RESET = {css: "div[title='Grid is currently being filtered. Click to remove all filters.']"}
   RESOURCE_REFRESH = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div/div[1]/div[1]/div[1]/div/div[2]/i"}
 
   #CSS Selectors: Detail
@@ -33,11 +33,12 @@ class InvoicesResource
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[1]/a/span"}
     TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[6]/span"}
     THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/header/div[1]/div[4]/div/button/div/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b58-b45-b32-b1-DropdownHeader']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id='b56-b45-b32-GridActionsCreateActivity']"}
-    DETAIL_SYNC_TO_QBO = {css: "span[id='b58-b45-b33-GridActionsSyncToQBO']"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b56-b45-b35-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b56-b45-b35-GridActionsCreateActivity']"}
       CONFIRM_SYNC = {css: "span[id$='b1-ConfirmButton']"}
-    DETAIL_PRINT_EMAIL = {css: "span[id='b56-b45-b32-GridActionsPrintEmail']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id='b56-b45-b35-GridActionsPrintEmail']"}
+  DETAIL_ACTIONS_MENU_SYNC = {css: "div[id='b58-b45-b35-b1-DropdownHeader']"}
+    DETAIL_SYNC_TO_QBO = {css: "span[id='b58-b45-b36-GridActionsSyncToQBO']"}
   CANCEL_BUTTON = {css: "button[id$='InvoiceCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='InvoiceSaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='InvoiceSaveAndCloseButton']"}
@@ -219,8 +220,8 @@ class InvoicesResource
 
   def sync_to_qbo()
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait.until {@driver.find_element(DETAIL_ACTIONS_MENU).displayed?}
-    actions = @driver.find_element(DETAIL_ACTIONS_MENU)
+    wait.until {@driver.find_element(DETAIL_ACTIONS_MENU_SYNC).displayed?}
+    actions = @driver.find_element(DETAIL_ACTIONS_MENU_SYNC)
     actions.click
     wait.until {@driver.find_element(DETAIL_SYNC_TO_QBO).displayed?}
     sync = @driver.find_element(DETAIL_SYNC_TO_QBO)
@@ -229,7 +230,7 @@ class InvoicesResource
     wait.until {@driver.find_element(CONFIRM_SYNC).displayed?}
     confirm = @driver.find_element(CONFIRM_SYNC)
     confirm.click
-    sleep(5)
+    sleep(7)
   end
 
   def print_email()
