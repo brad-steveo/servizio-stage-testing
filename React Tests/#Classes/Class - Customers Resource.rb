@@ -40,8 +40,8 @@ class CustomersResource
   TOP_CONTACT_DELETE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[3]/div/div/table/tbody/tr[1]/td[9]/a/i"}
   LINK_EXISTING_BUTTON = {css: "button[id$='LinkExisting']"}
   LINK_CONTACT_SEARCH = {css: "input[id$='ContactSearch']"}
-  LINK_CONTACT_TOP_NAME = {xpath: "/html/body/div[6]/div/div/div/div/div/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td[1]/span"}
-  LINK_CONTACT_TOP_SELECT = {xpath: "/html/body/div[6]/div/div/div/div/div/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td[4]/button"}
+  LINK_CONTACT_TOP_NAME = {xpath: "/html/body/div[8]/div/div/div/div/div/div[2]/div/div/div/div[2]/table/tbody/tr/td[1]/span"}
+  LINK_CONTACT_TOP_SELECT = {xpath: "/html/body/div[8]/div/div/div/div/div/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td[4]/button"}
   ADD_NEW_BUTTON = {css: "button[id$='AddNew']"}
   TOP_CONTACT_NAME = {xpath: "/html/body/div[2]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[3]/div/div/table/tbody/tr[1]/td[1]/div/a/span"}
   TOP_CONTACT_BILLING_CHECKBOX = {css: "input[id$='0-CheckboxBilling']"}
