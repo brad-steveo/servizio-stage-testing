@@ -19,7 +19,7 @@ class ContactsResource
   JOB_TITLE_FIELD = {css: "input[id$='Input_JobTitle']"}
   PHONE_FIELD_1 = {css: "input[id$='0-Input_Phone']"}
   EMAIL_FIELD_1 = {css: "input[id$='0-Input_Email']"}
-  DESCRIPTION_TEXTAREA = {css: "textarea[id='b56-b34-TextArea_Description']"}
+  DESCRIPTION_TEXTAREA = {css: "textarea[id='b58-b34-TextArea_Description']"}
   CANCEL_BUTTON = {css: "button[id$='b34-CancelButton']"}
   SAVE_BUTTON = {css: "button[id$='b34-SaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='b34-SaveAndCloseButton']"}

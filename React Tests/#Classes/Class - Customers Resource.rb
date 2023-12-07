@@ -4,8 +4,8 @@ class CustomersResource
   TOP_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div[1]/a/span"}
   TOP_NAME = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/div[1]/span"}
   TOP_ACTIONS = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]"}
-  TOP_BILLING_CONTACT = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[17]/a/span"}
-  TOP_SITE_CONTACT = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[16]/a/span"}
+  TOP_BILLING_CONTACT = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr/td[18]/a/span"}
+  TOP_SITE_CONTACT = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr/td[17]/a/span"}
   GRID_MENU = {css: "div[class='dropdown-header select']"}
     GRID_CREATE_ACTIVITY = {css: "span[id='b54-b11-l1_0-1950_0-b52-GridActionsCreateActivity']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
@@ -38,10 +38,11 @@ class CustomersResource
   BILLINGCOUNTRY = {css: "input[id$='Input_BillCountry']"}
   COPTYTOSITE = {css: "a[title='Copy billing address to site']"}
   TOP_CONTACT_DELETE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[3]/div/div/table/tbody/tr[1]/td[9]/a/i"}
+  TOP_CONTACT_DELETE_CONFIRM = {css: "span[id$='ConfirmButton']"}
   LINK_EXISTING_BUTTON = {css: "button[id$='LinkExisting']"}
   LINK_CONTACT_SEARCH = {css: "input[id$='ContactSearch']"}
-  LINK_CONTACT_TOP_NAME = {xpath: "/html/body/div[8]/div/div/div/div/div/div[2]/div/div/div/div[2]/table/tbody/tr/td[1]/span"}
-  LINK_CONTACT_TOP_SELECT = {xpath: "/html/body/div[8]/div/div/div/div/div/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td[4]/button"}
+  LINK_CONTACT_TOP_NAME = {xpath: "/html/body/div[9]/div/div/div/div/div/div[2]/div/div/div/div[2]/table/tbody/tr/td[1]/span"}
+  LINK_CONTACT_TOP_SELECT = {xpath: "/html/body/div[7]/div/div/div/div/div/div[2]/div/div/div/div[2]/table/tbody/tr/td[4]/button"}
   ADD_NEW_BUTTON = {css: "button[id$='AddNew']"}
   TOP_CONTACT_NAME = {xpath: "/html/body/div[2]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[3]/div/div/table/tbody/tr[1]/td[1]/div/a/span"}
   TOP_CONTACT_BILLING_CHECKBOX = {css: "input[id$='0-CheckboxBilling']"}
@@ -321,6 +322,10 @@ class CustomersResource
     option = @driver.find_element(TOP_CONTACT_DELETE)
     option.click
     sleep(1)
+    wait.until {@driver.find_element(TOP_CONTACT_DELETE_CONFIRM).displayed?}
+    confirm = @driver.find_element(TOP_CONTACT_DELETE_CONFIRM)
+    confirm.click
+    sleep(1)
   end
 
   def link_existing_contact(contactsearch)
@@ -362,8 +367,7 @@ class CustomersResource
       search.send_keys(contactsearch)
       sleep(1)
       @driver.action.send_keys(:enter).perform
-      sleep(2)
-      wait.until {@driver.find_element(LINK_CONTACT_TOP_NAME).text.include?(contactsearch)}
+      sleep(3)
       wait.until {@driver.find_element(LINK_CONTACT_TOP_SELECT).displayed?}
       selectbutton = @driver.find_element(LINK_CONTACT_TOP_SELECT)
       selectbutton.click

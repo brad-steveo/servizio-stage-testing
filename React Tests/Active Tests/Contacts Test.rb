@@ -15,8 +15,8 @@ describe "Contacts Test" do
     resource2 = "Customers"
     idsearch = "1041"
     namesearch = "Selenium Test Contact"
-    customersearch1 = "1380"
-    customersearch2 = "1381"
+    customersearch1 = "1385"
+    customersearch2 = "1386"
     contactlink = "Selenium Test Contact"
     contactname = "Selenium Test #{timestamp}"
     contactjobtitle = "Selenium"
@@ -76,12 +76,15 @@ describe "Contacts Test" do
         customers.save_close()
         expect(customers.top_billing_contact.text.downcase).to include(contactlink.downcase)
         expect(customers.top_site_contact.text.downcase).to include(contactlink.downcase)
+        customers.top_open()
+        customers.delete_top_contact()
+        customers.save_close()
+        customers.search_reset()
     end
 
     it "Go to Customers Resource, open top record, add a new contact" do
         customers.search_id(customersearch2)
         customers.top_open()
-        customers.delete_top_contact()
         customers.add_new_contact()
         contacts.name(contactname)
         contacts.job_title(contactjobtitle)
@@ -94,6 +97,9 @@ describe "Contacts Test" do
         customers.save_close()
         expect(customers.top_billing_contact.text.downcase).to include(contactname.downcase)
         expect(customers.top_site_contact.text.downcase).to include(contactname.downcase)
+        customers.top_open()
+        customers.delete_top_contact()
+        customers.save_close()
     end
   
 end
