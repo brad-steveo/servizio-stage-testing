@@ -3,7 +3,7 @@ class InvoiceLinesResource
     #CSS Selectors: Grid
     TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div[1]/div/span"}
     TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[4]"}
-    TOP_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[12]/span"}
+    TOP_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[12]/span"}
     GRID_MENU = {css: "div[class='dropdown-header select']"}
     EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
     SHOW_INACTIVES = {css: "input[id$='SwitchShowInactives']"}
@@ -34,8 +34,8 @@ class InvoiceLinesResource
 
     def top_description()
       wait = Selenium::WebDriver::Wait.new(:timeout => 10)
-      wait.until {@driver.find_element(TOP_NAME).displayed?}
-      top_record = @driver.find_element(TOP_NAME)
+      wait.until {@driver.find_element(TOP_DESCRIPTION).displayed?}
+      top_record = @driver.find_element(TOP_DESCRIPTION)
     end
   
     def export_grid()

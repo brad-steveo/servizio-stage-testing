@@ -35,7 +35,7 @@ class JobsResource
     CLEAR_LINES = {css: "button[id$='ClearAllLinesButton']"}
     ADD_DESCRIPTION = {css: "button[id$='AddDescriptionButton']"}
     TOP_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr/td[7]/div/div[1]/span"}
-    TOP_BOX_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr[1]/td[7]/div/div[1]"}
+    TOP_BOX_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr/td[7]"}
     TOP_HIDDEN_DESCRIPTION = {xpath: "/html/body/div[2]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr/td[7]/div/div[2]"}
     TOP_DESCRIPTION_TEXTAREA = {css: "textarea[id$='TextArea_Description']"} 
     TOP_LINE_DELETE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr/td[14]/a[2]/i"}
@@ -259,16 +259,7 @@ class JobsResource
 
   def top_line(descriptiontext)
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
-    wait.until {@driver.find_element(CLEAR_LINES).displayed?}
-    clear = @driver.find_element(CLEAR_LINES)
-    sleep(1)
-    clear.click
-    sleep(1)
-    wait.until {@driver.find_element(ADD_DESCRIPTION).displayed?}
-    add = @driver.find_element(ADD_DESCRIPTION)
-    sleep(1)
-    add.click
-    sleep(1)
+    wait.until {@driver.find_element(TOP_BOX_DESCRIPTION).displayed?}
     descbox = @driver.find_element(TOP_BOX_DESCRIPTION)
     sleep(1)
     descbox.click
@@ -277,6 +268,15 @@ class JobsResource
     desc = @driver.find_element(TOP_DESCRIPTION_TEXTAREA)
     desc.send_keys(descriptiontext)
     sleep(3)
+  end
+
+  def clear_lines()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(CLEAR_LINES).displayed?}
+    clear = @driver.find_element(CLEAR_LINES)
+    sleep(1)
+    clear.click
+    sleep(1)
   end
 
   def top_activity()
