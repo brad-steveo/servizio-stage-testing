@@ -39,8 +39,8 @@ class PatrolsResource
     DETAIL_CREATE_ACTIVITY = {css: "span[id$='b56-b8-b38-GridActionsCreateActivity']"}
     DETAIL_PRINT_EMAIL = {css: "span[id='b56-b8-b38-GridActionsPrintEmail']"}
   CANCEL_BUTTON = {css: "button[id$='CancelButton']"}
-  SAVE_BUTTON = {css: "button[id$='SaveButton']"}
-  SAVE_CLOSE_BUTTON = {css: "button[id$='SaveAndCloseButton']"}
+  SAVE_BUTTON = {css: "button[id$='PatrolSaveButton']"}
+  SAVE_CLOSE_BUTTON = {css: "button[id$='PatrolSaveAndCloseButton']"}
 
 
   attr_reader :driver
