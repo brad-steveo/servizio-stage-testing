@@ -9,7 +9,7 @@ class ActivitiesResource
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
   ID_COLUMN = {css: "input[id$='ColumnSearchID']"}
   ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[3]/div/div/i"}
-  DESCRIPTION_COLUMN = {css: "input[id$='Input_SearchVar']"}
+  DESCRIPTION_COLUMN = {css: "input[id$='b12-Input_SearchVar']"}
   DESCRIPTION_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[5]/div[3]/div/div/div/i[2]"}
   SEARCH_RESET = {css: "div[title='Grid is currently being filtered. Click to remove all filters.']"}
   RESOURCE_REFRESH = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[1]/div[1]/div/div/div[2]/i"}
@@ -171,7 +171,7 @@ class ActivitiesResource
     wait.until {@driver.find_element(SAVE_CLOSE_BUTTON).displayed?}
     button = @driver.find_element(SAVE_CLOSE_BUTTON)
     button.click
-    sleep(2)
+    sleep(3)
   end
 
 end
