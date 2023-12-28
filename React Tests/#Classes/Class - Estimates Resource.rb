@@ -38,9 +38,9 @@ class EstimatesResource
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[3]/div/section/section/div/div[5]/article/div/div/div/table/tbody/tr/td[1]/a/span"}
     TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[3]/div/section/section/div/div[5]/article/div/div/div/table/tbody/tr/td[7]/span"}
     THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div[4]/div/button/div/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b56-b26-b57-b1-DropdownHeader']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id='b56-b26-b57-GridActionsCreateActivity']"}
-    DETAIL_PRINT_EMAIL = {css: "span[id='b56-b26-b57-GridActionsPrintEmail']"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b56-b26-b65-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b56-b26-b65-GridActionsCreateActivity']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id='b56-b26-b65-GridActionsPrintEmail']"}
   CANCEL_BUTTON = {css: "button[id$='EstimateCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='EstimateSaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='EstimateSaveAndCloseButton']"}
