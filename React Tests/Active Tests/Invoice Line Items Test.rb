@@ -13,7 +13,7 @@ describe "Invoice Line Items Test" do
     password = "SUyesco123"
     resource1 = "Invoices"
     resource2 = "Invoice Lines"
-    invoicesearch = '1697'
+    invoicesearch = '1703'
     invoicelinedesc = "Selenium Test Invoice Line #{timestamp}"
 
 	#Test Classes

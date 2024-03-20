@@ -48,13 +48,13 @@ class CustomersResource
   TOP_CONTACT_BILLING_CHECKBOX = {css: "input[id$='0-CheckboxBilling']"}
   TOP_CONTACT_SITE_CHECKBOX = {css: "input[id$='0-CheckboxSite']"}
   TOP_CONTACT_REMOVE = {xpath: "/html/body/div[2]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[3]/div/div/table/tbody/tr[1]/td[9]/a/i"}
-  ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/header/div[1]/div[3]/button/div/span"}
-    ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[3]/article/div/div/table/thead/tr/th[1]"}
-    TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[3]/article/div/div/table/tbody/tr/td[1]/a/span"}
-    TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[3]/article/div/div/table/tbody/tr/td[7]/span"}
+  ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/header/div[1]/div[4]/button/div/span"}
+    ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[4]/article/div/div/table/thead/tr/th[1]"}
+    TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[1]/a/span"}
+    TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[7]/span"}
     THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/header/div[1]/div[4]/div/button/div/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b56-b12-b62-b1-DropdownHeader']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id='b56-b12-b62-GridActionsCreateActivity']"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b56-b12-b68-b1-Dropdown']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b56-b12-b68-GridActionsCreateActivity']"}
   CANCEL_BUTTON = {css: "button[id$='CustomerCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='CustomerSaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='CustomerSaveAndCloseButton']"}

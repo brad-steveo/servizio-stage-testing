@@ -28,17 +28,17 @@ class InvoicesResource
   TOP_HIDDEN_DESCRIPTION = {xpath: "/html/body/div[2]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr/td[7]/div/div[2]"}
   TOP_DESCRIPTION_TEXTAREA = {css: "textarea[id$='Input_InvoiceLineDescription']"} 
   TOP_LINE_DELETE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[4]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr[1]/td[14]/a[2]/i"}
-  ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/header/div[1]/div[4]/button/div/span"}
-    ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[4]/article/div/div/table/thead/tr/th[1]"}
-    TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[4]/article/div/div/table/tbody/tr[1]/td[1]/a/span"}
-    TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[4]/article/div/div/table/tbody/tr[1]/td[7]/span"}
+  ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/header/div[1]/div[5]/button/div/span"}
+    ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[5]/article/div/div/table/thead/tr/th[1]"}
+    TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[5]/article/div/div/table/tbody/tr[1]/td[1]/a/span"}
+    TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[5]/article/div/div/table/tbody/tr[1]/td[7]/span"}
     THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/header/div[1]/div[4]/div/button/div/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b56-b45-b38-b1-DropdownHeader']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id='b56-b45-b38-GridActionsCreateActivity']"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b56-b45-b42-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b56-b45-b42-GridActionsCreateActivity']"}
       CONFIRM_SYNC = {css: "span[id$='b1-ConfirmButton']"}
-    DETAIL_PRINT_EMAIL = {css: "span[id='b56-b45-b38-GridActionsPrintEmail']"}
-  DETAIL_ACTIONS_MENU_SYNC = {css: "div[id='b58-b45-b38-b1-DropdownHeader']"}
-    DETAIL_SYNC_TO_QBO = {css: "span[id='b58-b45-b39-GridActionsSyncToQBO']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id='b56-b45-b42-GridActionsPrintEmail']"}
+  DETAIL_ACTIONS_MENU_SYNC = {css: "div[id='b58-b45-b42-b1-DropdownHeader']"}
+    DETAIL_SYNC_TO_QBO = {css: "span[id='b58-b45-b43-GridActionsSyncToQBO']"}
   CANCEL_BUTTON = {css: "button[id$='InvoiceCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='InvoiceSaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='InvoiceSaveAndCloseButton']"}
