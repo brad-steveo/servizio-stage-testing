@@ -463,7 +463,7 @@ class CustomersResource
     wait.until {@driver.find_element(SAVE_CLOSE_BUTTON).displayed?}
     button = @driver.find_element(SAVE_CLOSE_BUTTON)
     button.click
-    sleep(2)
+    sleep(4)
   end
 
 end
