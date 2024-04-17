@@ -74,7 +74,7 @@ class ServizioHome
     wait.until {@driver.find_element(GLOBAL_TOP_ID).displayed?}
     top_result = @driver.find_element(GLOBAL_TOP_ID)
     top_result.click
-    sleep(5)
+    sleep(7)
   end
 
   def global_search_clear()
