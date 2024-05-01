@@ -16,7 +16,7 @@ class ContractsResource
     #CSS Selectors: Detail
     NAME_FIELD = {css: "input[id$='Input_Name']"}
     INSTALLMENT_AMOUNT_FIELD = {css: "input[id$='Input_InstallmentAmount']"}
-    CUSTOMER_SELECT = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[1]/div/div[1]/div[3]/div[3]/button"}
+    CUSTOMER_SELECT = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/form/div/div/div[1]/div[3]/div[3]/button"}
       CUSTOMER_SEARCH = {css: "input[id$='CustomerSearch']"}
       CUSTOMER_SEARCH_BUTTON = {css: "button[id$='CustomerSearchButton']"}
       TOP_CUSTOMER_SELECT = {xpath: "/html/body/div[9]/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div[1]/div/div/div[3]/button"}
