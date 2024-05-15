@@ -32,13 +32,13 @@ class InvoicesResource
     ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[6]/article/div/div/table/thead/tr/th[1]"}
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[6]/article/div/div/table/tbody/tr/td[1]/a/span"}
     TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[6]/article/div/div/table/tbody/tr/td[7]/span"}
-    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/header/div[1]/div[4]/div/button/div/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b56-b45-b46-b1-DropdownHeader']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id='b56-b45-b46-GridActionsCreateActivity']"}
+    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/header/div[1]/div/div/div[4]/div/button/div/div/span"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b78-b45-b46-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b78-b45-b46-GridActionsCreateActivity']"}
       CONFIRM_SYNC = {css: "span[id$='b1-ConfirmButton']"}
-    DETAIL_PRINT_EMAIL = {css: "span[id='b56-b45-b46-GridActionsPrintEmail']"}
-  DETAIL_ACTIONS_MENU_SYNC = {css: "div[id='b58-b45-b46-b1-Dropdown']"}
-    DETAIL_SYNC_TO_QBO = {css: "span[id='b58-b45-b47-GridActionsSyncToQBO']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id='b78-b45-b46-GridActionsPrintEmail']"}
+  DETAIL_ACTIONS_MENU_SYNC = {css: "div[id='b80-b45-b46-b1-DropdownHeader']"}
+    DETAIL_SYNC_TO_QBO = {css: "span[id='b80-b45-b47-GridActionsSyncToQBO']"}
   CANCEL_BUTTON = {css: "button[id$='InvoiceCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='InvoiceSaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='InvoiceSaveAndCloseButton']"}

@@ -34,10 +34,10 @@ class PatrolsResource
     ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[3]/article/div/div/div/table/thead/tr/th[1]"}
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[3]/article/div/div/div/table/tbody/tr/td[1]/a/span"}
     TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[3]/article/div/div/div/table/tbody/tr/td[7]/span"}
-    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div[4]/div/button/div/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b56-b8-b43-b1-DropdownHeader']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id$='b56-b8-b43-GridActionsCreateActivity']"}
-    DETAIL_PRINT_EMAIL = {css: "span[id='b56-b8-b43-GridActionsPrintEmail']"}
+    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/header/div[1]/div/div/div[4]/div/button/div/div/span"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b78-b8-b43-b1-Dropdown']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id$='b78-b8-b43-GridActionsCreateActivity']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id='b78-b8-b43-GridActionsPrintEmail']"}
   CANCEL_BUTTON = {css: "button[id$='CancelButton']"}
   SAVE_BUTTON = {css: "button[id$='PatrolSaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='PatrolSaveAndCloseButton']"}

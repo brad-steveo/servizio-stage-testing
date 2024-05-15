@@ -10,11 +10,11 @@ class ServizioHome
   GLOBAL_SEARCH = {css: "input[id$='Input_ResourceSearch']"}
   GLOBAL_TOP_ID = {xpath: "/html/body/div[1]/div/div/div/div/div/header/div/div/div/div/nav/div[2]/div[2]/div/div[2]/div/div[1]/div/div[2]/div/div/mark"}
   FIRST_TAB = {css: "div[id='Tab1']"}
-  FIRST_TAB_TITLE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div[2]/div/button/div/div/span"}
-  FIRST_TAB_CLOSE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div[2]/div/button/div/i"}
+  FIRST_TAB_TITLE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div/div/div[2]/div/button/div/div/span"}
+  FIRST_TAB_CLOSE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div/div/div[2]/div/button/div/div/i"}
   SECOND_TAB = {css: "div[id='Tab2']"}
-  SECOND_TAB_TITLE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div[3]/div/button/div/div/span"}
-  SECOND_TAB_CLOSE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div[3]/div/button/div/i"}
+  SECOND_TAB_TITLE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div/div/div[3]/div/button/div/div/span"}
+  SECOND_TAB_CLOSE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div/div/div[3]/div/button/div/div/i"}
 
   class StaleError < StandardError
     def initialize(msg='Stale reference error')

@@ -3,7 +3,7 @@ class ActivitiesResource
   #CSS Selectors: Grid
   TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div[1]/a/span"}
   TOP_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[5]"}
-  TOP_COMPLETED = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[12]/span"}
+  TOP_COMPLETED = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[14]/span"}
   GRID_MENU = {css: "div[class='dropdown-header select']"}
   NEW_ACTIVITY = {css: "div[id$='NewTitlePlaceholder']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
@@ -18,7 +18,7 @@ class ActivitiesResource
   REASON_DROPDOWN = {css: "select[id$='ReasonDropdown']"}
   CONTACT_METHOD_DROPDOWN = {css: "select[id$='Dropdown2']"}
   DESCRIPTIONCLICK = {xpath: "/html/body/div[2]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[4]/article/div/div/div/div/div[1]/div/form/div[9]/div[2]"}
-  DESCRIPTION = {css: "textarea[id$='ActivityDescription']"}
+  DESCRIPTION = {css: "textarea[id$='TextArea_Description']"}
   COMPLETE_ACTIVITY_CHECKBOX = {css: "input[id$='CompleteActivityCheckbox']"}
   CANCEL_BUTTON = {css: "button[id$='ActivityCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='ActivitySaveButton']"}
