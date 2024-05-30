@@ -1,14 +1,14 @@
 class PatrolsResource
 
   #CSS Selectors: Grid
-  TOP_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div/a/span"}
-  TOP_NAME = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/span"}
+  TOP_REF = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/div/div[1]/a/span"}
+  TOP_NAME = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[3]/span"}
   TOP_ACTIONS = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]"}
     GRID_CREATE_ACTIVITY = {css: "a[id$='GridActionsCreateActivityLink']"}
     GRID_PRINT_EMAIL = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div[2]/div/a[5]"}
     GRID_MAKE_INACTIVE = {css: "a[id$='GridActionsMakeInactiveLink']"}
       MAKE_INACTIVE_CONFIRM = {css: "span[id$='ConfirmButton']"}
-  TOP_SENT_ON = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[18]"}
+  TOP_SENT_ON = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[18]"}
   GRID_MENU = {css: "div[class='dropdown-header select']"}
   NEW_PATROL = {css: "a[id$='GridMenuCreateNew']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
@@ -34,10 +34,10 @@ class PatrolsResource
     ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[3]/article/div/div/div/table/thead/tr/th[1]"}
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[3]/article/div/div/div/table/tbody/tr/td[1]/a/span"}
     TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[3]/article/div/div/div/table/tbody/tr/td[7]/span"}
-    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/header/div[1]/div/div/div[4]/div/button/div/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b78-b8-b43-b1-Dropdown']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id$='b78-b8-b43-GridActionsCreateActivity']"}
-    DETAIL_PRINT_EMAIL = {css: "span[id='b78-b8-b43-GridActionsPrintEmail']"}
+    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div/div/div[4]/div/div/button/div/div/span"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b33-b8-b43-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id$='b33-b8-b43-GridActionsCreateActivity']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id='b33-b8-b43-GridActionsPrintEmail']"}
   CANCEL_BUTTON = {css: "button[id$='CancelButton']"}
   SAVE_BUTTON = {css: "button[id$='PatrolSaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='PatrolSaveAndCloseButton']"}
@@ -278,7 +278,7 @@ class PatrolsResource
     wait.until {@driver.find_element(SAVE_CLOSE_BUTTON).displayed?}
     button = @driver.find_element(SAVE_CLOSE_BUTTON)
     button.click
-    sleep(2) #Could maybe use a rescue loop here
+    sleep(4) #Could maybe use a rescue loop here
   end
 
 end

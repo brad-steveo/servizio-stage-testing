@@ -43,12 +43,12 @@ class JobsResource
     ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[7]/article/div/div/table/thead/tr/th[1]"}
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[7]/article/div/div/table/tbody/tr/td[1]/a/span"}
     TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[7]/article/div/div/table/tbody/tr/td[7]/span"}
-    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/header/div[1]/div/div/div[4]/div/button/div/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b78-b17-b96-b1-DropdownHeader']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id='b78-b17-b96-GridActionsCreateActivity']"}
-    DETAIL_CREATE_INVOICE = {css: "span[id='b78-b17-b96-GridActionsCreateInvoice']"}
+    THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/header/div[1]/div/div/div[4]/div/div/button/div/div/span"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b33-b17-b96-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b33-b17-b96-GridActionsCreateActivity']"}
+    DETAIL_CREATE_INVOICE = {css: "span[id='b33-b17-b96-GridActionsCreateInvoice']"}
       DUP_INVOICE_CONFIRM = {css: "span[id$='b1-ConfirmButton']"}
-    DETAIL_PRINT_EMAIL = {css: "span[id='b78-b17-b96-GridActionsPrintEmail']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id='b33-b17-b96-GridActionsPrintEmail']"}
   CANCEL_BUTTON = {css: "button[id$='JobCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='JobSaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='JobSaveAndCloseButton']"}
@@ -354,7 +354,7 @@ class JobsResource
     wait.until {@driver.find_element(SAVE_CLOSE_BUTTON).displayed?}
     button = @driver.find_element(SAVE_CLOSE_BUTTON)
     button.click
-    sleep(2)
+    sleep(4)
   end
 
 end

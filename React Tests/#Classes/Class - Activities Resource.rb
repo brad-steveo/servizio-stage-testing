@@ -23,6 +23,7 @@ class ActivitiesResource
   CANCEL_BUTTON = {css: "button[id$='ActivityCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='ActivitySaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='ActivitySaveAndCloseButton']"}
+  #b35-b38-TextArea_Description
 
   attr_reader :driver
 
