@@ -57,7 +57,7 @@ describe "Activities Test" do
   it "Create an Activity record" do
     activities.new_activity()
     activities.reason(activityreason)
-    activities.description(activitydescription)
+    activities.description1(activitydescription)
     activities.save_close()
 
     expect(activities.top_description.text.downcase).to include(activitydescription.downcase)
