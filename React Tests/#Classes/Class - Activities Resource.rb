@@ -18,7 +18,8 @@ class ActivitiesResource
   REASON_DROPDOWN = {css: "select[id$='ReasonDropdown']"}
   CONTACT_METHOD_DROPDOWN = {css: "select[id$='Dropdown2']"}
   DESCRIPTIONCLICK = {xpath: "/html/body/div[2]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[4]/article/div/div/div/div/div[1]/div/form/div[9]/div[2]"}
-  DESCRIPTION = {css: "textarea[id$='TextArea_Description']"}
+  DESCRIPTION = {css: "textarea[id='b35-b38-TextArea_Description']"}
+  DESCRIPTION1 = {css: "textarea[id='b33-b38-TextArea_Description']"}
   COMPLETE_ACTIVITY_CHECKBOX = {css: "input[id$='CompleteActivityCheckbox']"}
   CANCEL_BUTTON = {css: "button[id$='ActivityCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='ActivitySaveButton']"}
@@ -156,6 +157,13 @@ class ActivitiesResource
     wait = Selenium::WebDriver::Wait.new(:timeout => 5)
     wait.until {@driver.find_element(DESCRIPTION).displayed?}
     field = @driver.find_element(DESCRIPTION)
+    field.send_keys(activitydescription)
+  end
+
+  def description1(activitydescription)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 5)
+    wait.until {@driver.find_element(DESCRIPTION1).displayed?}
+    field = @driver.find_element(DESCRIPTION1)
     field.send_keys(activitydescription)
   end
 
