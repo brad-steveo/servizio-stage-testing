@@ -37,24 +37,24 @@ class CustomersResource
   BILLINGZIP = {css: "input[id$='Input_BillPostalCode']"}
   BILLINGCOUNTRY = {css: "input[id$='Input_BillCountry']"}
   COPTYTOSITE = {css: "a[title='Copy billing address to site']"}
-  TOP_CONTACT_DELETE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[1]/article/div/div[3]/div/div/table/tbody/tr/td[9]/a/i"}
+  TOP_CONTACT_DELETE = {xpath: "/html/body/div[2]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[1]/article/div/div[3]/div/div/div[2]/div[2]/div/div/div/div/div[10]/a/i"}
   TOP_CONTACT_DELETE_CONFIRM = {css: "span[id$='ConfirmButton']"}
   LINK_EXISTING_BUTTON = {css: "button[id$='LinkExisting']"}
   LINK_CONTACT_SEARCH = {css: "input[id$='ContactSearch']"}
   LINK_CONTACT_TOP_NAME = {xpath: "/html/body/div[9]/div/div/div/div/div/div[2]/div/div/div/div[2]/table/tbody/tr/td[1]/span"}
-  LINK_CONTACT_TOP_SELECT = {xpath: "/html/body/div[7]/div/div/div/div/div/div[2]/div/div/div/div[2]/table/tbody/tr/td[4]/button"}
+  LINK_CONTACT_TOP_SELECT = {xpath: "/html/body/div[7]/div/div/div/div/div/div[2]/div/div/div/div[2]/table/tbody/tr[1]/td[6]/button"}
   ADD_NEW_BUTTON = {css: "button[id$='AddNew']"}
   TOP_CONTACT_NAME = {xpath: "/html/body/div[2]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[3]/div/div/table/tbody/tr[1]/td[1]/div/a/span"}
-  TOP_CONTACT_BILLING_CHECKBOX = {css: "input[id$='0-CheckboxBilling']"}
-  TOP_CONTACT_SITE_CHECKBOX = {css: "input[id$='0-CheckboxSite']"}
+  TOP_CONTACT_BILLING_CHECKBOX = {css: "input[id$='0-CheckboxBilling2']"}
+  TOP_CONTACT_SITE_CHECKBOX = {css: "input[id$='0-CheckboxSite2']"}
   TOP_CONTACT_REMOVE = {xpath: "/html/body/div[2]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[3]/div/div/table/tbody/tr[1]/td[9]/a/i"}
   ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/header/div[1]/div[4]/button/div/span"}
-    ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[4]/article/div/div/table/thead/tr/th[1]"}
-    TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[1]/a/span"}
-    TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[7]/span"}
+    ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[4]/article/div/div/table/thead/tr/th[1]"}
+    TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[1]/a/span"}
+    TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[4]/article/div/div/table/tbody/tr/td[8]/span"}
     THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/header/div[1]/div/div/div[4]/div/div/button/div/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b33-b12-b69-b1-DropdownHeader']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id='b33-b12-b69-GridActionsCreateActivity']"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b33-b12-b71-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b33-b12-b71-GridActionsCreateActivity']"}
   CANCEL_BUTTON = {css: "button[id$='CustomerCancelButton']"}
   SAVE_BUTTON = {css: "button[id$='CustomerSaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='CustomerSaveAndCloseButton']"}
@@ -316,7 +316,7 @@ class CustomersResource
   end
 
   def delete_top_contact()
-    sleep(3)
+    sleep(5)
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(TOP_CONTACT_DELETE).displayed?}
     option = @driver.find_element(TOP_CONTACT_DELETE)
