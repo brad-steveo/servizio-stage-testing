@@ -286,6 +286,7 @@ class EstimatesResource
     createactivity.click
     wait.until {@driver.find_element(THIRD_TAB).displayed?}
     wait.until {@driver.find_element(THIRD_TAB).text.include?("New Activity")}
+    sleep(2)
   end
 
   def print_email()

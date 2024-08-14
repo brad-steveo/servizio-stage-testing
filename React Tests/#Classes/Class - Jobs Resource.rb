@@ -338,7 +338,7 @@ class JobsResource
       wait.until {@driver.find_element(THIRD_TAB).displayed?}
       wait.until {@driver.find_element(THIRD_TAB).text.include?("New Invoice")}
     end
-    sleep(2)
+    sleep(4)
   end
 
   def cancel()
