@@ -14,7 +14,7 @@ class PatrolsResource
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}
   SHOW_INACTIVES = {css: "input[id$='SwitchShowInactives']"}
   OLD_PATROLS = {css: "input[id$='SwitchShowOldPatrols']"}
-  ID_COLUMN = {css: "input[id$='b7-ColumnSearchID']"}
+  ID_COLUMN = {css: "input[id$='b7-Input_SearchVar']"}
   ID_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[2]/div[2]/div/div/i"}
   NAME_COLUMN = {css: "input[id$='b9-Input_SearchVar']"}
   NAME_COLUMN_CLEAR = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/thead/tr/th[3]/div[2]/div/div/div/i[2]"}
