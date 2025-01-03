@@ -2,7 +2,7 @@ class ServizioLogin
 
   #CSS Selectors
   USERNAME_FIELD = {css: "input[id$='Input_UsernameVal']"}
-  PASSWORD_FIELD = {css: "input[id$='Input_PasswordVal']"}
+  PASSWORD_FIELD = {css: "input[id$='Input_Password']"}
   LOGIN_BTN = {xpath: "/html/body/div/div/div/div/div/div/div/div/form/div[2]/div[2]/div/div/button"}
   SERVIZIO_LOGO = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/header/div/div/div/div/nav/div[1]/div/div/span"}
 
