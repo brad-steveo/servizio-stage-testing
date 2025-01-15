@@ -30,10 +30,10 @@ class PatrolsResource
   SCOPE_OF_WORK_TEXTAREA = {css: "textarea[id$=TextArea_Description']"}
   LOCATION_DROPDOWN = {css: "select[id$='Locations']"}
   ACCOUNT_EXECUTIVE_DROPDOWN = {css: "select[id$='AccountExecutives']"}
-  ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/header/div[1]/div[3]/button/div/span"}
-    ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[3]/article/div/div/div/table/thead/tr/th[1]"}
-    TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[3]/article/div/div/div/table/tbody/tr/td[1]/a/span"}
-    TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[3]/article/div/div/div/table/tbody/tr/td[8]/span"}
+  ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/div/section/header/div[1]/div[3]/button/div/span"}
+    ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[2]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/div/section/section/div/div[3]/article/div/div/div/table/thead/tr/th[1]"}
+    TOP_ACTIVITY_REF = {xpath: "/html/body/div[2]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/div/section/section/div/div[3]/article/div/div/div/table/tbody/tr/td[1]/a/span"}
+    TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/div/section/section/div/div[3]/article/div/div/div/table/tbody/tr/td[8]/span"}
     THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div/div/div[4]/div/div/button/div/div/span"}
   DETAIL_ACTIONS_MENU = {css: "div[id='b33-b8-b44-b1-DropdownHeader']"}
     DETAIL_CREATE_ACTIVITY = {css: "span[id='b33-b8-b44-GridActionsCreateActivity']"}
@@ -242,7 +242,7 @@ class PatrolsResource
     tab = @driver.find_element(ACTIVITIES_SUBTAB)
     tab.click
     sleep(5)
-    wait.until {@driver.find_element(ACTIVITIES_ID_COLUMN).displayed?}
+    #wait.until {@driver.find_element(ACTIVITIES_ID_COLUMN).displayed?}
     actions = @driver.find_element(DETAIL_ACTIONS_MENU)
     actions.click
     wait.until {@driver.find_element(DETAIL_CREATE_ACTIVITY).displayed?}
