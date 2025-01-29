@@ -22,7 +22,7 @@ class PatrolsResource
   RESOURCE_REFRESH = {xpath: "/html/body/div[1]/div/div/div[1]/div/div[1]/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[1]/div[1]/div[1]/div/div[2]/i"}
   CUSTOMER_SELECT_SEARCH = {css: "input[id$='CustomerSearch']"}
   CUSTOMER_SEARCH_BUTTON = {css: "button[class$='primary searchButton']"}
-  TOP_CUSTOMER_SELECT = {xpath: "/html/body/div[7]/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div[1]/div/div/div[3]/button"}
+  TOP_CUSTOMER_SELECT = {xpath: "/html/body/div[6]/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div[1]/div/div/div[3]/button"}
 
   #CSS Selectors: Detail
   SUBMITTED_NAME_FIELD = {css: "input[id$='Input_SubmittedName']"}
@@ -35,9 +35,9 @@ class PatrolsResource
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[2]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/div/section/section/div/div[3]/article/div/div/div/table/tbody/tr/td[1]/a/span"}
     TOP_ACTIVITY_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/div/section/section/div/div[3]/article/div/div/div/table/tbody/tr/td[8]/span"}
     THIRD_TAB = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div[3]/section/header/div[1]/div/div/div[4]/div/div/button/div/div/span"}
-  DETAIL_ACTIONS_MENU = {css: "div[id='b33-b8-b44-b1-DropdownHeader']"}
-    DETAIL_CREATE_ACTIVITY = {css: "span[id='b33-b8-b44-GridActionsCreateActivity']"}
-    DETAIL_PRINT_EMAIL = {css: "span[id='b33-b8-b44-GridActionsPrintEmail']"}
+  DETAIL_ACTIONS_MENU = {css: "div[id='b33-b8-b43-b1-DropdownHeader']"}
+    DETAIL_CREATE_ACTIVITY = {css: "span[id='b33-b8-b43-GridActionsCreateActivity']"}
+    DETAIL_PRINT_EMAIL = {css: "span[id='b33-b8-b43-GridActionsPrintEmail']"}
   CANCEL_BUTTON = {css: "button[id$='CancelButton']"}
   SAVE_BUTTON = {css: "button[id$='PatrolSaveButton']"}
   SAVE_CLOSE_BUTTON = {css: "button[id$='PatrolSaveAndCloseButton']"}
