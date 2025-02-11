@@ -92,6 +92,8 @@ describe "Patrols Test" do
 		printemail.email_subject(emailsubject)
 		printemail.email_message(emailmessage)
 		printemail.email_close()
+		sleep(2)
+		printemail.email_close()
 		patrols.cancel()
 		patrols.resource_refresh()
 
