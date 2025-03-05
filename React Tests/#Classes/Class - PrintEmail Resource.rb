@@ -26,6 +26,7 @@ class PrintEmailResource
   def email_address(string)
     wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     wait.until {@driver.find_element(EMAIL_ADDRESS).displayed?}
+    @driver.action.click.perform
     input = @driver.find_element(EMAIL_ADDRESS)
     input.send_keys(string)
   end

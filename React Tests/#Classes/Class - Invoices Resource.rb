@@ -24,7 +24,7 @@ class InvoicesResource
   CLEAR_LINES = {css: "button[id$='ClearAllLinesButton']"}
   ADD_DESCRIPTION = {css: "button[id$='AddDescriptionButton']"}
   TOP_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[4]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr[1]/td[6]/div[2]/div[1]/span"}
-  TOP_BOX_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr/td[6]/div[2]/div[1]"}
+  TOP_BOX_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[1]/article/div/div[1]/table/tbody/tr/td[7]/div[2]"}
   TOP_HIDDEN_DESCRIPTION = {xpath: "/html/body/div[2]/div/div/div/div/div[1]/div/div/div[3]/div[2]/section/section/div/div[3]/article/div/div/div/div/div[1]/div/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr/td[7]/div/div[2]"}
   TOP_DESCRIPTION_TEXTAREA = {css: "textarea[id$='0-TextArea_Description']"} 
   TOP_LINE_DELETE = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[4]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr[1]/td[14]/a[2]/i"}
