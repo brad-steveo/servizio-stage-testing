@@ -33,6 +33,9 @@ class EstimatesResource
     DETAIL_TOP_CUSTOMER_SELECT = {xpath: "/html/body/div[19]/div/div/div/div/div/div[3]/div/div[1]/div/div/div[3]/button"}
   AE_DROPDOWN = {css: "select[id$='AccountExecDropdown']"}
   NTE_FIELD = {css: "input[id$='Input_NTE']"}
+  ADD_FROM_TEMPLATE_BUTTON = {css: "button[id$='AddFromTemplateButton']"}
+  SELECT_TOP_TEMPLATE = {xpath: "/html/body/div[20]/div/div/div/div/div/div[2]/div/div/div/div[3]/div/div[1]/div/div/div[3]/button"}
+  SELECT_TEMPLATE = {xpath: "/html/body/div[20]/div/div/div/div/div/div[2]/div/div/div/div[2]/button/span"}
   ACTIVITIES_SUBTAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/header/div[1]/div[7]/button/div/span"}
     ACTIVITIES_ID_COLUMN = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[7]/article/div/div/div/table/thead/tr/th[1]"}
     TOP_ACTIVITY_REF = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/div[2]/div/div/section/section/div/div[7]/article/div/div/div/table/tbody/tr/td[1]/a/span"}
@@ -257,6 +260,19 @@ class EstimatesResource
     wait.until {@driver.find_element(NTE_FIELD).displayed?}
     field = @driver.find_element(NTE_FIELD)
     field.send_keys(nteinput)
+  end
+
+  def add_lines_template()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(ADD_FROM_TEMPLATE_BUTTON).displayed?}
+    addbutton = @driver.find_element(ADD_FROM_TEMPLATE_BUTTON)
+    addbutton.click
+    wait.until {@driver.find_element(SELECT_TOP_TEMPLATE).displayed?}
+    selecttopbutton = @driver.find_element(SELECT_TOP_TEMPLATE)
+    selecttopbutton.click
+    wait.until {@driver.find_element(SELECT_TEMPLATE).displayed?}
+    selectbutton = @driver.find_element(SELECT_TEMPLATE)
+    selectbutton.click
   end
 
   def top_activity()

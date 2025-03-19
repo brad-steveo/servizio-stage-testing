@@ -66,6 +66,7 @@ describe "Jobs Test" do
     jobs.new_job(customersearch)
 		jobs.name(jobname)
 		jobs.type(jobtype)
+    jobs.add_line_top()
 		jobs.save_close()
 
 		expect(jobs.top_name.text.downcase).to include(jobname.downcase)

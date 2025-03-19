@@ -17,7 +17,7 @@ describe "Estimates Test" do
   namesearch = "Selenium Job"
   customername = "Selenium Test Customer"
   estimatename = "Selenium Estimate #{timestamp}"
-  estimatetype = "Service"
+  estimatetype = "Time and Material Service"
   activityreason = "Sales"
   activitycontactmethod = "Email"
   activitydescription = "Selenium Test #{timestamp}"
@@ -66,6 +66,7 @@ describe "Estimates Test" do
     estimates.new_estimate(customername)
     estimates.name(estimatename)
     estimates.type(estimatetype)
+    estimates.add_lines_template()
     estimates.save_close()
 
     expect(estimates.top_name.text.downcase).to include(estimatename.downcase)

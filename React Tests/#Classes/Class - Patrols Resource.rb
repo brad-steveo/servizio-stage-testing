@@ -8,7 +8,7 @@ class PatrolsResource
     GRID_PRINT_EMAIL = {xpath: "/html/body/div[1]/div/div/div/div/div[1]/div/div/div[3]/div/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[1]/div/div/div/div[2]/div/a[5]"}
     GRID_MAKE_INACTIVE = {css: "a[id$='GridActionsMakeInactiveLink']"}
       MAKE_INACTIVE_CONFIRM = {css: "span[id$='ConfirmButton']"}
-  TOP_SENT_ON = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[19]"}
+  TOP_SENT_ON = {xpath: "/html/body/div[1]/div/div/div/div/div/div/div/div[3]/div[3]/section/section/div/div[2]/article/div/div/div/div/div/div[2]/table/tbody/tr[1]/td[20]"}
   GRID_MENU = {css: "div[class='dropdown-header select']"}
   NEW_PATROL = {css: "a[id$='GridMenuCreateNew']"}
   EXPORT_GRID = {css: "div[id$='ExportTitlePlaceholder']"}

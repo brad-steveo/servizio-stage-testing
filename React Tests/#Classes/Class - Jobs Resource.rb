@@ -32,6 +32,7 @@ class JobsResource
   NTE_FIELD = {css: "input[id$='Input_NotToExceed']"}
   LINE_ITEMS_SUBTAB = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/header/div[1]/div[1]/button/div/span"}
     ADD_LINES = {css: "button[id$='AddLineItemButton']"}
+      ADD_TOP_ITEM = {xpath: "/html/body/div[14]/div/div/div/div/div/div[2]/div/div/div/div[2]/div/div[1]/div/div/div[3]/button"}
     CLEAR_LINES = {css: "button[id$='ClearAllLinesButton']"}
     ADD_DESCRIPTION = {css: "button[id$='AddDescriptionButton']"}
     TOP_DESCRIPTION = {xpath: "/html/body/div[1]/div/div/div[1]/div/div/div/div/div[3]/div[3]/section/section/div/div[3]/article/div/div/div/div/div[1]/form/div[2]/div/section/section/div/div[1]/article/div/div[1]/div[1]/div/table/tbody/tr/td[7]/div/div[1]/span"}
@@ -268,6 +269,20 @@ class JobsResource
     desc = @driver.find_element(TOP_DESCRIPTION_TEXTAREA)
     desc.send_keys(descriptiontext)
     sleep(3)
+  end
+
+  def add_line_top()
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(ADD_LINES).displayed?}
+    add = @driver.find_element(ADD_LINES)
+    sleep(1)
+    add.click
+    sleep(2)
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+    wait.until {@driver.find_element(ADD_TOP_ITEM).displayed?}
+    addtop = @driver.find_element(ADD_TOP_ITEM)
+    addtop.click
+    sleep(2)
   end
 
   def clear_lines()
